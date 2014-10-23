@@ -17,6 +17,7 @@
 
 #import "UIImageView+Cache.h"
 #import "IpadGridViewInfoCell.h"
+#import "IpadGridViewUserCell.h"
 
 
 @implementation IpadGridViewCell
@@ -44,10 +45,15 @@
 
 - (void)setupUI {
    // Add other views
-   NSArray * views = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell" owner:self options:nil]; //&1
-   IpadGridViewInfoCell * infoCell = [views lastObject];
+   NSArray * infoCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell" owner:self options:nil]; //&1
+   IpadGridViewInfoCell * infoCell = [infoCellViews lastObject];
    infoCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
    [self.infoView addSubview:infoCell];
+
+   NSArray * userCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewUserCell" owner:self options:nil]; //&1
+   IpadGridViewUserCell * userCell = [userCellViews lastObject];
+   userCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
+   [self.userView addSubview:userCell];
 }
 
 
