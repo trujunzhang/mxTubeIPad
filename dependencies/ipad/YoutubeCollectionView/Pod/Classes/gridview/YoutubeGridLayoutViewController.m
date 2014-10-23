@@ -157,6 +157,7 @@ placeholderImage:self.placeHoderImage
 - (void)search:(NSString *)text {
    [self cleanup];
 
+   lastSearch = text;
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.videoList = array;
        [[self collectionView] reloadData];
