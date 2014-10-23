@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  SearchViewController.h
 //  TubeIPadApp
 //
 //  Created by djzhang on 10/23/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface SearchViewController : UIViewController
 
 
 @end

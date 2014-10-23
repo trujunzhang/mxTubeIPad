@@ -1,18 +1,18 @@
 //
-//  SecondViewController.m
+//  SearchViewController.m
 //  TubeIPadApp
 //
 //  Created by djzhang on 10/23/14.
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "SearchViewController.h"
 
-@interface SecondViewController ()
+@interface SearchViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation SearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

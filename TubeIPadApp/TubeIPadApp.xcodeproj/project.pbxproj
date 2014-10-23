@@ -10,7 +10,7 @@
 		5ECE0F2B19F8AB500098CF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2A19F8AB500098CF65 /* main.m */; };
 		5ECE0F2E19F8AB500098CF65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */; };
 		5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */; };
-		5ECE0F3419F8AB500098CF65 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3319F8AB500098CF65 /* SecondViewController.m */; };
+		5ECE0F3419F8AB500098CF65 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3319F8AB500098CF65 /* SearchViewController.m */; };
 		5ECE0F3719F8AB500098CF65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3519F8AB500098CF65 /* Main.storyboard */; };
 		5ECE0F3919F8AB500098CF65 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3819F8AB500098CF65 /* Images.xcassets */; };
 		5ECE0F3C19F8AB500098CF65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3A19F8AB500098CF65 /* LaunchScreen.xib */; };
@@ -35,8 +35,8 @@
 		5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5ECE0F2F19F8AB500098CF65 /* SubscriptionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubscriptionsViewController.h; sourceTree = "<group>"; };
 		5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsViewController.m; sourceTree = "<group>"; };
-		5ECE0F3219F8AB500098CF65 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		5ECE0F3319F8AB500098CF65 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		5ECE0F3219F8AB500098CF65 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		5ECE0F3319F8AB500098CF65 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		5ECE0F3619F8AB500098CF65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5ECE0F3819F8AB500098CF65 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5ECE0F3B19F8AB500098CF65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -88,8 +88,8 @@
 				5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */,
 				5ECE0F2F19F8AB500098CF65 /* SubscriptionsViewController.h */,
 				5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */,
-				5ECE0F3219F8AB500098CF65 /* SecondViewController.h */,
-				5ECE0F3319F8AB500098CF65 /* SecondViewController.m */,
+				5ECE0F3219F8AB500098CF65 /* SearchViewController.h */,
+				5ECE0F3319F8AB500098CF65 /* SearchViewController.m */,
 				5ECE0F3519F8AB500098CF65 /* Main.storyboard */,
 				5ECE0F3819F8AB500098CF65 /* Images.xcassets */,
 				5ECE0F3A19F8AB500098CF65 /* LaunchScreen.xib */,
@@ -225,7 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ECE0F3419F8AB500098CF65 /* SecondViewController.m in Sources */,
+				5ECE0F3419F8AB500098CF65 /* SearchViewController.m in Sources */,
 				5ECE0F2E19F8AB500098CF65 /* AppDelegate.m in Sources */,
 				5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */,
 				5ECE0F2B19F8AB500098CF65 /* main.m in Sources */,
