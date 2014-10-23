@@ -37,17 +37,7 @@ static NSString * const identifier = @"GridViewCellIdentifier";
 - (id)init {
    self = [super init];
    if (self) {
-      self.videoList = [[NSArray alloc] init];
-      YoutubeResponseBlock completion = ^(NSArray * array) {
-          self.videoList = array;
-          [[self collectionView] reloadData];
-      };
-      ErrorResponseBlock error = ^(NSError * error) {
-          NSString * debug = @"debug";
-      };
-      [[SearchImplementation getInstance] searchByQueryWithQueryTerm:@"sketch3"
-                                                   completionHandler:completion
-                                                        errorHandler:error];
+//      [self searchByValue];
    }
    return self;
 }
@@ -99,6 +89,7 @@ static NSString * const identifier = @"GridViewCellIdentifier";
    // Dispose of any resources that can be recreated.
 }
 
+
 - (BOOL)shouldAutorotate {
    return YES;
 }
@@ -107,7 +98,6 @@ static NSString * const identifier = @"GridViewCellIdentifier";
 - (NSUInteger)supportedInterfaceOrientations {
    return UIInterfaceOrientationMaskAll;
 }
-
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -160,4 +150,19 @@ placeholderImage:self.placeHoderImage
 }
 
 
+- (void)search:(NSString *)text {
+   self.videoList = [[NSArray alloc] init];
+   [[self collectionView] reloadData];
+
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+       self.videoList = array;
+       [[self collectionView] reloadData];
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[SearchImplementation getInstance] searchByQueryWithQueryTerm:text
+                                                completionHandler:completion
+                                                     errorHandler:error];
+}
 @end

@@ -31,6 +31,7 @@
    self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 180, 19)];
+   searchBar.backgroundColor = [UIColor clearColor];
    searchBar.delegate = self;
 
    UIBarButtonItem * btnSearch = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
@@ -76,7 +77,8 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-   NSLog(@" search123: %@", searchBar.text);
+//   NSLog(@" search123: %@", searchBar.text);
+   [self.youtubeGridLayoutViewController search:searchBar.text];
 }
 
 

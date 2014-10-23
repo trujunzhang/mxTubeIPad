@@ -27,4 +27,5 @@
 - (id)initWithVideoList:(NSMutableArray *)array;
 
 - (void)setupCollectionView:(UIScrollView *)scrollView;
+- (void)search:(NSString *)text;
 @end
