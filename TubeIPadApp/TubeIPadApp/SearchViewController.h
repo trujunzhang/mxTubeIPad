@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "IpadGridViewCell.h"
-@class YoutubeGridLayoutViewController;
+#import <YoutubeCollectionView/YoutubeGridLayoutViewController.h>
 
 
-@interface SearchViewController : UINavigationController<IpadGridViewCellDelegate,UISearchBarDelegate>
+@interface SearchViewController : YoutubeGridLayoutViewController<IpadGridViewCellDelegate, UISearchBarDelegate>
 
-@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+//@property(nonatomic, strong)  * youtubeGridLayoutViewController;
 @end
 
