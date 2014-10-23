@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SubscriptionsViewController : UIViewController
+@interface SubscriptionsViewController : UINavigationController
 
 
 @end
