@@ -126,19 +126,6 @@
 
 
 - (void)setupPlayer:(UIView *)pView {
-// Make a URL
-//   NSURL * url = [NSURL URLWithString:@"http://www.ebookfrenzy.com/ios_book/movie/movie.mov"];
-
-// NSURL *  url = [NSURL URLWithString:@"http://r10---sn-a5m7ln7d.googlevideo.com/videoplayback?yms=y9cO_gSkL8Q&id=o-AKC3f3MLPfGD_uD3m_UX-5X_62BXiJdbtiGrCBR47MYF&upn=jsjWp7OEYn0&mm=31&fexp=907257%2C909721%2C912124%2C914072%2C914951%2C916638%2C916941%2C927622%2C930666%2C931348%2C931983%2C932404%2C934030%2C945258%2C946013%2C947209%2C952302%2C953801&ms=au&mv=m&mt=1413168650&dnc=1&itag=36&key=yt5&ip=67.229.65.158&el=watch&initcwndbps=13998750&signature=4C5F042695ACBC63627CE80DEEC7C847E392F359.03F05EF5547EC01AC5C32406283E002931C19AEC&sver=3&app=youtube_mobile&expire=1413190338&source=youtube&ipbits=0&ratebypass=yes&sparams=id%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Cmm%2Cms%2Cmv%2Cratebypass%2Csource%2Cupn%2Cexpire"];
-
-//   self.moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
-//
-//   self.moviePlayer.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//   self.moviePlayer.view.frame = view.bounds;
-//
-//   [self.moviePlayer play];
-//   [view addSubview:self.moviePlayer.view];
-
    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
    self.youTubeVideo = [[YKYouTubeVideo alloc] initWithVideoId:self.video.identifier];
 
@@ -148,23 +135,11 @@
 //       [youTubeVideo play:YKQualityMedium];
        [self.youTubeVideo playInView:pView withQualityOptions:YKQualityLow];
    }];
-
-
 }
 
 
 #pragma mark -
 #pragma mark Rotation stuff
-
-
-- (BOOL)shouldAutorotate {
-   return YES;
-}
-
-
-- (NSUInteger)supportedInterfaceOrientations {
-   return UIInterfaceOrientationMaskAll;
-}
 
 
 - (void)viewDidLayoutSubviews {

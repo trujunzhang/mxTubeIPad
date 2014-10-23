@@ -50,7 +50,8 @@
 
 
 - (void)loadView {
-   self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//   self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+   self.view = [[UIView alloc] init];
    self.view.backgroundColor = [UIColor whiteColor];
 
    self.tabBar = [[WHTopTabBar alloc] init];

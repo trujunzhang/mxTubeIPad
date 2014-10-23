@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchViewController : UIViewController
+#import "IpadGridViewCell.h"
+@class YoutubeGridLayoutViewController;
+
+
+@interface SearchViewController : UINavigationController<IpadGridViewCellDelegate>
 
 
 @end

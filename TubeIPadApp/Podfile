@@ -1,6 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, 7.0
+platform :ios,7.0
+
+pod 'Reveal-iOS-SDK'
 
 target 'TubeIPadApp', :exclusive => true do
   # ________________open projects___________________
