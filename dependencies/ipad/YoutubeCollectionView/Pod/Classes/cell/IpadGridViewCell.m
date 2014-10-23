@@ -61,9 +61,9 @@
 //   self.thumbnails.image = [UIImage imageNamed:video.snippet.channelId];// test
 
    // 2
-   [self.title setText:video.snippet.title];
+//   [self.title setText:video.snippet.title];
    // 3
-   [self setupVideoStatistics:video];
+//   [self setupVideoStatistics:video];
    // UIView Touch event
    UITapGestureRecognizer * singleTapPanel = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(tapDetected)];
@@ -72,7 +72,7 @@
    [self.infoView addGestureRecognizer:singleTapPanel];
 
    // 4
-   [self.userName setText:video.snippet.channelTitle];
+//   [self.userName setText:video.snippet.channelTitle];
 }
 
 
