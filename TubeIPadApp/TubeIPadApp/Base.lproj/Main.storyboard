@@ -26,6 +26,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cgU-Q5-L3M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcT-zO-PEI" userLabel="First Responder" sceneMemberID="firstResponder"/>

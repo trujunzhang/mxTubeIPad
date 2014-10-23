@@ -10,9 +10,11 @@
 #import "YoutubeGridLayoutViewController.h"
 #import "VideoDetailViewControlleriPad.h"
 
+
 @interface SearchViewController ()
 
 @end
+
 
 @implementation SearchViewController
 
@@ -28,12 +30,11 @@
    self.youtubeGridLayoutViewController.delegate = self;
    self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
-   UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 26, 19)];
-   [btn addTarget:self action:@selector(popMenu:) forControlEvents:UIControlEventTouchUpInside];
-   [btn setImage:[UIImage imageNamed:@"mt_side_tab_button"] forState:UIControlStateNormal];
+   UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 180, 19)];
+   searchBar.delegate = self;
 
-   UIBarButtonItem * btnSearch = [[UIBarButtonItem alloc] initWithCustomView:btn];
-   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = btnSearch;
+   UIBarButtonItem * btnSearch = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+   self.youtubeGridLayoutViewController.navigationItem.rightBarButtonItem = btnSearch;
 
    [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
 }
@@ -67,6 +68,20 @@
                                                                              target:nil
                                                                              action:nil]];
    [self pushViewController:controller animated:YES];
+}
+
+
+#pragma mark -
+#pragma mark - UISearchBarDelegate
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+   NSLog(@" search123: %@", searchBar.text);
+}
+
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+   NSLog(@" cancel: %@", searchBar.text);
 }
 
 
