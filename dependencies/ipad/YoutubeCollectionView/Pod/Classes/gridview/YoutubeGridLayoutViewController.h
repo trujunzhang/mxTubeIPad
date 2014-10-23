@@ -28,4 +28,5 @@
 
 - (void)setupCollectionView:(UIScrollView *)scrollView;
 - (void)search:(NSString *)text;
+- (void)cleanup;
 @end

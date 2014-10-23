@@ -82,8 +82,11 @@
 }
 
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-   NSLog(@" cancel: %@", searchBar.text);
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+   if (searchText.length == 0) {
+      [self.youtubeGridLayoutViewController cleanup];
+   }
+
 }
 
 

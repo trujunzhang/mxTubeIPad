@@ -151,8 +151,7 @@ placeholderImage:self.placeHoderImage
 
 
 - (void)search:(NSString *)text {
-   self.videoList = [[NSArray alloc] init];
-   [[self collectionView] reloadData];
+   [self cleanup];
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.videoList = array;
@@ -164,5 +163,11 @@ placeholderImage:self.placeHoderImage
    [[SearchImplementation getInstance] searchByQueryWithQueryTerm:text
                                                 completionHandler:completion
                                                      errorHandler:error];
+}
+
+
+- (void)cleanup {
+   self.videoList = [[NSArray alloc] init];
+   [[self collectionView] reloadData];
 }
 @end
