@@ -19,17 +19,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    // Assign tab bar item with titles
-//   UITabBarController * tabBarController = (UITabBarController *) self.window.rootViewController;
-//   UITabBar * tabBar = tabBarController.tabBar;
-//   UITabBarItem * tabBarItem1 = [tabBar.items objectAtIndex:0];
-//   UITabBarItem * tabBarItem2 = [tabBar.items objectAtIndex:1];
-//
-//   tabBar.tintColor = [UIColor redColor];
-//
-//   tabBarItem1.title = @"Subscription";
-//   tabBarItem2.title = @"Search";
-//
-//   [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
+   UITabBarController * tabBarController = (UITabBarController *) self.window.rootViewController;
+   UITabBar * tabBar = tabBarController.tabBar;
+   UITabBarItem * tabBarItem1 = [tabBar.items objectAtIndex:0];
+   UITabBarItem * tabBarItem2 = [tabBar.items objectAtIndex:1];
+
+   tabBar.tintColor = [UIColor redColor];
+
+   tabBarItem1.title = @"Subscriptions";
+   tabBarItem2.title = @"Search";
+
+   [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
 
    return YES;
 }

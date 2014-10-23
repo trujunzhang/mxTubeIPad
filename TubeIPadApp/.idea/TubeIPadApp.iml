@@ -5,6 +5,9 @@
     <content url="file://$MODULE_DIR$/../dependencies/collect/IOS_Collection_Code">
       <sourceFolder url="file://$MODULE_DIR$/../dependencies/collect/IOS_Collection_Code" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../dependencies/ipad/VideoWatchDetailViewControlleriPad">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/ipad/VideoWatchDetailViewControlleriPad" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../dependencies/ipad/YoutubeCollectionView">
       <sourceFolder url="file://$MODULE_DIR$/../dependencies/ipad/YoutubeCollectionView" isTestSource="false" />
     </content>
