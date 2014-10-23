@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  SubscriptionsViewController.h
 //  TubeIPadApp
 //
 //  Created by djzhang on 10/23/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
+@interface SubscriptionsViewController : UIViewController
 
 
 @end

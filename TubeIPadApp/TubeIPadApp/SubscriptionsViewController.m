@@ -1,18 +1,18 @@
 //
-//  FirstViewController.m
+//  SubscriptionsViewController.m
 //  TubeIPadApp
 //
 //  Created by djzhang on 10/23/14.
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "SubscriptionsViewController.h"
 
-@interface FirstViewController ()
+@interface SubscriptionsViewController ()
 
 @end
 
-@implementation FirstViewController
+@implementation SubscriptionsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
