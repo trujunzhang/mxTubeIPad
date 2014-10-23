@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @class GTLYouTubeVideo;
+@class IpadGridViewInfoCell;
+@class IpadGridViewUserCell;
 
 
 @protocol IpadGridViewCellDelegate<NSObject>
@@ -26,10 +28,12 @@
 
 @property(strong, nonatomic) IBOutlet UIView * infoView;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIView *userView;
+@property(unsafe_unretained, nonatomic) IBOutlet UIView * userView;
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) GTLYouTubeVideo * video;
 
+@property(nonatomic, strong) IpadGridViewInfoCell * infoCell;
+@property(nonatomic, strong) IpadGridViewUserCell * userCell;
 - (void)bind:(GTLYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end

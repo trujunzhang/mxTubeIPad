@@ -23,7 +23,7 @@
                     <rect key="frame" x="211" y="0.0" width="39" height="27"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="quick_cache_remove.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jos-Ie-NUC">
-                    <rect key="frame" x="229" y="10" width="11" height="11"/>
+                    <rect key="frame" x="224" y="10" width="11" height="11"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

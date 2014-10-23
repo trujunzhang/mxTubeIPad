@@ -45,15 +45,25 @@
 
 - (void)setupUI {
    // Add other views
-   NSArray * infoCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell" owner:self options:nil]; //&1
-   IpadGridViewInfoCell * infoCell = [infoCellViews lastObject];
-   infoCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
-   [self.infoView addSubview:infoCell];
+   if (self.infoCell == nil) {
+      NSArray * infoCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell"
+                                                              owner:self
+                                                            options:nil]; //&1
+      self.infoCell = [infoCellViews lastObject];
+      self.infoCell.backgroundColor = [UIColor clearColor];
+      self.infoCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
+      [self.infoView addSubview:self.infoCell];
+   }
 
-   NSArray * userCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewUserCell" owner:self options:nil]; //&1
-   IpadGridViewUserCell * userCell = [userCellViews lastObject];
-   userCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
-   [self.userView addSubview:userCell];
+   if (self.userCell == nil) {
+      NSArray * userCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewUserCell"
+                                                              owner:self
+                                                            options:nil]; //&1
+      self.userCell = [userCellViews lastObject];
+      self.userCell.backgroundColor = [UIColor clearColor];
+      self.userCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
+      [self.userView addSubview:self.userCell];
+   }
 }
 
 
