@@ -39,8 +39,6 @@
 
    UIBarButtonItem * btnSearch = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
    self.navigationItem.rightBarButtonItem = btnSearch;
-
-//   [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
 }
 
 
@@ -82,14 +80,13 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-//   NSLog(@" search123: %@", searchBar.text);
-//   [self search:searchBar.text];
+   [self search:searchBar.text];
 }
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
    if (searchText.length == 0) {
-//      [self cleanup];
+      [self cleanup];
    }
 
 }
