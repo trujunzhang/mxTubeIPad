@@ -63,6 +63,7 @@
 - (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
+   controller.view.frame = self.view.bounds;
 
    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"back"
                                                                               style:UIBarButtonItemStyleBordered

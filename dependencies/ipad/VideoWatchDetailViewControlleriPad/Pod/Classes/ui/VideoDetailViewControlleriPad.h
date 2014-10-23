@@ -24,8 +24,6 @@
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) GTLYouTubeVideo * video;
 
-@property(nonatomic, strong) MPMoviePlayerController * moviePlayer;
-
 @property(nonatomic, strong) UIViewController * videoDetailController;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
 

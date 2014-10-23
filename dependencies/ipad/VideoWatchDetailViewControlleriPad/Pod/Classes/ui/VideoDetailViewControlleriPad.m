@@ -65,7 +65,6 @@
    self.firstViewController.title = @"Comments";
    self.secondViewController = [[UIViewController alloc] init];
    self.secondViewController.title = @"More From";
-//   self.thirdViewController = [[YoutubeGridLayoutViewController alloc] initWithVideoList:[YoutubeDataHelper getVideoList]];
    self.thirdViewController = [[YoutubeGridLayoutViewController alloc] init];
    self.thirdViewController.delegate = self.delegate;
    self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
