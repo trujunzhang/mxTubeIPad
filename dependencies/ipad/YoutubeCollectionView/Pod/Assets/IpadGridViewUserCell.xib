@@ -29,6 +29,12 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="headerImage" destination="dlD-9i-eIS" id="i3m-vK-8Zj"/>
+                <outlet property="subscribeBgImage" destination="3L6-kk-uto" id="xef-cC-mze"/>
+                <outlet property="subscribeImage" destination="Jos-Ie-NUC" id="6lc-GD-yeX"/>
+                <outlet property="userNameLabel" destination="ddN-7I-ntS" id="pRL-bA-oEd"/>
+            </connections>
         </view>
     </objects>
     <resources>

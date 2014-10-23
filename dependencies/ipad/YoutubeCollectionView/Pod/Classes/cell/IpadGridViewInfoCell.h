@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GTLYouTubeVideo;
+
 
 @interface IpadGridViewInfoCell : UIView
 
@@ -14,4 +16,5 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *ratingLabel;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *viewCountLabel;
 
+- (void)bind:(GTLYouTubeVideo *)video;
 @end

@@ -7,15 +7,15 @@
 //
 
 #import "IpadGridViewUserCell.h"
+#import "GTLYouTubeVideo.h"
+#import "GTLYouTubeVideoSnippet.h"
+
 
 @implementation IpadGridViewUserCell
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
+- (void)bind:(GTLYouTubeVideo *)video {
+   // 4
+   [self.userNameLabel setText:video.snippet.channelTitle];
+}
 @end
