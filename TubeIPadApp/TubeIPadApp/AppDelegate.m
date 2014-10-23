@@ -18,6 +18,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   self.window.backgroundColor=[UIColor whiteColor];
    // Assign tab bar item with titles
    UITabBarController * tabBarController = (UITabBarController *) self.window.rootViewController;
    UITabBar * tabBar = tabBarController.tabBar;
