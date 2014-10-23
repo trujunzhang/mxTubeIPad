@@ -7,21 +7,40 @@
 //
 
 #import "SubscriptionsViewController.h"
+#import "YoutubeGridLayoutViewController.h"
+
 
 @interface SubscriptionsViewController ()
 
 @end
 
+
 @implementation SubscriptionsViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+   [super viewDidLoad];
+   // Do any additional setup after loading the view, typically from a nib.
+   self.view.backgroundColor = [UIColor whiteColor];
+
+   NSArray * numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+
+   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.youtubeGridLayoutViewController.numbersPerLineArray = numbersPerLineArray;
+
+   UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 26, 19)];
+   [btn addTarget:self action:@selector(popMenu:) forControlEvents:UIControlEventTouchUpInside];
+   [btn setImage:[UIImage imageNamed:@"mt_side_tab_button"] forState:UIControlStateNormal];
+
+   UIBarButtonItem * btnSearch = [[UIBarButtonItem alloc] initWithCustomView:btn];
+   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = btnSearch;
+
+   [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
 }
 
+
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+   [super didReceiveMemoryWarning];
+   // Dispose of any resources that can be recreated.
 }
 
 @end

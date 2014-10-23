@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class YoutubeGridLayoutViewController;
+
 
 @interface SubscriptionsViewController : UINavigationController
 
 
+@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
 @end
 

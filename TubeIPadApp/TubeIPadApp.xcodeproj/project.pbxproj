@@ -29,6 +29,7 @@
 		5ECE0F3919F8AB500098CF65 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3819F8AB500098CF65 /* Images.xcassets */; };
 		5ECE0F3C19F8AB500098CF65 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3A19F8AB500098CF65 /* LaunchScreen.xib */; };
 		5ECE0F4819F8AB500098CF65 /* TubeIPadAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F4719F8AB500098CF65 /* TubeIPadAppTests.m */; };
+		9583B9FCD6418BAD14C2A3A7 /* libPods-TubeIPadApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F0CC6B7530131C6082DEDCD /* libPods-TubeIPadApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		503B76BB03FC21C949257E3C /* Pods-TubeIPadApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TubeIPadApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TubeIPadApp/Pods-TubeIPadApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5E08C3C119F8B12200F58D3D /* mt_side_tab_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mt_side_tab_button.png; path = Assets/menu/mt_side_tab_button.png; sourceTree = "<group>"; };
 		5E08C3C219F8B12200F58D3D /* mt_side_tab_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mt_side_tab_button@2x.png"; path = "Assets/menu/mt_side_tab_button@2x.png"; sourceTree = "<group>"; };
 		5E08C3C519F8B12E00F58D3D /* tab_cache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_cache.png; path = Assets/Tabs/tab_cache.png; sourceTree = "<group>"; };
@@ -72,6 +74,8 @@
 		5ECE0F4119F8AB500098CF65 /* TubeIPadAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TubeIPadAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECE0F4619F8AB500098CF65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ECE0F4719F8AB500098CF65 /* TubeIPadAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TubeIPadAppTests.m; sourceTree = "<group>"; };
+		8F0CC6B7530131C6082DEDCD /* libPods-TubeIPadApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TubeIPadApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B09F99A83B37E01EEEA949E6 /* Pods-TubeIPadApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TubeIPadApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TubeIPadApp/Pods-TubeIPadApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9583B9FCD6418BAD14C2A3A7 /* libPods-TubeIPadApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +148,8 @@
 				5ECE0F2719F8AB500098CF65 /* TubeIPadApp */,
 				5ECE0F4419F8AB500098CF65 /* TubeIPadAppTests */,
 				5ECE0F2619F8AB500098CF65 /* Products */,
+				655C24EC9CFD76F21250E609 /* Pods */,
+				9486E02470044646E19E3499 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +207,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		655C24EC9CFD76F21250E609 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				503B76BB03FC21C949257E3C /* Pods-TubeIPadApp.debug.xcconfig */,
+				B09F99A83B37E01EEEA949E6 /* Pods-TubeIPadApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9486E02470044646E19E3499 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F0CC6B7530131C6082DEDCD /* libPods-TubeIPadApp.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -207,9 +231,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5ECE0F4B19F8AB500098CF65 /* Build configuration list for PBXNativeTarget "TubeIPadApp" */;
 			buildPhases = (
+				FDD94F00BE4F221048B635F3 /* Check Pods Manifest.lock */,
 				5ECE0F2119F8AB500098CF65 /* Sources */,
 				5ECE0F2219F8AB500098CF65 /* Frameworks */,
 				5ECE0F2319F8AB500098CF65 /* Resources */,
+				CE8834B74A8DBA8A7529EF2B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,6 +294,8 @@
 			mainGroup = 5ECE0F1C19F8AB500098CF65;
 			productRefGroup = 5ECE0F2619F8AB500098CF65 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+			);
 			projectRoot = "";
 			targets = (
 				5ECE0F2419F8AB500098CF65 /* TubeIPadApp */,
@@ -308,6 +336,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE8834B74A8DBA8A7529EF2B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TubeIPadApp/Pods-TubeIPadApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDD94F00BE4F221048B635F3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5ECE0F2119F8AB500098CF65 /* Sources */ = {
@@ -440,23 +501,27 @@
 		};
 		5ECE0F4C19F8AB500098CF65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 503B76BB03FC21C949257E3C /* Pods-TubeIPadApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TubeIPadApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 			};
 			name = Debug;
 		};
 		5ECE0F4D19F8AB500098CF65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B09F99A83B37E01EEEA949E6 /* Pods-TubeIPadApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TubeIPadApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 			};
 			name = Release;
 		};

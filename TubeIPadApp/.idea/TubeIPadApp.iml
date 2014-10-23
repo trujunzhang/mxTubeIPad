@@ -2,6 +2,30 @@
 <module type="CIDR_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$/../dependencies/collect/IOS_Collection_Code">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/collect/IOS_Collection_Code" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/ipad/YoutubeCollectionView">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/ipad/YoutubeCollectionView" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/layers/Business-Logic-Layer">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/layers/Business-Logic-Layer" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/layers/google-api-services-youtube">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/layers/google-api-services-youtube" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/lib/WHTopTabBarController">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/lib/WHTopTabBarController" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/lib/XCDYouTubeKit">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/lib/XCDYouTubeKit" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/lib/YKMediaPlayerKit">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/lib/YKMediaPlayerKit" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../dependencies/module/VideoWatchDetailViewControlleriPad">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/module/VideoWatchDetailViewControlleriPad" isTestSource="false" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
