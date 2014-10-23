@@ -19,6 +19,8 @@
 		5E08C3D619F8B12E00F58D3D /* tab_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CC19F8B12E00F58D3D /* tab_more@2x.png */; };
 		5E08C3D719F8B12E00F58D3D /* tab_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CD19F8B12E00F58D3D /* tab_search.png */; };
 		5E08C3D819F8B12E00F58D3D /* tab_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CE19F8B12E00F58D3D /* tab_search@2x.png */; };
+		5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */; };
+		5E08C3DE19F8B45600F58D3D /* YoutubeGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */; };
 		5ECE0F2B19F8AB500098CF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2A19F8AB500098CF65 /* main.m */; };
 		5ECE0F2E19F8AB500098CF65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */; };
 		5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */; };
@@ -52,6 +54,9 @@
 		5E08C3CC19F8B12E00F58D3D /* tab_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_more@2x.png"; path = "Assets/Tabs/tab_more@2x.png"; sourceTree = "<group>"; };
 		5E08C3CD19F8B12E00F58D3D /* tab_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_search.png; path = Assets/Tabs/tab_search.png; sourceTree = "<group>"; };
 		5E08C3CE19F8B12E00F58D3D /* tab_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_search@2x.png"; path = "Assets/Tabs/tab_search@2x.png"; sourceTree = "<group>"; };
+		5E08C3DA19F8B45600F58D3D /* YoutubeGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoutubeGridViewController.h; path = CollectionView/YoutubeGridViewController.h; sourceTree = "<group>"; };
+		5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YoutubeGridViewController.m; path = CollectionView/YoutubeGridViewController.m; sourceTree = "<group>"; };
+		5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YoutubeGridViewController.xib; path = CollectionView/YoutubeGridViewController.xib; sourceTree = "<group>"; };
 		5ECE0F2519F8AB500098CF65 /* TubeIPadApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TubeIPadApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECE0F2919F8AB500098CF65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ECE0F2A19F8AB500098CF65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -122,6 +127,16 @@
 			name = menu;
 			sourceTree = "<group>";
 		};
+		5E08C3D919F8B41200F58D3D /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				5E08C3DA19F8B45600F58D3D /* YoutubeGridViewController.h */,
+				5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */,
+				5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
 		5ECE0F1C19F8AB500098CF65 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +158,7 @@
 		5ECE0F2719F8AB500098CF65 /* TubeIPadApp */ = {
 			isa = PBXGroup;
 			children = (
+				5E08C3D919F8B41200F58D3D /* CollectionView */,
 				5E08C3BE19F8B10100F58D3D /* Assets */,
 				5ECE0F2C19F8AB500098CF65 /* AppDelegate.h */,
 				5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */,
@@ -265,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E08C3DE19F8B45600F58D3D /* YoutubeGridViewController.xib in Resources */,
 				5ECE0F3719F8AB500098CF65 /* Main.storyboard in Resources */,
 				5E08C3C419F8B12200F58D3D /* mt_side_tab_button@2x.png in Resources */,
 				5E08C3D319F8B12E00F58D3D /* tab_home.png in Resources */,
@@ -298,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ECE0F3419F8AB500098CF65 /* SearchViewController.m in Sources */,
+				5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */,
 				5ECE0F2E19F8AB500098CF65 /* AppDelegate.m in Sources */,
 				5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */,
 				5ECE0F2B19F8AB500098CF65 /* main.m in Sources */,
