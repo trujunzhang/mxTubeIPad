@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IpadGridViewCell.h"
 @class YoutubeGridLayoutViewController;
 
 
-@interface SubscriptionsViewController : UINavigationController
+@interface SubscriptionsViewController : UINavigationController<IpadGridViewCellDelegate>
 
 
 @property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;

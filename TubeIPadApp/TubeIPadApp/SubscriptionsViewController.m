@@ -8,6 +8,7 @@
 
 #import "SubscriptionsViewController.h"
 #import "YoutubeGridLayoutViewController.h"
+#import "VideoDetailViewControlleriPad.h"
 
 
 @interface SubscriptionsViewController ()
@@ -25,6 +26,7 @@
 
    self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
    self.youtubeGridLayoutViewController.title = @"Subscriptions";
+   self.youtubeGridLayoutViewController.delegate = self;
    self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 26, 19)];
@@ -51,6 +53,22 @@
 
 - (NSUInteger)supportedInterfaceOrientations {
    return UIInterfaceOrientationMaskAll;
+}
+
+
+#pragma mark -
+#pragma mark - IpadGridViewCellDelegate
+
+
+- (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
+   VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
+                                                                                                  video:video];
+
+   [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"back"
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:nil
+                                                                             action:nil]];
+   [self pushViewController:controller animated:YES];
 }
 
 
