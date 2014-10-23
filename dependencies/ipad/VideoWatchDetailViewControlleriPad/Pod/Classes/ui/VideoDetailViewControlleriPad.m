@@ -189,7 +189,7 @@
 
    rect = self.tabbarView.frame;
    rect.origin.x = aWidth / 2;
-   rect.origin.y = 0;
+   rect.origin.y = self.view.bounds.origin.y;
    rect.size.width = aWidth / 2;
    rect.size.height = aHeight;
    self.tabbarView.frame = rect;
