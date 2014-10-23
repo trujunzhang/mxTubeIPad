@@ -17,6 +17,9 @@
 static NSString * const identifier = @"GridViewCellIdentifier";
 
 
+NSString * lastSearch;
+
+
 @interface YoutubeGridLayoutViewController ()
 @end
 
@@ -37,7 +40,8 @@ static NSString * const identifier = @"GridViewCellIdentifier";
 - (id)init {
    self = [super init];
    if (self) {
-//      [self searchByValue];
+      if (lastSearch)
+         [self search:lastSearch];
    }
    return self;
 }
