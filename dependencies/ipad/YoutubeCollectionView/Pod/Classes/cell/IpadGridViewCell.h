@@ -23,12 +23,10 @@
 
 @property(strong, nonatomic) IBOutlet UIImageView * thumbnails;
 
-//@property(strong, nonatomic) IBOutlet UILabel * title;
-//
-//@property(strong, nonatomic) IBOutlet UIImageView * userHeader;
-//@property(strong, nonatomic) IBOutlet UILabel * userName;
 
 @property(strong, nonatomic) IBOutlet UIView * infoView;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIView *userView;
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) GTLYouTubeVideo * video;

@@ -29,7 +29,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XyQ-kh-PlL">
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XyQ-kh-PlL" userLabel="userView">
                         <rect key="frame" x="0.0" y="219" width="250" height="27"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -40,6 +40,7 @@
             <connections>
                 <outlet property="infoView" destination="4TQ-3j-POz" id="f0i-Ff-se9"/>
                 <outlet property="thumbnails" destination="SPb-Hc-4tG" id="IKl-KN-uhB"/>
+                <outlet property="userView" destination="XyQ-kh-PlL" id="Bck-nX-90l"/>
             </connections>
         </collectionViewCell>
     </objects>
