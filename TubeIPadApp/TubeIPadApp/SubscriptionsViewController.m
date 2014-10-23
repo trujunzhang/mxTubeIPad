@@ -20,13 +20,12 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
    // Do any additional setup after loading the view, typically from a nib.
-   self.title = @"Subscriptions";
+   self.tabBarItem.title = @"Subscriptions";
    self.view.backgroundColor = [UIColor clearColor];
 
-   NSArray * numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
-
    self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
-   self.youtubeGridLayoutViewController.numbersPerLineArray = numbersPerLineArray;
+   self.youtubeGridLayoutViewController.title = @"Subscriptions";
+   self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 26, 19)];
    [btn addTarget:self action:@selector(popMenu:) forControlEvents:UIControlEventTouchUpInside];
