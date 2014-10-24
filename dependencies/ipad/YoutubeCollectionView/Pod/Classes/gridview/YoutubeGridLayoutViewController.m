@@ -114,7 +114,7 @@ placeholderImage:self.placeHoderImage
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
 
-   [DebugUtils printFrameInfo:self.view.frame withControllerName:@"YoutubeGridLayoutViewController"];
+//   [DebugUtils printFrameInfo:self.view.frame withControllerName:@"YoutubeGridLayoutViewController"];// TODO test(log)
 
    [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
 }
