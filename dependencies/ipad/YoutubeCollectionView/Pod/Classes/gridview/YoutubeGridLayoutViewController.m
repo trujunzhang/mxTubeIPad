@@ -37,18 +37,11 @@ NSString * lastSearch = @"yosemite";
 }
 
 
-- (id)init {
-   self = [super init];
-   if (self) {
-      if (lastSearch)
-         [self search:lastSearch];
-   }
-   return self;
-}
-
-
 - (void)viewDidLoad {
    [super viewDidLoad];
+
+   if (lastSearch)
+      [self search:lastSearch];
 
    // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor clearColor];
@@ -59,9 +52,9 @@ NSString * lastSearch = @"yosemite";
 }
 
 
-- (void)setupCollectionView:(UIScrollView *)scrollView {
+- (void)setupCollectionView:(UIView *)pView {
    self.collectionViewGridLayout = [[KRLCollectionViewGridLayout alloc] init];
-   self.collectionView = [[UICollectionView alloc] initWithFrame:scrollView.frame
+   self.collectionView = [[UICollectionView alloc] initWithFrame:pView.frame
                                             collectionViewLayout:self.collectionViewGridLayout];
 
    [self.collectionView setAutoresizesSubviews:YES];
@@ -74,7 +67,7 @@ NSString * lastSearch = @"yosemite";
    self.collectionView.delegate = self;
    self.collectionView.backgroundColor = [UIColor clearColor];
 
-   [scrollView addSubview:self.collectionView];
+   [pView addSubview:self.collectionView];
 
    self.layout.aspectRatio = 1;
    self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -91,16 +84,6 @@ NSString * lastSearch = @"yosemite";
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
-}
-
-
-- (BOOL)shouldAutorotate {
-   return YES;
-}
-
-
-- (NSUInteger)supportedInterfaceOrientations {
-   return UIInterfaceOrientationMaskAll;
 }
 
 
@@ -130,16 +113,16 @@ placeholderImage:self.placeHoderImage
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
 
-//   CGFloat x = self.view.frame.origin.x;
-//   CGFloat y = self.view.frame.origin.y;
-//   CGFloat w = self.view.frame.size.width;
-//   CGFloat h = self.view.frame.size.height;
-//
-//   NSLog(@"    YoutubeGridLayoutViewController     ");
-//   NSLog(@"x = %f", x);
-//   NSLog(@"y = %f", y);
-//   NSLog(@"w = %f", w);
-//   NSLog(@"h = %f", h);
+   CGFloat x = self.view.frame.origin.x;
+   CGFloat y = self.view.frame.origin.y;
+   CGFloat w = self.view.frame.size.width;
+   CGFloat h = self.view.frame.size.height;
+
+   NSLog(@"    YoutubeGridLayoutViewController     ");
+   NSLog(@"x = %f", x);
+   NSLog(@"y = %f", y);
+   NSLog(@"w = %f", w);
+   NSLog(@"h = %f", h);
 
    [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
 }
