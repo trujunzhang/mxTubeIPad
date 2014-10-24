@@ -41,6 +41,8 @@
    [super viewDidLoad];
 
    // Do any additional setup after loading the view, typically from a nib.
+   self.view.backgroundColor=[UIColor redColor];
+
    [self initViewControllers];
    [self setupPlayer:self.videoPlayView];
 
@@ -177,11 +179,14 @@
    CGFloat aHeight = self.view.frame.size.height;
 
    CGRect rect = self.videoPlayView.frame;
+   rect.origin.x = 0;
+   rect.origin.y = 200;
    rect.size.width = aWidth / 2;
    rect.size.height = aHeight / 2;
    self.videoPlayView.frame = rect;
 
    rect = self.detailView.frame;
+   rect.origin.x = 0;
    rect.origin.y = aHeight / 2;
    rect.size.width = aWidth / 2;
    rect.size.height = aHeight / 2;
