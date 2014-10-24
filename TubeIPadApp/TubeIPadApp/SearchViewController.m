@@ -48,16 +48,6 @@
 }
 
 
-- (BOOL)shouldAutorotate {
-   return YES;
-}
-
-
-- (NSUInteger)supportedInterfaceOrientations {
-   return UIInterfaceOrientationMaskAll;
-}
-
-
 #pragma mark -
 #pragma mark - IpadGridViewCellDelegate
 
@@ -66,11 +56,6 @@
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
 
-//   controller.view.frame = CGRectMake(0, 140, 320, 480);
-//   [self.navigationController.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"back"
-//                                                                              style:UIBarButtonItemStyleBordered
-//                                                                             target:nil
-//                                                                             action:nil]];
    [self.navigationController pushViewController:controller animated:YES];
 }
 
