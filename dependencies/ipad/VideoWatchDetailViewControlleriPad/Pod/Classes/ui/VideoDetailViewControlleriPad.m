@@ -41,7 +41,7 @@
    [super viewDidLoad];
 
    // Do any additional setup after loading the view, typically from a nib.
-   self.view.backgroundColor=[UIColor redColor];
+   self.view.backgroundColor = [UIColor redColor];
 
    [self initViewControllers];
    [self setupPlayer:self.videoPlayView];
@@ -175,27 +175,33 @@
 
 
 - (void)setupHorizontalLayout {
-   CGFloat aWidth = self.view.frame.size.width;
-   CGFloat aHeight = self.view.frame.size.height;
+   CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
+   CGFloat statusbarHeight = statusRect.size.height;
+   CGFloat navbarHeight = 44;
+   CGFloat topHeight = statusbarHeight + navbarHeight;
+   CGFloat tabbarHeight = 50;
+
+   CGFloat aHaflWidth = self.view.frame.size.width / 2;
+   CGFloat aHeight = self.view.frame.size.height - topHeight - tabbarHeight;
 
    CGRect rect = self.videoPlayView.frame;
    rect.origin.x = 0;
-   rect.origin.y = 200;
-   rect.size.width = aWidth / 2;
+   rect.origin.y = topHeight;
+   rect.size.width = aHaflWidth;
    rect.size.height = aHeight / 2;
    self.videoPlayView.frame = rect;
 
    rect = self.detailView.frame;
    rect.origin.x = 0;
-   rect.origin.y = aHeight / 2;
-   rect.size.width = aWidth / 2;
+   rect.origin.y = topHeight + aHeight / 2;
+   rect.size.width = aHaflWidth;
    rect.size.height = aHeight / 2;
    self.detailView.frame = rect;
 
    rect = self.tabbarView.frame;
-   rect.origin.x = aWidth / 2;
-   rect.origin.y = self.view.bounds.origin.y;
-   rect.size.width = aWidth / 2;
+   rect.origin.x = aHaflWidth;
+   rect.origin.y = topHeight;
+   rect.size.width = aHaflWidth;
    rect.size.height = aHeight;
    self.tabbarView.frame = rect;
 }
@@ -207,17 +213,25 @@
 
 
 - (void)setupVerticalLayout {
+   CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
+   CGFloat statusbarHeight = statusRect.size.height;
+   CGFloat navbarHeight = 44;
+   CGFloat topHeight = statusbarHeight + navbarHeight;
+   CGFloat tabbarHeight = 50;
+
    CGFloat aWidth = self.view.frame.size.width;
-   CGFloat aHeight = self.view.frame.size.height;
+   CGFloat aHeight = self.view.frame.size.height - topHeight - tabbarHeight;
 
    CGRect rect = self.videoPlayView.frame;
+   rect.origin.x = 0;
+   rect.origin.y = topHeight;
    rect.size.width = aWidth;
    rect.size.height = aHeight / 2;
    self.videoPlayView.frame = rect;
 
    rect = self.tabbarView.frame;
    rect.origin.x = 0;
-   rect.origin.y = aHeight / 2;
+   rect.origin.y = topHeight + aHeight / 2;
    rect.size.width = aWidth;
    rect.size.height = aHeight / 2;
    self.tabbarView.frame = rect;
