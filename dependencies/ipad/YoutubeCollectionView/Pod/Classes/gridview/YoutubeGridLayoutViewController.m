@@ -12,6 +12,7 @@
 #import "IpadGridViewCell.h"
 #import "GYSearch.h"
 #import "SearchImplementation.h"
+#import "DebugUtils.h"
 
 
 static NSString * const identifier = @"GridViewCellIdentifier";
@@ -113,16 +114,7 @@ placeholderImage:self.placeHoderImage
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
 
-   CGFloat x = self.view.frame.origin.x;
-   CGFloat y = self.view.frame.origin.y;
-   CGFloat w = self.view.frame.size.width;
-   CGFloat h = self.view.frame.size.height;
-
-   NSLog(@"    YoutubeGridLayoutViewController     ");
-   NSLog(@"x = %f", x);
-   NSLog(@"y = %f", y);
-   NSLog(@"w = %f", w);
-   NSLog(@"h = %f", h);
+   [DebugUtils printFrameInfo:self.view.frame withControllerName:@"YoutubeGridLayoutViewController"];
 
    [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
 }

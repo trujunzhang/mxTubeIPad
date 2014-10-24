@@ -11,7 +11,7 @@
 
 @implementation DebugUtils
 
-- (void)printFrameInfo:(CGRect)frame withControllerName:(NSString *)controllerName {
++ (void)printFrameInfo:(CGRect)frame withControllerName:(NSString *)controllerName {
    CGFloat x = frame.origin.x;
    CGFloat y = frame.origin.y;
    CGFloat w = frame.size.width;

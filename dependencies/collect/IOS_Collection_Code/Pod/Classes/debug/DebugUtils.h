@@ -11,6 +11,6 @@
 
 @interface DebugUtils : NSObject
 
-- (void)printFrameInfo:(CGRect)frame withControllerName:(NSString *)controllerName;
++ (void)printFrameInfo:(CGRect)frame withControllerName:(NSString *)controllerName;
 
 @end
