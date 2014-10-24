@@ -13,6 +13,5 @@
 
 @interface SearchViewController : YoutubeGridLayoutViewController<IpadGridViewCellDelegate, UISearchBarDelegate>
 
-//@property(nonatomic, strong)  * youtubeGridLayoutViewController;
 @end
 
