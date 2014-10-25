@@ -40,6 +40,7 @@
 
 - (void)setupNavigationRightItem {
    UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 180, 19)];
+   searchBar.text=@"search";
    searchBar.backgroundColor = [UIColor clearColor];
    searchBar.delegate = self;
 
@@ -50,14 +51,13 @@
 
 - (void)setupNavigationTitle {
    NSArray * segmentTextContent = [NSArray arrayWithObjects:
-    @"资讯",
-    @"博客",
-    @"推荐阅读",
+    @"Videos",
+    @"Channels",
+    @"Playlists",
      nil];
    self.segment_title = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
    self.segment_title.selectedSegmentIndex = 0;
    self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-   self.segment_title.segmentedControlStyle = UISegmentedControlStyleBar;
    self.segment_title.frame = CGRectMake(0, 0, 300, 30);
    [self.segment_title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
    self.navigationItem.titleView = self.segment_title;
