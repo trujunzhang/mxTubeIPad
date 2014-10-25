@@ -12,6 +12,6 @@
 
 
 @interface SearchViewController : YoutubeGridLayoutViewController<IpadGridViewCellDelegate, UISearchBarDelegate>
-
+@property (strong,nonatomic) UISegmentedControl * segment_title;
 @end
 
