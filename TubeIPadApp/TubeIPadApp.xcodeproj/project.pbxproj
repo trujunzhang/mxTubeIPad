@@ -8,18 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5D1231EDA4B596D1A4B52F39 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1CDEDF3CCCA685EE57E69B /* libPods.a */; };
-		5E08C3C319F8B12200F58D3D /* mt_side_tab_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C119F8B12200F58D3D /* mt_side_tab_button.png */; };
-		5E08C3C419F8B12200F58D3D /* mt_side_tab_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C219F8B12200F58D3D /* mt_side_tab_button@2x.png */; };
-		5E08C3CF19F8B12E00F58D3D /* tab_cache.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C519F8B12E00F58D3D /* tab_cache.png */; };
-		5E08C3D019F8B12E00F58D3D /* tab_cache@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C619F8B12E00F58D3D /* tab_cache@2x.png */; };
-		5E08C3D119F8B12E00F58D3D /* tab_history.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C719F8B12E00F58D3D /* tab_history.png */; };
-		5E08C3D219F8B12E00F58D3D /* tab_history@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C819F8B12E00F58D3D /* tab_history@2x.png */; };
-		5E08C3D319F8B12E00F58D3D /* tab_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3C919F8B12E00F58D3D /* tab_home.png */; };
-		5E08C3D419F8B12E00F58D3D /* tab_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CA19F8B12E00F58D3D /* tab_home@2x.png */; };
-		5E08C3D519F8B12E00F58D3D /* tab_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CB19F8B12E00F58D3D /* tab_more.png */; };
-		5E08C3D619F8B12E00F58D3D /* tab_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CC19F8B12E00F58D3D /* tab_more@2x.png */; };
-		5E08C3D719F8B12E00F58D3D /* tab_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CD19F8B12E00F58D3D /* tab_search.png */; };
-		5E08C3D819F8B12E00F58D3D /* tab_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3CE19F8B12E00F58D3D /* tab_search@2x.png */; };
 		5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */; };
 		5E08C3DE19F8B45600F58D3D /* YoutubeGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */; };
 		5ECE0F2B19F8AB500098CF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2A19F8AB500098CF65 /* main.m */; };
@@ -46,18 +34,6 @@
 /* Begin PBXFileReference section */
 		2B1CDEDF3CCCA685EE57E69B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		503B76BB03FC21C949257E3C /* Pods-TubeIPadApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TubeIPadApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TubeIPadApp/Pods-TubeIPadApp.debug.xcconfig"; sourceTree = "<group>"; };
-		5E08C3C119F8B12200F58D3D /* mt_side_tab_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mt_side_tab_button.png; path = Assets/menu/mt_side_tab_button.png; sourceTree = "<group>"; };
-		5E08C3C219F8B12200F58D3D /* mt_side_tab_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "mt_side_tab_button@2x.png"; path = "Assets/menu/mt_side_tab_button@2x.png"; sourceTree = "<group>"; };
-		5E08C3C519F8B12E00F58D3D /* tab_cache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_cache.png; path = Assets/Tabs/tab_cache.png; sourceTree = "<group>"; };
-		5E08C3C619F8B12E00F58D3D /* tab_cache@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_cache@2x.png"; path = "Assets/Tabs/tab_cache@2x.png"; sourceTree = "<group>"; };
-		5E08C3C719F8B12E00F58D3D /* tab_history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_history.png; path = Assets/Tabs/tab_history.png; sourceTree = "<group>"; };
-		5E08C3C819F8B12E00F58D3D /* tab_history@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_history@2x.png"; path = "Assets/Tabs/tab_history@2x.png"; sourceTree = "<group>"; };
-		5E08C3C919F8B12E00F58D3D /* tab_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_home.png; path = Assets/Tabs/tab_home.png; sourceTree = "<group>"; };
-		5E08C3CA19F8B12E00F58D3D /* tab_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_home@2x.png"; path = "Assets/Tabs/tab_home@2x.png"; sourceTree = "<group>"; };
-		5E08C3CB19F8B12E00F58D3D /* tab_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_more.png; path = Assets/Tabs/tab_more.png; sourceTree = "<group>"; };
-		5E08C3CC19F8B12E00F58D3D /* tab_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_more@2x.png"; path = "Assets/Tabs/tab_more@2x.png"; sourceTree = "<group>"; };
-		5E08C3CD19F8B12E00F58D3D /* tab_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_search.png; path = Assets/Tabs/tab_search.png; sourceTree = "<group>"; };
-		5E08C3CE19F8B12E00F58D3D /* tab_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_search@2x.png"; path = "Assets/Tabs/tab_search@2x.png"; sourceTree = "<group>"; };
 		5E08C3DA19F8B45600F58D3D /* YoutubeGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoutubeGridViewController.h; path = CollectionView/YoutubeGridViewController.h; sourceTree = "<group>"; };
 		5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YoutubeGridViewController.m; path = CollectionView/YoutubeGridViewController.m; sourceTree = "<group>"; };
 		5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YoutubeGridViewController.xib; path = CollectionView/YoutubeGridViewController.xib; sourceTree = "<group>"; };
@@ -100,41 +76,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5E08C3BE19F8B10100F58D3D /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				5E08C3C019F8B11800F58D3D /* menu */,
-				5E08C3BF19F8B11000F58D3D /* Tabs */,
-			);
-			name = Assets;
-			sourceTree = "<group>";
-		};
-		5E08C3BF19F8B11000F58D3D /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-				5E08C3C519F8B12E00F58D3D /* tab_cache.png */,
-				5E08C3C619F8B12E00F58D3D /* tab_cache@2x.png */,
-				5E08C3C719F8B12E00F58D3D /* tab_history.png */,
-				5E08C3C819F8B12E00F58D3D /* tab_history@2x.png */,
-				5E08C3C919F8B12E00F58D3D /* tab_home.png */,
-				5E08C3CA19F8B12E00F58D3D /* tab_home@2x.png */,
-				5E08C3CB19F8B12E00F58D3D /* tab_more.png */,
-				5E08C3CC19F8B12E00F58D3D /* tab_more@2x.png */,
-				5E08C3CD19F8B12E00F58D3D /* tab_search.png */,
-				5E08C3CE19F8B12E00F58D3D /* tab_search@2x.png */,
-			);
-			name = Tabs;
-			sourceTree = "<group>";
-		};
-		5E08C3C019F8B11800F58D3D /* menu */ = {
-			isa = PBXGroup;
-			children = (
-				5E08C3C119F8B12200F58D3D /* mt_side_tab_button.png */,
-				5E08C3C219F8B12200F58D3D /* mt_side_tab_button@2x.png */,
-			);
-			name = menu;
-			sourceTree = "<group>";
-		};
 		5E08C3D919F8B41200F58D3D /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				5E08C3D919F8B41200F58D3D /* CollectionView */,
-				5E08C3BE19F8B10100F58D3D /* Assets */,
 				5ECE0F2C19F8AB500098CF65 /* AppDelegate.h */,
 				5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */,
 				5ECE0F2F19F8AB500098CF65 /* SubscriptionsViewController.h */,
@@ -315,20 +255,8 @@
 			files = (
 				5E08C3DE19F8B45600F58D3D /* YoutubeGridViewController.xib in Resources */,
 				5ECE0F3719F8AB500098CF65 /* Main.storyboard in Resources */,
-				5E08C3C419F8B12200F58D3D /* mt_side_tab_button@2x.png in Resources */,
-				5E08C3D319F8B12E00F58D3D /* tab_home.png in Resources */,
-				5E08C3D219F8B12E00F58D3D /* tab_history@2x.png in Resources */,
-				5E08C3D119F8B12E00F58D3D /* tab_history.png in Resources */,
-				5E08C3CF19F8B12E00F58D3D /* tab_cache.png in Resources */,
-				5E08C3D619F8B12E00F58D3D /* tab_more@2x.png in Resources */,
 				5ECE0F3C19F8AB500098CF65 /* LaunchScreen.xib in Resources */,
 				5ECE0F3919F8AB500098CF65 /* Images.xcassets in Resources */,
-				5E08C3D719F8B12E00F58D3D /* tab_search.png in Resources */,
-				5E08C3D519F8B12E00F58D3D /* tab_more.png in Resources */,
-				5E08C3D019F8B12E00F58D3D /* tab_cache@2x.png in Resources */,
-				5E08C3D419F8B12E00F58D3D /* tab_home@2x.png in Resources */,
-				5E08C3D819F8B12E00F58D3D /* tab_search@2x.png in Resources */,
-				5E08C3C319F8B12200F58D3D /* mt_side_tab_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
