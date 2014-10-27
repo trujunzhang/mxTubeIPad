@@ -8,10 +8,9 @@
 
 #import "SubscriptionsViewController.h"
 
-#import <SWRevealViewController/SWRevealViewController.h>
-
 #import "YoutubeGridLayoutViewController.h"
 #import "VideoDetailViewControlleriPad.h"
+#import "SWRevealViewController.h"
 
 
 @interface SubscriptionsViewController ()
@@ -43,33 +42,30 @@
 
 
 - (void)setupSlideMenuController:(UIViewController *)controller {
-   SWRevealViewController * revealController = [controller revealViewController];
+   self.mRevealController = [controller revealViewController];
 
-   [revealController panGestureRecognizer];
-   [revealController tapGestureRecognizer];
+   [self.mRevealController panGestureRecognizer];
+   [self.mRevealController tapGestureRecognizer];
 
    UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
                                                                          style:UIBarButtonItemStyleBordered
-                                                                        target:revealController
+                                                                        target:self.mRevealController
                                                                         action:@selector(revealToggle:)];
 
    controller.navigationItem.leftBarButtonItem = revealButtonItem;
 }
 
 
+- (void)viewDidAppear:(BOOL)animated {
+   [super viewDidAppear:animated];
+
+   [self.mRevealController revealToggle:nil];
+}
+
+
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
-}
-
-
-- (BOOL)shouldAutorotate {
-   return YES;
-}
-
-
-- (NSUInteger)supportedInterfaceOrientations {
-   return UIInterfaceOrientationMaskAll;
 }
 
 
