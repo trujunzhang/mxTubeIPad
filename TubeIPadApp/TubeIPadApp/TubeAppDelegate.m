@@ -24,7 +24,6 @@
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
-
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];
 
    //2
@@ -38,14 +37,11 @@
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
-
    self.subscriptionsViewController.mRevealViewController = self.revealController;
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
    self.window.rootViewController = self.revealController;
-
    self.window.backgroundColor = [UIColor whiteColor];
    [self.window makeKeyAndVisible];
 
