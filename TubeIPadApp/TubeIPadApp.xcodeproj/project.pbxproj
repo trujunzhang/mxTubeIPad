@@ -11,7 +11,7 @@
 		5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */; };
 		5E08C3DE19F8B45600F58D3D /* YoutubeGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */; };
 		5ECE0F2B19F8AB500098CF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2A19F8AB500098CF65 /* main.m */; };
-		5ECE0F2E19F8AB500098CF65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */; };
+		5ECE0F2E19F8AB500098CF65 /* TubeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2D19F8AB500098CF65 /* TubeAppDelegate.m */; };
 		5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */; };
 		5ECE0F3419F8AB500098CF65 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3319F8AB500098CF65 /* SearchViewController.m */; };
 		5ECE0F3719F8AB500098CF65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3519F8AB500098CF65 /* Main.storyboard */; };
@@ -40,8 +40,8 @@
 		5ECE0F2519F8AB500098CF65 /* TubeIPadApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TubeIPadApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECE0F2919F8AB500098CF65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ECE0F2A19F8AB500098CF65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5ECE0F2C19F8AB500098CF65 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5ECE0F2C19F8AB500098CF65 /* TubeAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TubeAppDelegate.h; sourceTree = "<group>"; };
+		5ECE0F2D19F8AB500098CF65 /* TubeAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TubeAppDelegate.m; sourceTree = "<group>"; };
 		5ECE0F2F19F8AB500098CF65 /* SubscriptionsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubscriptionsViewController.h; sourceTree = "<group>"; };
 		5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsViewController.m; sourceTree = "<group>"; };
 		5ECE0F3219F8AB500098CF65 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				5E08C3D919F8B41200F58D3D /* CollectionView */,
-				5ECE0F2C19F8AB500098CF65 /* AppDelegate.h */,
-				5ECE0F2D19F8AB500098CF65 /* AppDelegate.m */,
+				5ECE0F2C19F8AB500098CF65 /* TubeAppDelegate.h */,
+				5ECE0F2D19F8AB500098CF65 /* TubeAppDelegate.m */,
 				5ECE0F2F19F8AB500098CF65 /* SubscriptionsViewController.h */,
 				5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */,
 				5ECE0F3219F8AB500098CF65 /* SearchViewController.h */,
@@ -309,7 +309,7 @@
 			files = (
 				5ECE0F3419F8AB500098CF65 /* SearchViewController.m in Sources */,
 				5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */,
-				5ECE0F2E19F8AB500098CF65 /* AppDelegate.m in Sources */,
+				5ECE0F2E19F8AB500098CF65 /* TubeAppDelegate.m in Sources */,
 				5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */,
 				5ECE0F2B19F8AB500098CF65 /* main.m in Sources */,
 			);

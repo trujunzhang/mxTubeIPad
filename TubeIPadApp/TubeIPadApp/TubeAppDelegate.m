@@ -1,22 +1,22 @@
 //
-//  AppDelegate.m
+//  TubeAppDelegate.m
 //  TubeIPadApp
 //
 //  Created by djzhang on 10/23/14.
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "TubeAppDelegate.h"
 #import "SWRevealViewController.h"
 #import "LeftMenuViewController.h"
 
 
-@interface AppDelegate ()
+@interface TubeAppDelegate ()
 
 @end
 
 
-@implementation AppDelegate
+@implementation TubeAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    //1

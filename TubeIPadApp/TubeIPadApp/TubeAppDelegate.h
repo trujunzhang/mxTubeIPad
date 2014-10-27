@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  TubeAppDelegate.h
 //  TubeIPadApp
 //
 //  Created by djzhang on 10/23/14.
@@ -10,7 +10,7 @@
 #import <SWRevealViewController/SWRevealViewController.h>
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,SWRevealViewControllerDelegate>
+@interface TubeAppDelegate : UIResponder <UIApplicationDelegate,SWRevealViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
