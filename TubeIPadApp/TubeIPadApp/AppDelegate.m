@@ -50,20 +50,7 @@
 }
 
 
-- (void)setupSlideMenuController:(UIViewController *)controller {
-   SWRevealViewController * revealController = [controller revealViewController];
 
-
-   [revealController panGestureRecognizer];
-   [revealController tapGestureRecognizer];
-
-   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
-                                                                         style:UIBarButtonItemStyleBordered
-                                                                        target:revealController
-                                                                        action:@selector(revealToggle:)];
-
-   controller.navigationItem.leftBarButtonItem = revealButtonItem;
-}
 
 
 - (UIViewController *)getLeftMenuController {
