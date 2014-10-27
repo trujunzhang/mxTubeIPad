@@ -50,30 +50,32 @@
 }
 
 
+- (void)setupSlideMenuController:(UIViewController *)controller {
+   SWRevealViewController * revealController = [controller revealViewController];
+
+
+   [revealController panGestureRecognizer];
+   [revealController tapGestureRecognizer];
+
+   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:revealController
+                                                                        action:@selector(revealToggle:)];
+
+   controller.navigationItem.leftBarButtonItem = revealButtonItem;
+}
+
+
 - (UIViewController *)getLeftMenuController {
    UIViewController * leftViewController = [[UIViewController alloc] init];
    leftViewController.view.backgroundColor = [UIColor blueColor];
 
-   // ボタンを作成
-   UIButton * button =
-    [UIButton buttonWithType:UIButtonTypeRoundedRect];
-
-   // ボタンの位置を設定
+   UIButton * button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    button.center = CGPointMake(100, 200);
-
-   // キャプションを設定
-   [button setTitle:@"What to Watch"
-           forState:UIControlStateNormal];
-
-   // キャプションに合わせてサイズを設定
+   [button setTitle:@"What to Watch" forState:UIControlStateNormal];
    [button sizeToFit];
+   [button addTarget:self action:@selector(button_Tapped:) forControlEvents:UIControlEventTouchUpInside];
 
-   // ボタンがタップされたときに呼ばれるメソッドを設定
-   [button addTarget:self
-              action:@selector(button_Tapped:)
-    forControlEvents:UIControlEventTouchUpInside];
-
-   // ボタンをビューに追加
    [leftViewController.view addSubview:button];
 
    return leftViewController;
