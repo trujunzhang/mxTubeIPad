@@ -35,8 +35,7 @@
    self.revealController.delegate = self;
 
    //7
-   UIWindow * window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-   self.window = window;
+   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
    self.window.rootViewController = self.revealController;
 
