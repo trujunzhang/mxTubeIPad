@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "SWRevealViewController.h"
+#import "LeftMenuViewController.h"
 
 
 @interface AppDelegate ()
@@ -47,16 +48,17 @@
 
 
 - (UIViewController *)getLeftMenuController {
-   UIViewController * leftViewController = [[UIViewController alloc] init];
-   leftViewController.view.backgroundColor = [UIColor blueColor];
+   UIViewController * leftViewController = [[LeftMenuViewController alloc] init];
 
-   UIButton * button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   button.center = CGPointMake(100, 200);
-   [button setTitle:@"What to Watch" forState:UIControlStateNormal];
-   [button sizeToFit];
-   [button addTarget:self action:@selector(button_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+//   leftViewController.view.backgroundColor = [UIColor blueColor];
 
-   [leftViewController.view addSubview:button];
+//   UIButton * button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//   button.center = CGPointMake(100, 200);
+//   [button setTitle:@"What to Watch" forState:UIControlStateNormal];
+//   [button sizeToFit];
+//   [button addTarget:self action:@selector(button_Tapped:) forControlEvents:UIControlEventTouchUpInside];
+//
+//   [leftViewController.view addSubview:button];
 
    return leftViewController;
 }
