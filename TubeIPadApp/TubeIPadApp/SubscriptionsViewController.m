@@ -42,24 +42,12 @@
 
 
 - (void)setupSlideMenuController:(UIViewController *)controller {
-   self.mRevealController = [controller revealViewController];
-
-   [self.mRevealController panGestureRecognizer];
-   [self.mRevealController tapGestureRecognizer];
-
    UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
                                                                          style:UIBarButtonItemStyleBordered
-                                                                        target:self.mRevealController
+                                                                        target:nil
                                                                         action:@selector(revealToggle:)];
 
    controller.navigationItem.leftBarButtonItem = revealButtonItem;
-}
-
-
-- (void)viewDidAppear:(BOOL)animated {
-   [super viewDidAppear:animated];
-
-   [self.mRevealController revealToggle:nil];
 }
 
 

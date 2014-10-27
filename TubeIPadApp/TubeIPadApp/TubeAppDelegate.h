@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <SWRevealViewController/SWRevealViewController.h>
+@class LeftMenuViewController;
 
 
 @interface TubeAppDelegate : UIResponder <UIApplicationDelegate,SWRevealViewControllerDelegate>
@@ -17,5 +18,7 @@
 
 @property(nonatomic, strong) UITabBarController * tabBarController;
 @property(nonatomic, strong) SWRevealViewController * revealController;
+
+@property(nonatomic, strong) LeftMenuViewController * leftViewController;
 @end
 

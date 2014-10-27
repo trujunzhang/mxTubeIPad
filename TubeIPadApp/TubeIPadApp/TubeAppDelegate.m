@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <youtube_slide_menu/LeftMenuViewController.h>
 #import "TubeAppDelegate.h"
 #import "SWRevealViewController.h"
 #import "LeftMenuViewController.h"
@@ -27,11 +28,11 @@
    [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
 
    //3
-   UIViewController * leftViewController = [self getLeftMenuController];
+   self.leftViewController = [self getLeftMenuController];
 
 
    //6
-   self.revealController = [[SWRevealViewController alloc] initWithRearViewController:leftViewController
+   self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
 
@@ -48,17 +49,7 @@
 
 
 - (UIViewController *)getLeftMenuController {
-   UIViewController * leftViewController = [[LeftMenuViewController alloc] init];
-
-//   leftViewController.view.backgroundColor = [UIColor blueColor];
-
-//   UIButton * button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//   button.center = CGPointMake(100, 200);
-//   [button setTitle:@"What to Watch" forState:UIControlStateNormal];
-//   [button sizeToFit];
-//   [button addTarget:self action:@selector(button_Tapped:) forControlEvents:UIControlEventTouchUpInside];
-//
-//   [leftViewController.view addSubview:button];
+   LeftMenuViewController * leftViewController = [[LeftMenuViewController alloc] init];
 
    return leftViewController;
 }
