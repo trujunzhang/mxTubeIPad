@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "SWRevealViewController.h"
 
 
 @interface AppDelegate ()
@@ -18,18 +19,70 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   self.window.backgroundColor = [UIColor whiteColor];
-   // Assign tab bar item with titles
+
 
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
 
    //2
-
    [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
 
+   //3
+   UIViewController * leftViewController = [self getLeftMenuController];
+
+
+   //6
+   self.revealController = [[SWRevealViewController alloc] initWithRearViewController:leftViewController
+                                                                  frontViewController:self.tabBarController];
+   self.revealController.delegate = self;
+
+   //7
+   UIWindow * window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+   self.window = window;
+
+   self.window.rootViewController = self.revealController;
+
+   self.window.backgroundColor = [UIColor whiteColor];
+   [self.window makeKeyAndVisible];
+
    return YES;
+}
+
+
+- (UIViewController *)getLeftMenuController {
+   UIViewController * leftViewController = [[UIViewController alloc] init];
+   leftViewController.view.backgroundColor = [UIColor blueColor];
+
+   // ボタンを作成
+   UIButton * button =
+    [UIButton buttonWithType:UIButtonTypeRoundedRect];
+
+   // ボタンの位置を設定
+   button.center = CGPointMake(100, 200);
+
+   // キャプションを設定
+   [button setTitle:@"What to Watch"
+           forState:UIControlStateNormal];
+
+   // キャプションに合わせてサイズを設定
+   [button sizeToFit];
+
+   // ボタンがタップされたときに呼ばれるメソッドを設定
+   [button addTarget:self
+              action:@selector(button_Tapped:)
+    forControlEvents:UIControlEventTouchUpInside];
+
+   // ボタンをビューに追加
+   [leftViewController.view addSubview:button];
+
+   return leftViewController;
+}
+
+
+- (void)button_Tapped:(id)sender {
+   NSString * debug = @"debug";
+//   [self.mainViewController search:@"sketch 3"];
 }
 
 
@@ -58,5 +111,22 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark -
+#pragma mark - SWRevealViewControllerDelegate
+
+
+// This will be called inside the reveal animation, thus you can use it to place your own code that will be animated in sync
+- (void)revealController:(SWRevealViewController *)revealController animateToPosition:(FrontViewPosition)position {
+   if (position == FrontViewPositionRight) {
+      NSString * debug = @"debug";
+   } else if (position == FrontViewPositionLeft) {
+      NSString * debug = @"debug";
+   }
+
+   NSString * debug = @"debug";
+}
+
 
 @end
