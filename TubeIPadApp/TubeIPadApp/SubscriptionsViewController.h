@@ -14,6 +14,9 @@
 
 
 @interface SubscriptionsViewController : UINavigationController<IpadGridViewCellDelegate>
+
+@property(nonatomic, strong) SWRevealViewController * mRevealViewController;
 @property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+
 @end
 

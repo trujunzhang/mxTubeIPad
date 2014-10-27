@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SWRevealViewController/SWRevealViewController.h>
 @class LeftMenuViewController;
+@class SubscriptionsViewController;
 
 
 @interface TubeAppDelegate : UIResponder <UIApplicationDelegate,SWRevealViewControllerDelegate>
@@ -20,5 +21,9 @@
 @property(nonatomic, strong) SWRevealViewController * revealController;
 
 @property(nonatomic, strong) LeftMenuViewController * leftViewController;
+
+@property(nonatomic, strong) SubscriptionsViewController * subscriptionsViewController;
+
+
 @end
 

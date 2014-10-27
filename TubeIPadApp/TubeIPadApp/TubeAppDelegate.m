@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <youtube_slide_menu/LeftMenuViewController.h>
+
 #import "TubeAppDelegate.h"
-#import "SWRevealViewController.h"
+
 #import "LeftMenuViewController.h"
+#import "SubscriptionsViewController.h"
 
 
 @interface TubeAppDelegate ()
@@ -24,6 +25,8 @@
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
 
+   self.subscriptionsViewController = self.tabBarController.viewControllers[0];
+
    //2
    [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
 
@@ -35,6 +38,8 @@
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
+
+   self.subscriptionsViewController.mRevealViewController = self.revealController;
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -52,12 +57,6 @@
    LeftMenuViewController * leftViewController = [[LeftMenuViewController alloc] init];
 
    return leftViewController;
-}
-
-
-- (void)button_Tapped:(id)sender {
-   NSString * debug = @"debug";
-//   [self.mainViewController search:@"sketch 3"];
 }
 
 
