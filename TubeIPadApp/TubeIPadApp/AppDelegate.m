@@ -17,10 +17,7 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
@@ -48,9 +45,6 @@
 
    return YES;
 }
-
-
-
 
 
 - (UIViewController *)getLeftMenuController {
