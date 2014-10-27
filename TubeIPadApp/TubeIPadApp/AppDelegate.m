@@ -18,17 +18,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   self.window.backgroundColor=[UIColor whiteColor];
+   self.window.backgroundColor = [UIColor whiteColor];
    // Assign tab bar item with titles
-   UITabBarController * tabBarController = (UITabBarController *) self.window.rootViewController;
-   UITabBar * tabBar = tabBarController.tabBar;
-   UITabBarItem * tabBarItem1 = [tabBar.items objectAtIndex:0];
-   UITabBarItem * tabBarItem2 = [tabBar.items objectAtIndex:1];
 
-   tabBar.tintColor = [UIColor redColor];
+   //1
+   self.tabBarController = (UITabBarController *) self.window.rootViewController;
+   self.tabBarController.tabBar.tintColor = [UIColor redColor];
 
-   tabBarItem1.title = @"Subscriptions";
-   tabBarItem2.title = @"Search";
+   //2
 
    [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
 

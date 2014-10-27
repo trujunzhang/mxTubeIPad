@@ -11,6 +11,9 @@
     <content url="file://$MODULE_DIR$/../dependencies/ipad/YoutubeCollectionView">
       <sourceFolder url="file://$MODULE_DIR$/../dependencies/ipad/YoutubeCollectionView" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/../dependencies/ipad/youtube_slide_menu">
+      <sourceFolder url="file://$MODULE_DIR$/../dependencies/ipad/youtube_slide_menu" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/../dependencies/layers/Business-Logic-Layer">
       <sourceFolder url="file://$MODULE_DIR$/../dependencies/layers/Business-Logic-Layer" isTestSource="false" />
     </content>

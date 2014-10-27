@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios,7.0
+platform :ios, 7.0
 
 pod 'Reveal-iOS-SDK'
 
@@ -19,9 +19,9 @@ target 'TubeIPadApp', :exclusive => true do
   pod "google-api-services-youtube", :path => "../dependencies/layers/google-api-services-youtube"
 
   # ________________Projects for iPad___________________
-  pod "YoutubeCollectionView", :path => "../dependencies/ipad/YoutubeCollectionView"
-
   # ________________module Projects___________________
+  pod "YoutubeCollectionView", :path => "../dependencies/ipad/YoutubeCollectionView"
+  pod "youtube_slide_menu", :path => "../dependencies/ipad/youtube_slide_menu"
   pod "VideoWatchDetailViewControlleriPad", :path => "../dependencies/ipad/VideoWatchDetailViewControlleriPad"
 
 end
