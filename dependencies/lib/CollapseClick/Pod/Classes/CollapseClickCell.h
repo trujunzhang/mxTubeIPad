@@ -16,7 +16,7 @@
 // Header
 @property (weak, nonatomic) IBOutlet UIView *TitleView;
 @property (weak, nonatomic) IBOutlet UILabel *TitleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *TitleButton;
+//@property (weak, nonatomic) IBOutlet UIButton *TitleButton;
 @property (weak, nonatomic) IBOutlet CollapseClickArrow *TitleArrow;
 
 // Body

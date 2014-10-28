@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CollapseClickCell.h"
+@class UserInfoView;
 
 #define kCCPad 10
 
@@ -46,7 +47,7 @@
 @property (nonatomic, retain) NSMutableArray *dataArray;
 
 // Methods
--(void)reloadCollapseClick;
+- (void)reloadCollapseClick:(UIImageView *)view withSubViews:(UserInfoView *)views;
 -(CollapseClickCell *)collapseClickCellForIndex:(int)index;
 -(void)scrollToCollapseClickCellAtIndex:(int)index animated:(BOOL)animated;
 -(UIView *)contentViewForCellAtIndex:(int)index;

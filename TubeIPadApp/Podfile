@@ -8,8 +8,8 @@ target 'TubeIPadApp', :exclusive => true do
   # ________________open projects___________________
   pod "WHTopTabBarController", :path => "../dependencies/lib/WHTopTabBarController"
   pod "YKMediaPlayerKit", :path => "../dependencies/lib/YKMediaPlayerKit"
-
   pod "XCDYouTubeKit", :path => "../dependencies/lib/XCDYouTubeKit"
+  pod "CollapseClick", :path => "../dependencies/lib/CollapseClick"
 
   # ________________collect common library___________________
   pod "IOS_Collection_Code", :path => "../dependencies/collect/IOS_Collection_Code"
