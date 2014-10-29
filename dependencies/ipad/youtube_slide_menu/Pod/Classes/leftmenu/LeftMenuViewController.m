@@ -58,12 +58,12 @@
    self.headers = [[NSMutableArray alloc] init];
    for (int i = 0; i < [colors count]; i++) {
       UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-//      header.backgroundColor=[UIColor clearColor];
-      [header setBackgroundColor:[colors objectAtIndex:i]];
+      header.backgroundColor = [UIColor clearColor];
+//      [header setBackgroundColor:[colors objectAtIndex:i]];
       UILabel * number = [[UILabel alloc] initWithFrame:header.frame];
-      number.textAlignment = NSTextAlignmentCenter;
+      number.textAlignment = NSTextAlignmentLeft;
       number.textColor = [UIColor blackColor];
-      number.text = [NSString stringWithFormat:@"%i", i + 1];
+      number.text = @"Categories";
       [header addSubview:number];
 
       [self.headers addObject:header];
