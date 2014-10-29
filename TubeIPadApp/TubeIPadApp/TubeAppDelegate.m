@@ -6,14 +6,22 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-
 #import "TubeAppDelegate.h"
+
+#import <SWRevealViewController/SWRevealViewController.h>
 
 #import "LeftMenuViewController.h"
 #import "SubscriptionsViewController.h"
 
 
-@interface TubeAppDelegate ()
+@interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate>
+
+@property(nonatomic, strong) SWRevealViewController * revealController;
+
+@property(nonatomic, strong) LeftMenuViewController * leftViewController; // left
+@property(nonatomic, strong) UITabBarController * tabBarController; // right
+
+@property(nonatomic, strong) SubscriptionsViewController * subscriptionsViewController; // the first right tab bar item
 
 @end
 
