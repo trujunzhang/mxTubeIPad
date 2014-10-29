@@ -59,11 +59,10 @@
    for (int i = 0; i < [colors count]; i++) {
       UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
       header.backgroundColor = [UIColor clearColor];
-//      [header setBackgroundColor:[colors objectAtIndex:i]];
       UILabel * number = [[UILabel alloc] initWithFrame:header.frame];
       number.textAlignment = NSTextAlignmentLeft;
       number.textColor = [UIColor blackColor];
-      number.text = @"Categories";
+      number.text = @"  Categories";
       [header addSubview:number];
 
       [self.headers addObject:header];
@@ -121,6 +120,8 @@
    if (cell == nil) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
    }
+
+//   cell.frame= CGRectMake(0, 0, cell.frame.size.width, 100);
    cell.backgroundColor = [UIColor clearColor];
 
    NSArray * line = [self defaultCategories][indexPath.row];
@@ -135,6 +136,7 @@
    UILabel * label = [[UILabel alloc] init];
    CGRect rect = cell.frame;
    rect.origin.x = 60;
+   rect.origin.y = 0;
    rect.size.width = rect.size.width - 60;
    label.frame = rect;
    label.text = line[0];
@@ -148,6 +150,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    return [[self defaultCategories] count];
 //   return [[self.data objectAtIndex:section] count];
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+   return 80;
 }
 
 
