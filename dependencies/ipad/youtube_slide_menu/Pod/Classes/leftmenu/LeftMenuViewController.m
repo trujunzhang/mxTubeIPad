@@ -44,11 +44,7 @@
 
 - (void)setupViewController {
    NSArray * colors = @[ [UIColor redColor],
-    [UIColor orangeColor],
-    [UIColor yellowColor],
-    [UIColor greenColor],
-    [UIColor blueColor],
-    [UIColor purpleColor] ];
+   ];
 
    self.data = [[NSMutableArray alloc] init];
    for (int i = 0; i < [colors count]; i++) {
@@ -62,6 +58,7 @@
    self.headers = [[NSMutableArray alloc] init];
    for (int i = 0; i < [colors count]; i++) {
       UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+//      header.backgroundColor=[UIColor clearColor];
       [header setBackgroundColor:[colors objectAtIndex:i]];
       UILabel * number = [[UILabel alloc] initWithFrame:header.frame];
       number.textAlignment = NSTextAlignmentCenter;
@@ -139,9 +136,9 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-   if (section == 0) {
-      return 0;
-   }
+//   if (section == 0) {
+//      return 0;
+//   }
    return 40;
 }
 
@@ -149,5 +146,30 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
    return [self.headers objectAtIndex:section];
 }
+
+
+- (NSArray *)defaultCategories {
+   NSArray * array = @[
+    @[ @"Autos & Vehicles", @"Autos" ],
+    @[ @"Comedy", @"Comedy" ],
+    @[ @"Education", @"Education" ],
+    @[ @"Entertainment", @"Entertainment" ],
+    @[ @"File & Animation", @"Film" ],
+    @[ @"Gaming", @"Games" ],
+    @[ @"Howto & Style", @"Howto" ],
+    @[ @"Music", @"Music" ],
+    @[ @"News & Politics", @"News" ],
+    @[ @"Nonprofits & Activism", @"Nonprofit" ],
+    @[ @"People & Blogs", @"People" ],
+    @[ @"Pets & Animals", @"Animals" ],
+    @[ @"Science & Technology", @"Tech" ],
+    @[ @"Sports", @"Sports" ],
+    @[ @"Travel & Events", @"Travel" ],
+   ];
+
+
+   return array;
+}
+
 
 @end
