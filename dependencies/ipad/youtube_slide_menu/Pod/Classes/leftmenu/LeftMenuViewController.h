@@ -1,25 +1,16 @@
 //
 //  LeftMenuViewController.h
-//  NIBMultiViewsApp
+//  STCollapseTableViewDemo
 //
-//  Created by djzhang on 10/27/14.
-//  Copyright (c) 2014 djzhang. All rights reserved.
+//  Created by Thomas Dupont on 09/08/13.
+//  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
-@class UserInfoView;
-@class UserListView;
-@class SubscriptionsView;
-@class CategoriesView;
+@class STCollapseTableView;
 
 
 @interface LeftMenuViewController : UIViewController
 
-
-@property(strong, nonatomic) IBOutlet UserInfoView * userInfoView;
-@property(strong, nonatomic) IBOutlet UserListView * userListView;
-@property(strong, nonatomic) IBOutlet SubscriptionsView * subscriptionsView;
-@property(strong, nonatomic) IBOutlet CategoriesView * caegoresView;
 
 @end
