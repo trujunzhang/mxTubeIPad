@@ -115,23 +115,39 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   static NSString * cellIdentifier = @"cell";
+   static NSString * CellIdentifier = @"NewsTableViewCell";
 
-   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
-   if (!cell) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
    }
+   cell.backgroundColor = [UIColor clearColor];
 
-   NSString * text = [[self.data objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-   cell.textLabel.text = text;
+   NSArray * line = [self defaultCategories][indexPath.row];
+
+   UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:line[1]]];
+   [imageView setContentMode:UIViewContentModeScaleAspectFit];
+   imageView.frame = CGRectMake(0, 0, 50, 50);
+
+   [cell.contentView addSubview:imageView];
+
+
+   UILabel * label = [[UILabel alloc] init];
+   CGRect rect = cell.frame;
+   rect.origin.x = 60;
+   rect.size.width = rect.size.width - 60;
+   label.frame = rect;
+   label.text = line[0];
+
+   [cell.contentView addSubview:label];
 
    return cell;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   return [[self.data objectAtIndex:section] count];
+   return [[self defaultCategories] count];
+//   return [[self.data objectAtIndex:section] count];
 }
 
 
@@ -139,7 +155,7 @@
 //   if (section == 0) {
 //      return 0;
 //   }
-   return 40;
+   return 50;
 }
 
 
