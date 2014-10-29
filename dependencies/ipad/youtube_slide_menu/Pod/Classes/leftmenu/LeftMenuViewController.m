@@ -9,6 +9,7 @@
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
+#import "UserInfoView.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -79,38 +80,44 @@
    [self setupBackground];
 
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
-   self.tableView.backgroundColor=[UIColor clearColor];
+   self.tableView.backgroundColor = [UIColor clearColor];
    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
    self.tableView.dataSource = self;
    self.tableView.delegate = self;
 
    [self.view addSubview:self.tableView];
 
-   self.tableView.tableHeaderView = ({
-      UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
-      UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
-      imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-      imageView.image = [UIImage imageNamed:@"avatar.jpg"];
-      imageView.layer.masksToBounds = YES;
-      imageView.layer.cornerRadius = 50.0;
-      imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-      imageView.layer.borderWidth = 3.0f;
-      imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-      imageView.layer.shouldRasterize = YES;
-      imageView.clipsToBounds = YES;
+   NSArray * views = [[NSBundle mainBundle] loadNibNamed:@"UserInfoView" owner:nil options:nil]; //&1
+   UserInfoView * userInfoView = [views lastObject];
+   userInfoView.frame = CGRectMake(0, 0, 256, 100);
 
-      UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
-      label.text = @"Roman Efimov";
-      label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
-      label.backgroundColor = [UIColor redColor];
-      label.textColor = [UIColor colorWithRed:62 / 255.0f green:68 / 255.0f blue:75 / 255.0f alpha:1.0f];
-      [label sizeToFit];
-      label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+   self.tableView.tableHeaderView = userInfoView;
 
-      [view addSubview:imageView];
-      [view addSubview:label];
-      view;
-   });
+//   self.tableView.tableHeaderView = ({
+//      UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
+//      UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
+//      imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+//      imageView.image = [UIImage imageNamed:@"avatar.jpg"];
+//      imageView.layer.masksToBounds = YES;
+//      imageView.layer.cornerRadius = 50.0;
+//      imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+//      imageView.layer.borderWidth = 3.0f;
+//      imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//      imageView.layer.shouldRasterize = YES;
+//      imageView.clipsToBounds = YES;
+//
+//      UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+//      label.text = @"Roman Efimov";
+//      label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
+//      label.backgroundColor = [UIColor redColor];
+//      label.textColor = [UIColor colorWithRed:62 / 255.0f green:68 / 255.0f blue:75 / 255.0f alpha:1.0f];
+//      [label sizeToFit];
+//      label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+//
+//      [view addSubview:imageView];
+//      [view addSubview:label];
+//      view;
+//   });
 
    [self.tableView reloadData];
 
