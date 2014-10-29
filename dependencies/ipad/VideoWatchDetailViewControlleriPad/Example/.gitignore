@@ -20,5 +20,7 @@ DerivedData
 *.ipa
 
 # CocoaPods
-Pods
+Pods/
 Podfile.lock
+*.xcworkspace
+*.idea/

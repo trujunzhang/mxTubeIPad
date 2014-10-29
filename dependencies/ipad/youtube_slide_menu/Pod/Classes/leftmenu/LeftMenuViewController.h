@@ -8,17 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-#import "CollapseClick.h"
 @class UserInfoView;
 @class UserListView;
 @class SubscriptionsView;
 @class CategoriesView;
 
 
-@interface LeftMenuViewController : UIViewController<CollapseClickDelegate>
+@interface LeftMenuViewController : UIViewController
 
-
-@property(weak, nonatomic) IBOutlet CollapseClick * myCollapseClick;
 
 @property(strong, nonatomic) IBOutlet UserInfoView * userInfoView;
 @property(strong, nonatomic) IBOutlet UserListView * userListView;
