@@ -131,6 +131,11 @@
    cell.imageView.image = [UIImage imageNamed:line[1]];
    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
+   // 4
+   cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
+    stretchableImageWithLeftCapWidth:0.0
+                        topCapHeight:5.0]];
+
    return cell;
 }
 
@@ -142,7 +147,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-   return 80;
+   return 42;
 }
 
 
@@ -150,7 +155,7 @@
 //   if (section == 0) {
 //      return 0;
 //   }
-   return 50;
+   return 30;
 }
 
 
