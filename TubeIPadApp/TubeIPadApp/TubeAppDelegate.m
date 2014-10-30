@@ -31,10 +31,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
+   self.tabBarController.view.backgroundColor = [UIColor whiteColor];
    self.tabBarController.delegate = self;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
-   // the first right tab bar item
+
+   //2. the first right tab bar item
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];
+   self.subscriptionsViewController.revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+                                                                                        style:UIBarButtonItemStyleBordered
+                                                                                       target:self.revealController
+                                                                                       action:@selector(revealToggle:)];
+   self.subscriptionsViewController.isRearOpen = YES;
 
    //3
    self.leftViewController = [[LeftMenuViewController alloc] init];
@@ -44,10 +51,6 @@
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
 
-   self.subscriptionsViewController.revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
-                                                                                        style:UIBarButtonItemStyleBordered
-                                                                                       target:self.revealController
-                                                                                       action:@selector(revealToggle:)];
 
    [[self revealController] revealToggleAnimated:NO];
 
@@ -101,6 +104,20 @@
    }
 
    NSString * debug = @"debug";
+}
+
+
+#pragma mark -
+#pragma mark UITabBarControllerDelegate
+
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+   NSUInteger integer = tabBarController.selectedIndex;
+   if (integer == 0) {
+
+   } else {
+
+   }
 }
 
 

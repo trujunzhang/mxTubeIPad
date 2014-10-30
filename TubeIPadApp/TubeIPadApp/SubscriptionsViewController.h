@@ -14,5 +14,7 @@
 
 @property(nonatomic, strong) UIBarButtonItem * revealButtonItem;
 
+@property(nonatomic) BOOL isRearOpen;
+
 @end
 

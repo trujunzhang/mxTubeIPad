@@ -55,7 +55,7 @@
 
 
 #pragma mark -
-#pragma mark - IpadGridViewCellDelegate
+#pragma mark  IpadGridViewCellDelegate
 
 
 - (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
