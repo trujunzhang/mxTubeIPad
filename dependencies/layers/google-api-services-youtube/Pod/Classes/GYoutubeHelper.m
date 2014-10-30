@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "GYSearch.h"
+#import "GYoutubeHelper.h"
 #import "GTLYouTubeSearchResult.h"
 #import "GTLYouTubeResourceId.h"
 #import "GTLYouTubeVideo.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2Authentication.h"
 
-static GYSearch * instance = nil;
+static GYoutubeHelper * instance = nil;
 
 
-@implementation GYSearch
+@implementation GYoutubeHelper
 
 - (GTLServiceYouTube *)youTubeService {
    static GTLServiceYouTube * service;
@@ -37,7 +37,7 @@ static GYSearch * instance = nil;
 }
 
 
-+ (GYSearch *)getInstance {
++ (GYoutubeHelper *)getInstance {
    @synchronized (self) {
       if (instance == nil) {
          instance = [[self alloc] init];

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GYSearch.h"
+#import "GYoutubeHelper.h"
 
 
 @interface SearchImplementation : NSObject

@@ -7,7 +7,7 @@
 //
 
 #import "SearchImplementation.h"
-#import "GYSearch.h"
+#import "GYoutubeHelper.h"
 
 SearchImplementation * instance;
 
@@ -27,7 +27,7 @@ SearchImplementation * instance;
 
 
 - (void)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
-   [[GYSearch getInstance] searchByQueryWithQueryTerm:queryTerm
+   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:queryTerm
                                     completionHandler:responseHandler
                                          errorHandler:errorHandler];
 }

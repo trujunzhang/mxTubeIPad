@@ -10,7 +10,7 @@
 
 #import "KRLCollectionViewGridLayout.h"
 #import "IpadGridViewCell.h"
-#import "GYSearch.h"
+#import "GYoutubeHelper.h"
 #import "SearchImplementation.h"
 #import "DebugUtils.h"
 

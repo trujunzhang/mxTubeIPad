@@ -27,7 +27,7 @@ typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
 
 
-@interface GYSearch : NSObject {
+@interface GYoutubeHelper : NSObject {
    GTLYouTubeChannelContentDetailsRelatedPlaylists * _myPlaylists;
    GTLServiceTicket * _searchListTicket;
    NSError * _channelListFetchError;
@@ -45,7 +45,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 
 @property(nonatomic) BOOL isSignedIn;
 
-+ (GYSearch *)getInstance;
++ (GYoutubeHelper *)getInstance;
 
 - (NSArray *)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler;
 
