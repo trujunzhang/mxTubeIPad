@@ -229,4 +229,8 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+#pragma mark -
+#pragma mark Get auth User's Subscriptions
+
+
 @end
