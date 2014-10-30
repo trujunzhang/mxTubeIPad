@@ -129,7 +129,6 @@
 - (void)closeRearPanel {
    [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
    self.subscriptionsViewController.isRearOpen = NO;
-   self.lastTabBarSelectedIndex = -1;
 }
 
 
