@@ -53,9 +53,10 @@
    label.textColor = [UIColor redColor];
    label.text = @"wanghao";
 
+   GTMOAuth2Authentication * authentication = [[GYSearch getInstance] getAuthorizer];
+
 
    [self.view addSubview:label];
-
 }
 
 

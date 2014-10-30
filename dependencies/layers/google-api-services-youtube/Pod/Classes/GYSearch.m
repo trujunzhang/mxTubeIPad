@@ -40,10 +40,8 @@ static GYSearch * instance = nil;
 + (GYSearch *)getInstance {
    @synchronized (self) {
       if (instance == nil) {
-//         NSLog(@"initializing");
          instance = [[self alloc] init];
       }
-//      NSLog(@"Address: %p", instance);
    }
    return (instance);
 }
@@ -195,12 +193,25 @@ static GYSearch * instance = nil;
       // Authentication succeeded
       NSLog(@"Success");
 
-      [[GYSearch getInstance] saveAuth:auth];
+      [self saveAuthorizer:auth];
+
+      [self getAuthorizer];
    }
 }
 
 
-- (void)saveAuth:(GTMOAuth2Authentication *)authentication {
+- (GTMOAuth2Authentication *)getAuthorizer {
+   GTMOAuth2Authentication * auth;
+   auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                clientID:kMyClientID
+                                                            clientSecret:kMyClientSecret];
+   self.youTubeService.authorizer = auth;
+
+   return auth;
+}
+
+
+- (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication {
    self.youTubeService.authorizer = authentication;
 }
 @end
