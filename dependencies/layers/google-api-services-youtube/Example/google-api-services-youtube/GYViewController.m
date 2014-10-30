@@ -8,7 +8,7 @@
 
 #import "GYViewController.h"
 
-#import "GYSearch.h"
+#import "GYoutubeHelper.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 
 
@@ -29,7 +29,7 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYSearch getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion errorHandler:error];
+   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion errorHandler:error];
 
    [self setupUI];
 }
@@ -82,21 +82,21 @@
 
 
 - (void)signingOutButtonTouch {
-   [[GYSearch getInstance] signingOut];
+   [[GYoutubeHelper getInstance] signingOut];
 }
 
 
 - (void)refreshButtonTouch {
-   BOOL isSignedIn = [[GYSearch getInstance] isSignedIn];
+   BOOL isSignedIn = [[GYoutubeHelper getInstance] isSignedIn];
    if (isSignedIn) {
-      self.label.text = [[GYSearch getInstance] getAuthorizer].userEmail;
+      self.label.text = [[GYoutubeHelper getInstance] getAuthorizer].userEmail;
    }
 }
 
 
 - (void)editBtnTouch {
    GTMOAuth2ViewControllerTouch * viewController =
-    [[GYSearch getInstance] getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:self
+    [[GYoutubeHelper getInstance] getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:self
                                                                  leftBarDelegate:self
                                                                     cancelAction:@selector(cancelGdriveSignIn:)];
 
@@ -119,7 +119,7 @@
       // Authentication succeeded
       NSLog(@"Success");
 
-      [[GYSearch getInstance] saveAuthorizer:auth];
+      [[GYoutubeHelper getInstance] saveAuthorizer:auth];
    }
 }
 
