@@ -54,6 +54,10 @@ static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
 
 - (void)editBtnTouch {
 
+
+   UINavigationController * naviBarObj = [[UINavigationController alloc] init];
+
+
    NSString * kMyClientID = @"981239920851-gi3pis2s62pb2miojr2lsukuc8n8405h.apps.googleusercontent.com";     // pre-assigned by service
    NSString * kMyClientSecret = @"wMEhiReTb1_429VsuG9Xu9r0"; // pre-assigned by service
 
@@ -67,7 +71,21 @@ static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
                                                delegate:self
                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
 
-   [self presentViewController:viewController animated:YES completion:nil];
+   viewController.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Cancel", nil)]
+                                     style:UIBarButtonItemStyleBordered
+                                    target:self
+                                    action:@selector(cancelGdriveSignIn:)];
+
+   [naviBarObj pushViewController:viewController animated:YES];
+
+   [self presentViewController:naviBarObj animated:YES completion:nil];
+}
+
+
+- (void)cancelGdriveSignIn:(id)cancelGdriveSignIn {
+   [self dismissViewControllerAnimated:YES completion:^(void) {
+   }];
 }
 
 
