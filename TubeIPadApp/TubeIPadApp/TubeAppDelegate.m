@@ -40,8 +40,8 @@
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];
    self.subscriptionsViewController.revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
                                                                                         style:UIBarButtonItemStyleBordered
-                                                                                       target:self.revealController
-                                                                                       action:@selector(revealToggle:)];
+                                                                                       target:self
+                                                                                       action:@selector(leftRevealToggle:)];
    self.subscriptionsViewController.isRearOpen = YES;
 
    //3
@@ -115,14 +115,7 @@
    NSUInteger integer = tabBarController.selectedIndex;
 
    if (integer == 0) {
-      if (integer == self.lastTabBarSelectedIndex) {
-         [[self revealController] revealToggleAnimated:YES];
-         self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
-      }
-      else if (self.subscriptionsViewController.isRearOpen) {
-         [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
-      }
-
+      [self setSubscriptionButtonEvent:integer];
    } else {
       if (self.subscriptionsViewController.isRearOpen) {
          [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
@@ -130,6 +123,26 @@
    }
 
    self.lastTabBarSelectedIndex = integer;
+}
+
+
+- (void)setSubscriptionButtonEvent:(NSUInteger)integer {
+   if (integer == self.lastTabBarSelectedIndex) {
+      [[self revealController] revealToggleAnimated:YES];
+      self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
+   }
+   else if (self.subscriptionsViewController.isRearOpen) {
+      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+   }
+}
+
+
+#pragma mark -
+#pragma mark - Provided acction methods
+
+
+- (void)leftRevealToggle:(id)sender {
+   [self setSubscriptionButtonEvent:self.lastTabBarSelectedIndex];
 }
 
 
