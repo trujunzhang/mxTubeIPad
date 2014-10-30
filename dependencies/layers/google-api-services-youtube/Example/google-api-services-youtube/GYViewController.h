@@ -10,4 +10,5 @@
 
 @interface GYViewController : UIViewController
 
+@property(nonatomic, strong) UILabel * label;
 @end

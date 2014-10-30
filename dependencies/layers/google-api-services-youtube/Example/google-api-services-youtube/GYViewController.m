@@ -47,18 +47,32 @@
 
    [self.view addSubview:editButton];
 
-   //2 user label
-   UILabel * label = [[UILabel alloc] init];
-   label.frame = CGRectMake(100, 300, 300, 100);
-   label.textColor = [UIColor redColor];
-   label.text = @"djzhang";
+   //1. edit button
+   UIButton * refreshButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   refreshButton.frame = CGRectMake(300, 100, 100, 100);
+   [refreshButton addTarget:self
+                     action:@selector(refreshButtonTouch)
+           forControlEvents:UIControlEventTouchDown];
 
+   [refreshButton setTitle:@"refreshButton" forState:UIControlStateNormal];
+
+   [self.view addSubview:refreshButton];
+
+   //2 user label
+   self.label = [[UILabel alloc] init];
+   self.label.frame = CGRectMake(100, 400, 300, 100);
+   self.label.textColor = [UIColor redColor];
+   self.label.text = @"djzhang";
+
+   [self.view addSubview:self.label];
+}
+
+
+- (void)refreshButtonTouch {
    BOOL isSignedIn = [[GYSearch getInstance] isSignedIn];
    if (isSignedIn) {
-      label.text = [[GYSearch getInstance] getAuthorizer].userEmail;
+      self.label.text = [[GYSearch getInstance] getAuthorizer].userEmail;
    }
-
-   [self.view addSubview:label];
 }
 
 
