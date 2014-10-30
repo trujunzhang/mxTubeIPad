@@ -145,9 +145,9 @@
 
 - (void)toggleRealPanel {
    if (self.subscriptionsViewController.isRearOpen) {
-      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
-   } else {
       [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+   } else {
+      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
    }
 }
 
