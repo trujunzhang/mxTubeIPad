@@ -118,11 +118,16 @@
       [self setSubscriptionButtonEvent:integer];
    } else {
       if (self.subscriptionsViewController.isRearOpen) {
-         [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+         [self closeRearPanel];
       }
    }
 
    self.lastTabBarSelectedIndex = integer;
+}
+
+
+- (void)closeRearPanel {
+   [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
 
 
