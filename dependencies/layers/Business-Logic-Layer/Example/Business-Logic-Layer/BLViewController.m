@@ -7,7 +7,6 @@
 //
 
 #import "BLViewController.h"
-#import "GYSearch.h"
 #import "SearchImplementation.h"
 
 
@@ -15,12 +14,12 @@
 
 @end
 
+
 @implementation BLViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+   [super viewDidLoad];
+   // Do any additional setup after loading the view, typically from a nib.
 
    self.view.backgroundColor = [UIColor clearColor]; // = transparent
 
@@ -31,14 +30,15 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[SearchImplementation getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion  errorHandler:error];
+   [[SearchImplementation getInstance] searchByQueryWithQueryTerm:@"sketch3"
+                                                completionHandler:completion
+                                                     errorHandler:error];
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)didReceiveMemoryWarning {
+   [super didReceiveMemoryWarning];
+   // Dispose of any resources that can be recreated.
 }
 
 @end
