@@ -46,6 +46,16 @@
    [editButton setTitle:@"Effects" forState:UIControlStateNormal];
 
    [self.view addSubview:editButton];
+
+   //2 user label
+   UILabel * label = [[UILabel alloc] init];
+   label.frame = CGRectMake(100, 300, 100, 100);
+   label.textColor = [UIColor redColor];
+   label.text = @"wanghao";
+
+
+   [self.view addSubview:label];
+
 }
 
 
