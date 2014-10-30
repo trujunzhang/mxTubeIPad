@@ -120,28 +120,16 @@
    if (cell == nil) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
    }
-
-//   cell.frame= CGRectMake(0, 0, cell.frame.size.width, 100);
+   // 1
    cell.backgroundColor = [UIColor clearColor];
 
+   // 2
    NSArray * line = [self defaultCategories][indexPath.row];
 
-   UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:line[1]]];
-   [imageView setContentMode:UIViewContentModeScaleAspectFit];
-   imageView.frame = CGRectMake(0, 0, 50, 50);
-
-   [cell.contentView addSubview:imageView];
-
-
-   UILabel * label = [[UILabel alloc] init];
-   CGRect rect = cell.frame;
-   rect.origin.x = 60;
-   rect.origin.y = 0;
-   rect.size.width = rect.size.width - 60;
-   label.frame = rect;
-   label.text = line[0];
-
-   [cell.contentView addSubview:label];
+   // 3
+   cell.textLabel.text = line[0];
+   cell.imageView.image = [UIImage imageNamed:line[1]];
+   cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
    return cell;
 }
