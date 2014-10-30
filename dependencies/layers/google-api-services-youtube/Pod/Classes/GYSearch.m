@@ -50,7 +50,7 @@ static GYSearch * instance = nil;
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.youTubeService.APIKey = kMyYoutubeApiKey;
+      [self initYoutubeService];
    }
 
    return self;
@@ -58,6 +58,25 @@ static GYSearch * instance = nil;
 
 
 #pragma mark -
+
+
+- (void)initYoutubeService {
+   // 1
+   self.youTubeService.APIKey = kMyYoutubeApiKey;
+
+   // 2
+   GTMOAuth2Authentication * auth;
+   auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                clientID:kMyClientID
+                                                            clientSecret:kMyClientSecret];
+   // 2.1
+   self.youTubeService.authorizer = auth;
+
+   // 3
+   self.isSignedIn = auth.canAuthorize;
+}
+
+
 #pragma mark Youtube search.
 
 
@@ -194,20 +213,12 @@ static GYSearch * instance = nil;
       NSLog(@"Success");
 
       [self saveAuthorizer:auth];
-
-      [self getAuthorizer];
    }
 }
 
 
 - (GTMOAuth2Authentication *)getAuthorizer {
-   GTMOAuth2Authentication * auth;
-   auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-                                                                clientID:kMyClientID
-                                                            clientSecret:kMyClientSecret];
-   self.youTubeService.authorizer = auth;
-
-   return auth;
+   return self.youTubeService.authorizer;
 }
 
 

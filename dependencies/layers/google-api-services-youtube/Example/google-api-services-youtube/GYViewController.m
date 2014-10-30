@@ -49,12 +49,14 @@
 
    //2 user label
    UILabel * label = [[UILabel alloc] init];
-   label.frame = CGRectMake(100, 300, 100, 100);
+   label.frame = CGRectMake(100, 300, 300, 100);
    label.textColor = [UIColor redColor];
-   label.text = @"wanghao";
+   label.text = @"djzhang";
 
-   GTMOAuth2Authentication * authentication = [[GYSearch getInstance] getAuthorizer];
-
+   BOOL isSignedIn = [[GYSearch getInstance] isSignedIn];
+   if (isSignedIn) {
+      label.text = [[GYSearch getInstance] getAuthorizer].userEmail;
+   }
 
    [self.view addSubview:label];
 }

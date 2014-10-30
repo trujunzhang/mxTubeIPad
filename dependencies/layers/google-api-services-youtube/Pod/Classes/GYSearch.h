@@ -43,6 +43,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 // Accessor for the app's single instance of the service object.
 @property(nonatomic, strong) GTLServiceYouTube * youTubeService;
 
+@property(nonatomic) BOOL isSignedIn;
 
 + (GYSearch *)getInstance;
 
