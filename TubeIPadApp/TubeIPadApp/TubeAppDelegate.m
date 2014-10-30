@@ -15,6 +15,7 @@
 
 
 @interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate, UITabBarControllerDelegate>
+@property(nonatomic) NSUInteger lastTabBarSelectedIndex;
 
 @property(nonatomic, strong) SWRevealViewController * revealController;
 
@@ -51,8 +52,7 @@
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
 
-
-   [[self revealController] revealToggleAnimated:NO];
+   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -113,11 +113,23 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    NSUInteger integer = tabBarController.selectedIndex;
+
    if (integer == 0) {
+      if (integer == self.lastTabBarSelectedIndex) {
+         [[self revealController] revealToggleAnimated:YES];
+         self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
+      }
+      else if (self.subscriptionsViewController.isRearOpen) {
+         [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+      }
 
    } else {
-
+      if (self.subscriptionsViewController.isRearOpen) {
+         [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+      }
    }
+
+   self.lastTabBarSelectedIndex = integer;
 }
 
 
