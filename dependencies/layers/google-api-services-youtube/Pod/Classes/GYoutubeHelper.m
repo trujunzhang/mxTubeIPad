@@ -182,9 +182,7 @@ static GYoutubeHelper * instance = nil;
 
 
 #pragma mark -
-
-
-#pragma mark GTMOAuth2ViewControllerTouch, Youtube oauth2.
+#pragma mark GTMOAuth2ViewControllerTouch, by Youtube oauth2.
 
 
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction {
@@ -228,7 +226,6 @@ static GYoutubeHelper * instance = nil;
 
    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.youTubeService.authorizer];
-
 }
 
 
