@@ -51,6 +51,6 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 
 - (GTMOAuth2Authentication *)getAuthorizer;
 - (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication;
-- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithDelegate:(id)delegate cancelAction:(SEL)cancelAction;
+- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
 
 @end

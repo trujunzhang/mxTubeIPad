@@ -65,6 +65,8 @@
    self.label.text = @"djzhang";
 
    [self.view addSubview:self.label];
+
+   [self refreshButtonTouch];
 }
 
 
@@ -78,12 +80,31 @@
 
 - (void)editBtnTouch {
    GTMOAuth2ViewControllerTouch * viewController =
-    [[GYSearch getInstance] getYoutubeOAuth2ViewControllerTouchWithDelegate:self
-                                                               cancelAction:@selector(cancelGdriveSignIn:)];
+    [[GYSearch getInstance] getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:self
+                                                                 leftBarDelegate:self
+                                                                    cancelAction:@selector(cancelGdriveSignIn:)];
 
    UINavigationController * naviBarObj = [[UINavigationController alloc] initWithRootViewController:viewController];
+   naviBarObj.view.backgroundColor = [UIColor whiteColor];
 
    [self presentViewController:naviBarObj animated:YES completion:nil];
+}
+
+
+- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
+      finishedWithAuth:(GTMOAuth2Authentication *)auth
+                 error:(NSError *)error {
+   if (error != nil) {
+      // Authentication failed
+      NSLog(@"failed");
+   } else {
+      // Authentication succeeded
+      NSLog(@"Success");
+
+      [[GYSearch getInstance] saveAuthorizer:auth];
+   }
+
+   [self cancelGdriveSignIn:nil];
 }
 
 

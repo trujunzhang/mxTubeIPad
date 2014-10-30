@@ -69,11 +69,8 @@ static GYSearch * instance = nil;
    auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
                                                                 clientID:kMyClientID
                                                             clientSecret:kMyClientSecret];
-   // 2.1
-   self.youTubeService.authorizer = auth;
-
    // 3
-   self.isSignedIn = auth.canAuthorize;
+   [self saveAuthorizer:auth];
 }
 
 
@@ -180,40 +177,25 @@ static GYSearch * instance = nil;
 #pragma mark GTMOAuth2ViewControllerTouch, Youtube oauth2.
 
 
-- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithDelegate:(id)delegate cancelAction:(SEL)cancelAction {
+- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction {
    //1
    GTMOAuth2ViewControllerTouch * viewController =
     [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kMyYoutube_scope
                                                clientID:kMyClientID
                                            clientSecret:kMyClientSecret
                                        keychainItemName:kKeychainItemName
-                                               delegate:self
+                                               delegate:touchDelegate
                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
 
    //2
    viewController.navigationItem.leftBarButtonItem =
     [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Cancel", nil)]
                                      style:UIBarButtonItemStyleBordered
-                                    target:delegate
+                                    target:leftBarDelegate
                                     action:cancelAction];
 
 
    return viewController;
-}
-
-
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)auth
-                 error:(NSError *)error {
-   if (error != nil) {
-      // Authentication failed
-      NSLog(@"failed");
-   } else {
-      // Authentication succeeded
-      NSLog(@"Success");
-
-//      [self saveAuthorizer:auth];
-   }
 }
 
 
@@ -224,5 +206,6 @@ static GYSearch * instance = nil;
 
 - (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication {
    self.youTubeService.authorizer = authentication;
+   self.isSignedIn = authentication.canAuthorize;
 }
 @end
