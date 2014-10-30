@@ -212,7 +212,7 @@ static GYSearch * instance = nil;
       // Authentication succeeded
       NSLog(@"Success");
 
-      [self saveAuthorizer:auth];
+//      [self saveAuthorizer:auth];
    }
 }
 
