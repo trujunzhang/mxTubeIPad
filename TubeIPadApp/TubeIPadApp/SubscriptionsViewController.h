@@ -7,16 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "IpadGridViewCell.h"
-@class YoutubeGridLayoutViewController;
-@class SWRevealViewController;
+#import <YoutubeCollectionView/IpadGridViewCell.h>
 
 
 @interface SubscriptionsViewController : UINavigationController<IpadGridViewCellDelegate>
 
-@property(nonatomic, strong) SWRevealViewController * mRevealViewController;
-@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+@property(nonatomic, strong) UIBarButtonItem * revealButtonItem;
 
 @end
 

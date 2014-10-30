@@ -32,20 +32,18 @@
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
+   // the first right tab bar item
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];
 
-   //2
-   [[UITabBar appearance] setBackgroundColor:[UIColor blackColor]];
-
    //3
-   self.leftViewController = [self getLeftMenuController];
-
+   self.leftViewController = [[LeftMenuViewController alloc] init];
 
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
-   self.subscriptionsViewController.mRevealViewController = self.revealController;
+
+   [self setupSubscriptionLeftBarButtonItem:nil];
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -57,10 +55,12 @@
 }
 
 
-- (UIViewController *)getLeftMenuController {
-   LeftMenuViewController * leftViewController = [[LeftMenuViewController alloc] init];
-
-   return leftViewController;
+- (void)setupSubscriptionLeftBarButtonItem:(UIViewController *)controller {
+   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+                                                                         style:UIBarButtonItemStyleBordered
+                                                                        target:self.revealController
+                                                                        action:@selector(revealToggle:)];
+   self.subscriptionsViewController.revealButtonItem = revealButtonItem;
 }
 
 

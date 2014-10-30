@@ -10,10 +10,11 @@
 
 #import "YoutubeGridLayoutViewController.h"
 #import "VideoDetailViewControlleriPad.h"
-#import "SWRevealViewController.h"
 
 
 @interface SubscriptionsViewController ()
+
+@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
 
 @end
 
@@ -34,21 +35,21 @@
    self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    // 2.1
-   [self setupSlideMenuController:self.youtubeGridLayoutViewController];
+   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
 
    //3
    [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
 }
 
 
-- (void)setupSlideMenuController:(UIViewController *)controller {
-   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
-                                                                         style:UIBarButtonItemStyleBordered
-                                                                        target:self.mRevealViewController
-                                                                        action:@selector(revealToggle:)];
-
-   controller.navigationItem.leftBarButtonItem = revealButtonItem;
-}
+//- (void)setupSlideMenuController:(UIViewController *)controller {
+//   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+//                                                                         style:UIBarButtonItemStyleBordered
+//                                                                        target:self.mRevealViewController
+//                                                                        action:@selector(revealToggle:)];
+//
+//   controller.navigationItem.leftBarButtonItem = revealButtonItem;
+//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -60,7 +61,7 @@
 - (void)viewDidAppear:(BOOL)animated {
    [super viewDidAppear:animated];
 
-   [[self mRevealViewController] revealToggleAnimated:NO];
+//   [[self mRevealViewController] revealToggleAnimated:NO];
 }
 
 
