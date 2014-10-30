@@ -94,6 +94,8 @@
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
                  error:(NSError *)error {
+   [self cancelGdriveSignIn:nil];
+
    if (error != nil) {
       // Authentication failed
       NSLog(@"failed");
@@ -103,8 +105,6 @@
 
       [[GYSearch getInstance] saveAuthorizer:auth];
    }
-
-   [self cancelGdriveSignIn:nil];
 }
 
 
