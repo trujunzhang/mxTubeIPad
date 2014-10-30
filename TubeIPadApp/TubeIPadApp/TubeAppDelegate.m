@@ -134,11 +134,20 @@
 
 - (void)setSubscriptionButtonEvent:(NSUInteger)integer {
    if (integer == self.lastTabBarSelectedIndex) {
-      [[self revealController] revealToggleAnimated:YES];
+      [self toggleRealPanel];
       self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
    }
    else if (self.subscriptionsViewController.isRearOpen) {
       [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+   }
+}
+
+
+- (void)toggleRealPanel {
+   if (self.subscriptionsViewController.isRearOpen) {
+      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+   } else {
+      [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
    }
 }
 

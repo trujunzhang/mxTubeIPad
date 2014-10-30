@@ -62,6 +62,7 @@
 - (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
    TubeAppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
    [appDelegate closeRearPanel];
+   self.isRearOpen= YES;
 
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
