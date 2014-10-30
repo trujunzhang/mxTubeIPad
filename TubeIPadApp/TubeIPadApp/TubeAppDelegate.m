@@ -14,7 +14,7 @@
 #import "SubscriptionsViewController.h"
 
 
-@interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate>
+@interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate, UITabBarControllerDelegate>
 
 @property(nonatomic, strong) SWRevealViewController * revealController;
 
@@ -31,6 +31,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
+   self.tabBarController.delegate = self;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
    // the first right tab bar item
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];
@@ -88,7 +89,7 @@
 
 
 #pragma mark -
-#pragma mark - SWRevealViewControllerDelegate
+#pragma mark SWRevealViewControllerDelegate
 
 
 // This will be called inside the reveal animation, thus you can use it to place your own code that will be animated in sync
