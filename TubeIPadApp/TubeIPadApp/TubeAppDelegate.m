@@ -43,7 +43,12 @@
                                                                   frontViewController:self.tabBarController];
    self.revealController.delegate = self;
 
-   [self setupSubscriptionLeftBarButtonItem:nil];
+   self.subscriptionsViewController.revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
+                                                                                        style:UIBarButtonItemStyleBordered
+                                                                                       target:self.revealController
+                                                                                       action:@selector(revealToggle:)];
+
+   [[self revealController] revealToggleAnimated:NO];
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -52,15 +57,6 @@
    [self.window makeKeyAndVisible];
 
    return YES;
-}
-
-
-- (void)setupSubscriptionLeftBarButtonItem:(UIViewController *)controller {
-   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
-                                                                         style:UIBarButtonItemStyleBordered
-                                                                        target:self.revealController
-                                                                        action:@selector(revealToggle:)];
-   self.subscriptionsViewController.revealButtonItem = revealButtonItem;
 }
 
 

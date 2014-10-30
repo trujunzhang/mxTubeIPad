@@ -42,16 +42,6 @@
 }
 
 
-//- (void)setupSlideMenuController:(UIViewController *)controller {
-//   UIBarButtonItem * revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
-//                                                                         style:UIBarButtonItemStyleBordered
-//                                                                        target:self.mRevealViewController
-//                                                                        action:@selector(revealToggle:)];
-//
-//   controller.navigationItem.leftBarButtonItem = revealButtonItem;
-//}
-
-
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
@@ -61,7 +51,6 @@
 - (void)viewDidAppear:(BOOL)animated {
    [super viewDidAppear:animated];
 
-//   [[self mRevealViewController] revealToggleAnimated:NO];
 }
 
 
