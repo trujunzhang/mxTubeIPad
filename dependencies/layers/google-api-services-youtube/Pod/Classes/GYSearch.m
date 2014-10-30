@@ -16,13 +16,32 @@ static GYSearch * instance = nil;
 
 @implementation GYSearch
 
+- (GTLServiceYouTube *)youTubeService {
+   static GTLServiceYouTube * service;
+
+   static dispatch_once_t onceToken;
+   dispatch_once(&onceToken, ^{
+       service = [[GTLServiceYouTube alloc] init];
+
+       // Have the service object set tickets to fetch consecutive pages
+       // of the feed so we do not need to manually fetch them.
+       service.shouldFetchNextPages = YES;
+
+       // Have the service object set tickets to retry temporary error conditions
+       // automatically.
+       service.retryEnabled = YES;
+   });
+   return service;
+}
+
+
 + (GYSearch *)getInstance {
    @synchronized (self) {
       if (instance == nil) {
-         NSLog(@"initializing");
+//         NSLog(@"initializing");
          instance = [[self alloc] init];
       }
-      NSLog(@"Address: %p", instance);
+//      NSLog(@"Address: %p", instance);
    }
    return (instance);
 }
@@ -31,7 +50,6 @@ static GYSearch * instance = nil;
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.youTubeService = [[GTLServiceYouTube alloc] init];
       self.youTubeService.APIKey = youtube_apikey;
    }
 
@@ -42,10 +60,12 @@ static GYSearch * instance = nil;
 - (NSArray *)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        // 02 Search Videos by videoIds
-       [self searchVideoByVideoIds:array completionHandler:(YoutubeResponseBlock) responseHandler errorHandler:errorHandler];
+       [self searchVideoByVideoIds:array
+                 completionHandler:(YoutubeResponseBlock) responseHandler
+                      errorHandler:errorHandler];
    };
    ErrorResponseBlock error = ^(NSError * error) {
-       if(error){
+       if (error) {
           errorHandler(error);
        }
    };
