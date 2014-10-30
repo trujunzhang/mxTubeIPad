@@ -38,7 +38,6 @@
 /* Begin PBXFileReference section */
 		121941D3EADE39D0E13531E7 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2E89666C5F734748A1082DC7 /* libPods-google-api-services-youtube.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-google-api-services-youtube.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		30A3117CEF8F4A1484EDF9FE /* Pods-google-api-services-youtube.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-api-services-youtube.xcconfig"; path = "Pods/Pods-google-api-services-youtube.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* google-api-services-youtube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "google-api-services-youtube.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,6 +60,8 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		71728E09DA9B9CF35BCC88FD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		AFCC56676C2A089444981741 /* Pods-google-api-services-youtube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-api-services-youtube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-google-api-services-youtube/Pods-google-api-services-youtube.debug.xcconfig"; sourceTree = "<group>"; };
+		CCEC741CB05EDC5CBF200732 /* Pods-google-api-services-youtube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-google-api-services-youtube.release.xcconfig"; path = "Pods/Target Support Files/Pods-google-api-services-youtube/Pods-google-api-services-youtube.release.xcconfig"; sourceTree = "<group>"; };
 		D67D81C99CFEF97F850D6524 /* google-api-services-youtube.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = "google-api-services-youtube.podspec"; path = "../google-api-services-youtube.podspec"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +98,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				30A3117CEF8F4A1484EDF9FE /* Pods-google-api-services-youtube.xcconfig */,
+				CD33A6AA4BA0A7174D9CA73F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +176,15 @@
 				121941D3EADE39D0E13531E7 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		CD33A6AA4BA0A7174D9CA73F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AFCC56676C2A089444981741 /* Pods-google-api-services-youtube.debug.xcconfig */,
+				CCEC741CB05EDC5CBF200732 /* Pods-google-api-services-youtube.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-google-api-services-youtube-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-google-api-services-youtube/Pods-google-api-services-youtube-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EF746B8A4F4F4BE1A1C621CF /* Check Pods Manifest.lock */ = {
@@ -447,7 +457,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30A3117CEF8F4A1484EDF9FE /* Pods-google-api-services-youtube.xcconfig */;
+			baseConfigurationReference = AFCC56676C2A089444981741 /* Pods-google-api-services-youtube.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -461,7 +471,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30A3117CEF8F4A1484EDF9FE /* Pods-google-api-services-youtube.xcconfig */;
+			baseConfigurationReference = CCEC741CB05EDC5CBF200732 /* Pods-google-api-services-youtube.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
