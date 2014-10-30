@@ -10,6 +10,7 @@
 
 #import "YoutubeGridLayoutViewController.h"
 #import "VideoDetailViewControlleriPad.h"
+#import "TubeAppDelegate.h"
 
 
 @interface SubscriptionsViewController ()
@@ -59,6 +60,9 @@
 
 
 - (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
+   TubeAppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+   [appDelegate closeRearPanel];
+
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"back"
