@@ -209,6 +209,8 @@ static GYoutubeHelper * instance = nil;
    self.isSignedIn = authentication.canAuthorize;
 }
 
+//  "userID" -> "106717865566488673403"
+//  "scope" -> "https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email"
 
 - (void)signingOut {
    if (self.isSignedIn == NO)

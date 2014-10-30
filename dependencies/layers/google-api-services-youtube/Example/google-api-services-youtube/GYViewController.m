@@ -43,7 +43,7 @@
                   action:@selector(editBtnTouch)
         forControlEvents:UIControlEventTouchDown];
 
-   [editButton setTitle:@"Effects" forState:UIControlStateNormal];
+   [editButton setTitle:@"login" forState:UIControlStateNormal];
 
    [self.view addSubview:editButton];
 
@@ -97,8 +97,8 @@
 - (void)editBtnTouch {
    GTMOAuth2ViewControllerTouch * viewController =
     [[GYoutubeHelper getInstance] getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:self
-                                                                 leftBarDelegate:self
-                                                                    cancelAction:@selector(cancelGdriveSignIn:)];
+                                                                       leftBarDelegate:self
+                                                                          cancelAction:@selector(cancelGdriveSignIn:)];
 
    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
    navigationController.view.backgroundColor = [UIColor whiteColor];
