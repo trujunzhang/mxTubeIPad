@@ -55,9 +55,6 @@ static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
 - (void)editBtnTouch {
 
 
-   UINavigationController * naviBarObj = [[UINavigationController alloc] init];
-
-
    NSString * kMyClientID = @"981239920851-gi3pis2s62pb2miojr2lsukuc8n8405h.apps.googleusercontent.com";     // pre-assigned by service
    NSString * kMyClientSecret = @"wMEhiReTb1_429VsuG9Xu9r0"; // pre-assigned by service
 
@@ -77,7 +74,7 @@ static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
                                     target:self
                                     action:@selector(cancelGdriveSignIn:)];
 
-   [naviBarObj pushViewController:viewController animated:YES];
+   UINavigationController * naviBarObj = [[UINavigationController alloc] initWithRootViewController:viewController];
 
    [self presentViewController:naviBarObj animated:YES completion:nil];
 }
