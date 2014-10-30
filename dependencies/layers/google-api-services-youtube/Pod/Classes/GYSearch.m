@@ -11,6 +11,7 @@
 #import "GTLYouTubeResourceId.h"
 #import "GTLYouTubeVideo.h"
 #import "GTMOAuth2ViewControllerTouch.h"
+#import "GTMOAuth2Authentication.h"
 
 static GYSearch * instance = nil;
 
@@ -162,7 +163,8 @@ static GYSearch * instance = nil;
 #pragma mark GTMOAuth2ViewControllerTouch, Youtube oauth2.
 
 
-- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouch:(SEL)cancelAction {
+- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithDelegate:(id)delegate cancelAction:(SEL)cancelAction {
+   //1
    GTMOAuth2ViewControllerTouch * viewController =
     [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kMyYoutube_scope
                                                clientID:kMyClientID
@@ -171,13 +173,30 @@ static GYSearch * instance = nil;
                                                delegate:self
                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
 
+   //2
    viewController.navigationItem.leftBarButtonItem =
     [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Cancel", nil)]
                                      style:UIBarButtonItemStyleBordered
-                                    target:self
+                                    target:delegate
                                     action:cancelAction];
-//                                    action:@selector(cancelGdriveSignIn:)];
+
+
    return viewController;
+}
+
+
+- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
+      finishedWithAuth:(GTMOAuth2Authentication *)auth
+                 error:(NSError *)error {
+   if (error != nil) {
+      // Authentication failed
+      NSLog(@"failed");
+   } else {
+      // Authentication succeeded
+      NSLog(@"Success");
+
+      [[GYSearch getInstance] saveAuth:auth];
+   }
 }
 
 

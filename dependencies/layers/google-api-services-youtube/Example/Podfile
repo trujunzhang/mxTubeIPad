@@ -1,3 +1,6 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+
 target 'google-api-services-youtube', :exclusive => true do
   pod "google-api-services-youtube", :path => "../"
 

@@ -36,10 +36,9 @@
 
 
 - (void)setupUI {
-
-   //edit button
+   //1. edit button
    UIButton * editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-   editButton.frame = self.view.frame;
+   editButton.frame = CGRectMake(100, 100, 100, 100);
    [editButton addTarget:self
                   action:@selector(editBtnTouch)
         forControlEvents:UIControlEventTouchDown];
@@ -51,7 +50,9 @@
 
 
 - (void)editBtnTouch {
-   GTMOAuth2ViewControllerTouch * viewController = [[GYSearch getInstance] getYoutubeOAuth2ViewControllerTouch:@selector(cancelGdriveSignIn:)];
+   GTMOAuth2ViewControllerTouch * viewController =
+    [[GYSearch getInstance] getYoutubeOAuth2ViewControllerTouchWithDelegate:self
+                                                               cancelAction:@selector(cancelGdriveSignIn:)];
 
    UINavigationController * naviBarObj = [[UINavigationController alloc] initWithRootViewController:viewController];
 
@@ -62,21 +63,6 @@
 - (void)cancelGdriveSignIn:(id)cancelGdriveSignIn {
    [self dismissViewControllerAnimated:YES completion:^(void) {
    }];
-}
-
-
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)auth
-                 error:(NSError *)error {
-   if (error != nil) {
-      // Authentication failed
-      NSLog(@"failed");
-   } else {
-      // Authentication succeeded
-      NSLog(@"Success");
-
-      [[GYSearch getInstance] saveAuth:auth];
-   }
 }
 
 

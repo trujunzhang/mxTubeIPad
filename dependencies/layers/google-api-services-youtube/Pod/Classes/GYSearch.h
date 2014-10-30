@@ -21,6 +21,7 @@
 @class GTLServiceYouTube;
 @class GTLYouTubePlaylistItemListResponse;
 @class GTMOAuth2ViewControllerTouch;
+@class GTMOAuth2Authentication;
 
 typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
@@ -48,6 +49,6 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (NSArray *)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler;
 
 - (void)saveAuth:(GTMOAuth2Authentication *)authentication;
-- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouch:(SEL)cancelAction;
+- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithDelegate:(id)delegate cancelAction:(SEL)cancelAction;
 
 @end
