@@ -12,6 +12,7 @@
 #import "GTLYouTubeVideo.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2Authentication.h"
+#import "GTLYouTubeSubscriptionListResponse.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -230,7 +231,32 @@ static GYoutubeHelper * instance = nil;
 
 
 #pragma mark -
-#pragma mark Get auth User's Subscriptions
+#pragma mark Fetch auth User's Subscriptions
+
+
+- (void)fetchSubscriptionsListWithVideoId:(NSString *)videoId
+                        completionHandler:(YoutubeResponseBlock)completion
+                             errorHandler:(ErrorResponseBlock)errorBlock {
+   GTLServiceYouTube * service = self.youTubeService;
+
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
+   query.forMine = YES;
+   query.mySubscribers = YES;
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubeSubscriptionListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               if ([[resultList items] count] > 0) {
+                                  completion([resultList items]);
+                               }
+                               errorBlock(error);
+                               _searchListTicket = nil;
+                           }];
+}
+
+//"Error Domain=com.google.GTLJSONRPCErrorDomain Code=403 "The operation couldn’t be completed. (Insufficient Permission)" UserInfo=0x7a940f40 {error=Insufficient Permission, GTLStructuredError=GTLErrorObject 0x7a93ce20: {message:"Insufficient Permission" code:403 data:[1]}, NSLocalizedFailureReason=(Insufficient Permission)}"
 
 
 @end

@@ -29,7 +29,8 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion errorHandler:error];
+//   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion errorHandler:error];
+   [[GYoutubeHelper getInstance] fetchSubscriptionsListWithVideoId:@"sketch3" completionHandler:completion errorHandler:error];
 
    [self setupUI];
 }
