@@ -18,6 +18,10 @@ static GYoutubeHelper * instance = nil;
 
 @implementation GYoutubeHelper
 
+#pragma mark -
+#pragma mark Global GTLServiceYouTube instance
+
+
 - (GTLServiceYouTube *)youTubeService {
    static GTLServiceYouTube * service;
 
@@ -35,6 +39,10 @@ static GYoutubeHelper * instance = nil;
    });
    return service;
 }
+
+
+#pragma mark -
+#pragma mark GYoutubeHelper Static instance
 
 
 + (GYoutubeHelper *)getInstance {
@@ -58,6 +66,7 @@ static GYoutubeHelper * instance = nil;
 
 
 #pragma mark -
+#pragma mark initialize Youtube Service
 
 
 - (void)initYoutubeService {
@@ -74,6 +83,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+#pragma mark -
 #pragma mark Youtube search.
 
 
