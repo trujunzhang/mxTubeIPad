@@ -45,8 +45,6 @@
    [editButton setTitle:@"Effects" forState:UIControlStateNormal];
 
    [self.view addSubview:editButton];
-
-
 }
 
 
