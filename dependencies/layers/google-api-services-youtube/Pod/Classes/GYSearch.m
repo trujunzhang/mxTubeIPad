@@ -208,4 +208,16 @@ static GYSearch * instance = nil;
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
 }
+
+
+- (void)signingOut {
+   if (self.isSignedIn == NO)
+      return;
+
+   [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
+   [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.youTubeService.authorizer];
+
+}
+
+
 @end

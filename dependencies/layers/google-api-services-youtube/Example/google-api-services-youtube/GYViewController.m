@@ -84,10 +84,10 @@
                                                                  leftBarDelegate:self
                                                                     cancelAction:@selector(cancelGdriveSignIn:)];
 
-   UINavigationController * naviBarObj = [[UINavigationController alloc] initWithRootViewController:viewController];
-   naviBarObj.view.backgroundColor = [UIColor whiteColor];
+   UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+   navigationController.view.backgroundColor = [UIColor whiteColor];
 
-   [self presentViewController:naviBarObj animated:YES completion:nil];
+   [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 

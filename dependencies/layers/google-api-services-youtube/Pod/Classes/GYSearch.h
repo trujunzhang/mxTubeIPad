@@ -49,6 +49,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 
 - (NSArray *)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler;
 
+- (void)signingOut;
 - (GTMOAuth2Authentication *)getAuthorizer;
 - (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication;
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
