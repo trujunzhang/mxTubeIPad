@@ -7,7 +7,11 @@
 //
 
 #import "GYViewController.h"
+
 #import "GYSearch.h"
+#import "GTMOAuth2ViewControllerTouch.h"
+
+static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
 
 
 @interface GYViewController ()
@@ -49,7 +53,34 @@
 
 
 - (void)editBtnTouch {
-   NSString * debug = @"debug";
+
+   NSString * kMyClientID = @"981239920851-gi3pis2s62pb2miojr2lsukuc8n8405h.apps.googleusercontent.com";     // pre-assigned by service
+   NSString * kMyClientSecret = @"wMEhiReTb1_429VsuG9Xu9r0"; // pre-assigned by service
+
+   NSString * scope = @"https://www.googleapis.com/auth/plus.me"; // scope for Google+ API
+
+   GTMOAuth2ViewControllerTouch * viewController =
+    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:scope
+                                               clientID:kMyClientID
+                                           clientSecret:kMyClientSecret
+                                       keychainItemName:kKeychainItemName
+                                               delegate:self
+                                       finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+
+   [self presentViewController:viewController animated:YES completion:nil];
+}
+
+
+- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
+      finishedWithAuth:(GTMOAuth2Authentication *)auth
+                 error:(NSError *)error {
+   if (error != nil) {
+      // Authentication failed
+      NSLog(@"failed");
+   } else {
+      // Authentication succeeded
+      NSLog(@"Success");
+   }
 }
 
 
