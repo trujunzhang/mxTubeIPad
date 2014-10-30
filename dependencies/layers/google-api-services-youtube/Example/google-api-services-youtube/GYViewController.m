@@ -47,7 +47,7 @@
 
    [self.view addSubview:editButton];
 
-   //1. edit button
+   //2. refreshButton
    UIButton * refreshButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    refreshButton.frame = CGRectMake(300, 100, 100, 100);
    [refreshButton addTarget:self
@@ -58,15 +58,31 @@
 
    [self.view addSubview:refreshButton];
 
-   //2 user label
+   //3. Signing Out
+   UIButton * signingOutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   signingOutButton.frame = CGRectMake(100, 200, 100, 100);
+   [signingOutButton addTarget:self
+                        action:@selector(signingOutButtonTouch)
+              forControlEvents:UIControlEventTouchDown];
+
+   [signingOutButton setTitle:@"Signing Out" forState:UIControlStateNormal];
+
+   [self.view addSubview:signingOutButton];
+
+   //6user label
    self.label = [[UILabel alloc] init];
-   self.label.frame = CGRectMake(100, 400, 300, 100);
+   self.label.frame = CGRectMake(100, 500, 300, 100);
    self.label.textColor = [UIColor redColor];
    self.label.text = @"djzhang";
 
    [self.view addSubview:self.label];
 
    [self refreshButtonTouch];
+}
+
+
+- (void)signingOutButtonTouch {
+   [[GYSearch getInstance] signingOut];
 }
 
 
