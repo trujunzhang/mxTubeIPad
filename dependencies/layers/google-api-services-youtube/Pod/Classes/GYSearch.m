@@ -10,6 +10,7 @@
 #import "GTLYouTubeSearchResult.h"
 #import "GTLYouTubeResourceId.h"
 #import "GTLYouTubeVideo.h"
+#import "GTMOAuth2ViewControllerTouch.h"
 
 static GYSearch * instance = nil;
 
@@ -50,11 +51,15 @@ static GYSearch * instance = nil;
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.youTubeService.APIKey = youtube_apikey;
+      self.youTubeService.APIKey = kMyYoutubeApiKey;
    }
 
    return self;
 }
+
+
+#pragma mark -
+#pragma mark Youtube search.
 
 
 - (NSArray *)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
@@ -151,4 +156,32 @@ static GYSearch * instance = nil;
 }
 
 
+#pragma mark -
+
+
+#pragma mark GTMOAuth2ViewControllerTouch, Youtube oauth2.
+
+
+- (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouch:(SEL)cancelAction {
+   GTMOAuth2ViewControllerTouch * viewController =
+    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kMyYoutube_scope
+                                               clientID:kMyClientID
+                                           clientSecret:kMyClientSecret
+                                       keychainItemName:kKeychainItemName
+                                               delegate:self
+                                       finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+
+   viewController.navigationItem.leftBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Cancel", nil)]
+                                     style:UIBarButtonItemStyleBordered
+                                    target:self
+                                    action:cancelAction];
+//                                    action:@selector(cancelGdriveSignIn:)];
+   return viewController;
+}
+
+
+- (void)saveAuth:(GTMOAuth2Authentication *)authentication {
+   self.youTubeService.authorizer = authentication;
+}
 @end

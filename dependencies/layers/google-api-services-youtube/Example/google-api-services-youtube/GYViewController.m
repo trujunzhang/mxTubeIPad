@@ -11,8 +11,6 @@
 #import "GYSearch.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 
-static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
-
 
 @interface GYViewController ()
 
@@ -53,26 +51,7 @@ static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
 
 
 - (void)editBtnTouch {
-
-
-   NSString * kMyClientID = @"981239920851-gi3pis2s62pb2miojr2lsukuc8n8405h.apps.googleusercontent.com";     // pre-assigned by service
-   NSString * kMyClientSecret = @"wMEhiReTb1_429VsuG9Xu9r0"; // pre-assigned by service
-
-   NSString * scope = @"https://www.googleapis.com/auth/plus.me"; // scope for Google+ API
-
-   GTMOAuth2ViewControllerTouch * viewController =
-    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:scope
-                                               clientID:kMyClientID
-                                           clientSecret:kMyClientSecret
-                                       keychainItemName:kKeychainItemName
-                                               delegate:self
-                                       finishedSelector:@selector(viewController:finishedWithAuth:error:)];
-
-   viewController.navigationItem.leftBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Cancel", nil)]
-                                     style:UIBarButtonItemStyleBordered
-                                    target:self
-                                    action:@selector(cancelGdriveSignIn:)];
+   GTMOAuth2ViewControllerTouch * viewController = [[GYSearch getInstance] getYoutubeOAuth2ViewControllerTouch:@selector(cancelGdriveSignIn:)];
 
    UINavigationController * naviBarObj = [[UINavigationController alloc] initWithRootViewController:viewController];
 
@@ -95,6 +74,8 @@ static NSString * const kKeychainItemName = @"OAuth2 Sample: Google+";
    } else {
       // Authentication succeeded
       NSLog(@"Success");
+
+      [[GYSearch getInstance] saveAuth:auth];
    }
 }
 
