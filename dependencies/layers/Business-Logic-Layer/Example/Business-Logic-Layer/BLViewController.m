@@ -8,6 +8,7 @@
 
 #import "BLViewController.h"
 #import "SearchImplementation.h"
+#import "GYoutubeHelper.h"
 
 
 @interface BLViewController ()

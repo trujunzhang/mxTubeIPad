@@ -17,10 +17,10 @@ SearchImplementation * instance;
 + (SearchImplementation *)getInstance {
    @synchronized (self) {
       if (instance == nil) {
-         NSLog(@"initializing");
+//         NSLog(@"initializing");
          instance = [[self alloc] init];
       }
-      NSLog(@"Address: %p", instance);
+//      NSLog(@"Address: %p", instance);
    }
    return (instance);
 }
