@@ -15,6 +15,8 @@
 #import "GTLYouTubeSubscriptionListResponse.h"
 #import "GTLYouTubeChannelListResponse.h"
 #import "GTLYouTubeChannelSnippet.h"
+#import "GTLYouTubeSubscription.h"
+#import "GTLYouTubeSubscriptionSnippet.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -219,16 +221,38 @@ static GYoutubeHelper * instance = nil;
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
 
+//   [self getUserInfo];
+   [self getUserSubscriptions];
+}
+
+
+- (void)getUserInfo {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        GTLYouTubeChannel * channel = array[0];
        NSString * string = channel.snippet.title;
        NSLog(@" user name = %@", string);
        NSString * debug = @"debug";
    };
+
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
+
    [self initUserWithCompletionHandler:completion errorHandler:error];
+}
+
+
+- (void)getUserSubscriptions {
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+//       GTLYouTubeSubscription * channel = array[0];
+//       NSString * string = channel.snippet.title;
+//       NSLog(@" user name = %@", string);
+       NSString * debug = @"debug";
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [self fetchSubscriptionsListWithCompletionHandler:completion errorHandler:error];
 }
 
 //  "userID" -> "106717865566488673403"
@@ -247,14 +271,16 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Fetch auth User's Subscriptions
 
 
-- (void)fetchSubscriptionsListWithVideoId:(NSString *)videoId
-                        completionHandler:(YoutubeResponseBlock)completion
-                             errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchSubscriptionsListWithCompletionHandler:(YoutubeResponseBlock)completion
+                                       errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
+//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"snippet"];
    query.forMine = YES;
-   query.mySubscribers = YES;
+   query.maxResults = 50;
+   query.fields = @"items(id/videoId)";
+//   query.fields = @"items,nextPageToken";
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
@@ -269,7 +295,13 @@ static GYoutubeHelper * instance = nil;
                            }];
 }
 
-//"Error Domain=com.google.GTLJSONRPCErrorDomain Code=403 "The operation couldn’t be completed. (Insufficient Permission)" UserInfo=0x7a940f40 {error=Insufficient Permission, GTLStructuredError=GTLErrorObject 0x7a93ce20: {message:"Insufficient Permission" code:403 data:[1]}, NSLocalizedFailureReason=(Insufficient Permission)}"
+//"Error Domain=com.google.GTLJSONRPCErrorDomain
+// Code=-32602 "The operation couldn’t be completed.
+// (No filter selected.)"
+// UserInfo=0x7b115ec0 {error=No filter selected., GTLStructuredError=GTLErrorObject 0x7b11a5b0:
+// {message:"No filter selected." code:-32602 data:[1]}, NSLocalizedFailureReason=(No filter selected.)}"
+
+//"Error Domain=com.google.GTLJSONRPCErrorDomain Code=-32602 "The operation couldn’t be completed. (No filter selected.)" UserInfo=0x7902a180 {error=No filter selected., GTLStructuredError=GTLErrorObject 0x7868c6c0: {message:"No filter selected." code:-32602 data:[1]}, NSLocalizedFailureReason=(No filter selected.)}"
 
 
 #pragma mark -
