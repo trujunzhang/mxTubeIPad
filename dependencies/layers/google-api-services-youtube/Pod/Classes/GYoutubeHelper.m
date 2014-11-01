@@ -13,6 +13,7 @@
 #import "GTMOAuth2ViewControllerTouch.h"
 #import "GTMOAuth2Authentication.h"
 #import "GTLYouTubeSubscriptionListResponse.h"
+#import "GTLYouTubeChannelListResponse.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -216,6 +217,15 @@ static GYoutubeHelper * instance = nil;
 - (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication {
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
+
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+       GTLYouTubeChannel * channel = array[0];
+       NSString * debug = @"debug";
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [self initUserWithCompletionHandler:completion errorHandler:error];
 }
 
 //  "userID" -> "106717865566488673403"
@@ -257,6 +267,31 @@ static GYoutubeHelper * instance = nil;
 }
 
 //"Error Domain=com.google.GTLJSONRPCErrorDomain Code=403 "The operation couldn’t be completed. (Insufficient Permission)" UserInfo=0x7a940f40 {error=Insufficient Permission, GTLStructuredError=GTLErrorObject 0x7a93ce20: {message:"Insufficient Permission" code:403 data:[1]}, NSLocalizedFailureReason=(Insufficient Permission)}"
+
+
+#pragma mark -
+#pragma mark Fetch auth User's Subscriptions
+
+
+- (void)initUserWithCompletionHandler:(YoutubeResponseBlock)completion
+                         errorHandler:(ErrorResponseBlock)errorBlock {
+   GTLServiceYouTube * service = self.youTubeService;
+
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,auditDetails,brandingSettings,contentDetails,invideoPromotion,statistics,status,topicDetails"];
+   query.mine = YES;
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubeChannelListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               if ([[resultList items] count] > 0) {
+                                  completion([resultList items]);
+                               }
+                               errorBlock(error);
+                               _searchListTicket = nil;
+                           }];
+}
 
 
 @end
