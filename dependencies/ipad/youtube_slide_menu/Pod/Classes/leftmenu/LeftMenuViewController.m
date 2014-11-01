@@ -37,9 +37,10 @@
    self.tableSectionArray = @[ defaultMenuItemTree ];
    if (subscriptionsArray) {
       LeftMenuItemTree * signUserMenuItemTree =
-       [[LeftMenuItemTree alloc] initWithTitle:nil
+//       [[LeftMenuItemTree alloc] initWithTitle:nil
+       [[LeftMenuItemTree alloc] initWithTitle:@"  wanghao"
                                      rowsArray:[self signUserCategories]
-                                     hideTitle:NO
+                                     hideTitle:YES
                                    remoteImage:NO];
       LeftMenuItemTree * subscriptionsMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
@@ -166,8 +167,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
-   if (menuItemTree.hideTitle)
+   if (menuItemTree.hideTitle) {
       return 0;
+   }
 
    return 30;
 }
