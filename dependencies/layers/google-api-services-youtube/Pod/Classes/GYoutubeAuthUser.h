@@ -16,4 +16,5 @@
 
 @property(nonatomic, strong) GTLYouTubeChannel * channel;
 
+@property(nonatomic, strong) NSArray * subscriptions;
 @end

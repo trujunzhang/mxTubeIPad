@@ -262,9 +262,7 @@ static GYoutubeHelper * instance = nil;
 
 - (void)getUserSubscriptions {
    YoutubeResponseBlock completion = ^(NSArray * array) {
-//       GTLYouTubeSubscription * channel = array[0];
-//       NSString * string = channel.snippet.title;
-//       NSLog(@" user name = %@", string);
+       self.youtubeAuthUser.subscriptions = array;
        NSString * debug = @"debug";
    };
    ErrorResponseBlock error = ^(NSError * error) {
@@ -311,13 +309,7 @@ static GYoutubeHelper * instance = nil;
    GTLServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
-//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"snippet"];
-//   query.maxResults = 50;
-//   query.channelId = @"UC0wObT_HayGfWLdRAnFyPwA";
    query.channelId = self.youtubeAuthUser.channel.identifier;
-//   query.fields = @"items(id/videoId)";
-
-//   query.fields = @"items,nextPageToken";
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
@@ -331,14 +323,6 @@ static GYoutubeHelper * instance = nil;
                                _searchListTicket = nil;
                            }];
 }
-
-//"Error Domain=com.google.GTLJSONRPCErrorDomain
-// Code=-32602 "The operation couldn’t be completed.
-// (No filter selected.)"
-// UserInfo=0x7b115ec0 {error=No filter selected., GTLStructuredError=GTLErrorObject 0x7b11a5b0:
-// {message:"No filter selected." code:-32602 data:[1]}, NSLocalizedFailureReason=(No filter selected.)}"
-
-//"Error Domain=com.google.GTLJSONRPCErrorDomain Code=-32602 "The operation couldn’t be completed. (No filter selected.)" UserInfo=0x7902a180 {error=No filter selected., GTLStructuredError=GTLErrorObject 0x7868c6c0: {message:"No filter selected." code:-32602 data:[1]}, NSLocalizedFailureReason=(No filter selected.)}"
 
 
 - (void)fetchWantWatchListWithCompletionHandler:(YoutubeResponseBlock)completion
