@@ -37,6 +37,12 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="logOutImage" destination="vUJ-or-31v" id="80d-Gm-wZe"/>
+                <outlet property="userEmail" destination="zCc-HS-fcl" id="Lvz-l1-Kh7"/>
+                <outlet property="userHeader" destination="pjr-gA-kvG" id="jS9-n5-eER"/>
+                <outlet property="userTitle" destination="8dB-lf-ZX1" id="PWl-7j-gFJ"/>
+            </connections>
         </view>
     </objects>
     <resources>
