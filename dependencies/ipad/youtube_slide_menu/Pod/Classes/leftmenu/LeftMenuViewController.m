@@ -150,8 +150,6 @@
 
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
-
-
    //4
    [self.tableView reloadData];
 }

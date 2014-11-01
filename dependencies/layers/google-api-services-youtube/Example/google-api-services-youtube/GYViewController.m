@@ -41,7 +41,7 @@
    UIButton * editButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    editButton.frame = CGRectMake(100, 100, 100, 100);
    [editButton addTarget:self
-                  action:@selector(editBtnTouch)
+                  action:@selector(loginInTouch)
         forControlEvents:UIControlEventTouchDown];
 
    [editButton setTitle:@"login" forState:UIControlStateNormal];
@@ -97,7 +97,7 @@
 }
 
 
-- (void)editBtnTouch {
+- (void)loginInTouch {
    GTMOAuth2ViewControllerTouch * viewController =
     [[GYoutubeHelper getInstance] getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:self
                                                                        leftBarDelegate:self
