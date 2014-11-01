@@ -30,5 +30,9 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/main/*.{h,m}'
   end
 
+  s.subspec 'tablecell' do |sub|
+    sub.source_files = 'Pod/Classes/tablecell/*.{h,m}'
+  end
+
 end
 

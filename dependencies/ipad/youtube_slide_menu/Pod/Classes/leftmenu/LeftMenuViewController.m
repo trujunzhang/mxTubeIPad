@@ -126,23 +126,24 @@
 
    // 3
    cell.textLabel.text = line[0];
-//   if (menuItemTree.remoteImage) {
-   //"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
-   [ImageCacheImplement CacheWithImageView:cell.imageView
+   if (menuItemTree.remoteImage) {
+      //"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+      [ImageCacheImplement CacheWithImageView:cell.imageView
 //                                      withUrl:line[1]
-                                   withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
-                           withPlaceholder:self.placeholderImage
+                                      withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+                              withPlaceholder:self.placeholderImage
 //                       withCompletionBlock:block];
-   ];
-//   } else {
-//      cell.imageView.image = [UIImage imageNamed:line[1]];
-//   }
+      ];
+   } else {
+      cell.imageView.image = [UIImage imageNamed:line[1]];
+   }
    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
    // 4
-   cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
-    stretchableImageWithLeftCapWidth:0.0
-                        topCapHeight:5.0]];
+   cell.selectedBackgroundView = [
+    [UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
+     stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+
 
    return cell;
 }
@@ -168,7 +169,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-   return 42;
+   return 82;
 }
 
 
