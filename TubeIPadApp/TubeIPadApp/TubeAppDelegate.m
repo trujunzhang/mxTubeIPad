@@ -181,8 +181,7 @@
    [ImageCacheImplement CacheWithImageView:imageView
                                    withUrl:@"http://www.google.com"
                            withPlaceholder:nil
-//                       withCompletionBlock:block];
-   ];
+                                      size:CGSizeMake(26, 26)];
 }
 
 

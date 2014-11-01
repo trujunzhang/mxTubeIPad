@@ -15,14 +15,10 @@
 
 
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder withCompletionBlock:(CacheCompletionBlock)completionBlock {
-//   [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:@"http://dundermifflin.com/i/MichaelScott.png"]
    view.image = placeHolder;
    [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
                            completionBlock:^(UIImage * downloadedImage) {
-                               [downloadedImage resizedImageToSize:CGSizeMake(26, 26)];
-                               view.image = downloadedImage;
-                               view.contentMode = UIViewContentModeScaleAspectFit;
-//                               completionBlock(downloadedImage);
+                               completionBlock(downloadedImage);
                            }];
 }
 
@@ -31,7 +27,20 @@
    [self CacheWithImageView:view
                     withUrl:url
             withPlaceholder:placeHolder
-        withCompletionBlock:nil];
+        withCompletionBlock:^(UIImage * downloadedImage) {
+            view.image = downloadedImage;
+        }
+   ];
+}
+
+
++ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)size {
+   [self CacheWithImageView:view
+                    withUrl:url
+            withPlaceholder:placeHolder
+        withCompletionBlock:^(UIImage * downloadedImage) {
+            view.image = [downloadedImage resizedImageToSize:size];
+        }];
 }
 
 @end

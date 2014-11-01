@@ -32,12 +32,10 @@
    // 3
    self.textLabel.text = line[0];
 //   if (remote) {
-      [ImageCacheImplement CacheWithImageView:self.imageView
-//                                      withUrl:line[1]
-                                      withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
-                              withPlaceholder:holder
-//                       withCompletionBlock:block];
-      ];
+   [ImageCacheImplement CacheWithImageView:self.imageView
+                                   withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+                           withPlaceholder:holder
+                                      size:CGSizeMake(26, 26)];
 //   } else {
 //      self.imageView.image = [UIImage imageNamed:line[1]];
 //   }
