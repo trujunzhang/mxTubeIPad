@@ -9,7 +9,6 @@
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
-#import "UserInfoView.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
