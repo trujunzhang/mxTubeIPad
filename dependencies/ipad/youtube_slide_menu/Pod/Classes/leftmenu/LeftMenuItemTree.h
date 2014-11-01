@@ -12,4 +12,7 @@
 @interface LeftMenuItemTree : NSObject
 
 
+@property(nonatomic, copy) NSString * title;
+@property(nonatomic, strong) NSArray * rowsArray;
+
 @end

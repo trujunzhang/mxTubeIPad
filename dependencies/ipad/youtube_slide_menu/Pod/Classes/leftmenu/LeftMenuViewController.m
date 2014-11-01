@@ -10,6 +10,7 @@
 
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
+#import "LeftMenuItemTree.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -44,20 +45,24 @@
 - (void)setupViewController:(GYoutubeAuthUser *)user {
    self.tableSectionArray = [self getDefaultSections];
 
-
    if (user) {
 
    }
 
 
    self.headers = [[NSMutableArray alloc] init];
+
    for (int i = 0; i < [self.tableSectionArray count]; i++) {
+      LeftMenuItemTree * menuItemTree = self.tableSectionArray[i];
+
       UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
       header.backgroundColor = [UIColor clearColor];
       UILabel * number = [[UILabel alloc] initWithFrame:header.frame];
       number.textAlignment = NSTextAlignmentLeft;
       number.textColor = [UIColor blackColor];
-      number.text = @"  Categories";
+
+      number.text = menuItemTree.title;
+
       [header addSubview:number];
 
       [self.headers addObject:header];
@@ -67,7 +72,12 @@
 
 - (NSMutableArray *)getDefaultSections {
    NSMutableArray * sections = [[NSMutableArray alloc] init];
-   [sections addObject:[self defaultCategories]];
+
+   LeftMenuItemTree * menuItemTree = [[LeftMenuItemTree alloc] init];
+   menuItemTree.title = @"  Categories";
+   menuItemTree.rowsArray = [self defaultCategories];
+   [sections addObject:menuItemTree];
+
    return sections;
 }
 
@@ -128,8 +138,8 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   return [[self defaultCategories] count];
-//   return [[self.data objectAtIndex:section] count];
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
+   return menuItemTree.rowsArray.count;
 }
 
 
