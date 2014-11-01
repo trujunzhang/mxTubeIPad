@@ -13,6 +13,7 @@
 @class GYoutubeAuthUser;
 
 
+
 @interface LeftMenuViewController : LeftMenuViewBase
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user;
