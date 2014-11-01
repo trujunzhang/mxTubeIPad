@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UserInfoView;
+@class GYoutubeAuthUser;
 
 
 @interface LeftMenuViewBase : UIViewController
 
 @property(nonatomic, strong) NSArray * tableSectionArray;
 
-- (UserInfoView *)getUserInfoPanel;
+- (UIView *)getUserHeaderView:(GYoutubeAuthUser *)user;
 - (NSArray *)defaultCategories;
 @end

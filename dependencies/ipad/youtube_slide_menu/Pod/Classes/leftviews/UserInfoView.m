@@ -7,15 +7,13 @@
 //
 
 #import "UserInfoView.h"
+#import "GYoutubeAuthUser.h"
+
 
 @implementation UserInfoView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+- (UIView *)bind:(GYoutubeAuthUser *)user {
 
+   return self;
+}
 @end

@@ -25,23 +25,6 @@
 
 @implementation LeftMenuViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-   if (self) {
-      [self setupViewController:nil];
-   }
-   return self;
-}
-
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-   self = [super initWithCoder:aDecoder];
-   if (self) {
-      [self setupViewController:nil];
-   }
-   return self;
-}
-
 
 - (void)setupViewController:(NSArray *)subscriptionsArray {
    LeftMenuItemTree * defaultMenuItemTree =
@@ -79,6 +62,19 @@
 
       [self.headers addObject:header];
    }
+
+}
+
+
+- (void)setupSlideTableView:(GYoutubeAuthUser *)user {
+   //2
+   self.tableView.tableHeaderView = [self getUserHeaderView:user];
+
+   // 3
+   [self.tableView setExclusiveSections:NO];
+   for (int i = 0; i < [self.tableSectionArray count]; i++) {
+      [self.tableView openSection:i animated:NO];
+   }
 }
 
 
@@ -94,14 +90,9 @@
 
    [self.view addSubview:self.tableView];
 
-   //2
-   self.tableView.tableHeaderView = [self getUserInfoPanel];
-
-   // 3
-   [self.tableView setExclusiveSections:NO];
-
-   [self.tableView openSection:0 animated:NO];
-   [self.tableView openSection:1 animated:NO];
+   // 2
+   [self setupViewController:nil];
+   [self setupSlideTableView:nil];
 }
 
 
@@ -186,7 +177,7 @@
    NSArray * array = [user getTableRows];
 
    [self setupViewController:array];
-
+   [self setupSlideTableView:user];
    //4
    [self.tableView reloadData];
 }

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GYoutubeAuthUser;
+
 
 @interface UserInfoView : UIView
 
+- (UIView *)bind:(GYoutubeAuthUser *)user;
 @end

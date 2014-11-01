@@ -9,6 +9,7 @@
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "SearchImplementation.h"
+#import "GYoutubeAuthUser.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -32,25 +33,29 @@
 #pragma mark Youtube auth login events
 
 
-- (UserInfoView *)getUserInfoPanel {
+- (UIView *)getUserHeaderView:(GYoutubeAuthUser *)user {
 
    BOOL isSignedIn = [[SearchImplementation getInstance] isSignedIn];
 
-   UIView * userInfoView = nil;
+   UIView * headerView = nil;
    if (isSignedIn) {
-      userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView" owner:nil options:nil] lastObject];
+      UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
+                                                                   owner:nil
+                                                                 options:nil] lastObject];
+
+      headerView = [userInfoView bind:user];
    } else {
-      userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserLoginView" owner:nil options:nil] lastObject];
+      headerView = [[[NSBundle mainBundle] loadNibNamed:@"UserLoginView" owner:nil options:nil] lastObject];
 
       //The setup code (in viewDidLoad in your view controller)
       UITapGestureRecognizer * singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(handleSingleTap:)];
-      [userInfoView addGestureRecognizer:singleFingerTap];
+      [headerView addGestureRecognizer:singleFingerTap];
    }
 
-   userInfoView.frame = CGRectMake(0, 0, 256, 100);
+   headerView.frame = CGRectMake(0, 0, 256, 100);
 
-   return userInfoView;
+   return headerView;
 }
 
 
