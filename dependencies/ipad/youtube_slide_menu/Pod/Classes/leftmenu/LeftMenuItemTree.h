@@ -15,7 +15,8 @@
 @property(nonatomic, copy) NSString * title;
 @property(nonatomic, strong) NSArray * rowsArray;
 
-- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray;
+@property(nonatomic) BOOL hideTitle;
+- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle;
 
 
 @end

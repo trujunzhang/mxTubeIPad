@@ -45,7 +45,8 @@
 - (void)setupViewController:(GYoutubeAuthUser *)user {
    LeftMenuItemTree * defaultMenuItemTree =
     [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
-                                  rowsArray:[self defaultCategories]];
+                                  rowsArray:[self defaultCategories]
+                                  hideTitle:NO];
 
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
@@ -155,6 +156,8 @@
 
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
+   NSArray * array = [user getTableRows];
+
    [self setupViewController:user];
 
    //4

@@ -12,4 +12,12 @@
 
 @implementation GYoutubeAuthUser
 
+
+- (NSArray *)getTableRows {
+   NSMutableArray * rows = [[NSMutableArray alloc] init];
+//for()
+
+
+   return [rows copy];
+}
 @end
