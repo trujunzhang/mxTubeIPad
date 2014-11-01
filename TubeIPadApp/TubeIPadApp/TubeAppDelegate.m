@@ -14,6 +14,7 @@
 #import "SubscriptionsViewController.h"
 #import "SearchImplementation.h"
 #import "GYoutubeAuthUser.h"
+#import "ImageCacheImplement.h"
 
 
 @interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate, UITabBarControllerDelegate, GYoutubeHelperDelegate>
@@ -172,6 +173,16 @@
 
 - (void)FetchYoutubeAuthUserCompletion:(GYoutubeAuthUser *)user {
    [self.leftViewController refreshAutoUser:user];
+
+   UIImageView * imageView = [[UIImageView alloc] init];
+   CacheCompletionBlock block = ^(UIImage * downloadedImage) {
+
+   };
+   [ImageCacheImplement CacheWithImageView:imageView
+                                   withUrl:@"http://www.google.com"
+                           withPlaceholder:nil
+//                       withCompletionBlock:block];
+   ];
 }
 
 

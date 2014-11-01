@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
+#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
-#import "UIImageView+Cache.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -47,7 +47,8 @@
                                      rowsArray:subscriptionsArray
                                      hideTitle:NO
                                    remoteImage:YES];
-      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
+//      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
+      self.tableSectionArray = @[ subscriptionsMenuItemTree ];
    }
 
 
@@ -87,6 +88,8 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
+   self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
+
    // 1
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
    self.tableView.backgroundColor = [UIColor clearColor];
@@ -123,13 +126,17 @@
 
    // 3
    cell.textLabel.text = line[0];
-   if (menuItemTree.remoteImage) {
-      UIColor * color = [UIColor clearColor];   // Or your whatever UIColor
-      UIImage * image = [self imageWithColor:color];
-      [cell.imageView setImageWithURL:[NSURL URLWithString:line[1]] placeholderImage:image];
-   } else {
-      cell.imageView.image = [UIImage imageNamed:line[1]];
-   }
+//   if (menuItemTree.remoteImage) {
+   //"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+   [ImageCacheImplement CacheWithImageView:cell.imageView
+//                                      withUrl:line[1]
+                                   withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+                           withPlaceholder:self.placeholderImage
+//                       withCompletionBlock:block];
+   ];
+//   } else {
+//      cell.imageView.image = [UIImage imageNamed:line[1]];
+//   }
    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
    // 4
@@ -181,13 +188,13 @@
 
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
-   NSArray * array = [user getTableRows];
-
-   [self setupViewController:array];
-   [self setupSlideTableView:user];
-
-   //4
-   [self.tableView reloadData];
+//   NSArray * array = [user getTableRows];
+//
+//   [self setupViewController:array];
+//   [self setupSlideTableView:user];
+//
+//   //4
+//   [self.tableView reloadData];
 }
 
 @end

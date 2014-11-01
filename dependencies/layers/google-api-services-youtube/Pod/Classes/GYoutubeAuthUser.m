@@ -25,6 +25,8 @@
       NSArray * row = @[ title, thumbnailsUrl ];
 
       [rows addObject:row];
+
+      break;
    }
 
    return [rows copy];

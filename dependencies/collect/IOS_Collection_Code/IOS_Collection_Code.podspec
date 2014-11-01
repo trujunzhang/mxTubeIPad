@@ -9,8 +9,31 @@ Pod::Spec.new do |s|
   s.author   = { 'Jin Budelmann' => 'jin@bitcrank.com' }
   s.source   = { :git => 'https://github.com/wanghaogithub720/mxYoutube.git', :tag => '0.1.0' }
   s.platform = :ios
-  s.source_files = 'Pod/Classes/*/*.{h,m}'
+
+  #s.source_files = 'Pod/Classes/*/*.{h,m}'
   #s.resources = "Pod/Assets/IOS_Collection_Code.bundle"
+
   s.requires_arc = true
+
+
+  s.subspec 'CacheImage' do |sub|
+    sub.source_files = 'Pod/Classes/CacheImage/*.{h,m}'
+  end
+
+  s.subspec 'debug' do |sub|
+    sub.source_files = 'Pod/Classes/debug/*.{h,m}'
+  end
+
+  s.subspec 'resolutions' do |sub|
+    sub.source_files = 'Pod/Classes/resolutions/*.{h,m}'
+  end
+
+  s.subspec 'xibViews' do |sub|
+    sub.source_files = 'Pod/Classes/xibViews/*.{h,m}'
+  end
+
+  s.dependency 'JMImageCache'
+
+
 end
 
