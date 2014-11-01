@@ -72,7 +72,7 @@ static GYoutubeHelper * instance = nil;
 
 - (void)initYoutubeService {
    // 1
-   self.youTubeService.APIKey = kMyYoutubeApiKey;
+   self.youTubeService.APIKey = apiKey;
 
    // 2
    GTMOAuth2Authentication * auth;
@@ -189,7 +189,7 @@ static GYoutubeHelper * instance = nil;
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction {
    //1
    GTMOAuth2ViewControllerTouch * viewController =
-    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:kMyYoutube_scope
+    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:scope
                                                clientID:kMyClientID
                                            clientSecret:kMyClientSecret
                                        keychainItemName:kKeychainItemName
