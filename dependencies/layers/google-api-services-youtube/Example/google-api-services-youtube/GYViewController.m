@@ -30,7 +30,7 @@
        NSString * debug = @"debug";
    };
 //   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion errorHandler:error];
-   [[GYoutubeHelper getInstance] fetchSubscriptionsListWithVideoId:@"sketch3" completionHandler:completion errorHandler:error];
+//   [[GYoutubeHelper getInstance] fetchSubscriptionsListWithVideoId:@"sketch3" completionHandler:completion errorHandler:error];
 
    [self setupUI];
 }
@@ -74,7 +74,7 @@
    self.label = [[UILabel alloc] init];
    self.label.frame = CGRectMake(100, 500, 300, 100);
    self.label.textColor = [UIColor redColor];
-   self.label.text = @"djzhang";
+   self.label.text = @"not login";
 
    [self.view addSubview:self.label];
 
@@ -84,6 +84,8 @@
 
 - (void)signingOutButtonTouch {
    [[GYoutubeHelper getInstance] signingOut];
+
+   [self refreshButtonTouch];
 }
 
 
@@ -121,6 +123,8 @@
       NSLog(@"Success");
 
       [[GYoutubeHelper getInstance] saveAuthorizer:auth];
+
+      [self refreshButtonTouch];
    }
 }
 
