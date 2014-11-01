@@ -16,7 +16,6 @@
 
 @property(nonatomic, strong) STCollapseTableView * tableView;
 
-@property(nonatomic, strong) NSMutableArray * data;
 @property(nonatomic, strong) NSMutableArray * headers;
 
 @end
@@ -43,16 +42,17 @@
 
 
 - (void)setupViewController {
-   NSArray * colors = @[ [UIColor redColor],
+   NSArray * colors = @[
+    [UIColor redColor],
    ];
 
-   self.data = [[NSMutableArray alloc] init];
+   self.tableData = [[NSMutableArray alloc] init];
    for (int i = 0; i < [colors count]; i++) {
       NSMutableArray * section = [[NSMutableArray alloc] init];
       for (int j = 0; j < 3; j++) {
          [section addObject:[NSString stringWithFormat:@"Cell n°%i %i", i + 1, j]];
       }
-      [self.data addObject:section];
+      [self.tableData addObject:section];
    }
 
    self.headers = [[NSMutableArray alloc] init];
@@ -95,11 +95,8 @@
 }
 
 
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   return [self.data count];
+   return [self.tableData count];
 }
 
 
