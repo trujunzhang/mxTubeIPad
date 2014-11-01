@@ -9,9 +9,26 @@ Pod::Spec.new do |s|
   s.author   = { 'Jin Budelmann' => 'jin@bitcrank.com' }
   s.source   = { :git => 'https://github.com/jinthagerman/youtube_slide_menu.git', :tag => '0.1.0' }
   s.platform = :ios
-  s.source_files = 'Pod/Classes/*/*.{h,m}'
+
+  #s.source_files = 'Pod/Classes/*/*.{h,m}'
+
   s.resources = "Pod/Assets/*/*.*"
   s.requires_arc = true
   s.dependency 'SWRevealViewController'
+
+
+
+  s.subspec 'leftmenu' do |sub|
+    sub.source_files = 'Pod/Classes/leftmenu/*.{h,m}'
+  end
+
+  s.subspec 'leftviews' do |sub|
+    sub.source_files = 'Pod/Classes/leftviews/*.{h,m}'
+  end
+
+  s.subspec 'main' do |sub|
+    sub.source_files = 'Pod/Classes/main/*.{h,m}'
+  end
+
 end
 
