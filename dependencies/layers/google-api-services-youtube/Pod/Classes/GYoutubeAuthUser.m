@@ -21,7 +21,7 @@
    NSMutableArray * rows = [[NSMutableArray alloc] init];
    for (GTLYouTubeSubscription * subscription in self.subscriptions) {
       NSString * title = subscription.snippet.title;
-      NSString * thumbnailsUrl = subscription.snippet.thumbnails.standard.url;
+      NSString * thumbnailsUrl = subscription.snippet.thumbnails.high.url;
       NSArray * row = @[ title, thumbnailsUrl ];
 
       [rows addObject:row];

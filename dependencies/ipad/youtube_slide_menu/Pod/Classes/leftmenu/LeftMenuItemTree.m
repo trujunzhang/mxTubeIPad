@@ -16,16 +16,18 @@
 
 @implementation LeftMenuItemTree
 
-- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle {
+- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage {
    self = [super init];
    if (self) {
       self.title = title;
       self.rowsArray = rowsArray;
       self.hideTitle = hideTitle;
+      self.remoteImage = remoteImage;
    }
 
    return self;
 }
+
 
 
 @end

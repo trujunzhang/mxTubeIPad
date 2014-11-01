@@ -16,7 +16,9 @@
 @property(nonatomic, strong) NSArray * rowsArray;
 
 @property(nonatomic) BOOL hideTitle;
-- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle;
+
+@property(nonatomic) BOOL remoteImage;
+- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage;
 
 
 @end

@@ -11,6 +11,7 @@
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
+#import "UIImageView+Cache.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -46,7 +47,8 @@
    LeftMenuItemTree * defaultMenuItemTree =
     [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
                                   rowsArray:[self defaultCategories]
-                                  hideTitle:NO];
+                                  hideTitle:NO
+                                remoteImage:NO];
 
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
@@ -54,7 +56,8 @@
       LeftMenuItemTree * subscriptionsMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
                                      rowsArray:subscriptionsArray
-                                     hideTitle:YES];
+                                     hideTitle:YES
+                                   remoteImage:YES];
       self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
    }
 
@@ -123,7 +126,12 @@
 
    // 3
    cell.textLabel.text = line[0];
-   cell.imageView.image = [UIImage imageNamed:line[1]];
+
+   if (menuItemTree.remoteImage) {
+      [cell.imageView setImageWithURL:[NSURL URLWithString:line[1]]];
+   } else {
+      cell.imageView.image = [UIImage imageNamed:line[1]];
+   }
    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
    // 4
