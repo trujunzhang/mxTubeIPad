@@ -14,6 +14,7 @@
 #import "GTMOAuth2Authentication.h"
 #import "GTLYouTubeSubscriptionListResponse.h"
 #import "GTLYouTubeChannelListResponse.h"
+#import "GTLYouTubeChannelSnippet.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -220,6 +221,8 @@ static GYoutubeHelper * instance = nil;
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        GTLYouTubeChannel * channel = array[0];
+       NSString * string = channel.snippet.title;
+       NSLog(@" user name = %@", string);
        NSString * debug = @"debug";
    };
    ErrorResponseBlock error = ^(NSError * error) {
