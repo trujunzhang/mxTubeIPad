@@ -264,24 +264,12 @@ static GYoutubeHelper * instance = nil;
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [self fetchSubscriptionsListWithCompletionHandler:completion errorHandler:error];
+   [self fetchSubscriptionsListWithChannelId:self.youtubeAuthUser.channel.identifier
+                           CompletionHandler:completion
+                                errorHandler:error];
 }
 
 
-- (void)getUserWatchWatch {
-   YoutubeResponseBlock completion = ^(NSArray * array) {
-       GTLYouTubeChannel * channel = array[0];
-       NSString * string = channel.snippet.title;
-       NSLog(@" user name = %@", string);
-       NSString * debug = @"debug";
-   };
-
-   ErrorResponseBlock error = ^(NSError * error) {
-       NSString * debug = @"debug";
-   };
-
-   [self fetchSubscriptionsListWithCompletionHandler:completion errorHandler:error];
-}
 
 //  "userID" -> "106717865566488673403"
 //  "scope" -> "https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email"
@@ -300,12 +288,11 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Fetch auth User's Subscriptions
 
 
-- (void)fetchSubscriptionsListWithCompletionHandler:(YoutubeResponseBlock)completion
-                                       errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
-   query.channelId = self.youtubeAuthUser.channel.identifier;
+   query.channelId = channelId;
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
