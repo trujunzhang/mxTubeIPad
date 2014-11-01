@@ -41,6 +41,7 @@ SearchImplementation * instance;
 
 
 - (void)fetchAuthUserWithDelegate:(id)delegate {
+   [GYoutubeHelper getInstance].delegate = delegate;
 //   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:queryTerm
 //                                          completionHandler:responseHandler
 //                                               errorHandler:errorHandler];
