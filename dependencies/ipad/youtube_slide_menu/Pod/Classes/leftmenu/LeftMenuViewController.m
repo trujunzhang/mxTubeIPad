@@ -47,8 +47,8 @@
                                      rowsArray:subscriptionsArray
                                      hideTitle:NO
                                    remoteImage:YES];
-//      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
-      self.tableSectionArray = @[ subscriptionsMenuItemTree ];
+      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
+//      self.tableSectionArray = @[ subscriptionsMenuItemTree ];
    }
 
 
@@ -168,9 +168,7 @@
 
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
-   NSArray * array = [user getTableRows];
-
-   [self setupViewController:array];
+   [self setupViewController:[user getTableRows]];
    [self setupSlideTableView:user];
 
    //4
