@@ -88,7 +88,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   self.placeholderImage = [self imageWithColor:[UIColor redColor]];
+   self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
 
    // 1
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
@@ -116,7 +116,6 @@
    SlideMenuTableCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
    if (cell == nil) {
       cell = [[SlideMenuTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
    }
 
    // 1
@@ -169,13 +168,13 @@
 
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
-//   NSArray * array = [user getTableRows];
-//
-//   [self setupViewController:array];
-//   [self setupSlideTableView:user];
-//
-//   //4
-//   [self.tableView reloadData];
+   NSArray * array = [user getTableRows];
+
+   [self setupViewController:array];
+   [self setupSlideTableView:user];
+
+   //4
+   [self.tableView reloadData];
 }
 
 @end
