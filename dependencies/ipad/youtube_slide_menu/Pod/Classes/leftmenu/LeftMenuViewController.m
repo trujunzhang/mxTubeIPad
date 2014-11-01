@@ -42,7 +42,7 @@
 }
 
 
-- (void)setupViewController:(GYoutubeAuthUser *)user {
+- (void)setupViewController:(NSArray *)subscriptionsArray {
    LeftMenuItemTree * defaultMenuItemTree =
     [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
                                   rowsArray:[self defaultCategories]
@@ -50,8 +50,12 @@
 
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
-   if (user) {
-
+   if (subscriptionsArray) {
+      LeftMenuItemTree * subscriptionsMenuItemTree =
+       [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
+                                     rowsArray:subscriptionsArray
+                                     hideTitle:YES];
+      self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
    }
 
 
@@ -143,9 +147,10 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//   if (section == 0) {
-//      return 0;
-//   }
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
+   if (menuItemTree.hideTitle)
+      return 0;
+
    return 30;
 }
 
@@ -158,7 +163,7 @@
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
    NSArray * array = [user getTableRows];
 
-   [self setupViewController:user];
+   [self setupViewController:array];
 
    //4
    [self.tableView reloadData];

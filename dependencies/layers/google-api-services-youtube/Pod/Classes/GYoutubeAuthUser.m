@@ -8,6 +8,10 @@
 
 #import "GYoutubeAuthUser.h"
 #import "GTLYouTubeChannel.h"
+#import "GTLYouTubeSubscription.h"
+#import "GTLYouTubeSubscriptionSnippet.h"
+#import "GTLYouTubeThumbnailDetails.h"
+#import "GTLYouTubeThumbnail.h"
 
 
 @implementation GYoutubeAuthUser
@@ -15,8 +19,13 @@
 
 - (NSArray *)getTableRows {
    NSMutableArray * rows = [[NSMutableArray alloc] init];
-//for()
+   for (GTLYouTubeSubscription * subscription in self.subscriptions) {
+      NSString * title = subscription.snippet.title;
+      NSString * thumbnailsUrl = subscription.snippet.thumbnails.standard.url;
+      NSArray * row = @[ title, thumbnailsUrl ];
 
+      [rows addObject:row];
+   }
 
    return [rows copy];
 }
