@@ -53,7 +53,7 @@
       [headerView addGestureRecognizer:singleFingerTap];
    }
 
-   headerView.frame = CGRectMake(0, 0, 256, 100);
+   headerView.frame = CGRectMake(0, 0, 256, 60);
 
    return headerView;
 }

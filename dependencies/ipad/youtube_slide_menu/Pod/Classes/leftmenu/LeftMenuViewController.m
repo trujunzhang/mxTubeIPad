@@ -183,6 +183,7 @@
 
    [self setupViewController:array];
    [self setupSlideTableView:user];
+
    //4
    [self.tableView reloadData];
 }
