@@ -33,6 +33,7 @@ Pod::Spec.new do |s|
   end
 
   s.dependency 'JMImageCache'
+  s.dependency 'ASImageResize'
 
 
 end

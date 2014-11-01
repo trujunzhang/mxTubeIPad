@@ -88,7 +88,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
+   self.placeholderImage = [self imageWithColor:[UIColor redColor]];
 
    // 1
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];

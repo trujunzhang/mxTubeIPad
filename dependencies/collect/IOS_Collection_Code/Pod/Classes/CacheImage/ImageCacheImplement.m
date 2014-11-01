@@ -8,6 +8,7 @@
 
 #import "ImageCacheImplement.h"
 #import "JMImageCache.h"
+#import "UIImage+Resize.h"
 
 
 @implementation ImageCacheImplement
@@ -18,8 +19,8 @@
    view.image = placeHolder;
    [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
                            completionBlock:^(UIImage * downloadedImage) {
+                               [downloadedImage resizedImageToSize:CGSizeMake(26, 26)];
                                view.image = downloadedImage;
-                               view.frame = CGRectMake(0, 0, 20, 20);
                                view.contentMode = UIViewContentModeScaleAspectFit;
 //                               completionBlock(downloadedImage);
                            }];
