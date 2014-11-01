@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserInfoView;
 
 
 @interface LeftMenuViewBase : UIViewController
 
 
+- (UserInfoView *)getUserInfoPanel;
 - (NSArray *)defaultCategories;
 @end

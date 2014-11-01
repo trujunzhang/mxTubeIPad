@@ -73,8 +73,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   [self setupBackground];
-
+   // 1
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
    self.tableView.backgroundColor = [UIColor clearColor];
    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -83,14 +82,12 @@
 
    [self.view addSubview:self.tableView];
 
-   NSArray * views = [[NSBundle mainBundle] loadNibNamed:@"UserInfoView" owner:nil options:nil]; //&1
-   UserInfoView * userInfoView = [views lastObject];
-   userInfoView.frame = CGRectMake(0, 0, 256, 100);
-
-   self.tableView.tableHeaderView = userInfoView;
+   //2
+   self.tableView.tableHeaderView = [self getUserInfoPanel];
 
    [self.tableView reloadData];
 
+   // 3
    [self.tableView setExclusiveSections:NO];
 
    [self.tableView openSection:0 animated:NO];
@@ -98,14 +95,7 @@
 }
 
 
-- (void)setupBackground {
-   UIImageView * imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
-   imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-   imageView.contentMode = UIViewContentModeScaleAspectFit;
-   imageView.image = [UIImage imageNamed:@"mt_side_menu_bg"];
 
-   [self.view addSubview:imageView];
-}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
