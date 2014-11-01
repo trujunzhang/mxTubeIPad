@@ -15,4 +15,7 @@
 @property(nonatomic, copy) NSString * title;
 @property(nonatomic, strong) NSArray * rowsArray;
 
+- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray;
+
+
 @end

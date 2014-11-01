@@ -16,5 +16,16 @@
 
 @implementation LeftMenuItemTree
 
+- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray {
+   self = [super init];
+   if (self) {
+      self.title = title;
+      self.rowsArray = rowsArray;
+   }
+
+   return self;
+}
+
+
 
 @end

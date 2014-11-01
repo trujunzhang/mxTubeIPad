@@ -12,7 +12,7 @@
 
 @interface LeftMenuViewBase : UIViewController
 
-@property(nonatomic, strong) NSMutableArray * tableSectionArray;
+@property(nonatomic, strong) NSArray * tableSectionArray;
 
 - (UserInfoView *)getUserInfoPanel;
 - (NSArray *)defaultCategories;

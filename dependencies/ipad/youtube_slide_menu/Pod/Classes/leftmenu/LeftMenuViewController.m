@@ -43,8 +43,12 @@
 
 
 - (void)setupViewController:(GYoutubeAuthUser *)user {
-   self.tableSectionArray = [self getDefaultSections];
+   LeftMenuItemTree * defaultMenuItemTree =
+    [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
+                                  rowsArray:[self defaultCategories]];
 
+
+   self.tableSectionArray = @[ defaultMenuItemTree ];
    if (user) {
 
    }
@@ -67,18 +71,6 @@
 
       [self.headers addObject:header];
    }
-}
-
-
-- (NSMutableArray *)getDefaultSections {
-   NSMutableArray * sections = [[NSMutableArray alloc] init];
-
-   LeftMenuItemTree * menuItemTree = [[LeftMenuItemTree alloc] init];
-   menuItemTree.title = @"  Categories";
-   menuItemTree.rowsArray = [self defaultCategories];
-   [sections addObject:menuItemTree];
-
-   return sections;
 }
 
 
