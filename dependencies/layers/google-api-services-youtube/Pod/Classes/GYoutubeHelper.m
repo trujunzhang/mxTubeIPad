@@ -297,6 +297,7 @@ static GYoutubeHelper * instance = nil;
 
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
+   query.maxResults = 10;
    query.channelId = channelId;
 
    _searchListTicket = [service executeQuery:query

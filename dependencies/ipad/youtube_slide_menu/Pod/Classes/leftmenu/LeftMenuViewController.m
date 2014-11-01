@@ -126,9 +126,10 @@
 
    // 3
    cell.textLabel.text = line[0];
-
    if (menuItemTree.remoteImage) {
-      [cell.imageView setImageWithURL:[NSURL URLWithString:line[1]]];
+      UIColor * color = [UIColor clearColor];   // Or your whatever UIColor
+      UIImage * image = [self imageWithColor:color];
+      [cell.imageView setImageWithURL:[NSURL URLWithString:line[1]] placeholderImage:image];
    } else {
       cell.imageView.image = [UIImage imageNamed:line[1]];
    }
@@ -140,6 +141,19 @@
                         topCapHeight:5.0]];
 
    return cell;
+}
+
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+   CGRect rect = CGRectMake(0, 0, 26, 26);
+   // Create a 1 by 1 pixel context
+   UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+   [color setFill];
+   UIRectFill(rect);   // Fill it with your color
+   UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+   UIGraphicsEndImageContext();
+
+   return image;
 }
 
 
