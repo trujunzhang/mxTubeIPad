@@ -121,7 +121,8 @@
    cell.backgroundColor = [UIColor clearColor];
 
    // 2
-   NSArray * line = [self defaultCategories][indexPath.row];
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section];
+   NSArray * line = menuItemTree.rowsArray[indexPath.row];
 
    // 3
    cell.textLabel.text = line[0];
