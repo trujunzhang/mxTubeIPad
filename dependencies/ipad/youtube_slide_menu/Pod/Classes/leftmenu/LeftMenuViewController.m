@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
+#import "SlideMenuTableCell.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -113,37 +113,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    static NSString * CellIdentifier = @"NewsTableViewCell";
 
-   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   SlideMenuTableCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+      cell = [[SlideMenuTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
    }
-   // 1
-   cell.backgroundColor = [UIColor clearColor];
 
-   // 2
+   // 1
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section];
    NSArray * line = menuItemTree.rowsArray[indexPath.row];
 
-   // 3
-   cell.textLabel.text = line[0];
-   if (menuItemTree.remoteImage) {
-      //"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
-      [ImageCacheImplement CacheWithImageView:cell.imageView
-//                                      withUrl:line[1]
-                                      withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
-                              withPlaceholder:self.placeholderImage
-//                       withCompletionBlock:block];
-      ];
-   } else {
-      cell.imageView.image = [UIImage imageNamed:line[1]];
-   }
-   cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
-   // 4
-   cell.selectedBackgroundView = [
-    [UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
-     stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
-
+   [cell bind:line hasRemote:menuItemTree.remoteImage withPlaceHolder:self.placeholderImage];
 
    return cell;
 }

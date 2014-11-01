@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface SlideMenuTableCell : UITableViewCell
 
+- (void)bind:(NSArray *)array hasRemote:(BOOL)remote withPlaceHolder:(UIImage *)holder;
 @end
