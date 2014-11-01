@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+@class GTLYouTubeChannel;
 
 
 @interface GYoutubeAuthUser : NSObject {
 
 }
 
-
+@property(nonatomic, strong) GTLYouTubeChannel * channel;
 
 @end

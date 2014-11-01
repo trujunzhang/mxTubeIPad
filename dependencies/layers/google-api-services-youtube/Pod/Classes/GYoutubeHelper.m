@@ -231,15 +231,21 @@ static GYoutubeHelper * instance = nil;
 - (void)getAuthUserInfo {
    self.youtubeAuthUser = [[GYoutubeAuthUser alloc] init];
 
-   //   [self getUserInfo];
-   [self getUserSubscriptions];
+   [self getUserInfo];
+
 //   [self getUserWatchWatch];
 }
 
 
 - (void)getUserInfo {
    YoutubeResponseBlock completion = ^(NSArray * array) {
+       // 1
        GTLYouTubeChannel * channel = array[0];
+       self.youtubeAuthUser.channel = channel;
+
+       // 2
+       [self getUserSubscriptions];
+
        // "id" -> "UC0wObT_HayGfWLdRAnFyPwA"
        NSString * string = channel.snippet.title;
        NSLog(@" user name = %@", string);
@@ -304,10 +310,11 @@ static GYoutubeHelper * instance = nil;
                                        errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
-//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"snippet"];
-   query.maxResults = 50;
-   query.channelId = @"UC0wObT_HayGfWLdRAnFyPwA";
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
+//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"snippet"];
+//   query.maxResults = 50;
+//   query.channelId = @"UC0wObT_HayGfWLdRAnFyPwA";
+   query.channelId = self.youtubeAuthUser.channel.identifier;
 //   query.fields = @"items(id/videoId)";
 
 //   query.fields = @"items,nextPageToken";
