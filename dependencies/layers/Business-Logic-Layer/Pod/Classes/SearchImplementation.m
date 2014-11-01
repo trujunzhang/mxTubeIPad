@@ -40,4 +40,10 @@ SearchImplementation * instance;
 }
 
 
+- (void)fetchAuthUserWithDelegate:(id)delegate {
+//   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:queryTerm
+//                                          completionHandler:responseHandler
+//                                               errorHandler:errorHandler];
+}
+
 @end

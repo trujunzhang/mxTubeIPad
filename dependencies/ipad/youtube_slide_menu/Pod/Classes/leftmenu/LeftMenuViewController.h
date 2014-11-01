@@ -10,9 +10,10 @@
 
 #import "LeftMenuViewBase.h"
 @class STCollapseTableView;
+@class GYoutubeAuthUser;
 
 
 @interface LeftMenuViewController : LeftMenuViewBase
 
-
+- (void)refreshAutoUser:(GYoutubeAuthUser *)user;
 @end

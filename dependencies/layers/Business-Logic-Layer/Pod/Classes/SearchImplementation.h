@@ -13,9 +13,13 @@
 
 @interface SearchImplementation : NSObject
 
-+ (SearchImplementation *)getInstance;
+
+- (void)fetchAuthUserWithDelegate:(id)delegate;
 
 + (GYoutubeAuthUser *)shareYoutubeAuthUser;
++ (SearchImplementation *)getInstance;
+
 - (void)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler;
+
 
 @end

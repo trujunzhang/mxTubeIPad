@@ -260,6 +260,10 @@ static GYoutubeHelper * instance = nil;
 - (void)getUserSubscriptions {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
+
+       if (self.delegate) {
+          [self.delegate FetchYoutubeAuthUserCompletion:self.youtubeAuthUser];
+       }
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";

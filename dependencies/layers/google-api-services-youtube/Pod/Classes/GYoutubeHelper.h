@@ -28,6 +28,15 @@ typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
 
 
+@protocol GYoutubeHelperDelegate<NSObject>
+
+@optional
+- (void)FetchYoutubeAuthUserCompletion:(GYoutubeAuthUser *)user;
+
+
+@end
+
+
 @interface GYoutubeHelper : NSObject {
    GTLYouTubeChannelContentDetailsRelatedPlaylists * _myPlaylists;
    GTLServiceTicket * _searchListTicket;
@@ -55,5 +64,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (GTMOAuth2Authentication *)getAuthorizer;
 - (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication;
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
+
+@property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
 
 @end

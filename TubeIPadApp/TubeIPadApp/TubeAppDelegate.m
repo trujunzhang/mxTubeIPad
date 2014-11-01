@@ -12,9 +12,11 @@
 
 #import "LeftMenuViewController.h"
 #import "SubscriptionsViewController.h"
+#import "SearchImplementation.h"
+#import "GYoutubeAuthUser.h"
 
 
-@interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate, UITabBarControllerDelegate>
+@interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate, UITabBarControllerDelegate, GYoutubeHelperDelegate>
 @property(nonatomic) NSUInteger lastTabBarSelectedIndex;
 
 @property(nonatomic, strong) SWRevealViewController * revealController;
@@ -30,6 +32,9 @@
 @implementation TubeAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+   [[SearchImplementation getInstance] fetchAuthUserWithDelegate:self];
+
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
    self.tabBarController.view.backgroundColor = [UIColor whiteColor];
@@ -158,6 +163,15 @@
 
 - (void)leftRevealToggle:(id)sender {
    [self setSubscriptionButtonEvent:self.lastTabBarSelectedIndex];
+}
+
+
+#pragma mark -
+#pragma mark GYoutubeHelperDelegate
+
+
+- (void)FetchYoutubeAuthUserCompletion:(GYoutubeAuthUser *)user {
+   [self.leftViewController refreshAutoUser:user];
 }
 
 

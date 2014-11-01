@@ -9,6 +9,7 @@
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
+#import "GYoutubeAuthUser.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -45,13 +46,13 @@
     [UIColor redColor],
    ];
 
-   self.tableData = [[NSMutableArray alloc] init];
+   self.tableSectionArray = [[NSMutableArray alloc] init];
    for (int i = 0; i < [colors count]; i++) {
       NSMutableArray * section = [[NSMutableArray alloc] init];
       for (int j = 0; j < 3; j++) {
          [section addObject:[NSString stringWithFormat:@"Cell n°%i %i", i + 1, j]];
       }
-      [self.tableData addObject:section];
+      [self.tableSectionArray addObject:section];
    }
 
    self.headers = [[NSMutableArray alloc] init];
@@ -84,8 +85,6 @@
    //2
    self.tableView.tableHeaderView = [self getUserInfoPanel];
 
-   [self.tableView reloadData];
-
    // 3
    [self.tableView setExclusiveSections:NO];
 
@@ -95,7 +94,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   return [self.tableData count];
+   return [self.tableSectionArray count];
 }
 
 
@@ -149,5 +148,12 @@
    return [self.headers objectAtIndex:section];
 }
 
+
+- (void)refreshAutoUser:(GYoutubeAuthUser *)user {
+
+
+   //4
+   [self.tableView reloadData];
+}
 
 @end
