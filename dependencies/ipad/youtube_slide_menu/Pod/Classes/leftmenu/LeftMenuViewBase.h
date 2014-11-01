@@ -1,5 +1,5 @@
 //
-//  LeftMenuViewController.h
+//  LeftMenuViewBase.h
 //  STCollapseTableViewDemo
 //
 //  Created by Thomas Dupont on 09/08/13.
@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "LeftMenuViewBase.h"
-@class STCollapseTableView;
+
+@interface LeftMenuViewBase : UIViewController
 
 
-@interface LeftMenuViewController : LeftMenuViewBase
-
-
+- (NSArray *)defaultCategories;
 @end

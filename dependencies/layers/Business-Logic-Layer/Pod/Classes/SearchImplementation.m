@@ -8,11 +8,13 @@
 
 #import "SearchImplementation.h"
 #import "GYoutubeHelper.h"
+#import "GYoutubeAuthUser.h"
 
 SearchImplementation * instance;
 
 
 @implementation SearchImplementation
+
 
 + (SearchImplementation *)getInstance {
    @synchronized (self) {
@@ -26,10 +28,15 @@ SearchImplementation * instance;
 }
 
 
++ (GYoutubeAuthUser *)shareYoutubeAuthUser {
+   return [GYoutubeHelper getInstance].youtubeAuthUser;
+}
+
+
 - (void)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:queryTerm
-                                    completionHandler:responseHandler
-                                         errorHandler:errorHandler];
+                                          completionHandler:responseHandler
+                                               errorHandler:errorHandler];
 }
 
 

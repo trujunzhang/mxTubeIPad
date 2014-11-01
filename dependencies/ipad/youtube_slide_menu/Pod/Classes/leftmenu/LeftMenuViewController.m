@@ -164,28 +164,4 @@
 }
 
 
-- (NSArray *)defaultCategories {
-   NSArray * array = @[
-    @[ @"Autos & Vehicles", @"Autos" ],
-    @[ @"Comedy", @"Comedy" ],
-    @[ @"Education", @"Education" ],
-    @[ @"Entertainment", @"Entertainment" ],
-    @[ @"File & Animation", @"Film" ],
-    @[ @"Gaming", @"Games" ],
-    @[ @"Howto & Style", @"Howto" ],
-    @[ @"Music", @"Music" ],
-    @[ @"News & Politics", @"News" ],
-    @[ @"Nonprofits & Activism", @"Nonprofit" ],
-    @[ @"People & Blogs", @"People" ],
-    @[ @"Pets & Animals", @"Animals" ],
-    @[ @"Science & Technology", @"Tech" ],
-    @[ @"Sports", @"Sports" ],
-    @[ @"Travel & Events", @"Travel" ],
-   ];
-
-
-   return array;
-}
-
-
 @end
