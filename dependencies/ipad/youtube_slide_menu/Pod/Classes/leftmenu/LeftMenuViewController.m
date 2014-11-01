@@ -36,12 +36,17 @@
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
    if (subscriptionsArray) {
+      LeftMenuItemTree * signUserMenuItemTree =
+       [[LeftMenuItemTree alloc] initWithTitle:nil
+                                     rowsArray:[self signUserCategories]
+                                     hideTitle:NO
+                                   remoteImage:NO];
       LeftMenuItemTree * subscriptionsMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
                                      rowsArray:subscriptionsArray
-                                     hideTitle:YES
+                                     hideTitle:NO
                                    remoteImage:YES];
-      self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
+      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
    }
 
 

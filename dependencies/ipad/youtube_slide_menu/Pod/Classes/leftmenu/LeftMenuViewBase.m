@@ -140,4 +140,18 @@
 }
 
 
+- (NSArray *)signUserCategories {
+   NSArray * array = @[
+    @[ @"Subscriptions", @"subscriptions" ],
+    @[ @"What to Watch", @"recommended" ],
+    @[ @"Favorite", @"favorites" ],
+    @[ @"Watch Later", @"watch_later" ],
+    @[ @"Playlists", @"playlists" ],
+   ];
+
+
+   return array;
+}
+
+
 @end

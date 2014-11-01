@@ -16,4 +16,5 @@
 
 - (UIView *)getUserHeaderView:(GYoutubeAuthUser *)user;
 - (NSArray *)defaultCategories;
+- (NSArray *)signUserCategories;
 @end
