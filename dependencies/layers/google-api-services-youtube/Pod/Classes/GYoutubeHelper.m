@@ -240,16 +240,13 @@ static GYoutubeHelper * instance = nil;
 - (void)getUserInfo {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        // 1
-       GTLYouTubeChannel * channel = array[0];
-       self.youtubeAuthUser.channel = channel;
+       self.youtubeAuthUser.channel = array[0];
 
        // 2
        [self getUserSubscriptions];
 
        // "id" -> "UC0wObT_HayGfWLdRAnFyPwA"
-       NSString * string = channel.snippet.title;
-       NSLog(@" user name = %@", string);
-       NSString * debug = @"debug";
+       NSLog(@" user name = %@", self.youtubeAuthUser.channel.snippet.title);
    };
 
    ErrorResponseBlock error = ^(NSError * error) {
@@ -263,6 +260,7 @@ static GYoutubeHelper * instance = nil;
 - (void)getUserSubscriptions {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
+
        NSString * debug = @"debug";
    };
    ErrorResponseBlock error = ^(NSError * error) {
