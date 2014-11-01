@@ -26,7 +26,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
    if (self) {
-      [self setupViewController];
+      [self setupViewController:nil];
    }
    return self;
 }
@@ -35,28 +35,23 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
    self = [super initWithCoder:aDecoder];
    if (self) {
-      [self setupViewController];
+      [self setupViewController:nil];
    }
    return self;
 }
 
 
-- (void)setupViewController {
-   NSArray * colors = @[
-    [UIColor redColor],
-   ];
+- (void)setupViewController:(GYoutubeAuthUser *)user {
+   self.tableSectionArray = [self getDefaultSections];
 
-   self.tableSectionArray = [[NSMutableArray alloc] init];
-   for (int i = 0; i < [colors count]; i++) {
-      NSMutableArray * section = [[NSMutableArray alloc] init];
-      for (int j = 0; j < 3; j++) {
-         [section addObject:[NSString stringWithFormat:@"Cell n°%i %i", i + 1, j]];
-      }
-      [self.tableSectionArray addObject:section];
+
+   if (user) {
+
    }
 
+
    self.headers = [[NSMutableArray alloc] init];
-   for (int i = 0; i < [colors count]; i++) {
+   for (int i = 0; i < [self.tableSectionArray count]; i++) {
       UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
       header.backgroundColor = [UIColor clearColor];
       UILabel * number = [[UILabel alloc] initWithFrame:header.frame];
@@ -67,6 +62,13 @@
 
       [self.headers addObject:header];
    }
+}
+
+
+- (NSMutableArray *)getDefaultSections {
+   NSMutableArray * sections = [[NSMutableArray alloc] init];
+   [sections addObject:[self defaultCategories]];
+   return sections;
 }
 
 
@@ -150,6 +152,8 @@
 
 
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user {
+   [self setupViewController:user];
+
    //4
    [self.tableView reloadData];
 }
