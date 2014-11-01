@@ -22,4 +22,5 @@
 - (void)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler;
 
 
+- (BOOL)isSignedIn;
 @end

@@ -47,4 +47,8 @@ SearchImplementation * instance;
 //                                               errorHandler:errorHandler];
 }
 
+
+- (BOOL)isSignedIn {
+   return [GYoutubeHelper getInstance].isSignedIn;
+}
 @end

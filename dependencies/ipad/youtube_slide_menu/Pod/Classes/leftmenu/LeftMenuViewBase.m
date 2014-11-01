@@ -8,6 +8,7 @@
 
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
+#import "SearchImplementation.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -26,7 +27,11 @@
 
 }
 
+
 - (UserInfoView *)getUserInfoPanel {
+
+   BOOL isSignedIn = [[SearchImplementation getInstance] isSignedIn];
+
    UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
                                                                 owner:nil
                                                               options:nil] lastObject];
