@@ -17,6 +17,7 @@
 #import "GTLYouTubeChannelSnippet.h"
 #import "GTLYouTubeSubscription.h"
 #import "GTLYouTubeSubscriptionSnippet.h"
+#import "GYoutubeAuthUser.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -221,7 +222,16 @@ static GYoutubeHelper * instance = nil;
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
 
-//   [self getUserInfo];
+   if (self.isSignedIn) {
+      [self getAuthUserInfo];
+   }
+}
+
+
+- (void)getAuthUserInfo {
+   self.youtubeAuthUser = [[GYoutubeAuthUser alloc] init];
+
+   //   [self getUserInfo];
    [self getUserSubscriptions];
 //   [self getUserWatchWatch];
 }
@@ -280,6 +290,7 @@ static GYoutubeHelper * instance = nil;
    if (self.isSignedIn == NO)
       return;
 
+   self.youtubeAuthUser = nil;
    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.youTubeService.authorizer];
 }

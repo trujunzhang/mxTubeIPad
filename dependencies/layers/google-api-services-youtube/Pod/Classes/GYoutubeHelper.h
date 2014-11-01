@@ -22,6 +22,7 @@
 @class GTLYouTubePlaylistItemListResponse;
 @class GTMOAuth2ViewControllerTouch;
 @class GTMOAuth2Authentication;
+@class GYoutubeAuthUser;
 
 typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
@@ -42,7 +43,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 }
 // Accessor for the app's single instance of the service object.
 @property(nonatomic, strong) GTLServiceYouTube * youTubeService;
-
+@property(nonatomic, strong) GYoutubeAuthUser * youtubeAuthUser;
 @property(nonatomic) BOOL isSignedIn;
 
 + (GYoutubeHelper *)getInstance;
