@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
+
 #import "SlideMenuTableCell.h"
 
+#import "ImageCacheImplement.h"
 
 @implementation SlideMenuTableCell
 

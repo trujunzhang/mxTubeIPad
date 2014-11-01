@@ -11,6 +11,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Classes/*/*.{h,m}'
   s.resources = "Pod/Assets/*.*"
   s.requires_arc = true
-  s.dependency 'MLImageCache'
   s.dependency 'KRLCollectionViewGridLayout'
 end

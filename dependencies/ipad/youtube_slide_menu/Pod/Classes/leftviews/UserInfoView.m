@@ -14,7 +14,7 @@
 #import "GTLYouTubeThumbnailDetails.h"
 #import "GTLYouTubeThumbnail.h"
 
-#import "UIImageView+Cache.h"
+#import "ImageCacheImplement.h"
 
 
 @implementation UserInfoView
@@ -30,8 +30,13 @@
 
    // 1
 //   channelThumbnailsUrl = @"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg";
-   UIImage * image = [UIImage imageNamed:@"account_default_thumbnail.png"];
-   [self.userHeader setImageWithURL:[NSURL URLWithString:channelThumbnailsUrl] placeholderImage:image];
+   UIImage * holder = [UIImage imageNamed:@"account_default_thumbnail.png"];
+
+   [ImageCacheImplement CacheWithImageView:self.userHeader
+                                   withUrl:channelThumbnailsUrl
+                           withPlaceholder:holder];
+
+
    self.userTitle.text = channelTitle;
    self.userEmail.text = channelThumbnailsUrl;
 

@@ -15,9 +15,10 @@
 #import "GTLYouTubeVideoStatistics.h"
 #import "GTLYouTubeThumbnail.h"
 
-#import "UIImageView+Cache.h"
 #import "IpadGridViewInfoCell.h"
 #import "IpadGridViewUserCell.h"
+
+#import "ImageCacheImplement.h"
 
 
 @implementation IpadGridViewCell
@@ -60,8 +61,9 @@
    // item will not contain a video ID.
 
    // 1
-   [self.thumbnails setImageWithURL:[NSURL URLWithString:video.snippet.thumbnails.high.url]
-                   placeholderImage:image];// used
+   [ImageCacheImplement CacheWithImageView:self.thumbnails
+                                   withUrl:video.snippet.thumbnails.high.url
+                           withPlaceholder:image];
    // UIImageView Touch event
    UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(tapDetected)];
