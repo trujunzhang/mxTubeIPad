@@ -117,8 +117,11 @@
 
    cell.backgroundColor = [UIColor clearColor];
 
-   // 3
+   // 1
    cell.textLabel.text = line[0];
+   cell.textLabel.textColor = [UIColor whiteColor];
+
+   // 2
    if (menuItemTree.remoteImage) {
       [ImageCacheImplement CacheWithImageView:cell.imageView
 //                                   withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
@@ -130,7 +133,7 @@
    }
    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
-   // 4
+   // 3
    cell.selectedBackgroundView = [
     [UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
      stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
