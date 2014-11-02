@@ -27,8 +27,6 @@
    } else {
       return [[YoutubeAuthInfo alloc] init];
    }
-
-   return nil;
 }
 
 
