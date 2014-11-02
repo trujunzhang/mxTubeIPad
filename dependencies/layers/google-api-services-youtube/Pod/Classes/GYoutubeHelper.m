@@ -18,6 +18,9 @@
 #import "GTLYouTubeSubscription.h"
 #import "GTLYouTubeSubscriptionSnippet.h"
 #import "GYoutubeAuthUser.h"
+#import "YoutubeAuthDataStore.h"
+#import "GTLYouTubeThumbnailDetails.h"
+#import "GTLYouTubeThumbnail.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -85,7 +88,7 @@ static GYoutubeHelper * instance = nil;
                                                                 clientID:kMyClientID
                                                             clientSecret:kMyClientSecret];
    // 3
-   [self saveAuthorizerAndFetchUserInfo:auth];
+   [self fetchAuthorizeInfo:auth];
 }
 
 
@@ -218,7 +221,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)saveAuthorizerAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
+- (void)fetchAuthorizeInfo:(GTMOAuth2Authentication *)authentication {
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
 
@@ -228,20 +231,33 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+- (void)saveAuthorizeAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
+   // 1
+   [self fetchAuthorizeInfo:authentication];
+}
+
+
 - (void)getAuthUserInfo {
    self.youtubeAuthUser = [[GYoutubeAuthUser alloc] init];
 
    [self getUserInfo];
-
-//   [self getUserWatchWatch];
 }
 
 
 - (void)getUserInfo {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        // 1
-       self.youtubeAuthUser.channel = array[0];
+       GTLYouTubeChannel * channel = array[0];
+       // save user title
+       NSString * title = channel.snippet.title;
+       NSString * email = self.youTubeService.authorizer.userEmail;
+       NSString * thumbnailUrl = [GYoutubeAuthUser getUserThumbnails:channel];
+       [[YoutubeAuthDataStore getInstance] saveAuthUserChannelWithTitle:title
+                                                              withEmail:email
+                                                       withThumbmailUrl:thumbnailUrl];
 
+
+       self.youtubeAuthUser.channel = channel;
        // 2
        [self getUserSubscriptions];
 

@@ -12,6 +12,7 @@
 #import "GTLYouTubeSubscriptionSnippet.h"
 #import "GTLYouTubeThumbnailDetails.h"
 #import "GTLYouTubeThumbnail.h"
+#import "GTLYouTubeChannelSnippet.h"
 
 
 @implementation GYoutubeAuthUser
@@ -29,4 +30,11 @@
 
    return [rows copy];
 }
+
+
++ (NSString *)getUserThumbnails:(GTLYouTubeChannel *)channel {
+   return channel.snippet.thumbnails.high.url;
+}
+
+
 @end

@@ -95,7 +95,7 @@
       // Authentication succeeded
       NSLog(@"Success");
 
-      [[GYoutubeHelper getInstance] saveAuthorizerAndFetchUserInfo:auth];
+      [[GYoutubeHelper getInstance] saveAuthorizeAndFetchUserInfo:auth];
    }
 }
 

@@ -11,8 +11,7 @@
 
 YoutubeAuthDataStore * instance;
 
-static NSString * const GTM_CHANNEL_TITLE = @"GTM_channel_title";
-static NSString * const GTM_CHANNEL_EMAIL = @"GTM_auth_email";
+static NSString * const GTM_YOUTUBE_INFO = @"GTM_youtube_info";
 
 
 @implementation YoutubeAuthDataStore
@@ -28,38 +27,32 @@ static NSString * const GTM_CHANNEL_EMAIL = @"GTM_auth_email";
 }
 
 
-- (void)saveAuthUserChannel:(NSString *)channelTitle withEmail:(NSString *)email {
-   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   [defaults setObject:channelTitle forKey:GTM_CHANNEL_TITLE];
-   [defaults setObject:email forKey:GTM_CHANNEL_EMAIL];
-   [defaults synchronize];
-}
-
-
 - (void)resetAuthUserChannel {
    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   [defaults setObject:nil forKey:GTM_CHANNEL_TITLE];
-   [defaults setObject:nil forKey:GTM_CHANNEL_EMAIL];
+   [defaults setObject:nil forKey:GTM_YOUTUBE_INFO];
    [defaults synchronize];
 }
 
 
-- (NSString *)readAuthUserChannelTitle {
+- (YoutubeAuthInfo *)readAuthUserInfo {
    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   if ([defaults objectForKey:GTM_CHANNEL_TITLE]) {
-      return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:GTM_CHANNEL_TITLE]];
+   if ([defaults objectForKey:GTM_YOUTUBE_INFO]) {
+      return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:GTM_YOUTUBE_INFO]];
    }
-   return @"";
+   return nil;
 }
 
 
-- (NSString *)readAuthUserEmail {
+- (void)saveAuthUserChannelWithTitle:(NSString *)title withEmail:(NSString *)email withThumbmailUrl:(NSString *)thumbnailUrl {
+   // 1
+   YoutubeAuthInfo * info = [[YoutubeAuthInfo alloc] init];
+   info.title = title;
+   info.email = email;
+   info.thumbnailUrl = thumbnailUrl;
+
+   // 2
    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   if ([defaults objectForKey:GTM_CHANNEL_EMAIL]) {
-      return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:GTM_CHANNEL_EMAIL]];
-   }
-   return @"";
+   [defaults setObject:info forKey:GTM_YOUTUBE_INFO];
+   [defaults synchronize];
 }
-
-
 @end

@@ -9,14 +9,21 @@
 #import <Foundation/Foundation.h>
 
 
+@interface YoutubeAuthInfo : NSObject
 
+@property(nonatomic, copy) NSString * title;
+@property(nonatomic, copy) NSString * email;
+@property(nonatomic, copy) NSString * thumbnailUrl;
+
+@end
 
 
 @interface YoutubeAuthDataStore : NSObject
 
 
-- (void)saveAuthUserChannel:(NSString *)channelTitle withEmail:(NSString *)email;
++ (YoutubeAuthDataStore *)getInstance;
+
 - (void)resetAuthUserChannel;
-- (NSString *)readAuthUserChannelTitle;
-- (NSString *)readAuthUserEmail;
+- (YoutubeAuthInfo *)readAuthUserInfo;
+- (void)saveAuthUserChannelWithTitle:(NSString *)title withEmail:(NSString *)email withThumbmailUrl:(NSString *)thumbnailUrl;
 @end
