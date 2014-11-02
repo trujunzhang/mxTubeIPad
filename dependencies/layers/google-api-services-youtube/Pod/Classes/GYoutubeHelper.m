@@ -15,7 +15,7 @@
 #import "GTLYouTubeChannelListResponse.h"
 #import "GTLYouTubeChannelSnippet.h"
 #import "GYoutubeAuthUser.h"
-//#import "YoutubeAuthDataStore.h"
+#import "YoutubeAuthDataStore.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -247,9 +247,9 @@ static GYoutubeHelper * instance = nil;
        NSString * title = channel.snippet.title;
        NSString * email = self.youTubeService.authorizer.userEmail;
        NSString * thumbnailUrl = [GYoutubeAuthUser getUserThumbnails:channel];
-//       [[YoutubeAuthDataStore getInstance] saveAuthUserChannelWithTitle:title
-//                                                              withEmail:email
-//                                                       withThumbmailUrl:thumbnailUrl];
+       [[[YoutubeAuthDataStore alloc] init] saveAuthUserChannelWithTitle:title
+                                                               withEmail:email
+                                                        withThumbmailUrl:thumbnailUrl];
 
 
        self.youtubeAuthUser.channel = channel;
@@ -294,7 +294,7 @@ static GYoutubeHelper * instance = nil;
       return;
 
    // 1
-//   [[YoutubeAuthDataStore getInstance] resetAuthUserChannel];
+   [[[YoutubeAuthDataStore alloc] init] resetAuthUserChannel];
 
    // 2
    self.youtubeAuthUser = nil;
