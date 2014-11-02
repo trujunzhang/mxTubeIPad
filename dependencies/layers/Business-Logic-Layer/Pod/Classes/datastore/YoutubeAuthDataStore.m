@@ -39,7 +39,7 @@
 
    // 2
    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-   [defaults setObject:info forKey:@"GTM_youtube_info"];
+   [defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:info] forKey:@"GTM_youtube_info"];
    [defaults synchronize];
 
    return info;
