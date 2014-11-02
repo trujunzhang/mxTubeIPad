@@ -12,6 +12,7 @@
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
+#import "YoutubeAuthDataStore.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -73,7 +74,10 @@
 }
 
 
-- (void)setupSlideTableView:(YoutubeAuthInfo *)user {
+- (void)setupSlideTableViewWithAutoInfo:(YoutubeAuthInfo *)user {
+   if (user == nil)
+      user = [[[YoutubeAuthDataStore alloc] init] readAuthUserInfo];
+
    self.tableView.tableHeaderView = [self getUserHeaderView:user];
 }
 
@@ -102,7 +106,7 @@
 
    // 2
    [self setupViewController:nil];
-   [self setupSlideTableView:nil];
+   [self setupSlideTableViewWithAutoInfo:nil];
 }
 
 
@@ -154,7 +158,7 @@
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
    // 1
    [self setupViewController:[user getTableRows]];
-   [self setupSlideTableView:user];
+   [self setupSlideTableViewWithAutoInfo:nil];
    [self setupTableViewExclusiveState];
 
    // 2
@@ -163,6 +167,6 @@
 
 
 - (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
-//   [self setupSlideTableView:user];
+   [self setupSlideTableViewWithAutoInfo:info];
 }
 @end
