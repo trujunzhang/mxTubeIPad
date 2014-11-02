@@ -7,6 +7,7 @@
 //
 
 #import <Business-Logic-Layer/YoutubeAuthInfo.h>
+#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
@@ -36,10 +37,9 @@
 
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
-   if (subscriptionsArray) {
+   if ([[GYoutubeHelper getInstance] isSignedIn]) {
       LeftMenuItemTree * signUserMenuItemTree =
-//       [[LeftMenuItemTree alloc] initWithTitle:nil
-       [[LeftMenuItemTree alloc] initWithTitle:@"  wanghao"
+       [[LeftMenuItemTree alloc] initWithTitle:@"  "
                                      rowsArray:[self signUserCategories]
                                      hideTitle:YES
                                    remoteImage:NO];
@@ -105,7 +105,7 @@
    [self.view addSubview:self.tableView];
 
    // 2
-   [self setupViewController:nil];
+   [self setupViewController:[[NSArray alloc] init]];
    [self setupSlideTableViewWithAutoInfo:nil];
    [self setupTableViewExclusiveState];
 }

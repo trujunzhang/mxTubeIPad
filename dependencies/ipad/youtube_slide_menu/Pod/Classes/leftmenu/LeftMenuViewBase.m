@@ -8,10 +8,9 @@
 
 #import <IOS_Collection_Code/ImageCacheImplement.h>
 #import <Business-Logic-Layer/YoutubeAuthInfo.h>
+#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
-#import "SearchImplementation.h"
-#import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
 
 
@@ -40,10 +39,8 @@
 
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user {
 
-   BOOL isSignedIn = [[SearchImplementation getInstance] isSignedIn];
-
    UIView * headerView = nil;
-   if (isSignedIn) {
+   if ([[GYoutubeHelper getInstance] isSignedIn]) {
       UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
                                                                    owner:nil
                                                                  options:nil] lastObject];
