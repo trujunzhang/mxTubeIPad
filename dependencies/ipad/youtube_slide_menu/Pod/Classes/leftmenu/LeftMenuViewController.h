@@ -16,6 +16,6 @@
 
 @interface LeftMenuViewController : LeftMenuViewBase
 
-@property(nonatomic, strong) UIImage * placeholderImage;
+
 - (void)refreshAutoUser:(GYoutubeAuthUser *)user;
 @end

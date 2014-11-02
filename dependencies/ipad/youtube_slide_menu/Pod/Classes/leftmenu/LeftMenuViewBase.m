@@ -6,10 +6,12 @@
 //  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
+#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "SearchImplementation.h"
 #import "GYoutubeAuthUser.h"
+#import "LeftMenuItemTree.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -26,6 +28,8 @@
    // 1
    [self setupBackground];
 
+   // 2
+   self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
 }
 
 
@@ -99,6 +103,50 @@
 - (void)cancelGdriveSignIn:(id)cancelGdriveSignIn {
    [self dismissViewControllerAnimated:YES completion:^(void) {
    }];
+}
+
+
+#pragma mark -
+#pragma mark cell
+
+
+//"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+- (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row {
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
+   NSArray * line = menuItemTree.rowsArray[row];
+
+   cell.backgroundColor = [UIColor clearColor];
+
+   // 3
+   cell.textLabel.text = line[0];
+   if (menuItemTree.remoteImage) {
+      [ImageCacheImplement CacheWithImageView:cell.imageView
+//                                   withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+                                      withUrl:line[1]
+                              withPlaceholder:self.placeholderImage
+                                         size:CGSizeMake(32, 32)];
+   } else {
+      cell.imageView.image = [UIImage imageNamed:line[1]];
+   }
+   cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+
+   // 4
+   cell.selectedBackgroundView = [
+    [UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
+     stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+}
+
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+   CGRect rect = CGRectMake(0, 0, 26, 26);
+   // Create a 1 by 1 pixel context
+   UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+   [color setFill];
+   UIRectFill(rect);   // Fill it with your color
+   UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+   UIGraphicsEndImageContext();
+
+   return image;
 }
 
 

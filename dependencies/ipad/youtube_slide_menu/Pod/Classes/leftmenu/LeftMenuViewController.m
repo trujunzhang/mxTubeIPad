@@ -11,7 +11,6 @@
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
-#import "SlideMenuTableCell.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -88,7 +87,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
+
 
    // 1
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
@@ -111,33 +110,16 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   static NSString * CellIdentifier = @"NewsTableViewCell";
+   static NSString * CellIdentifier = @"LeftMenuTableViewCell";
 
-   SlideMenuTableCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
    if (cell == nil) {
-      cell = [[SlideMenuTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
    }
 
-   // 1
-   LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section];
-   NSArray * line = menuItemTree.rowsArray[indexPath.row];
-
-   [cell bind:line hasRemote:menuItemTree.remoteImage withPlaceHolder:self.placeholderImage];
+   [self bind:cell atSection:indexPath.section atRow:indexPath.row];
 
    return cell;
-}
-
-
-- (UIImage *)imageWithColor:(UIColor *)color {
-   CGRect rect = CGRectMake(0, 0, 26, 26);
-   // Create a 1 by 1 pixel context
-   UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-   [color setFill];
-   UIRectFill(rect);   // Fill it with your color
-   UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-   UIGraphicsEndImageContext();
-
-   return image;
 }
 
 

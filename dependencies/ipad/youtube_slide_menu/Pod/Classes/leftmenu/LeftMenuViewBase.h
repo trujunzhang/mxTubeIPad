@@ -12,9 +12,11 @@
 
 @interface LeftMenuViewBase : UIViewController
 
+@property(nonatomic, strong) UIImage * placeholderImage;
 @property(nonatomic, strong) NSArray * tableSectionArray;
 
 - (UIView *)getUserHeaderView:(GYoutubeAuthUser *)user;
+- (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;
 - (NSArray *)defaultCategories;
 - (NSArray *)signUserCategories;
 @end
