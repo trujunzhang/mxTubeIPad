@@ -298,6 +298,9 @@ static GYoutubeHelper * instance = nil;
    if (self.isSignedIn == NO)
       return;
 
+   // 1
+   [[YoutubeAuthDataStore getInstance] resetAuthUserChannel];
+   // 2
    self.youtubeAuthUser = nil;
    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.youTubeService.authorizer];
