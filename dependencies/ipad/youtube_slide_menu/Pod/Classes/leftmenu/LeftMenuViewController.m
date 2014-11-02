@@ -107,6 +107,7 @@
    // 2
    [self setupViewController:nil];
    [self setupSlideTableViewWithAutoInfo:nil];
+   [self setupTableViewExclusiveState];
 }
 
 
