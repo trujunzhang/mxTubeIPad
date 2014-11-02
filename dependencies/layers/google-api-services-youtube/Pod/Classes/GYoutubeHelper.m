@@ -7,20 +7,15 @@
 //
 
 #import "GYoutubeHelper.h"
+
 #import "GTLYouTubeSearchResult.h"
 #import "GTLYouTubeResourceId.h"
-#import "GTLYouTubeVideo.h"
 #import "GTMOAuth2ViewControllerTouch.h"
-#import "GTMOAuth2Authentication.h"
 #import "GTLYouTubeSubscriptionListResponse.h"
 #import "GTLYouTubeChannelListResponse.h"
 #import "GTLYouTubeChannelSnippet.h"
-#import "GTLYouTubeSubscription.h"
-#import "GTLYouTubeSubscriptionSnippet.h"
 #import "GYoutubeAuthUser.h"
 #import "YoutubeAuthDataStore.h"
-#import "GTLYouTubeThumbnailDetails.h"
-#import "GTLYouTubeThumbnail.h"
 
 static GYoutubeHelper * instance = nil;
 
