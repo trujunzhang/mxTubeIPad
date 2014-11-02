@@ -49,7 +49,6 @@
                                      hideTitle:NO
                                    remoteImage:YES];
       self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
-//      self.tableSectionArray = @[ subscriptionsMenuItemTree ];
    }
 
 
@@ -74,7 +73,7 @@
 }
 
 
-- (void)setupSlideTableViewWithAutoInfo:(YoutubeAuthInfo *)user {
+- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user {
    if (user == nil)
       user = [[[YoutubeAuthDataStore alloc] init] readAuthUserInfo];
 
@@ -93,8 +92,6 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-
-
    // 1
    self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
    self.tableView.backgroundColor = [UIColor clearColor];
@@ -106,7 +103,8 @@
 
    // 2
    [self setupViewController:[[NSArray alloc] init]];
-   [self setupSlideTableViewWithAutoInfo:nil];
+   [self setupSlideTableViewWithAuthInfo:nil];
+
    [self setupTableViewExclusiveState];
 }
 
@@ -159,15 +157,17 @@
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
    // 1
    [self setupViewController:[user getTableRows]];
-   [self setupSlideTableViewWithAutoInfo:nil];
-   [self setupTableViewExclusiveState];
+   [self setupSlideTableViewWithAuthInfo:nil];
 
    // 2
    [self.tableView reloadData];
+
+   //3
+   [self setupTableViewExclusiveState];
 }
 
 
 - (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
-   [self setupSlideTableViewWithAutoInfo:info];
+   [self setupSlideTableViewWithAuthInfo:info];
 }
 @end
