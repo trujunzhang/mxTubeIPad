@@ -24,7 +24,10 @@
    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
    if ([defaults objectForKey:@"GTM_youtube_info"]) {
       return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:@"GTM_youtube_info"]];
+   } else {
+      return [[YoutubeAuthInfo alloc] init];
    }
+
    return nil;
 }
 

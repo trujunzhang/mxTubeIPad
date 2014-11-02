@@ -8,6 +8,18 @@
 
 #import "YoutubeAuthInfo.h"
 
+
 @implementation YoutubeAuthInfo
+
+- (instancetype)init {
+   self = [super init];
+   if (self) {
+      self.title = @"";
+      self.email = @"";
+      self.thumbnailUrl = @"";
+   }
+
+   return self;
+}
 
 @end
