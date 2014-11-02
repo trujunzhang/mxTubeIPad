@@ -62,7 +62,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (void)signingOut;
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock;
 - (GTMOAuth2Authentication *)getAuthorizer;
-- (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication;
+- (void)saveAuthorizerAndFetchUserInfo:(GTMOAuth2Authentication *)authentication;
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
 
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;

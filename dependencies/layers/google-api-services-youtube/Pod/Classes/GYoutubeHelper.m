@@ -85,7 +85,7 @@ static GYoutubeHelper * instance = nil;
                                                                 clientID:kMyClientID
                                                             clientSecret:kMyClientSecret];
    // 3
-   [self saveAuthorizer:auth];
+   [self saveAuthorizerAndFetchUserInfo:auth];
 }
 
 
@@ -218,7 +218,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)saveAuthorizer:(GTMOAuth2Authentication *)authentication {
+- (void)saveAuthorizerAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
 
