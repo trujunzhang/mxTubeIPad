@@ -9,37 +9,39 @@
 #import "YoutubeAuthDataStore.h"
 #import "YoutubeAuthInfo.h"
 
+
 @implementation YoutubeAuthDataStore
 
 
-
 - (void)resetAuthUserChannel {
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:nil forKey:@"GTM_youtube_info"];
-    [defaults synchronize];
+   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+   [defaults setObject:nil forKey:@"GTM_youtube_info"];
+   [defaults synchronize];
 }
 
 
 - (YoutubeAuthInfo *)readAuthUserInfo {
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"GTM_youtube_info"]) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:@"GTM_youtube_info"]];
-    }
-    return nil;
+   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+   if ([defaults objectForKey:@"GTM_youtube_info"]) {
+      return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:@"GTM_youtube_info"]];
+   }
+   return nil;
 }
 
 
-- (void)saveAuthUserChannelWithTitle:(NSString *)title withEmail:(NSString *)email withThumbmailUrl:(NSString *)thumbnailUrl {
-    // 1
-    YoutubeAuthInfo * info = [[YoutubeAuthInfo alloc] init];
-    info.title = title;
-    info.email = email;
-    info.thumbnailUrl = thumbnailUrl;
-    
-    // 2
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:info forKey:@"GTM_youtube_info"];
-    [defaults synchronize];
+- (YoutubeAuthInfo *)saveAuthUserChannelWithTitle:(NSString *)title withEmail:(NSString *)email withThumbmailUrl:(NSString *)thumbnailUrl {
+   // 1
+   YoutubeAuthInfo * info = [[YoutubeAuthInfo alloc] init];
+   info.title = title;
+   info.email = email;
+   info.thumbnailUrl = thumbnailUrl;
+
+   // 2
+   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+   [defaults setObject:info forKey:@"GTM_youtube_info"];
+   [defaults synchronize];
+
+   return info;
 }
 
 

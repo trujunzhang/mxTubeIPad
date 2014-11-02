@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
+#import <Business-Logic-Layer/YoutubeAuthInfo.h>
 #import "LeftMenuViewController.h"
 
 #import "STCollapseTableView.h"
@@ -72,11 +73,12 @@
 }
 
 
-- (void)setupSlideTableView:(GYoutubeAuthUser *)user {
-   //2
+- (void)setupSlideTableView:(YoutubeAuthInfo *)user {
    self.tableView.tableHeaderView = [self getUserHeaderView:user];
+}
 
-   // 3
+
+- (void)setupTableViewExclusiveState {
    [self.tableView setExclusiveSections:NO];
    for (int i = 0; i < [self.tableSectionArray count]; i++) {
       [self.tableView openSection:i animated:NO];
@@ -149,12 +151,18 @@
 }
 
 
-- (void)refreshAutoUser:(GYoutubeAuthUser *)user {
+- (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
+   // 1
    [self setupViewController:[user getTableRows]];
    [self setupSlideTableView:user];
+   [self setupTableViewExclusiveState];
 
-   //4
+   // 2
    [self.tableView reloadData];
 }
 
+
+- (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
+//   [self setupSlideTableView:user];
+}
 @end

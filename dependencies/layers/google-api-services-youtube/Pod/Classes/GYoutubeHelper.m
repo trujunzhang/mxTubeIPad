@@ -16,6 +16,7 @@
 #import "GTLYouTubeChannelSnippet.h"
 #import "GYoutubeAuthUser.h"
 #import "YoutubeAuthDataStore.h"
+#import "YoutubeAuthInfo.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -247,14 +248,17 @@ static GYoutubeHelper * instance = nil;
        NSString * title = channel.snippet.title;
        NSString * email = self.youTubeService.authorizer.userEmail;
        NSString * thumbnailUrl = [GYoutubeAuthUser getUserThumbnails:channel];
-       [[[YoutubeAuthDataStore alloc] init] saveAuthUserChannelWithTitle:title
-                                                               withEmail:email
-                                                        withThumbmailUrl:thumbnailUrl];
-
-
+       YoutubeAuthInfo * info = [[[YoutubeAuthDataStore alloc] init] saveAuthUserChannelWithTitle:title
+                                                                                        withEmail:email
+                                                                                 withThumbmailUrl:thumbnailUrl];
        self.youtubeAuthUser.channel = channel;
+
+       if (self.delegate)
+          [self.delegate FetchYoutubeChannelCompletion:info];
+
+
        // 2
-       [self getUserSubscriptions];
+       [self getUserSubscriptions:self.delegate];
 
        // "id" -> "UC0wObT_HayGfWLdRAnFyPwA"
        NSLog(@" user name = %@", self.youtubeAuthUser.channel.snippet.title);
@@ -268,13 +272,13 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)getUserSubscriptions {
+- (void)getUserSubscriptions:(id<GYoutubeHelperDelegate>)delegate {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
 
-       if (self.delegate) {
-          [self.delegate FetchYoutubeAuthUserCompletion:self.youtubeAuthUser];
-       }
+       if (delegate)
+          [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
+
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";

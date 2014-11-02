@@ -14,7 +14,7 @@
 
 - (void)resetAuthUserChannel;
 - (YoutubeAuthInfo *)readAuthUserInfo;
-- (void)saveAuthUserChannelWithTitle:(NSString *)title withEmail:(NSString *)email withThumbmailUrl:(NSString *)thumbnailUrl;
+- (YoutubeAuthInfo *)saveAuthUserChannelWithTitle:(NSString *)title withEmail:(NSString *)email withThumbmailUrl:(NSString *)thumbnailUrl;
 
 
 @end

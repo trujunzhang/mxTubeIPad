@@ -23,6 +23,7 @@
 @class GTMOAuth2ViewControllerTouch;
 @class GTMOAuth2Authentication;
 @class GYoutubeAuthUser;
+@class YoutubeAuthInfo;
 
 typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
@@ -31,8 +32,9 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 @protocol GYoutubeHelperDelegate<NSObject>
 
 @optional
-- (void)FetchYoutubeAuthUserCompletion:(GYoutubeAuthUser *)user;
 
+- (void)FetchYoutubeSubscriptionListCompletion:(GYoutubeAuthUser *)user;
+- (void)FetchYoutubeChannelCompletion:(YoutubeAuthInfo *)info;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import <IOS_Collection_Code/ImageCacheImplement.h>
+#import <Business-Logic-Layer/YoutubeAuthInfo.h>
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "SearchImplementation.h"
@@ -37,7 +38,7 @@
 #pragma mark Youtube auth login events
 
 
-- (UIView *)getUserHeaderView:(GYoutubeAuthUser *)user {
+- (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user {
 
    BOOL isSignedIn = [[SearchImplementation getInstance] isSignedIn];
 

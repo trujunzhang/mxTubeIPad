@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class GYoutubeAuthUser;
+@class YoutubeAuthInfo;
 
 
 @interface UserInfoView : UIView
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView * userHeader;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *userTitle;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *userEmail;
+@property(unsafe_unretained, nonatomic) IBOutlet UIImageView * userHeader;
+@property(unsafe_unretained, nonatomic) IBOutlet UILabel * userTitle;
+@property(unsafe_unretained, nonatomic) IBOutlet UILabel * userEmail;
 
-@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *logOutImage;
+@property(unsafe_unretained, nonatomic) IBOutlet UIImageView * logOutImage;
 
-
-- (UIView *)bind:(GYoutubeAuthUser *)user;
+//"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
+- (UIView *)bind:(YoutubeAuthInfo *)user;
 @end

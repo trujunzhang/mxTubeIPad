@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class GYoutubeAuthUser;
+@class YoutubeAuthInfo;
 
 
 @interface LeftMenuViewBase : UIViewController
@@ -15,7 +16,8 @@
 @property(nonatomic, strong) UIImage * placeholderImage;
 @property(nonatomic, strong) NSArray * tableSectionArray;
 
-- (UIView *)getUserHeaderView:(GYoutubeAuthUser *)user;
+- (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user;
+
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;
 - (NSArray *)defaultCategories;
 - (NSArray *)signUserCategories;

@@ -6,41 +6,27 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+
 #import "UserInfoView.h"
-
-#import "GYoutubeAuthUser.h"
-#import "GTLYouTubeChannel.h"
-#import "GTLYouTubeChannelSnippet.h"
-#import "GTLYouTubeThumbnailDetails.h"
-#import "GTLYouTubeThumbnail.h"
-
 #import "ImageCacheImplement.h"
+#import <Business-Logic-Layer/YoutubeAuthInfo.h>
 
 
 @implementation UserInfoView
 
-//"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
-- (UIView *)bind:(GYoutubeAuthUser *)user {
-   if (user == nil)
-      return self;
-
-   GTLYouTubeChannel * channel = user.channel;
-   NSString * channelTitle = channel.snippet.title;
-   NSString * channelThumbnailsUrl = channel.snippet.thumbnails.high.url;
+- (UIView *)bind:(YoutubeAuthInfo *)authInfo {
+   NSString * title = authInfo.title;
+   NSString * email = authInfo.email;
+   NSString * thumbnailUrl = authInfo.thumbnailUrl;
 
    // 1
-//   channelThumbnailsUrl = @"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg";
-   UIImage * holder = [UIImage imageNamed:@"account_default_thumbnail.png"];
+   [ImageCacheImplement CacheWithImageView:self.userHeader withUrl:thumbnailUrl
+                           withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]];
 
-   [ImageCacheImplement CacheWithImageView:self.userHeader
-                                   withUrl:channelThumbnailsUrl
-                           withPlaceholder:holder];
+   self.userTitle.text = title;
+   self.userEmail.text = email;
 
-
-   self.userTitle.text = channelTitle;
-   self.userEmail.text = channelThumbnailsUrl;
-
-   // UIImageView Touch event
+   // 2 UIImageView Touch event
    UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(tapSignOut)];
    singleTap.numberOfTapsRequired = 1;
