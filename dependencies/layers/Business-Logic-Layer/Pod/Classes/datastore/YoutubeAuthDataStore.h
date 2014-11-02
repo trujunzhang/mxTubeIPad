@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#include "YoutubeAuthInfo.h"
+@class YoutubeAuthInfo;
 
 
 @interface YoutubeAuthDataStore : NSObject

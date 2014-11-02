@@ -295,6 +295,7 @@ static GYoutubeHelper * instance = nil;
 
    // 1
    [[YoutubeAuthDataStore getInstance] resetAuthUserChannel];
+
    // 2
    self.youtubeAuthUser = nil;
    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];

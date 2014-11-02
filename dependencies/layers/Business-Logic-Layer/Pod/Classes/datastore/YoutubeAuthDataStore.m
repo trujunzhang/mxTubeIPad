@@ -7,6 +7,7 @@
 //
 
 #import "YoutubeAuthDataStore.h"
+#import "YoutubeAuthInfo.h"
 
 
 YoutubeAuthDataStore * instance;
