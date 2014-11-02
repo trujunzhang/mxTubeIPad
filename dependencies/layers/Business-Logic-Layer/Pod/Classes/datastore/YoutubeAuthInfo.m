@@ -22,4 +22,25 @@
    return self;
 }
 
+
+#pragma mark NSCoding
+
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+   [aCoder encodeObject:self.title forKey:@"title"];
+   [aCoder encodeObject:self.email forKey:@"email"];
+   [aCoder encodeObject:self.thumbnailUrl forKey:@"thumbnailUrl"];
+}
+
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+   if (self = [super init]) {
+      self.title = [aDecoder decodeObjectForKey:@"title"];
+      self.email = [aDecoder decodeObjectForKey:@"email"];
+      self.thumbnailUrl = [aDecoder decodeObjectForKey:@"thumbnailUrl"];
+   }
+   return self;
+}
+
+
 @end
