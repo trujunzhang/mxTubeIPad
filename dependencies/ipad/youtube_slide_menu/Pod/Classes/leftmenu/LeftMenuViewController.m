@@ -14,6 +14,7 @@
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
 #import "YoutubeAuthDataStore.h"
+#import "LeftMenuTableHeaderView.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -57,16 +58,10 @@
    for (int i = 0; i < [self.tableSectionArray count]; i++) {
       LeftMenuItemTree * menuItemTree = self.tableSectionArray[i];
 
-      UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-      header.backgroundColor = [UIColor clearColor];
-      UILabel * number = [[UILabel alloc] initWithFrame:header.frame];
-      number.textAlignment = NSTextAlignmentLeft;
-      number.textColor = [UIColor blackColor];
-
-      number.text = menuItemTree.title;
-
-      [header addSubview:number];
-
+      LeftMenuTableHeaderView * header = [[[NSBundle mainBundle] loadNibNamed:@"LeftMenuTableHeaderView"
+                                                                        owner:nil
+                                                                      options:nil] lastObject];
+      [header setupUI:menuItemTree.title];
       [self.headers addObject:header];
    }
 
@@ -150,7 +145,9 @@
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-   return [self.headers objectAtIndex:section];
+   LeftMenuTableHeaderView * header = [self.headers objectAtIndex:section];
+
+   return header;
 }
 
 
