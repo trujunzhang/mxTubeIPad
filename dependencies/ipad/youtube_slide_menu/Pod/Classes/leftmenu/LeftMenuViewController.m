@@ -140,7 +140,7 @@
       return 0;
    }
 
-   return 30;
+   return 50;
 }
 
 
