@@ -102,6 +102,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    NSUInteger integer = tabBarController.selectedIndex;
+   UINavigationController * controller = tabBarController.selectedViewController;
 
    if (integer == 0) {
       [self setSubscriptionButtonEvent:integer];
