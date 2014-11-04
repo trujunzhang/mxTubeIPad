@@ -42,7 +42,7 @@ LeftRevealHelper * instance;
 #pragma mark -
 
 
-- (void)ftoggleReveal {
+- (void)toggleReveal {
    if (self.isRearOpen) {
       [self hideLeftMenu];
    } else {
