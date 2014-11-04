@@ -16,6 +16,7 @@
 #import "GYoutubeAuthUser.h"
 #import "ImageCacheImplement.h"
 #import "YoutubeAuthInfo.h"
+#import "LeftRevealHelper.h"
 
 
 @interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate>
@@ -48,7 +49,6 @@
                                                                                         style:UIBarButtonItemStyleBordered
                                                                                        target:self
                                                                                        action:@selector(leftRevealToggle:)];
-//   self.subscriptionsViewController.isRearOpen = YES;
 
    //3
    self.leftViewController = [[LeftMenuViewController alloc] init];
@@ -56,9 +56,10 @@
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
+   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
    self.revealController.delegate = self;
 
-   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+   [LeftRevealHelper sharedLeftRevealHelper].revealController = self.revealController;
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -131,12 +132,13 @@
    NSString * debug = @"debug";
 }
 
+
 #pragma mark -
 #pragma mark - Provided acction methods
 
 
 - (void)leftRevealToggle:(id)sender {
-//   [self setSubscriptionButtonEvent:self.lastTabBarSelectedIndex];
+   [[LeftRevealHelper sharedLeftRevealHelper] toggleReveal];
 }
 
 
@@ -149,7 +151,7 @@
 - (void)setSubscriptionButtonEvent:(NSUInteger)integer {
 //   if (integer == self.lastTabBarSelectedIndex) {
 //      [self toggleRealPanel];
-////      self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
+//      self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
 //   }
 //   else if (self.subscriptionsViewController.isRearOpen) {
 //      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];

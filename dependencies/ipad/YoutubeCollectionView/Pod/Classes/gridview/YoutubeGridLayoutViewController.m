@@ -18,8 +18,8 @@
 static NSString * const identifier = @"GridViewCellIdentifier";
 
 
-//NSString * lastSearch = @"yosemite";
-NSString * lastSearch = nil;
+NSString * lastSearch = @"yosemite";
+//NSString * lastSearch = nil;
 
 
 @interface YoutubeGridLayoutViewController ()

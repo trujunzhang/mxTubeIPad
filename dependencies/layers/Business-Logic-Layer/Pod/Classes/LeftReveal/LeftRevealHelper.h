@@ -11,12 +11,12 @@
 
 @interface LeftRevealHelper : NSObject
 
-@property(nonatomic, strong) SWRevealViewController * revealController;
-
 @property(nonatomic) BOOL isRearOpen;
+@property(nonatomic) NSUInteger lastTabBarSelectedIndex;
+
+@property(nonatomic, strong) SWRevealViewController * revealController;
 
 + (LeftRevealHelper *)sharedLeftRevealHelper;
 
-@property(nonatomic) NSUInteger lastTabBarSelectedIndex;
-
+- (void)toggleReveal;
 @end
