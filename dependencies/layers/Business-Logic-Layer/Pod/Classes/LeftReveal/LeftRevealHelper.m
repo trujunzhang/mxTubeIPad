@@ -44,9 +44,9 @@ LeftRevealHelper * instance;
 
 - (void)toggleReveal {
    if (self.isRearOpen) {
-      [self openLeftMenu];
-   } else {
       [self hideLeftMenu];
+   } else {
+      [self openLeftMenu];
    }
    self.isRearOpen = !self.isRearOpen;
 }

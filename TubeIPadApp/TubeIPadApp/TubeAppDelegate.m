@@ -48,19 +48,16 @@
    self.subscriptionsViewController.revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]
                                                                                         style:UIBarButtonItemStyleBordered
                                                                                        target:self
-                                                                                       action:@selector(leftRevealToggle:)];
-
+                                                                                       action:@selector(leftBarButtonItemAction:)];
    //3
    self.leftViewController = [[LeftMenuViewController alloc] init];
 
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
-//   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
    self.revealController.delegate = self;
 
    [[LeftRevealHelper sharedLeftRevealHelper] setupHelper:self.revealController];
-
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -138,7 +135,7 @@
 #pragma mark - Provided acction methods
 
 
-- (void)leftRevealToggle:(id)sender {
+- (void)leftBarButtonItemAction:(id)sender {
    [[LeftRevealHelper sharedLeftRevealHelper] toggleReveal];
 }
 
