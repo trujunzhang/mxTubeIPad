@@ -10,28 +10,17 @@
 #import "LeftRevealHelper.h"
 
 #import <SWRevealViewController/SWRevealViewController.h>
+
 LeftRevealHelper * instance;
 
 
 @implementation LeftRevealHelper
 
 + (LeftRevealHelper *)sharedLeftRevealHelper {
-   @synchronized (self) {
-      if (instance == nil) {
-         instance = [[self alloc] init];
-      }
+   if (instance == nil) {
+      instance = [[LeftRevealHelper alloc] init];
    }
-   return (instance);
-}
-
-
-- (instancetype)init {
-   self = [super init];
-   if (self) {
-      self.isRearOpen = YES;
-   }
-
-   return self;
+   return instance;
 }
 
 
@@ -39,7 +28,8 @@ LeftRevealHelper * instance;
 #pragma mark -
 
 
-- (void)setRevealController:(SWRevealViewController *)controller {
+- (void)setupHelper:(SWRevealViewController *)controller {
+   self.isRearOpen = YES;
    self.revealController = controller;
 }
 
@@ -66,4 +56,6 @@ LeftRevealHelper * instance;
 - (void)showLeftMenu {
    [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
+
+
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "SearchImplementation.h"
-#import "GYoutubeHelper.h"
+
 #import "GYoutubeAuthUser.h"
 
 SearchImplementation * instance;

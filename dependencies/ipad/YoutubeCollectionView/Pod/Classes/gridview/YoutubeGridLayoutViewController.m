@@ -11,7 +11,6 @@
 #import "KRLCollectionViewGridLayout.h"
 #import "IpadGridViewCell.h"
 #import "GYoutubeHelper.h"
-#import "SearchImplementation.h"
 #import "DebugUtils.h"
 
 
@@ -141,9 +140,9 @@ placeholderImage:self.placeHoderImage
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[SearchImplementation getInstance] searchByQueryWithQueryTerm:text
-                                                completionHandler:completion
-                                                     errorHandler:error];
+   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:text
+                                          completionHandler:completion
+                                               errorHandler:error];
 }
 
 

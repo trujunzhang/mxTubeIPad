@@ -12,11 +12,11 @@
 
 #import "LeftMenuViewController.h"
 #import "SubscriptionsViewController.h"
-#import "SearchImplementation.h"
 #import "GYoutubeAuthUser.h"
 #import "ImageCacheImplement.h"
 #import "YoutubeAuthInfo.h"
 #import "LeftRevealHelper.h"
+#import "GYoutubeHelper.h"
 
 
 @interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate>
@@ -35,7 +35,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    [ImageCacheImplement removeAllObjects];
-   [[SearchImplementation getInstance] fetchAuthUserWithDelegate:self];
+   [GYoutubeHelper getInstance].delegate = self;
 
    //1
    self.tabBarController = (UITabBarController *) self.window.rootViewController;
@@ -59,7 +59,9 @@
    [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
    self.revealController.delegate = self;
 
-   [LeftRevealHelper sharedLeftRevealHelper].revealController = self.revealController;
+   LeftRevealHelper * helper = [LeftRevealHelper sharedLeftRevealHelper];
+   [helper setupHelper:self.revealController];
+
 
    //7
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

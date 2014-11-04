@@ -19,4 +19,5 @@
 + (LeftRevealHelper *)sharedLeftRevealHelper;
 
 - (void)toggleReveal;
+- (void)setupHelper:(SWRevealViewController *)controller;
 @end
