@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 @class SWRevealViewController;
 
 
@@ -17,4 +16,7 @@
 @property(nonatomic) BOOL isRearOpen;
 
 + (LeftRevealHelper *)sharedLeftRevealHelper;
+
+@property(nonatomic) NSUInteger lastTabBarSelectedIndex;
+
 @end

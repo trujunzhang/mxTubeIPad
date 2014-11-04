@@ -18,7 +18,7 @@
 #import "YoutubeAuthInfo.h"
 
 
-@interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, GYoutubeHelperDelegate>
+@interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate>
 
 @property(nonatomic, strong) SWRevealViewController * revealController;
 
@@ -56,7 +56,7 @@
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
-//   self.revealController.delegate = self;
+   self.revealController.delegate = self;
 
    [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 
@@ -113,6 +113,30 @@
    }
 
 //   self.lastTabBarSelectedIndex = integer;
+}
+
+
+#pragma mark -
+#pragma mark SWRevealViewControllerDelegate
+
+
+// This will be called inside the reveal animation, thus you can use it to place your own code that will be animated in sync
+- (void)revealController:(SWRevealViewController *)revealController animateToPosition:(FrontViewPosition)position {
+   if (position == FrontViewPositionRight) {
+      NSString * debug = @"debug";
+   } else if (position == FrontViewPositionLeft) {
+      NSString * debug = @"debug";
+   }
+
+   NSString * debug = @"debug";
+}
+
+#pragma mark -
+#pragma mark - Provided acction methods
+
+
+- (void)leftRevealToggle:(id)sender {
+//   [self setSubscriptionButtonEvent:self.lastTabBarSelectedIndex];
 }
 
 
