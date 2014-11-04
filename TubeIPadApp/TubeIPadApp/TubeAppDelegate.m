@@ -101,9 +101,7 @@
 
 
 - (void)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-   NSUInteger integer = tabBarController.selectedIndex;
    UINavigationController * controller = tabBarController.selectedViewController;
-   NSUInteger integer123 = controller.viewControllers.count;
 
    [[LeftRevealHelper sharedLeftRevealHelper]
     beginTabBarToggleWithSelectedIndex:tabBarController.selectedIndex
@@ -112,20 +110,7 @@
 
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-   NSUInteger integer = tabBarController.selectedIndex;
-   UINavigationController * controller = tabBarController.selectedViewController;
-   NSUInteger integer123 = controller.viewControllers.count;
-
-   if (integer == 0) {
-      [self setSubscriptionButtonEvent:integer];
-   } else {
-//      if (self.subscriptionsViewController.isRearOpen) {
-//         [self closeRearPanel];
-//      }
-   }
-   [[LeftRevealHelper sharedLeftRevealHelper]
-    endTabBarToggleWithSelectedIndex:tabBarController.selectedIndex
-                         withViewCount:controller.viewControllers.count];
+   [[LeftRevealHelper sharedLeftRevealHelper] endTabBarToggleWithSelectedIndex:tabBarController.selectedIndex];
 }
 
 

@@ -72,7 +72,7 @@ LeftRevealHelper * instance;
 }
 
 
-- (void)endTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count {
+- (void)endTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex {
    if (selectedIndex != 0)
       return;
 

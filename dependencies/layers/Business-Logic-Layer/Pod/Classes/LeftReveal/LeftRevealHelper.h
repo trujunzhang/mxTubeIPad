@@ -26,5 +26,5 @@ static const int TAB_INDEX_SUBSCRIPTIONS = 0;
 - (void)setupHelper:(SWRevealViewController *)controller;
 
 - (void)beginTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count;
-- (void)endTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count;
+- (void)endTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex;
 @end
