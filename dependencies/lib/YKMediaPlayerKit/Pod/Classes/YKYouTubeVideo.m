@@ -130,9 +130,9 @@
             object:player];
 
 
-//   if ([player respondsToSelector:@selector(setFullscreen:animated:)]) {
-//      [player.view removeFromSuperview];
-//   }
+   if ([player respondsToSelector:@selector(setFullscreen:animated:)]) {
+      [player.view removeFromSuperview];
+   }
 }
 
 

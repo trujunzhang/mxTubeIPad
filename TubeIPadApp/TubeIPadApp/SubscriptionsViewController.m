@@ -62,7 +62,7 @@
 
 
 - (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
-   [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenu];
+   [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
 
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];

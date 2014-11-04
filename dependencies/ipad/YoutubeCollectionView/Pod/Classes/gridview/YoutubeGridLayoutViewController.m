@@ -17,7 +17,7 @@
 static NSString * const identifier = @"GridViewCellIdentifier";
 
 
-NSString * lastSearch = @"yosemite";
+NSString * lastSearch = @"call of duty advanced warfare";
 //NSString * lastSearch = nil;
 
 

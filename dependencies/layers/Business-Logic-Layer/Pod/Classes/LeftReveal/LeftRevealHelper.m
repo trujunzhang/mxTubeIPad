@@ -57,6 +57,12 @@ LeftRevealHelper * instance;
 }
 
 
+- (void)closeLeftMenuAndNoRearOpen {
+   [self closeLeftMenu];
+   self.isRearOpen = NO;
+}
+
+
 - (void)openLeftMenu {
    [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 }
@@ -90,7 +96,7 @@ LeftRevealHelper * instance;
       return;
 
    if (selectedIndex == 0 && self.isLastTabBarSelectedInRoot && self.isRearOpen) {
-      [self closeLeftMenu];
+      [self closeLeftMenuAndNoRearOpen];
       return;
    }
 
