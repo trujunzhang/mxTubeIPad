@@ -18,8 +18,7 @@
 #import "YoutubeAuthInfo.h"
 
 
-@interface TubeAppDelegate ()<UIApplicationDelegate, SWRevealViewControllerDelegate, UITabBarControllerDelegate, GYoutubeHelperDelegate>
-@property(nonatomic) NSUInteger lastTabBarSelectedIndex;
+@interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, GYoutubeHelperDelegate>
 
 @property(nonatomic, strong) SWRevealViewController * revealController;
 
@@ -49,7 +48,7 @@
                                                                                         style:UIBarButtonItemStyleBordered
                                                                                        target:self
                                                                                        action:@selector(leftRevealToggle:)];
-   self.subscriptionsViewController.isRearOpen = YES;
+//   self.subscriptionsViewController.isRearOpen = YES;
 
    //3
    self.leftViewController = [[LeftMenuViewController alloc] init];
@@ -57,7 +56,7 @@
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
-   self.revealController.delegate = self;
+//   self.revealController.delegate = self;
 
    [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 
@@ -99,22 +98,6 @@
 
 
 #pragma mark -
-#pragma mark SWRevealViewControllerDelegate
-
-
-// This will be called inside the reveal animation, thus you can use it to place your own code that will be animated in sync
-- (void)revealController:(SWRevealViewController *)revealController animateToPosition:(FrontViewPosition)position {
-   if (position == FrontViewPositionRight) {
-      NSString * debug = @"debug";
-   } else if (position == FrontViewPositionLeft) {
-      NSString * debug = @"debug";
-   }
-
-   NSString * debug = @"debug";
-}
-
-
-#pragma mark -
 #pragma mark UITabBarControllerDelegate
 
 
@@ -124,47 +107,38 @@
    if (integer == 0) {
       [self setSubscriptionButtonEvent:integer];
    } else {
-      if (self.subscriptionsViewController.isRearOpen) {
-         [self closeRearPanel];
-      }
+//      if (self.subscriptionsViewController.isRearOpen) {
+//         [self closeRearPanel];
+//      }
    }
 
-   self.lastTabBarSelectedIndex = integer;
+//   self.lastTabBarSelectedIndex = integer;
 }
 
 
 - (void)closeRearPanel {
    [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
-   self.subscriptionsViewController.isRearOpen = NO;
+//   self.subscriptionsViewController.isRearOpen = NO;
 }
 
 
 - (void)setSubscriptionButtonEvent:(NSUInteger)integer {
-   if (integer == self.lastTabBarSelectedIndex) {
-      [self toggleRealPanel];
-      self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
-   }
-   else if (self.subscriptionsViewController.isRearOpen) {
-      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
-   }
+//   if (integer == self.lastTabBarSelectedIndex) {
+//      [self toggleRealPanel];
+////      self.subscriptionsViewController.isRearOpen = !self.subscriptionsViewController.isRearOpen;
+//   }
+//   else if (self.subscriptionsViewController.isRearOpen) {
+//      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+//   }
 }
 
 
 - (void)toggleRealPanel {
-   if (self.subscriptionsViewController.isRearOpen) {
-      [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
-   } else {
-      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
-   }
-}
-
-
-#pragma mark -
-#pragma mark - Provided acction methods
-
-
-- (void)leftRevealToggle:(id)sender {
-   [self setSubscriptionButtonEvent:self.lastTabBarSelectedIndex];
+//   if (self.subscriptionsViewController.isRearOpen) {
+//      [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+//   } else {
+//      [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+//   }
 }
 
 
