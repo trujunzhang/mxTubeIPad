@@ -9,9 +9,6 @@
 @class SWRevealViewController;
 
 
-static const int TAB_INDEX_SUBSCRIPTIONS = 0;
-
-
 @interface LeftRevealHelper : NSObject
 
 @property(nonatomic) BOOL isRearOpen;

@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <Business-Logic-Layer/LeftRevealHelper.h>
+
 #import "SubscriptionsViewController.h"
 
 #import "YoutubeGridLayoutViewController.h"
 #import "VideoDetailViewControlleriPad.h"
-#import "TubeAppDelegate.h"
+
+#import "LeftRevealHelper.h"
 
 
 @interface SubscriptionsViewController ()
