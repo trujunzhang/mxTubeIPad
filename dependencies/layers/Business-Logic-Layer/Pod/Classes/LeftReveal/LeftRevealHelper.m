@@ -29,8 +29,12 @@ LeftRevealHelper * instance;
 
 
 - (void)setupHelper:(SWRevealViewController *)controller {
-   self.isRearOpen = YES;
+   // 1
    self.revealController = controller;
+
+   // 2
+   self.isRearOpen = YES;
+   [self openLeftMenu];
 }
 
 
@@ -40,7 +44,7 @@ LeftRevealHelper * instance;
 
 - (void)toggleReveal {
    if (self.isRearOpen) {
-      [self showLeftMenu];
+      [self openLeftMenu];
    } else {
       [self hideLeftMenu];
    }
@@ -49,12 +53,12 @@ LeftRevealHelper * instance;
 
 
 - (void)hideLeftMenu {
-   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+   [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
 }
 
 
-- (void)showLeftMenu {
-   [self.revealController setFrontViewPosition:FrontViewPositionLeft animated:YES];
+- (void)openLeftMenu {
+   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 }
 
 

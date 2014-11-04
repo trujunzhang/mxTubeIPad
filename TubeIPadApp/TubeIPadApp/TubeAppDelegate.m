@@ -56,11 +56,10 @@
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
                                                                   frontViewController:self.tabBarController];
-   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
+//   [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
    self.revealController.delegate = self;
 
-   LeftRevealHelper * helper = [LeftRevealHelper sharedLeftRevealHelper];
-   [helper setupHelper:self.revealController];
+   [[LeftRevealHelper sharedLeftRevealHelper] setupHelper:self.revealController];
 
 
    //7
