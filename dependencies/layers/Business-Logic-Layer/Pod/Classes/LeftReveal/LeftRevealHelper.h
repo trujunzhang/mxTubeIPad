@@ -23,6 +23,9 @@ static const int TAB_INDEX_SUBSCRIPTIONS = 0;
 + (LeftRevealHelper *)sharedLeftRevealHelper;
 
 - (void)toggleReveal;
+- (void)closeLeftMenu;
+- (void)openLeftMenu;
+
 - (void)setupHelper:(SWRevealViewController *)controller;
 
 - (void)beginTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count;

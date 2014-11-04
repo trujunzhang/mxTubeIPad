@@ -89,6 +89,11 @@ LeftRevealHelper * instance;
    if (!self.isLastTabBarSelectedInRoot)
       return;
 
+   if (selectedIndex == 0 && self.isLastTabBarSelectedInRoot && self.isRearOpen) {
+      [self closeLeftMenu];
+      return;
+   }
+
    [self toggleReveal];
 }
 

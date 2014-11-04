@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <Business-Logic-Layer/LeftRevealHelper.h>
 #import "SubscriptionsViewController.h"
 
 #import "YoutubeGridLayoutViewController.h"
@@ -60,9 +61,7 @@
 
 
 - (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
-   TubeAppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
-   [appDelegate closeRearPanel];
-//   self.isRearOpen= YES;
+   [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenu];
 
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
