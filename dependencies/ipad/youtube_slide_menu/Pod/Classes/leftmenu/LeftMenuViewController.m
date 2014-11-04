@@ -34,7 +34,8 @@
     [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
                                   rowsArray:[self defaultCategories]
                                   hideTitle:NO
-                                remoteImage:NO];
+                                remoteImage:NO
+                             cellIdentifier:@"CategoriesCellIdentifier"];
 
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
@@ -43,13 +44,16 @@
        [[LeftMenuItemTree alloc] initWithTitle:@"  "
                                      rowsArray:[self signUserCategories]
                                      hideTitle:YES
-                                   remoteImage:NO];
+                                   remoteImage:NO
+                                cellIdentifier:@"SignUserCellIdentifier"];
       LeftMenuItemTree * subscriptionsMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
                                      rowsArray:subscriptionsArray
                                      hideTitle:NO
-                                   remoteImage:YES];
+                                   remoteImage:YES
+                                cellIdentifier:@"SubscriptionsCellIdentifier"];
       self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
+//      self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
    }
 
 
@@ -88,7 +92,7 @@
    [super viewDidLoad];
 
    // 1
-   self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame];
+   self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
    self.tableView.backgroundColor = [UIColor clearColor];
    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
    self.tableView.dataSource = self;
@@ -110,7 +114,9 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   static NSString * CellIdentifier = @"LeftMenuTableViewCell";
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section];
+
+   NSString * CellIdentifier = menuItemTree.cellIdentifier;
 
    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
    if (cell == nil) {

@@ -76,6 +76,7 @@
 
    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
    navigationController.view.backgroundColor = [UIColor whiteColor];
+   navigationController.modalPresentationStyle = UIModalPresentationPageSheet;
 
    [self presentViewController:navigationController animated:YES completion:nil];
 }
@@ -122,14 +123,14 @@
    // 2
    if (menuItemTree.remoteImage) {
       [ImageCacheImplement CacheWithImageView:cell.imageView
-//                                   withUrl:@"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
                                       withUrl:line[1]
                               withPlaceholder:self.placeholderImage
+//                                 withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
                                          size:CGSizeMake(32, 32)];
    } else {
       cell.imageView.image = [UIImage imageNamed:line[1]];
+      cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
    }
-   cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
    // 3
    cell.selectedBackgroundView = [

@@ -34,7 +34,7 @@
 @implementation TubeAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+   [ImageCacheImplement removeAllObjects];
    [[SearchImplementation getInstance] fetchAuthUserWithDelegate:self];
 
    //1

@@ -18,7 +18,10 @@
 @property(nonatomic) BOOL hideTitle;
 
 @property(nonatomic) BOOL remoteImage;
-- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage;
+
+@property(nonatomic, copy) NSString * cellIdentifier;
+
+- (instancetype)initWithTitle:(NSString *)title rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage cellIdentifier:(NSString *)cellIdentifier;
 
 
 @end
