@@ -100,9 +100,21 @@
 #pragma mark UITabBarControllerDelegate
 
 
+- (void)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+   NSUInteger integer = tabBarController.selectedIndex;
+   UINavigationController * controller = tabBarController.selectedViewController;
+   NSUInteger integer123 = controller.viewControllers.count;
+
+   [[LeftRevealHelper sharedLeftRevealHelper]
+    beginTabBarToggleWithSelectedIndex:tabBarController.selectedIndex
+                         withViewCount:controller.viewControllers.count];
+}
+
+
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    NSUInteger integer = tabBarController.selectedIndex;
    UINavigationController * controller = tabBarController.selectedViewController;
+   NSUInteger integer123 = controller.viewControllers.count;
 
    if (integer == 0) {
       [self setSubscriptionButtonEvent:integer];
@@ -111,8 +123,9 @@
 //         [self closeRearPanel];
 //      }
    }
-
-//   self.lastTabBarSelectedIndex = integer;
+   [[LeftRevealHelper sharedLeftRevealHelper]
+    endTabBarToggleWithSelectedIndex:tabBarController.selectedIndex
+                         withViewCount:controller.viewControllers.count];
 }
 
 

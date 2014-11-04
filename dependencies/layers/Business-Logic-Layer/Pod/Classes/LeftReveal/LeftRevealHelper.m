@@ -42,7 +42,7 @@ LeftRevealHelper * instance;
 #pragma mark -
 
 
-- (void)toggleReveal {
+- (void)ftoggleReveal {
    if (self.isRearOpen) {
       [self hideLeftMenu];
    } else {
@@ -61,5 +61,28 @@ LeftRevealHelper * instance;
    [self.revealController setFrontViewPosition:FrontViewPositionRight animated:YES];
 }
 
+
+#pragma mark - 
+#pragma mark - 
+
+
+- (void)beginTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count {
+   self.lastTabBarSelectedIndex = index;
+   self.isLastTabBarSelectedInRoot = (count == 1);
+}
+
+
+- (void)endTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count {
+   if (selectedIndex != 0)
+      return;
+
+   if (selectedIndex != self.lastTabBarSelectedIndex)
+      return;
+
+   if (!self.isLastTabBarSelectedInRoot)
+      return;
+
+   [self toggleReveal];
+}
 
 @end
