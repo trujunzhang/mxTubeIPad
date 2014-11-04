@@ -67,7 +67,7 @@ LeftRevealHelper * instance;
 
 
 - (void)beginTabBarToggleWithSelectedIndex:(NSUInteger)selectedIndex withViewCount:(NSUInteger)count {
-   self.lastTabBarSelectedIndex = index;
+   self.lastTabBarSelectedIndex = selectedIndex;
    self.isLastTabBarSelectedInRoot = (count == 1);
 }
 
