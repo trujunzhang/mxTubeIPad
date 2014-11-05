@@ -297,6 +297,7 @@ static GYoutubeHelper * instance = nil;
           }
 
           if ([subscription.snippet.title isEqualToString:@"XiveTV"]) {
+
              NSString * debug = @"debug";
              YoutubeResponseBlock channelCompletionBlock = ^(NSArray * array) {
                  GTLYouTubeChannel * channel = array[0];
@@ -309,9 +310,13 @@ static GYoutubeHelper * instance = nil;
              ErrorResponseBlock channelErrorBlock = ^(NSError * error) {
 
              };
-             [self fetchChannelListWithChannelId:subscription.snippet.channelId
-                                      completion:channelCompletionBlock
-                                    errorHandler:channelErrorBlock];
+
+             NSString * identifier = subscription.identifier;
+             // UC0wObT_HayGfWLdRAnFyPwA
+             // QmeTdj_6PqKCdSgz_RNI17IZL-GPEOlyfsiHizcoMRM
+             [self fetchChannelListWithIdentifier:identifier
+                                       completion:channelCompletionBlock
+                                     errorHandler:channelErrorBlock];
 
           }
        }
@@ -381,8 +386,9 @@ static GYoutubeHelper * instance = nil;
    GTLServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet"];
-//   query.identifier = playlistId;
-   query.playlistId = playlistId;
+//   query.playlistId = playlistId;
+   query.playlistId = @"PL6urkeK7KgD4vU4jbCTimNXdtB1gqvWsP";
+
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
@@ -400,14 +406,13 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchChannelListWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchChannelListWithIdentifier:(NSString *)identifier completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,statistics"];
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
-   query.identifier = channelId;
-//   query.channelId = channelId;
-
+//   query.identifier = identifier;
+   query.channelId = identifier;
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
