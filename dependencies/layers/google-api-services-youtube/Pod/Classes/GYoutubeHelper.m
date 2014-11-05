@@ -20,6 +20,8 @@
 #import "GTLYouTubeSubscription.h"
 #import "GTLYouTubeSubscriptionContentDetails.h"
 #import "GTLYouTubeSubscriptionSnippet.h"
+#import "GTLYouTubePlaylistItemListResponse.h"
+#import "GTLYouTubePlaylistItem.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -300,8 +302,9 @@ static GYoutubeHelper * instance = nil;
                  GTLYouTubeChannel * channel = array[0];
 //                 contentDetails.relatedPlaylists.uploads
                  NSString * uploadsVar = channel.contentDetails.relatedPlaylists.uploads;
-
-
+                 [self fetchPlaylistItemsListWithplaylistId:uploadsVar
+                                                 completion:nil
+                                               errorHandler:nil];
              };
              ErrorResponseBlock channelErrorBlock = ^(NSError * error) {
 
@@ -374,6 +377,29 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Fetch channels list.
 
 
+- (void)fetchPlaylistItemsListWithplaylistId:(NSString *)playlistId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   GTLServiceYouTube * service = self.youTubeService;
+
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet"];
+//   query.identifier = playlistId;
+   query.playlistId = playlistId;
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubePlaylistItemListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               NSArray * array = [resultList items];
+                               GTLYouTubePlaylistItem * item = array[0];
+                               if ([array count] > 0) {
+                                  completion(array);
+                               }
+                               errorBlock(error);
+                               _searchListTicket = nil;
+                           }];
+}
+
+
 - (void)fetchChannelListWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
@@ -388,14 +414,14 @@ static GYoutubeHelper * instance = nil;
                             GTLYouTubeChannelListResponse * resultList,
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
-                               if ([[resultList items] count] > 0) {
-                                  completion([resultList items]);
+                               NSArray * array = [resultList items];
+                               if ([array count] > 0) {
+                                  completion(array);
                                }
                                errorBlock(error);
                                _searchListTicket = nil;
                            }];
 }
-//"GTLStructuredError" -> "GTLErrorObject 0x79636330: {message:"No filter selected." code:-32602 data:[1]}"
 
 
 - (void)fetchAuthUserChannelWithCompletion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
@@ -411,8 +437,9 @@ static GYoutubeHelper * instance = nil;
                             GTLYouTubeChannelListResponse * resultList,
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
-                               if ([[resultList items] count] > 0) {
-                                  completion([resultList items]);
+                               NSArray * array = [resultList items];
+                               if ([array count] > 0) {
+                                  completion(array);
                                }
                                errorBlock(error);
                                _searchListTicket = nil;
