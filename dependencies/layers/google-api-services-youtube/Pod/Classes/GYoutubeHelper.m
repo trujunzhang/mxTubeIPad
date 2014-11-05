@@ -17,6 +17,9 @@
 #import "GYoutubeAuthUser.h"
 #import "YoutubeAuthDataStore.h"
 #import "YoutubeAuthInfo.h"
+#import "GTLYouTubeSubscription.h"
+#import "GTLYouTubeSubscriptionContentDetails.h"
+#import "GTLYouTubeSubscriptionSnippet.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -268,13 +271,47 @@ static GYoutubeHelper * instance = nil;
        NSString * debug = @"debug";
    };
 
-   [self initUserWithCompletionHandler:completion errorHandler:error];
+   [self fetchAuthUserChannelWithCompletion:completion errorHandler:error];
 }
 
 
 - (void)getUserSubscriptions:(id<GYoutubeHelperDelegate>)delegate {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
+
+       for (int i = 0; i < array.count; i++) {
+          GTLYouTubeSubscription * subscription = (GTLYouTubeSubscription *) array[i];
+          GTLYouTubeSubscriptionContentDetails * details = [subscription contentDetails];
+          NSString * activityType = details.activityType;
+
+          NSNumber * number = [details newItemCount];
+          if ([number intValue] > 0) {
+             NSLog(@"%@", subscription.snippet.title);
+             NSLog(@"%d", [number intValue]);
+             NSLog(@"%@", subscription.snippet.channelId);
+             if ([subscription.snippet.title isEqualToString:@"The Online Piano and Violin Tutor"]) {
+                NSString * debug = @"debug";
+             }
+          }
+
+          if ([subscription.snippet.title isEqualToString:@"XiveTV"]) {
+             NSString * debug = @"debug";
+             YoutubeResponseBlock channelCompletionBlock = ^(NSArray * array) {
+                 GTLYouTubeChannel * channel = array[0];
+//                 contentDetails.relatedPlaylists.uploads
+                 NSString * uploadsVar = channel.contentDetails.relatedPlaylists.uploads;
+
+
+             };
+             ErrorResponseBlock channelErrorBlock = ^(NSError * error) {
+
+             };
+             [self fetchChannelListWithChannelId:subscription.snippet.channelId
+                                      completion:channelCompletionBlock
+                                    errorHandler:channelErrorBlock];
+
+          }
+       }
 
        if (delegate)
           [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
@@ -314,8 +351,8 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
-//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
+//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
    query.maxResults = 10;
    query.channelId = channelId;
 
@@ -333,20 +370,22 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchWantWatchListWithCompletionHandler:(YoutubeResponseBlock)completion
-                                   errorHandler:(ErrorResponseBlock)errorBlock {
+#pragma mark -
+#pragma mark Fetch channels list.
+
+
+- (void)fetchChannelListWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
-//   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"snippet"];
-   query.forMine = YES;
-   query.maxResults = 50;
-   query.fields = @"items(id/videoId)";
-//   query.fields = @"items,nextPageToken";
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,statistics"];
+//   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
+   query.identifier = channelId;
+//   query.channelId = channelId;
+
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
-                            GTLYouTubeSubscriptionListResponse * resultList,
+                            GTLYouTubeChannelListResponse * resultList,
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
                                if ([[resultList items] count] > 0) {
@@ -356,18 +395,15 @@ static GYoutubeHelper * instance = nil;
                                _searchListTicket = nil;
                            }];
 }
+//"GTLStructuredError" -> "GTLErrorObject 0x79636330: {message:"No filter selected." code:-32602 data:[1]}"
 
 
-#pragma mark -
-#pragma mark Fetch auth User's Subscriptions
-
-
-- (void)initUserWithCompletionHandler:(YoutubeResponseBlock)completion
-                         errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchAuthUserChannelWithCompletion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,auditDetails,brandingSettings,contentDetails,invideoPromotion,statistics,status,topicDetails"];
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,statistics"];
+//   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
    query.mine = YES;
 
    _searchListTicket = [service executeQuery:query

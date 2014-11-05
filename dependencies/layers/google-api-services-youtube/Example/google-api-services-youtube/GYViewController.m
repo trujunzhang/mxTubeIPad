@@ -31,7 +31,9 @@
    };
 //   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:@"sketch3" completionHandler:completion errorHandler:error];
 //   [[GYoutubeHelper getInstance] fetchSubscriptionsListWithVideoId:@"sketch3" completionHandler:completion errorHandler:error];
-
+   [[GYoutubeHelper getInstance] fetchChannelListWithChannelId:@"UC0wObT_HayGfWLdRAnFyPwA"
+                                                    completion:completion
+                                                  errorHandler:error];
    [self setupUI];
 }
 
@@ -122,7 +124,7 @@
       // Authentication succeeded
       NSLog(@"Success");
 
-      [[GYoutubeHelper getInstance] saveAuthorizer:auth];
+//      [[GYoutubeHelper getInstance] saveAuthorizer:auth];
 
       [self refreshButtonTouch];
    }

@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
 
   s.resources = "Pod/Assets/*/*.*"
   s.requires_arc = true
-  s.dependency 'SWRevealViewController'
 
 
   s.subspec 'leftmenu' do |sub|
