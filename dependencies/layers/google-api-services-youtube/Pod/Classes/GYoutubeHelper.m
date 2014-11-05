@@ -311,7 +311,9 @@ static GYoutubeHelper * instance = nil;
 
              };
 
-             NSString * identifier = subscription.identifier;
+             GTLYouTubeResourceId * resourceId = subscription.snippet.resourceId;
+             NSString * identifier = [(resourceId.JSON) objectForKey:@"channelId"];
+             //"channelId" -> "UCNVqxnfsf0KJjIRlWRMD3cA"
              // UC0wObT_HayGfWLdRAnFyPwA
              // QmeTdj_6PqKCdSgz_RNI17IZL-GPEOlyfsiHizcoMRM
              [self fetchChannelListWithIdentifier:identifier
@@ -386,8 +388,12 @@ static GYoutubeHelper * instance = nil;
    GTLServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet"];
-//   query.playlistId = playlistId;
-   query.playlistId = @"PL6urkeK7KgD4vU4jbCTimNXdtB1gqvWsP";
+   query.playlistId = playlistId;
+   query.order = @"date";
+   query.publishedBefore = [GTLDateTime dateTimeWithDate:[NSDate dateWithTimeIntervalSinceNow:-(24 * 60 * 60)]
+                                                timeZone:[NSTimeZone systemTimeZone]];
+   query.maxResults = 10;
+//   query.playlistId = @"PL6urkeK7KgD4vU4jbCTimNXdtB1gqvWsP";
 
 
    _searchListTicket = [service executeQuery:query
@@ -411,8 +417,7 @@ static GYoutubeHelper * instance = nil;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
-//   query.identifier = identifier;
-   query.channelId = identifier;
+   query.identifier = identifier;
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
@@ -433,7 +438,7 @@ static GYoutubeHelper * instance = nil;
    GTLServiceYouTube * service = self.youTubeService;
 
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,auditDetails,brandingSettings,contentDetails,invideoPromotion,statistics,status,topicDetails"];
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,statistics"];
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
    query.mine = YES;
 
