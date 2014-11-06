@@ -110,7 +110,7 @@ static GYoutubeHelper * instance = nil;
        }
    };
    // 01: Search videoIds by queryTerm
-   [self fetchSearchListWithQueryType:queryType queryTerm:queryTerm completionHandler:completion errorHandler:error];
+//   [self fetchSearchListWithQueryType:queryType queryTerm:queryTerm completionHandler:completion errorHandler:error];
 
    return nil;
 }
@@ -136,9 +136,9 @@ static GYoutubeHelper * instance = nil;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSearchListWithPart:@"id,snippet"];
    query.q = queryTerm;
-//   query.type = queryType;
+   query.type = queryType;
 //   query.type = @"video";
-   query.type = @"channel";
+//   query.type = @"channel";
 
    // maxResults specifies the number of results per page.  Since we earlier
    // specified shouldFetchNextPages=YES, all results should be fetched,
@@ -233,6 +233,8 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)saveAuthorizeAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
+
+
    // 1
    [self fetchAuthorizeInfo:authentication];
 }
@@ -241,7 +243,7 @@ static GYoutubeHelper * instance = nil;
 - (void)getAuthUserInfo {
    self.youtubeAuthUser = [[GYoutubeAuthUser alloc] init];
 
-//   [self getUserInfo];// used
+   [self getUserInfo];// used
 }
 
 

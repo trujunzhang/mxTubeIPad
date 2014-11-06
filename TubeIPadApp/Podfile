@@ -11,6 +11,7 @@ target 'TubeIPadApp', :exclusive => true do
   pod "XCDYouTubeKit", :path => "../dependencies/lib/XCDYouTubeKit"
   pod "STCollapseTableView", :path => "../dependencies/lib/STCollapseTableView"
   pod "SWRevealViewController", :path => "../dependencies/lib/SWRevealViewController"
+  pod "YouTubeAPI3-Objective-C-wrapper", :path => "../dependencies/lib/YouTubeAPI3-Objective-C-wrapper"
 
   # ________________collect common library___________________
   pod "IOS_Collection_Code", :path => "../dependencies/collect/IOS_Collection_Code"
