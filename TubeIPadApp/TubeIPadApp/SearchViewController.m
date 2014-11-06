@@ -15,7 +15,8 @@
 
 
 @interface SearchViewController ()
-
+@property(strong, nonatomic) UISegmentedControl * segment_title;
+@property(nonatomic, strong) UISearchBar * searchBar;
 @end
 
 
@@ -25,11 +26,9 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
    // Do any additional setup after loading the view, typically from a nib.
-   self.tabBarItem.title = @"Subscriptions";
    self.view.backgroundColor = [UIColor clearColor];
 
 //   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
-   self.title = @"Subscriptions";
    self.delegate = self;
    self.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
@@ -44,9 +43,11 @@
    searchBar.showsCancelButton = YES;
    searchBar.userInteractionEnabled = YES;
    searchBar.placeholder = @"Search";
+   searchBar.text = @"yosemite";//test
 
    searchBar.delegate = self;
 
+   self.searchBar = searchBar;
    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
 }
 
@@ -107,6 +108,12 @@
 
 
 - (void)segmentAction:(id)sender {
+   if (self.searchBar.text.length > 0) {
+      NSArray * segmentTextContent = [NSArray arrayWithObjects:@"video", @"channel", @"playlist", nil];
+      NSString * queryType = segmentTextContent[self.segment_title.selectedSegmentIndex];
+      [self search:self.searchBar.text withQueryType:queryType];
+   }
+
 //   [self.newsView reloadType:self.segment_title.selectedSegmentIndex+1];
 }
 

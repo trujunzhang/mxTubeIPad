@@ -28,6 +28,7 @@
 - (id)initWithVideoList:(NSMutableArray *)array;
 
 - (void)setupCollectionView:(UIScrollView *)pView;
+- (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)search:(NSString *)text;
 - (void)cleanup;
 @end

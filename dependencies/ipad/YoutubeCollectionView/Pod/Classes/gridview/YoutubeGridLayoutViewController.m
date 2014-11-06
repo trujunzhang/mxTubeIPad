@@ -179,6 +179,12 @@ NSString * lastSearch = @"call of duty advanced warfare";
 }
 
 
+- (void)search:(NSString *)text withQueryType:(NSString *)queryType {
+   self.queryType = queryType;
+   [self search:text];
+}
+
+
 - (void)search:(NSString *)text {
    [self cleanup];
 
