@@ -15,6 +15,7 @@
 
 
 static NSString * const identifier = @"GridViewCellIdentifier";
+static NSString * const LOADING_CELL_IDENTIFIER = @"LoadingItemCell";
 
 
 NSString * lastSearch = @"call of duty advanced warfare";
@@ -65,8 +66,6 @@ NSString * lastSearch = @"call of duty advanced warfare";
                  forControlEvents:UIControlEventValueChanged];
 
    [self.collectionView addSubview:self.refreshControl];
-
-   [self.refreshControl beginRefreshing];
 }
 
 
@@ -83,9 +82,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
    [self.collectionView setAutoresizesSubviews:YES];
    [self.collectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-
-//   [self.collectionView registerNib:[UINib nibWithNibName:@"IpadGridViewCell" bundle:nil]
-//         forCellWithReuseIdentifier:identifier];
+   [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER];
 
    [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:identifier];
 
@@ -120,17 +117,44 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return self.videoList.count;
+   return self.videoList.count + 1;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   IpadGridViewCell * cell = (IpadGridViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:identifier
-                                                                                            forIndexPath:indexPath];
+   if (indexPath.item < self.videoList.count) {
+      return [self itemCellForIndexPath:indexPath];
+   } else {
+//      [self search:lastSearch];
+      return [self loadingCellForIndexPath:indexPath];
+   }
+}
 
-   [cell    bind:[self.videoList objectAtIndex:indexPath.row]
-placeholderImage:self.placeHoderImage
-        delegate:self.delegate];
+
+- (UICollectionViewCell *)itemCellForIndexPath:(NSIndexPath *)indexPath {
+   IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier
+                                                                                                 forIndexPath:indexPath];
+
+   GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
+   [cell bind:video placeholderImage:self.placeHoderImage delegate:self.delegate];
+
+   return cell;
+}
+
+
+- (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
+
+   UICollectionViewCell * cell = (UICollectionViewCell *)
+    [self.collectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER forIndexPath:indexPath];
+
+   UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+
+   activityIndicator.color = [UIColor whiteColor];
+   activityIndicator.center = cell.center;
+
+   [cell addSubview:activityIndicator];
+
+   [activityIndicator startAnimating];
 
    return cell;
 }
