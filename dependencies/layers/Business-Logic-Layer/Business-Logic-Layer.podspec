@@ -15,8 +15,6 @@ Pod::Spec.new do |s|
   s.resources = "Pod/Assets/*/*.*"
   s.requires_arc = true
 
-  s.dependency 'SWRevealViewController'
-
   s.subspec 'datastore' do |sub|
     sub.source_files = 'Pod/Classes/datastore/*.{h,m}'
   end

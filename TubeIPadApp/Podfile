@@ -10,6 +10,7 @@ target 'TubeIPadApp', :exclusive => true do
   pod "YKMediaPlayerKit", :path => "../dependencies/lib/YKMediaPlayerKit"
   pod "XCDYouTubeKit", :path => "../dependencies/lib/XCDYouTubeKit"
   pod "STCollapseTableView", :path => "../dependencies/lib/STCollapseTableView"
+  pod "SWRevealViewController", :path => "../dependencies/lib/SWRevealViewController"
 
   # ________________collect common library___________________
   pod "IOS_Collection_Code", :path => "../dependencies/collect/IOS_Collection_Code"
