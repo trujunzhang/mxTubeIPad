@@ -24,6 +24,7 @@
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
 @property(nonatomic, strong) UIImage * placeHoderImage;
 
+
 - (id)initWithVideoList:(NSMutableArray *)array;
 
 - (void)setupCollectionView:(UIScrollView *)pView;

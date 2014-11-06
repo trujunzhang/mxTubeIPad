@@ -22,6 +22,9 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
 
 @interface YoutubeGridLayoutViewController ()
+
+@property(nonatomic, strong) UIRefreshControl * refreshControl;
+
 @end
 
 
@@ -50,6 +53,26 @@ NSString * lastSearch = @"call of duty advanced warfare";
    self.placeHoderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
 
    [self setupCollectionView:self.view];
+   [self setupRefresh];
+}
+
+
+- (void)setupRefresh {
+   self.refreshControl = [[UIRefreshControl alloc] init];
+   self.refreshControl.tintColor = [UIColor clearColor];
+   [self.refreshControl addTarget:self
+                           action:@selector(refreshControlAction)
+                 forControlEvents:UIControlEventValueChanged];
+
+   [self.collectionView addSubview:self.refreshControl];
+
+   [self.refreshControl beginRefreshing];
+}
+
+
+- (void)refreshControlAction {
+   // Enter your code for request you are creating here when you pull the collectionView. When the request is completed then the collectionView go to its original position.
+   [self.refreshControl endRefreshing];
 }
 
 
@@ -137,13 +160,15 @@ placeholderImage:self.placeHoderImage
    lastSearch = text;
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
+       [self.refreshControl endRefreshing];
        self.videoList = array;
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:text
+   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:nil
+                                                  queryTerm:text
                                           completionHandler:completion
                                                errorHandler:error];
 }

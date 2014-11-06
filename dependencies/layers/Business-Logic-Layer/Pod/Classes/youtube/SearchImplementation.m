@@ -33,11 +33,12 @@ SearchImplementation * instance;
 }
 
 
-- (void)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
-   [[GYoutubeHelper getInstance] searchByQueryWithQueryTerm:queryTerm
-                                          completionHandler:responseHandler
-                                               errorHandler:errorHandler];
-}
+//- (void)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+//   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:nil
+//                                                  queryTerm:queryTerm
+//                                          completionHandler:responseHandler
+//                                               errorHandler:errorHandler];
+//}
 
 
 - (void)fetchAuthUserWithDelegate:(id)delegate {

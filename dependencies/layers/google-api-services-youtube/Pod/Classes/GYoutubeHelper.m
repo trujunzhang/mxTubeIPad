@@ -97,7 +97,7 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Youtube search.
 
 
-- (NSArray *)searchByQueryWithQueryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+- (NSArray *)searchByQueryWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        // 02 Search Videos by videoIds
        [self searchVideoByVideoIds:array
@@ -110,7 +110,7 @@ static GYoutubeHelper * instance = nil;
        }
    };
    // 01: Search videoIds by queryTerm
-   [self fetchSearchListWithQueryTerm:queryTerm completionHandler:completion errorHandler:error];
+   [self fetchSearchListWithQueryType:queryType queryTerm:queryTerm completionHandler:completion errorHandler:error];
 
    return nil;
 }
@@ -131,14 +131,13 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchSearchListWithQueryTerm:(NSString *)queryTerm
-                   completionHandler:(YoutubeResponseBlock)completion
-                        errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchSearchListWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSearchListWithPart:@"id,snippet"];
    query.q = queryTerm;
-   query.type = @"video";
+   query.type = queryType;
+//   query.type = @"video";
 
    // maxResults specifies the number of results per page.  Since we earlier
    // specified shouldFetchNextPages=YES, all results should be fetched,
