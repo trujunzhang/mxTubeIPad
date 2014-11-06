@@ -102,13 +102,12 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   IpadGridViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-   cell.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+   IpadGridViewCell * cell = (IpadGridViewCell *) [collectionView dequeueReusableCellWithReuseIdentifier:identifier
+                                                                                            forIndexPath:indexPath];
 
    [cell    bind:[self.videoList objectAtIndex:indexPath.row]
 placeholderImage:self.placeHoderImage
         delegate:self.delegate];
-
 
    return cell;
 }
