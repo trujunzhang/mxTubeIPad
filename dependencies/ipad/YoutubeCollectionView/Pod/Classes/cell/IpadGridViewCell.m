@@ -47,6 +47,7 @@
 
       self = [arrayOfViews objectAtIndex:0];
 
+      [self setupUI];
    }
 
    return self;
@@ -54,7 +55,7 @@
 }
 
 
-- (void)setupUI:(GTLYouTubeVideo *)video {
+- (void)setupUI {
    // Add other views
    // 1
    self.infoCell = [[[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell"
@@ -64,7 +65,7 @@
    self.infoCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
    [self.infoView addSubview:self.infoCell];
 
-   [self.infoCell bind:video];
+
 
    //2
    self.userCell = [[[NSBundle mainBundle] loadNibNamed:@"IpadGridViewUserCell"
@@ -74,7 +75,7 @@
    self.userCell.frame = CGRectMake(0, 0, self.userView.frame.size.width, self.userView.frame.size.height);
    [self.userView addSubview:self.userCell];
 
-   [self.userCell bind:video];
+
 }
 
 
@@ -82,7 +83,9 @@
    self.video = video;
    self.delegate = delegate;
 
-   [self setupUI:video];
+
+   [self.infoCell bind:video];
+   [self.userCell bind:video];
 
    // Confirm that the result represents a video. Otherwise, the
    // item will not contain a video ID.
