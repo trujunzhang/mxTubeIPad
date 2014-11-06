@@ -61,8 +61,11 @@ NSString * lastSearch = @"call of duty advanced warfare";
    [self.collectionView setAutoresizesSubviews:YES];
    [self.collectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 
-   [self.collectionView registerNib:[UINib nibWithNibName:@"IpadGridViewCell" bundle:nil]
-         forCellWithReuseIdentifier:identifier];
+//   [self.collectionView registerNib:[UINib nibWithNibName:@"IpadGridViewCell" bundle:nil]
+//         forCellWithReuseIdentifier:identifier];
+
+   [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:identifier];
+
 
    self.collectionView.dataSource = self;
    self.collectionView.delegate = self;
@@ -102,10 +105,10 @@ NSString * lastSearch = @"call of duty advanced warfare";
    IpadGridViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
    cell.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-
    [cell    bind:[self.videoList objectAtIndex:indexPath.row]
 placeholderImage:self.placeHoderImage
         delegate:self.delegate];
+
 
    return cell;
 }

@@ -33,7 +33,6 @@
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) GTLYouTubeVideo * video;
 
-@property(nonatomic, strong) IpadGridViewInfoCell * infoCell;
-@property(nonatomic, strong) IpadGridViewUserCell * userCell;
+
 - (void)bind:(GTLYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end

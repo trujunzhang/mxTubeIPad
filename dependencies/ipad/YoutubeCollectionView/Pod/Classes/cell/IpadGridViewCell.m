@@ -21,33 +21,36 @@
 #import "ImageCacheImplement.h"
 
 
+@interface IpadGridViewCell ()
+
+@property(nonatomic, strong) IpadGridViewInfoCell * infoCell;
+@property(nonatomic, strong) IpadGridViewUserCell * userCell;
+@end
+
+
 @implementation IpadGridViewCell
 
 - (void)setupUI:(GTLYouTubeVideo *)video {
    // Add other views
-   if (self.infoCell == nil) {
-      NSArray * infoCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell"
-                                                              owner:self
-                                                            options:nil];
-      self.infoCell = [infoCellViews lastObject];
-      self.infoCell.backgroundColor = [UIColor clearColor];
-      self.infoCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
-      [self.infoView addSubview:self.infoCell];
+   // 1
+   self.infoCell = [[[NSBundle mainBundle] loadNibNamed:@"IpadGridViewInfoCell"
+                                                  owner:self
+                                                options:nil] lastObject];
+   self.infoCell.backgroundColor = [UIColor clearColor];
+   self.infoCell.frame = CGRectMake(0, 0, self.infoView.frame.size.width, self.infoView.frame.size.height);
+   [self.infoView addSubview:self.infoCell];
 
-      [self.infoCell bind:video];
-   }
+   [self.infoCell bind:video];
 
-   if (self.userCell == nil) {
-      NSArray * userCellViews = [[NSBundle mainBundle] loadNibNamed:@"IpadGridViewUserCell"
-                                                              owner:self
-                                                            options:nil];
-      self.userCell = [userCellViews lastObject];
-      self.userCell.backgroundColor = [UIColor clearColor];
-      self.userCell.frame = CGRectMake(0, 0, self.userView.frame.size.width, self.userView.frame.size.height);
-      [self.userView addSubview:self.userCell];
+   //2
+   self.userCell = [[[NSBundle mainBundle] loadNibNamed:@"IpadGridViewUserCell"
+                                                  owner:self
+                                                options:nil] lastObject];
+   self.userCell.backgroundColor = [UIColor clearColor];
+   self.userCell.frame = CGRectMake(0, 0, self.userView.frame.size.width, self.userView.frame.size.height);
+   [self.userView addSubview:self.userCell];
 
-      [self.userCell bind:video];
-   }
+   [self.userCell bind:video];
 }
 
 
@@ -70,8 +73,6 @@
    singleTap.numberOfTapsRequired = 1;
    [self.thumbnails setUserInteractionEnabled:YES];
    [self.thumbnails addGestureRecognizer:singleTap];
-
-//   self.thumbnails.image = [UIImage imageNamed:video.snippet.channelId];// test
 
 
    // UIView Touch event

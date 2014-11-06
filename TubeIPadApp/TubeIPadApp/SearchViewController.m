@@ -39,13 +39,15 @@
 
 
 - (void)setupNavigationRightItem {
-   UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 180, 19)];
-   searchBar.text=@"search";
+   UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 220, 19)];
    searchBar.backgroundColor = [UIColor clearColor];
+   searchBar.showsCancelButton = YES;
+   searchBar.userInteractionEnabled = YES;
+   searchBar.placeholder = @"Search";
+
    searchBar.delegate = self;
 
-   UIBarButtonItem * btnSearch = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
-   self.navigationItem.rightBarButtonItem = btnSearch;
+   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
 }
 
 
@@ -88,6 +90,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
    [self search:searchBar.text];
+   [searchBar resignFirstResponder];
 }
 
 
