@@ -281,47 +281,47 @@ static GYoutubeHelper * instance = nil;
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
 
-       for (int i = 0; i < array.count; i++) {
-          GTLYouTubeSubscription * subscription = (GTLYouTubeSubscription *) array[i];
-          GTLYouTubeSubscriptionContentDetails * details = [subscription contentDetails];
-          NSString * activityType = details.activityType;
-
-          NSNumber * number = [details newItemCount];
-          if ([number intValue] > 0) {
-             NSLog(@"%@", subscription.snippet.title);
-             NSLog(@"%d", [number intValue]);
-             NSLog(@"%@", subscription.snippet.channelId);
-             if ([subscription.snippet.title isEqualToString:@"The Online Piano and Violin Tutor"]) {
-                NSString * debug = @"debug";
-             }
-          }
-
-          if ([subscription.snippet.title isEqualToString:@"XiveTV"]) {
-
-             NSString * debug = @"debug";
-             YoutubeResponseBlock channelCompletionBlock = ^(NSArray * array) {
-                 GTLYouTubeChannel * channel = array[0];
-//                 contentDetails.relatedPlaylists.uploads
-                 NSString * uploadsVar = channel.contentDetails.relatedPlaylists.uploads;
-                 [self fetchPlaylistItemsListWithplaylistId:channel
-                                                 completion:nil
-                                               errorHandler:nil];
-             };
-             ErrorResponseBlock channelErrorBlock = ^(NSError * error) {
-
-             };
-
-             GTLYouTubeResourceId * resourceId = subscription.snippet.resourceId;
-             NSString * identifier = [(resourceId.JSON) objectForKey:@"channelId"];
-             //"channelId" -> "UCNVqxnfsf0KJjIRlWRMD3cA"
-             // UC0wObT_HayGfWLdRAnFyPwA
-             // QmeTdj_6PqKCdSgz_RNI17IZL-GPEOlyfsiHizcoMRM
-             [self fetchChannelListWithIdentifier:identifier
-                                       completion:channelCompletionBlock
-                                     errorHandler:channelErrorBlock];
-
-          }
-       }
+//       for (int i = 0; i < array.count; i++) {
+//          GTLYouTubeSubscription * subscription = (GTLYouTubeSubscription *) array[i];
+//          GTLYouTubeSubscriptionContentDetails * details = [subscription contentDetails];
+//          NSString * activityType = details.activityType;
+//
+//          NSNumber * number = [details newItemCount];
+//          if ([number intValue] > 0) {
+//             NSLog(@"%@", subscription.snippet.title);
+//             NSLog(@"%d", [number intValue]);
+//             NSLog(@"%@", subscription.snippet.channelId);
+//             if ([subscription.snippet.title isEqualToString:@"The Online Piano and Violin Tutor"]) {
+//                NSString * debug = @"debug";
+//             }
+//          }
+//
+//          if ([subscription.snippet.title isEqualToString:@"XiveTV"]) {
+//
+//             NSString * debug = @"debug";
+//             YoutubeResponseBlock channelCompletionBlock = ^(NSArray * array) {
+//                 GTLYouTubeChannel * channel = array[0];
+////                 contentDetails.relatedPlaylists.uploads
+//                 NSString * uploadsVar = channel.contentDetails.relatedPlaylists.uploads;
+//                 [self fetchPlaylistItemsListWithplaylistId:channel
+//                                                 completion:nil
+//                                               errorHandler:nil];
+//             };
+//             ErrorResponseBlock channelErrorBlock = ^(NSError * error) {
+//
+//             };
+//
+//             GTLYouTubeResourceId * resourceId = subscription.snippet.resourceId;
+//             NSString * identifier = [(resourceId.JSON) objectForKey:@"channelId"];
+//             //"channelId" -> "UCNVqxnfsf0KJjIRlWRMD3cA"
+//             // UC0wObT_HayGfWLdRAnFyPwA
+//             // QmeTdj_6PqKCdSgz_RNI17IZL-GPEOlyfsiHizcoMRM
+//             [self fetchChannelListWithIdentifier:identifier
+//                                       completion:channelCompletionBlock
+//                                     errorHandler:channelErrorBlock];
+//
+//          }
+//       }
 
        if (delegate)
           [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
