@@ -149,7 +149,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
    UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 
-   activityIndicator.color = [UIColor whiteColor];
+   activityIndicator.color = [UIColor blackColor];
    activityIndicator.center = cell.center;
 
    [cell addSubview:activityIndicator];
