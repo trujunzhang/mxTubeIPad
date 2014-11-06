@@ -303,7 +303,7 @@ static GYoutubeHelper * instance = nil;
                  GTLYouTubeChannel * channel = array[0];
 //                 contentDetails.relatedPlaylists.uploads
                  NSString * uploadsVar = channel.contentDetails.relatedPlaylists.uploads;
-                 [self fetchPlaylistItemsListWithplaylistId:uploadsVar
+                 [self fetchPlaylistItemsListWithplaylistId:channel
                                                  completion:nil
                                                errorHandler:nil];
              };
@@ -384,14 +384,16 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Fetch channels list.
 
 
-- (void)fetchPlaylistItemsListWithplaylistId:(NSString *)playlistId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchPlaylistItemsListWithplaylistId:(GTLYouTubeChannel *)channel completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet"];
-   query.playlistId = playlistId;
-   query.order = @"date";
-   query.publishedBefore = [GTLDateTime dateTimeWithDate:[NSDate dateWithTimeIntervalSinceNow:-(24 * 60 * 60)]
-                                                timeZone:[NSTimeZone systemTimeZone]];
+   query.identifier = channel.identifier;
+   query.playlistId = channel.contentDetails.relatedPlaylists.uploads;
+
+//   query.order = @"date";
+//   query.publishedBefore = [GTLDateTime dateTimeWithDate:[NSDate dateWithTimeIntervalSinceNow:-(24 * 60 * 60)]
+//                                                timeZone:[NSTimeZone systemTimeZone]];
    query.maxResults = 10;
 //   query.playlistId = @"PL6urkeK7KgD4vU4jbCTimNXdtB1gqvWsP";
 
@@ -410,7 +412,7 @@ static GYoutubeHelper * instance = nil;
                                _searchListTicket = nil;
                            }];
 }
-
+//"Error Domain=com.google.GTLJSONRPCErrorDomain Code=-32602 "The operation couldn’t be completed. (Incompatible parameters specified in the request.)" UserInfo=0x7ae756c0 {error=Incompatible parameters specified in the request., GTLStructuredError=GTLErrorObject 0x7ae29b60: {message:"Incompatible parameters specified in the request." code:-32602 data:[1]}, NSLocalizedFailureReason=(Incompatible parameters specified in the request.)}"
 
 - (void)fetchChannelListWithIdentifier:(NSString *)identifier completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    GTLServiceYouTube * service = self.youTubeService;
