@@ -136,8 +136,9 @@ static GYoutubeHelper * instance = nil;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSearchListWithPart:@"id,snippet"];
    query.q = queryTerm;
-   query.type = queryType;
+//   query.type = queryType;
 //   query.type = @"video";
+   query.type = @"channel";
 
    // maxResults specifies the number of results per page.  Since we earlier
    // specified shouldFetchNextPages=YES, all results should be fetched,
