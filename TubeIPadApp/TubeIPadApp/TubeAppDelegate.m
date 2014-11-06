@@ -43,6 +43,8 @@
    self.tabBarController.delegate = self;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
 
+   self.tabBarController.selectedIndex = 1;
+
    //2. the first right tab bar item
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];
    self.subscriptionsViewController.revealButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mt_side_tab_button"]

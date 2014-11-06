@@ -33,8 +33,8 @@ LeftRevealHelper * instance;
    self.revealController = controller;
 
    // 2
-   self.isRearOpen = YES;
-   [self openLeftMenu];
+//   self.isRearOpen = YES; // used
+//   [self openLeftMenu];   // used
 }
 
 
