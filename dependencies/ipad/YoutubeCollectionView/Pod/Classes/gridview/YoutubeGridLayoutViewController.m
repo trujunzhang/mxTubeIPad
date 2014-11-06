@@ -24,6 +24,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
 @interface YoutubeGridLayoutViewController ()
 
+@property(nonatomic, copy) NSString * queryType;
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
 
 @end
@@ -45,6 +46,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
 - (void)viewDidLoad {
    [super viewDidLoad];
 
+   self.queryType = @"video";
    if (lastSearch)
       [self search:lastSearch];
 
@@ -191,7 +193,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:nil
+   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:self.queryType
                                                   queryTerm:text
                                           completionHandler:completion
                                                errorHandler:error];
