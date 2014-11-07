@@ -133,7 +133,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (NSString *)VideoSearchURLforTerm:(NSString *)term withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max {
+- (NSString *)VideoSearchURLforTerm:(NSString *)term queryType:(NSString *)queryType withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max {
 
    NSString * paramS = @"";
    for (NSString * key in [params allKeys]) {
@@ -142,7 +142,8 @@ static MABYT3_APIRequest * sharedlst = nil;
    if (max != 5) {
       paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
    }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=%@&type=video%@",
+   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=%@&type=%@%@",
+                                     queryType,
                                      term,
                                      paramS];
 }
@@ -707,24 +708,36 @@ static MABYT3_APIRequest * sharedlst = nil;
 
 
 - (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
-   NSMutableURLRequest * request = [self getRequest:urlStr];
+   __block NSString * nxtURLStr = @"";
+
+   NSMutableURLRequest * request = [self getRequest:urlStr withAuth:NO];
 
    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-//   operation.responseSerializer = [AFJSONResponseSerializer serializer];
 
    void (^completionBlock)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation * operation, id o) {
-       NSString * debug = @"debug";
+       NSError * error = nil;
+       NSMutableArray * array = [[NSMutableArray alloc] init];
+
+       if (operation.response.statusCode == 200) {
+          nxtURLStr = [self parseSearchList:urlStr arr:array data:operation.responseData];
+       }
+       else {
+          error = [self getError:operation.responseData httpresp:operation.response];
+       }
+       dispatch_async(dispatch_get_main_queue(), ^(void) {
+           handler(array, error, nxtURLStr);
+       });
    };
    void (^failBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation * operation, NSError * error) {
-       NSString * debug = @"debug";
+       dispatch_async(dispatch_get_main_queue(), ^(void) {
+           handler(nil, error, nil);
+       });
    };
 
    [operation setCompletionBlockWithSuccess:completionBlock failure:failBlock];
    [operation start];
-//
-}
 
-//"Error Domain=NSURLErrorDomain Code=-1002 "unsupported URL" UserInfo=0x786f4f70 {NSUnderlyingError=0x79986d90 "unsupported URL", NSLocalizedDescription=unsupported URL}"
+}
 
 
 - (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
@@ -748,49 +761,64 @@ static MABYT3_APIRequest * sharedlst = nil;
 
                               if (httpresp.statusCode == 200) {
                                  NSError * e = nil;
-                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
-                                                                                       options:NSJSONReadingMutableContainers
-                                                                                         error:&e];
-                                 if ([dict objectForKey:@"items"]) {
-                                    NSArray * items = [dict objectForKey:@"items"];
-                                    if (items.count > 0) {
-                                       for (int i = 0; i < items.count; i++) {
-                                          MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
-                                          [arr addObject:itm];
-                                       }
-                                    }
-                                 }
-                                 if ([dict objectForKey:@"nextPageToken"]) {
-                                    NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
-                                 }
+                                 nxtURLStr = [self parseSearchList:urlStr arr:arr data:data];
                               }
                               else {
-                                 NSError * e = nil;
-                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
-                                                                                       options:NSJSONReadingMutableContainers
-                                                                                         error:&e];
-                                 if ([dict objectForKey:@"error"]) {
-                                    NSDictionary * dict2 = [dict objectForKey:@"error"];
-                                    if ([dict2 objectForKey:@"errors"]) {
-                                       NSArray * items = [dict2 objectForKey:@"errors"];
-                                       if (items.count > 0) {
-                                          NSString * dom = @"YTAPI";
-                                          if ([items[0] objectForKey:@"domain"]) {
-                                             dom = [items[0] objectForKey:@"domain"];
-                                          }
-                                          error = [NSError errorWithDomain:dom
-                                                                      code:httpresp.statusCode
-                                                                  userInfo:items[0]];
-                                       }
-                                    }
-                                 }
+                                 error = [self getError:data httpresp:httpresp];
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
                                   handler(arr, error, nxtURLStr);
                               });
 
                           }];
+}
+
+
+- (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp {
+   NSError * error;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"error"]) {
+      NSDictionary * dict2 = [dict objectForKey:@"error"];
+      if ([dict2 objectForKey:@"errors"]) {
+         NSArray * items = [dict2 objectForKey:@"errors"];
+         if (items.count > 0) {
+            NSString * dom = @"YTAPI";
+            if ([items[0] objectForKey:@"domain"]) {
+               dom = [items[0] objectForKey:@"domain"];
+            }
+            error = [NSError errorWithDomain:dom
+                                        code:httpresp.statusCode
+                                    userInfo:items[0]];
+         }
+      }
+   }
+   return error;
+}
+
+
+- (NSString *)parseSearchList:(NSString *)urlStr arr:(NSMutableArray *)arr data:(NSData *)data {
+   NSError * e = nil;
+   NSString * nxtURLStr;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+   }
+   if ([dict objectForKey:@"nextPageToken"]) {
+      NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
+      nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+   }
+   return nxtURLStr;
 }
 
 
@@ -814,7 +842,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSMutableURLRequest * request = [self getRequest:urlStr];
+   NSMutableURLRequest * request = [self getRequest:urlStr withAuth:NO];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -870,7 +898,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (NSMutableURLRequest *)getRequest:(NSString *)urlStr {
+- (NSMutableURLRequest *)getRequest:(NSString *)urlStr withAuth:(BOOL)auth {
 
    NSString * string = [NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey];
 
@@ -878,10 +906,12 @@ static MABYT3_APIRequest * sharedlst = nil;
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:url];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
+   if (auth) {
+      if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
+         [request setValue:[NSString stringWithFormat:@"Bearer %@",
+                                                      [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
+        forHTTPHeaderField:@"Authorization"];
+      }
    }
    return request;
 }
