@@ -136,6 +136,7 @@ NSString * lastSearch = @"sketch 3";
       return [self itemCellForIndexPath:indexPath];
    } else {
 //      [self search:lastSearch];
+      [self searchByPageToken];
       return [self loadingCellForIndexPath:indexPath];
    }
 }
@@ -200,8 +201,14 @@ NSString * lastSearch = @"sketch 3";
 
    lastSearch = text;
 
+   [self searchByPageToken];
+}
+
+
+- (void)searchByPageToken {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
+
        self.videoList = array;
        [[self collectionView] reloadData];
    };
@@ -211,7 +218,6 @@ NSString * lastSearch = @"sketch 3";
    [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.searchInfo
                                            completionHandler:completion
                                                 errorHandler:error];
-
 }
 
 
