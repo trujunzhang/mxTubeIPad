@@ -6,19 +6,13 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+
 #import "GYoutubeHelper.h"
 
-#import "GTLYouTubeSearchResult.h"
-#import "GTLYouTubeResourceId.h"
-#import "GTMOAuth2ViewControllerTouch.h"
-#import "GTLYouTubeSubscriptionListResponse.h"
-#import "GTLYouTubeChannelListResponse.h"
-#import "GTLYouTubeChannelSnippet.h"
 #import "GYoutubeAuthUser.h"
 #import "YoutubeAuthDataStore.h"
 #import "YoutubeAuthInfo.h"
-#import "GTLYouTubePlaylistItemListResponse.h"
-#import "GTLYouTubePlaylistItem.h"
+
 #import "MAB_GoogleAccessToken.h"
 #import "MAB_GoogleUserCredentials.h"
 
@@ -26,7 +20,7 @@ static GYoutubeHelper * instance = nil;
 
 
 @interface GYoutubeHelper ()<MAB_GoogleUserCredentialsDelegate> {
-
+   GTLServiceTicket * _searchListTicket;
 }
 @end
 
@@ -34,15 +28,15 @@ static GYoutubeHelper * instance = nil;
 @implementation GYoutubeHelper
 
 #pragma mark -
-#pragma mark Global GTLServiceYouTube instance
+#pragma mark Global YTServiceYouTube instance
 
 
-- (GTLServiceYouTube *)youTubeService {
-   static GTLServiceYouTube * service;
+- (YTServiceYouTube *)youTubeService {
+   static YTServiceYouTube * service;
 
    static dispatch_once_t onceToken;
    dispatch_once(&onceToken, ^{
-       service = [[GTLServiceYouTube alloc] init];
+       service = [[YTServiceYouTube alloc] init];
 
        // Have the service object set tickets to fetch consecutive pages
        // of the feed so we do not need to manually fetch them.
@@ -90,7 +84,7 @@ static GYoutubeHelper * instance = nil;
    self.youTubeService.APIKey = apiKey;
 
    // 2
-   GTMOAuth2Authentication * auth;
+   YTOAuth2Authentication * auth;
    auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
                                                                 clientID:kMyClientID
                                                             clientSecret:kMyClientSecret];
@@ -154,7 +148,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchSearchListWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   GTLServiceYouTube * service = self.youTubeService;
+   YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSearchListWithPart:@"id,snippet"];
    query.q = queryTerm;
@@ -194,7 +188,7 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchVideoListWithVideoId:(NSString *)videoId
                 completionHandler:(YoutubeResponseBlock)completion
                      errorHandler:(ErrorResponseBlock)errorBlock {
-   GTLServiceYouTube * service = self.youTubeService;
+   YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForVideosListWithPart:@"snippet,contentDetails, statistics"];
    query.identifier = videoId;
@@ -239,12 +233,12 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (GTMOAuth2Authentication *)getAuthorizer {
+- (YTOAuth2Authentication *)getAuthorizer {
    return self.youTubeService.authorizer;
 }
 
 
-- (void)fetchAuthorizeInfo:(GTMOAuth2Authentication *)authentication {
+- (void)fetchAuthorizeInfo:(YTOAuth2Authentication *)authentication {
    self.youTubeService.authorizer = authentication;
    self.isSignedIn = authentication.canAuthorize;
 
@@ -254,7 +248,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)saveAuthorizeAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
+- (void)saveAuthorizeAndFetchUserInfo:(YTOAuth2Authentication *)authentication {
    // 1
    [self fetchAuthorizeInfo:authentication];
    // 2
@@ -389,7 +383,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   GTLServiceYouTube * service = self.youTubeService;
+   YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
@@ -415,7 +409,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchPlaylistItemsListWithplaylistId:(GTLYouTubeChannel *)channel completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   GTLServiceYouTube * service = self.youTubeService;
+   YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet"];
    query.identifier = channel.identifier;
@@ -445,7 +439,7 @@ static GYoutubeHelper * instance = nil;
 //"Error Domain=com.google.GTLJSONRPCErrorDomain Code=-32602 "The operation couldn’t be completed. (Incompatible parameters specified in the request.)" UserInfo=0x7ae756c0 {error=Incompatible parameters specified in the request., GTLStructuredError=GTLErrorObject 0x7ae29b60: {message:"Incompatible parameters specified in the request." code:-32602 data:[1]}, NSLocalizedFailureReason=(Incompatible parameters specified in the request.)}"
 
 - (void)fetchChannelListWithIdentifier:(NSString *)identifier completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   GTLServiceYouTube * service = self.youTubeService;
+   YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
@@ -467,7 +461,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchAuthUserChannelWithCompletion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   GTLServiceYouTube * service = self.youTubeService;
+   YTServiceYouTube * service = self.youTubeService;
 
 //   GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,auditDetails,brandingSettings,contentDetails,invideoPromotion,statistics,status,topicDetails"];
    GTLQueryYouTube * query = [GTLQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];

@@ -8,6 +8,28 @@
 #import "GTLYouTubeThumbnail.h"
 #import "GTLYouTubeChannelSnippet.h"
 
+//
+#import "GTLUtilities.h"
+#import "GTMHTTPUploadFetcher.h"
+#import "GTMHTTPFetcherLogging.h"
+
+#import "GTLQueryYouTube.h"
+#import "GTLYouTubeSearchListResponse.h"
+#import "GTLYouTubeChannel.h"
+#import "GTLYouTubeChannelContentDetails.h"
+#import "GTLYouTubeSubscriptionListResponse.h"
+#import "GTLYouTubePlaylistItemListResponse.h"
+#import "GTLYouTubeChannelListResponse.h"
+#import "GTLYouTubeSearchResult.h"
+#import "GTLYouTubeResourceId.h"
+
+//
+#import "GTLServiceYouTube.h"
+#import "GTMOAuth2Authentication.h"
+#import "GTMOAuth2ViewControllerTouch.h"
+
+//
+
 
 #endif
 
@@ -21,8 +43,17 @@ static NSString * kKeychainItemName = @"mxyoutube";
 
 static NSUInteger search_maxResults = 15;
 
+// module
 #define YTYouTubeChannel  GTLYouTubeChannel
 #define YTYouTubeSubscription  GTLYouTubeSubscription
+
+//
+#define YTServiceYouTube  GTLServiceYouTube
+#define YTOAuth2Authentication  GTMOAuth2Authentication
+
+
+//
+
 
 
 

@@ -8,20 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "GTLUtilities.h"
-#import "GTMHTTPUploadFetcher.h"
-#import "GTMHTTPFetcherLogging.h"
-#import "GTLServiceYouTube.h"
-#import "GTLQueryYouTube.h"
-#import "YoutubeConstants.h"
-#import "GTLYouTubeSearchListResponse.h"
-#import "GTLYouTubeChannel.h"
-#import "GTLYouTubeChannelContentDetails.h"
 
-@class GTLServiceYouTube;
-@class GTLYouTubePlaylistItemListResponse;
-@class GTMOAuth2ViewControllerTouch;
-@class GTMOAuth2Authentication;
+#import "YoutubeConstants.h"
+
+
 @class GYoutubeAuthUser;
 @class YoutubeAuthInfo;
 
@@ -40,20 +30,10 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 
 
 @interface GYoutubeHelper : NSObject {
-   GTLYouTubeChannelContentDetailsRelatedPlaylists * _myPlaylists;
-   GTLServiceTicket * _searchListTicket;
-   NSError * _channelListFetchError;
-
-   GTLYouTubePlaylistItemListResponse * _playlistItemList;
-   GTLServiceTicket * _playlistItemListTicket;
-   NSError * _playlistFetchError;
-
-   GTLServiceTicket * _uploadFileTicket;
-   NSURL * _uploadLocationURL;  // URL for restarting an upload.
 
 }
 // Accessor for the app's single instance of the service object.
-@property(nonatomic, strong) GTLServiceYouTube * youTubeService;
+@property(nonatomic, strong) YTServiceYouTube * youTubeService;
 @property(nonatomic, strong) GYoutubeAuthUser * youtubeAuthUser;
 @property(nonatomic) BOOL isSignedIn;
 
@@ -64,8 +44,8 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (void)signingOut;
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock;
 - (void)fetchChannelListWithIdentifier:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock;
-- (GTMOAuth2Authentication *)getAuthorizer;
-- (void)saveAuthorizeAndFetchUserInfo:(GTMOAuth2Authentication *)authentication;
+- (YTOAuth2Authentication *)getAuthorizer;
+- (void)saveAuthorizeAndFetchUserInfo:(YTOAuth2Authentication *)authentication;
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
 
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;

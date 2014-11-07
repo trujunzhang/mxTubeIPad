@@ -12,8 +12,7 @@
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "LeftMenuItemTree.h"
-#import "MAB_GoogleUserCredentials.h"
-#import "GTMOAuth2ViewControllerTouch.h"
+#import "YoutubeConstants.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -84,8 +83,8 @@
 }
 
 
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)auth
+- (void)viewController:(UIViewController *)viewController
+      finishedWithAuth:(YTOAuth2Authentication *)auth
                  error:(NSError *)error {
    [self cancelGdriveSignIn:nil];
 
@@ -97,26 +96,6 @@
       NSLog(@"Success");
 
       [[GYoutubeHelper getInstance] saveAuthorizeAndFetchUserInfo:auth];
-   }
-}
-
-
-- (void)viewController1:(GTMOAuth2ViewControllerTouch *)viewController
-       finishedWithAuth:(GTMOAuth2Authentication *)auth
-                  error:(NSError *)error {
-   if (error != nil) {
-      NSLog(@"Authentication failed");
-   } else {
-      NSLog(@"Authentication succeeded");
-      auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
-                                                                   clientID:kMyClientID
-                                                               clientSecret:kMyClientSecret];
-      NSLog(@"Auth = %@", auth);
-      NSLog(@"auth.canAutorize : %@", auth.canAuthorize);
-      NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-      [defaults setObject:auth.code forKey:@"kCode"];
-      [defaults setObject:auth.accessToken forKey:@"kAccessToken"];
-      [defaults setObject:auth.refreshToken forKey:@"kRefreshToken"];
    }
 }
 

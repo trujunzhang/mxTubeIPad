@@ -9,7 +9,7 @@
 #import "GYViewController.h"
 
 #import "GYoutubeHelper.h"
-#import "GTMOAuth2ViewControllerTouch.h"
+
 
 
 @interface GYViewController ()
@@ -112,8 +112,8 @@
 }
 
 
-- (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
-      finishedWithAuth:(GTMOAuth2Authentication *)auth
+- (void)viewController:(UIViewController *)viewController
+      finishedWithAuth:(YTOAuth2Authentication *)auth
                  error:(NSError *)error {
    [self cancelGdriveSignIn:nil];
 
