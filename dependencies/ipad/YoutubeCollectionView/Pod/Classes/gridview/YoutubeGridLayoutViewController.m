@@ -23,8 +23,6 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
 
 @interface YoutubeGridLayoutViewController ()
-
-@property(nonatomic, copy) NSString * queryType;
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
 
 
@@ -56,7 +54,6 @@ NSString * lastSearch = @"call of duty advanced warfare";
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   self.queryType = @"video";
    if (lastSearch)
       [self search:lastSearch];
 
@@ -190,14 +187,15 @@ NSString * lastSearch = @"call of duty advanced warfare";
 }
 
 
-- (void)search:(NSString *)text withQueryType:(NSString *)queryType {
-   self.queryType = queryType;
-   [self search:text];
+- (void)search:(NSString *)text {
+   [self search:text withQueryType:@"video"];
 }
 
 
-- (void)search:(NSString *)text {
+- (void)search:(NSString *)text withQueryType:(NSString *)queryType {
    [self cleanup];
+
+   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithQueryType:@"video" withTeam:text];
 
    lastSearch = text;
 
@@ -209,15 +207,20 @@ NSString * lastSearch = @"call of duty advanced warfare";
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:self.queryType
-                                                  queryTerm:text
-                                          completionHandler:completion
-                                               errorHandler:error];
+   [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.searchInfo
+                                           completionHandler:completion
+                                                errorHandler:error];
+//
+//   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:self.queryType
+//                                                  queryTerm:text
+//                                          completionHandler:completion
+//                                               errorHandler:error];
 }
 
 
 - (void)cleanup {
    self.videoList = [[NSArray alloc] init];
+
    [[self collectionView] reloadData];
 }
 @end

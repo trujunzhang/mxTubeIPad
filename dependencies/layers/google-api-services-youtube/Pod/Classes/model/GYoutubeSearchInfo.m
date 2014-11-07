@@ -12,6 +12,20 @@
 @implementation GYoutubeSearchInfo
 
 
+- (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team {
+   self = [super init];
+   if (self) {
+      self.queryType = queryType;
+      self.queryTeam = team;
+      NSDictionary * parameters = @{
+       @"part" : @"id,snippet",
+       @"fields" : @"items(id/videoId)",
+      };
+      self.parameters = parameters;
+   }
+
+   return self;
+}
 
 
 @end

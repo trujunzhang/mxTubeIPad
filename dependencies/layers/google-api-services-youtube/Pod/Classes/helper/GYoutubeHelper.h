@@ -14,6 +14,7 @@
 
 @class GYoutubeAuthUser;
 @class YoutubeAuthInfo;
+@class GYoutubeSearchInfo;
 
 typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
@@ -49,5 +50,6 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
 
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
+- (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)handler errorHandler:(ErrorResponseBlock)handler1;
 
 @end

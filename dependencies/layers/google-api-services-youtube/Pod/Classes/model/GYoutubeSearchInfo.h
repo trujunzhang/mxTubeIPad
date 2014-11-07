@@ -10,6 +10,13 @@
 
 @interface GYoutubeSearchInfo : NSObject {
 
+
 }
+@property(nonatomic, copy) NSString * queryType;
+
+@property(nonatomic, strong) NSDictionary * parameters;
+@property(nonatomic, copy) NSString * queryTeam;
+- (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team;
+
 
 @end

@@ -15,6 +15,7 @@
 
 #import "MAB_GoogleAccessToken.h"
 #import "MAB_GoogleUserCredentials.h"
+#import "GYoutubeSearchInfo.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -132,6 +133,29 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+- (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+   // 01: Search videoIds by queryTerm
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:info.queryTeam
+                                                                       queryType:info.queryType
+                                                                  withParameters:info.parameters
+                                                                   andMaxResults:10];
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * string) {
+       if (!error) {
+          // 02 Search Videos by videoIds
+          [self searchVideoByVideoIds:array
+                    completionHandler:(YoutubeResponseBlock) responseHandler
+                         errorHandler:errorHandler];
+       }
+       else {
+          if (error) {
+             errorHandler(error);
+          }
+       }
+   };
+   [[MABYT3_APIRequest sharedInstance] fetchWithUrl:urlStr andHandler:finishedHandler];
+}
+
+
 - (void)searchVideoByVideoIds:(NSArray *)searchResultList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    NSMutableArray * videoIds = [[NSMutableArray alloc] init];
 
@@ -148,26 +172,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchSearchListWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   NSDictionary * parameters = @{
-    @"part" : @"id,snippet",
-    @"q" : queryTerm,
-    @"fields" : @"items(id/videoId)",
-   };
-   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:queryTerm
-                                                                       queryType:@"video"
-                                                                  withParameters:parameters
-                                                                   andMaxResults:10];
-   [[MABYT3_APIRequest sharedInstance]
-    fetchWithUrl:urlStr
-      andHandler:^(NSMutableArray * results, NSError * error, NSString * pageToken) {
-          if (!error) {
-             completion(results);
-          }
-          else {
-             NSLog(@"%@", error.description);
-             errorBlock(error);
-          }
-      }];
+
 }
 
 
