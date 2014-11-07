@@ -137,7 +137,7 @@ static GYoutubeHelper * instance = nil;
 
    if (searchResultList) {
       // Merge video IDs
-      for (GTLYouTubeSearchResult * searchResult in searchResultList) {
+      for (YTYouTubeSearchResult * searchResult in searchResultList) {
          [videoIds addObject:searchResult.identifier.videoId];
       }
       [self fetchVideoListWithVideoId:[videoIds componentsJoinedByString:@","]

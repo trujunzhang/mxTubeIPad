@@ -64,8 +64,15 @@ static NSUInteger search_maxResults = 15;
 #define YTOAuth2Authentication  GTMOAuth2Authentication
 
 
+
 //
 #define YTQueryYouTube  GTLQueryYouTube
+
+
+// different
+//#define YTYouTubeSearchResult  GTLYouTubeSearchResult
+#define YTYouTubeSearchResult  MABYT3_SearchItem
+
 
 
 
