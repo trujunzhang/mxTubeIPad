@@ -8,14 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface MABYT3_VideoStatistics : NSObject
 
-@property (nonatomic) unsigned long viewCount;
-@property (nonatomic) unsigned long likeCount;
-@property (nonatomic) unsigned long dislikeCount;
-@property (nonatomic) unsigned long favoriteCount;
-@property (nonatomic) unsigned long commentCount;
 
-- (id) initFromDictionary:(NSDictionary *)dict;
+// The number of comments for the video.
+@property(retain) NSNumber * commentCount;  // unsignedLongLongValue
+
+// The number of users who have indicated that they disliked the video by giving
+// it a negative rating.
+@property(retain) NSNumber * dislikeCount;  // unsignedLongLongValue
+
+// The number of users who currently have the video marked as a favorite video.
+@property(retain) NSNumber * favoriteCount;  // unsignedLongLongValue
+
+// The number of users who have indicated that they liked the video by giving it
+// a positive rating.
+@property(retain) NSNumber * likeCount;  // unsignedLongLongValue
+
+// The number of times the video has been viewed.
+@property(retain) NSNumber * viewCount;  // unsignedLongLongValue
+
+- (id)initFromDictionary:(NSDictionary *)dict;
 
 @end

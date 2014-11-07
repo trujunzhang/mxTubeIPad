@@ -41,6 +41,10 @@
 //================================================================================================
 #import "MABYT3_APIRequest.h"
 
+// module
+#import "MABYT3_Video.h"
+
+
 #endif
 
 
@@ -55,7 +59,9 @@ static NSUInteger search_maxResults = 15;
 
 // module
 
-#define YTYouTubeVideo  GTLYouTubeVideo
+//#define YTYouTubeVideo  GTLYouTubeVideo
+#define YTYouTubeVideo  MABYT3_Video
+
 #define YTYouTubeChannel  GTLYouTubeChannel
 #define YTYouTubeSubscription  GTLYouTubeSubscription
 
