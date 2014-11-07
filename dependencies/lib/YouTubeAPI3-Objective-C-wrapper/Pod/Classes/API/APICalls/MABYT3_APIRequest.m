@@ -707,6 +707,9 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
+#pragma mark -
+#pragma mark fetch youtube search
+
 
 - (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
    __block NSString * pageToken = nil;
@@ -737,7 +740,77 @@ static MABYT3_APIRequest * sharedlst = nil;
 
    [operation setCompletionBlockWithSuccess:completionBlock failure:failBlock];
    [operation start];
+}
 
+
+#pragma mark -
+#pragma mark -
+
+
+- (NSMutableURLRequest *)getRequest:(NSString *)urlStr withAuth:(BOOL)auth {
+
+   NSString * string = [NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey];
+
+   NSURL * url = [NSURL URLWithString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+   NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:url];
+
+   [request setHTTPMethod:@"GET"];
+   if (auth) {
+      if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
+         [request setValue:[NSString stringWithFormat:@"Bearer %@",
+                                                      [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
+        forHTTPHeaderField:@"Authorization"];
+      }
+   }
+   return request;
+}
+
+
+- (NSString *)parseSearchList:(NSString *)urlStr arr:(NSMutableArray *)arr data:(NSData *)data {
+   NSError * e = nil;
+   NSString * pageToken;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+   }
+   if ([dict objectForKey:@"nextPageToken"]) {
+      pageToken = [dict objectForKey:@"nextPageToken"];
+//      pageToken = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+   }
+   return pageToken;
+}
+
+
+- (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp {
+   NSError * error;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"error"]) {
+      NSDictionary * dict2 = [dict objectForKey:@"error"];
+      if ([dict2 objectForKey:@"errors"]) {
+         NSArray * items = [dict2 objectForKey:@"errors"];
+         if (items.count > 0) {
+            NSString * dom = @"YTAPI";
+            if ([items[0] objectForKey:@"domain"]) {
+               dom = [items[0] objectForKey:@"domain"];
+            }
+            error = [NSError errorWithDomain:dom
+                                        code:httpresp.statusCode
+                                    userInfo:items[0]];
+         }
+      }
+   }
+   return error;
 }
 
 

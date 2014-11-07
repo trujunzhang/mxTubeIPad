@@ -57,6 +57,7 @@
 - (void) LISTGuideCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void) LISTLanguagesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void) LISTRegionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
+- (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTPlayListsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
