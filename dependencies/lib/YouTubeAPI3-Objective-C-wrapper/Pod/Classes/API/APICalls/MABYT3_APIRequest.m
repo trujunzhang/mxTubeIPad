@@ -7,6 +7,7 @@
 //
 
 #import "MABYT3_APIRequest.h"
+#import "AFNetworking.h"
 
 
 @implementation MABYT3_APIRequest
@@ -705,21 +706,37 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-//"Error Domain=NSURLErrorDomain Code=-1002 "unsupported URL" UserInfo=0x7b131680 {NSUnderlyingError=0x7a747ee0 "unsupported URL", NSLocalizedDescription=unsupported URL}"
+- (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+   NSMutableURLRequest * request = [self getRequest:urlStr];
+
+   AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//   operation.responseSerializer = [AFJSONResponseSerializer serializer];
+
+   void (^completionBlock)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation * operation, id o) {
+       NSString * debug = @"debug";
+   };
+   void (^failBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation * operation, NSError * error) {
+       NSString * debug = @"debug";
+   };
+
+   [operation setCompletionBlockWithSuccess:completionBlock failure:failBlock];
+   [operation start];
+//
+}
+
+//"Error Domain=NSURLErrorDomain Code=-1002 "unsupported URL" UserInfo=0x786f4f70 {NSUnderlyingError=0x79986d90 "unsupported URL", NSLocalizedDescription=unsupported URL}"
+
+
 - (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
-   NSString * string = [NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey];
-   [request setURL:[NSURL URLWithString:string]];
 
-   [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
+   NSURL * url = [self getCommonURL:urlStr];
+   [request setURL:url];
+
+   [self setCommonRequest:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -777,19 +794,27 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (NSURL *)getCommonURL:(NSString *)urlStr {
+   NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]];
+   return url;
+}
 
-   __block NSString * nxtURLStr = @"";
-   NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
-   [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
+- (void)setCommonRequest:(NSMutableURLRequest *)request {
    [request setHTTPMethod:@"GET"];
    if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
       [request setValue:[NSString stringWithFormat:@"Bearer %@",
                                                    [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
      forHTTPHeaderField:@"Authorization"];
    }
+}
+
+
+- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+
+   __block NSString * nxtURLStr = @"";
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSMutableURLRequest * request = [self getRequest:urlStr];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -842,6 +867,23 @@ static MABYT3_APIRequest * sharedlst = nil;
                               });
 
                           }];
+}
+
+
+- (NSMutableURLRequest *)getRequest:(NSString *)urlStr {
+
+   NSString * string = [NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey];
+
+   NSURL * url = [NSURL URLWithString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+   NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:url];
+
+   [request setHTTPMethod:@"GET"];
+   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
+      [request setValue:[NSString stringWithFormat:@"Bearer %@",
+                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
+     forHTTPHeaderField:@"Authorization"];
+   }
+   return request;
 }
 
 

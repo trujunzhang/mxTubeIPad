@@ -154,23 +154,23 @@ static GYoutubeHelper * instance = nil;
    NSDictionary * parameters = @{
     @"part" : @"id,snippet",
     @"q" : queryTerm,
-    @"type" : queryType,
+//    @"type" : queryType,
     //@"fields" : @"items/id",
    };
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:queryTerm
                                                                   withParameters:parameters
                                                                    andMaxResults:10];
    [[MABYT3_APIRequest sharedInstance]
-    LISTSearchItemsForURL:urlStr
-               andHandler:^(NSMutableArray * results, NSError * error, NSString * nxt) {
+    fetchWithUrl:urlStr
+      andHandler:^(NSMutableArray * results, NSError * error, NSString * nxt) {
 
-                   if (!error) {
-                      NSLog(@"%@", [@(results.count) stringValue]);
-                   }
-                   else {
-                      NSLog(@"%@", error.description);
-                   }
-               }];
+          if (!error) {
+             NSLog(@"%@", [@(results.count) stringValue]);
+          }
+          else {
+             NSLog(@"%@", error.description);
+          }
+      }];
 }
 
 

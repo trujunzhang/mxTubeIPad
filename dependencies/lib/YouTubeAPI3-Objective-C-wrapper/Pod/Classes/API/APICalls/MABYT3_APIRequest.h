@@ -60,6 +60,7 @@
 - (void) LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTPlayListsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
+- (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTSearchItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
 - (void) LISTVideosForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
