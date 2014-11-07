@@ -154,7 +154,7 @@ static GYoutubeHelper * instance = nil;
     @"fields" : @"items(id/videoId)",
    };
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:queryTerm
-                                                                       queryType:@"playlist"
+                                                                       queryType:@"video"
                                                                   withParameters:parameters
                                                                    andMaxResults:10];
    [[MABYT3_APIRequest sharedInstance]
@@ -168,44 +168,6 @@ static GYoutubeHelper * instance = nil;
              errorBlock(error);
           }
       }];
-}
-
-
-- (void)fetchSearchListWithQueryType111:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   YTServiceYouTube * service = self.youTubeService;
-
-   YTQueryYouTube * query = [YTQueryYouTube queryForSearchListWithPart:@"id,snippet"];
-   query.q = queryTerm;
-   query.type = queryType;
-//   query.type = @"video";
-//   query.type = @"channel";
-
-   // maxResults specifies the number of results per page.  Since we earlier
-   // specified shouldFetchNextPages=YES, all results should be fetched,
-   // though specifying a larger maxResults will reduce the number of fetches
-   // needed to retrieve all pages.
-   query.maxResults = search_maxResults; // NUMBER_OF_VIDEOS_RETURNED
-
-   // We can specify the fields we want here to reduce the network
-   // bandwidth and memory needed for the fetched collection.
-   //
-   // For example, leave query.fields as nil during development.
-   // When ready to test and optimize your app, specify just the fields needed.
-   // For example, this sample app might use
-   //
-   query.fields = @"items(id/videoId)";
-
-   _searchListTicket = [service executeQuery:query
-                           completionHandler:^(GTLServiceTicket * ticket,
-                            GTLYouTubeSearchListResponse * resultList,
-                            NSError * error) {
-                               // The contentDetails of the response has the playlists available for "my channel".
-                               if ([[resultList items] count] > 0) {
-                                  completion([resultList items]);
-                               }
-                               errorBlock(error);
-                               _searchListTicket = nil;
-                           }];
 }
 
 
