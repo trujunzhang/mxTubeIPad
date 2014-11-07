@@ -63,4 +63,5 @@ static NSString *scope = @"https://www.googleapis.com/auth/youtube https://www.g
 - (void)SignOut;
 
 - (void)saveToken:(MAB_GoogleAccessToken *)token;
+- (void)setAuthToken:(MAB_GoogleAccessToken *)token isSignedIn:(BOOL)in;
 @end

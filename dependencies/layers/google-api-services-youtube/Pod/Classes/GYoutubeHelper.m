@@ -116,7 +116,7 @@ static GYoutubeHelper * instance = nil;
 //   token.tokenTime = youtubeAuthInfo.expirationDate;
 //   token.tokenType = youtubeAuthInfo.tokenType;
 
-   [MAB_GoogleUserCredentials sharedInstance].token = token;
+   [[MAB_GoogleUserCredentials sharedInstance] setAuthToken:token isSignedIn:self.isSignedIn];
 }
 
 

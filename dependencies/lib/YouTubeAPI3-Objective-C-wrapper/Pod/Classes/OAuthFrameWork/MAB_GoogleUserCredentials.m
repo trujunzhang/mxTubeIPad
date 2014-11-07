@@ -288,4 +288,10 @@ static MAB_GoogleUserCredentials * sharedCred = nil;
 }
 
 
+- (void)setAuthToken:(MAB_GoogleAccessToken *)token isSignedIn:(BOOL)isSignedIn {
+   self.token = token;
+   self.signedin = isSignedIn;
+}
+
+
 @end
