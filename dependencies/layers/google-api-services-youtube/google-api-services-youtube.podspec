@@ -13,4 +13,20 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.dependency 'Google-API-Client/YouTube'
   s.dependency 'Google-API-Client/YouTubeAnalytics'
+
+
+  s.subspec 'constant' do |sub|
+    sub.source_files = 'Pod/Classes/constant/*.{h,m}'
+  end
+
+  s.subspec 'helper' do |sub|
+    sub.source_files = 'Pod/Classes/helper/*.{h,m}'
+  end
+
+  s.subspec 'model' do |sub|
+    sub.source_files = 'Pod/Classes/model/*.{h,m}'
+  end
+
+
+
 end
