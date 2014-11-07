@@ -198,6 +198,7 @@ NSString * lastSearch = @"sketch 3";
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
+       NSLog(@"leng = %d", array.count);
        [self.videoList addObjectsFromArray:array];
        self.isLoadingMore = YES;
        [[self collectionView] reloadData];
