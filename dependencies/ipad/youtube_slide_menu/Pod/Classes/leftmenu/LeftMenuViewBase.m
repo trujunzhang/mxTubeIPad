@@ -42,20 +42,20 @@
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user {
 
    UIView * headerView = nil;
-//   if ([[GYoutubeHelper getInstance] isSignedIn]) {
-//      UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
-//                                                                   owner:nil
-//                                                                 options:nil] lastObject];
-//
-//      headerView = [userInfoView bind:user];
-//   } else {
+   if ([[GYoutubeHelper getInstance] isSignedIn]) {
+      UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
+                                                                   owner:nil
+                                                                 options:nil] lastObject];
+
+      headerView = [userInfoView bind:user];
+   } else {
       headerView = [[[NSBundle mainBundle] loadNibNamed:@"UserLoginView" owner:nil options:nil] lastObject];
 
       //The setup code (in viewDidLoad in your view controller)
       UITapGestureRecognizer * singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(handleSingleTap:)];
       [headerView addGestureRecognizer:singleFingerTap];
-//   }
+   }
 
    headerView.frame = CGRectMake(0, 0, 256, 70);
 

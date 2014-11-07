@@ -266,17 +266,6 @@ static GYoutubeHelper * instance = nil;
                                                          refreshToken:authentication.refreshToken];
    // 3
    [self saveMABGoogleAccessToken:info];
-
-   [[MABYT3_APIRequest sharedInstance] LISTActivitiesForURL:[[MABYT3_APIRequest sharedInstance] ActivitiesURLforHomeWithMaxResults:50]
-                                                 andHandler:^(NSMutableArray * results, NSError * error, NSString * nxt) {
-
-                                                     if (!error) {
-                                                        NSLog(@"%@", [@(results.count) stringValue]);
-                                                     }
-                                                     else {
-                                                        NSLog(@"%@", error.description);
-                                                     }
-                                                 }];
 }
 
 
