@@ -211,11 +211,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -278,11 +274,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -341,11 +333,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -521,11 +509,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -589,11 +573,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -822,11 +802,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-//      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-//                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-//     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -890,11 +866,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -957,11 +929,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -1021,11 +989,8 @@ static MABYT3_APIRequest * sharedlst = nil;
    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
 
    [request setHTTPMethod:@"GET"];
-   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-     forHTTPHeaderField:@"Authorization"];
-   }
+
+   [self appendAuthInfo:request];
 
    NSOperationQueue * queue = [[NSOperationQueue alloc] init];
    [NSURLConnection sendAsynchronousRequest:request
@@ -1078,6 +1043,15 @@ static MABYT3_APIRequest * sharedlst = nil;
                               });
 
                           }];
+}
+
+
+- (void)appendAuthInfo:(NSMutableURLRequest *)request {
+   if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
+//      [request setValue:[NSString stringWithFormat:@"Bearer %@",
+//                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
+//     forHTTPHeaderField:@"Authorization"];
+   }
 }
 
 
