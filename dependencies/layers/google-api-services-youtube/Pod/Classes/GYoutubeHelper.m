@@ -171,25 +171,22 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchVideoListWithVideoId:(NSString *)videoId
+//"K2ZBubuxqVA,ISTE3VfPWHI,ij_0p_6qTss,KRbMlHjjvEY,FFDEsDClY08,uKFzQxl3iJk,8aShfolR6w8,0fLokHhfueM,mlk-8QOSztE,9skaRCdcphc"
+- (void)fetchVideoListWithVideoId:(NSString *)videoIds
                 completionHandler:(YoutubeResponseBlock)completion
                      errorHandler:(ErrorResponseBlock)errorBlock {
-   YTServiceYouTube * service = self.youTubeService;
-
-   YTQueryYouTube * query = [YTQueryYouTube queryForVideosListWithPart:@"snippet,contentDetails, statistics"];
-   query.identifier = videoId;
-
-   _searchListTicket = [service executeQuery:query
-                           completionHandler:^(GTLServiceTicket * ticket,
-                            GTLYouTubeSearchListResponse * resultList,
-                            NSError * error) {
-                               // The contentDetails of the response has the playlists available for "my channel".
-                               if ([[resultList items] count] > 0) {
-                                  completion([resultList items]);
-                               }
-                               errorBlock(error);
-                               _searchListTicket = nil;
-                           }];
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideo:videoIds withMaxResults:5];
+   [[MABYT3_APIRequest sharedInstance]
+    LISTVideosForURL:urlStr
+          andHandler:^(NSMutableArray * results, NSError * error, NSString * pageToken) {
+              if (!error) {
+                 completion(results);
+              }
+              else {
+                 NSLog(@"%@", error.description);
+                 errorBlock(error);
+              }
+          }];
 }
 
 
