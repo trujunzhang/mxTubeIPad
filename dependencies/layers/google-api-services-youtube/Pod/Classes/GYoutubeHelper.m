@@ -22,6 +22,8 @@
 #import "GTLYouTubeSubscriptionSnippet.h"
 #import "GTLYouTubePlaylistItemListResponse.h"
 #import "GTLYouTubePlaylistItem.h"
+#import "MAB_GoogleAccessToken.h"
+#import "MAB_GoogleUserCredentials.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -233,7 +235,12 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)saveAuthorizeAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
-
+   MAB_GoogleAccessToken * token = [[MAB_GoogleAccessToken alloc] init];
+   token.accessToken = authentication.accessToken;
+   token.refreshToken = authentication.refreshToken;
+   token.tokenTime = authentication.expirationDate;
+   token.tokenType = authentication.tokenType;
+   [[MAB_GoogleUserCredentials sharedInstance] saveToken:token];
 
    // 1
    [self fetchAuthorizeInfo:authentication];

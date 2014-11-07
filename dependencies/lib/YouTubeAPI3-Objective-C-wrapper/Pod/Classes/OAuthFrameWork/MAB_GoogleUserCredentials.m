@@ -43,13 +43,20 @@ static MAB_GoogleUserCredentials * sharedCred = nil;
 }
 
 
-- (void)saveToken {
-
-   NSData * encodedToken = [NSKeyedArchiver archivedDataWithRootObject:_token];
+- (void)saveToken:(MAB_GoogleAccessToken *)token {
+   NSData * encodedToken = [NSKeyedArchiver archivedDataWithRootObject:token];
    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
    [defaults setObject:encodedToken forKey:@"GTM_token"];
    [defaults synchronize];
    _signedin = YES;
+
+   [self initUser];
+}
+
+
+- (void)saveToken {
+   [self saveToken:_token];
+
    [_delegate CredUserPrepare];
    [self initUser];
 }
@@ -277,5 +284,6 @@ static MAB_GoogleUserCredentials * sharedCred = nil;
    }
    return sharedCred;
 }
+
 
 @end
