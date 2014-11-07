@@ -43,7 +43,7 @@
    searchBar.showsCancelButton = YES;
    searchBar.userInteractionEnabled = YES;
    searchBar.placeholder = @"Search";
-   searchBar.text = @"yosemite";//test
+   searchBar.text = @"sketch 3";//test
 
    searchBar.delegate = self;
 
