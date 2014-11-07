@@ -6,19 +6,10 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <google-api-services-youtube/YoutubeConstants.h>
 
 
-@interface GYoutubeAuthUser : NSObject {
+@interface GYoutubeSearchInfo : NSObject {
 
 }
-
-@property(nonatomic, strong) YTYouTubeChannel * channel;
-
-@property(nonatomic, strong) NSArray * subscriptions;
-
-- (NSArray *)getTableRows;
-+ (NSString *)getUserThumbnails:(YTYouTubeChannel *)channel;
 
 @end

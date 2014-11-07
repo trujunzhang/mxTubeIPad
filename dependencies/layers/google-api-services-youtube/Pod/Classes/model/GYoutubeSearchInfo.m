@@ -6,31 +6,12 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "GYoutubeAuthUser.h"
-
-#import "YoutubeConstants.h"
+#import "GYoutubeSearchInfo.h"
 
 
-@implementation GYoutubeAuthUser
+@implementation GYoutubeSearchInfo
 
 
-- (NSArray *)getTableRows {
-   NSMutableArray * rows = [[NSMutableArray alloc] init];
-   for (YTYouTubeSubscription * subscription in self.subscriptions) {
-      NSString * title = subscription.snippet.title;
-      NSString * thumbnailsUrl = subscription.snippet.thumbnails.high.url;
-      NSArray * row = @[ title, thumbnailsUrl ];
-
-      [rows addObject:row];
-   }
-
-   return [rows copy];
-}
-
-
-+ (NSString *)getUserThumbnails:(YTYouTubeChannel *)channel {
-   return channel.snippet.thumbnails.high.url;
-}
 
 
 @end

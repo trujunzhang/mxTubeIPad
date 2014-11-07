@@ -11,6 +11,7 @@
 #import "KRLCollectionViewGridLayout.h"
 #import "IpadGridViewCell.h"
 #import "GYoutubeHelper.h"
+#import "GYoutubeSearchInfo.h"
 
 
 static NSString * const identifier = @"GridViewCellIdentifier";
@@ -25,6 +26,16 @@ NSString * lastSearch = @"call of duty advanced warfare";
 
 @property(nonatomic, copy) NSString * queryType;
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
+
+
+@property(nonatomic, strong) UICollectionView * collectionView;
+
+@property(nonatomic, strong) KRLCollectionViewGridLayout * collectionViewGridLayout;
+@property(nonatomic, strong) NSMutableArray * videoList;
+
+
+@property(nonatomic, strong) UIImage * placeHoderImage;
+@property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
 
 @end
 
