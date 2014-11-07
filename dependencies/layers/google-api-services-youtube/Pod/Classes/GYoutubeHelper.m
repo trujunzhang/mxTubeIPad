@@ -17,14 +17,10 @@
 #import "GYoutubeAuthUser.h"
 #import "YoutubeAuthDataStore.h"
 #import "YoutubeAuthInfo.h"
-#import "GTLYouTubeSubscription.h"
-#import "GTLYouTubeSubscriptionContentDetails.h"
-#import "GTLYouTubeSubscriptionSnippet.h"
 #import "GTLYouTubePlaylistItemListResponse.h"
 #import "GTLYouTubePlaylistItem.h"
 #import "MAB_GoogleAccessToken.h"
 #import "MAB_GoogleUserCredentials.h"
-#import "MABYT3_APIRequest.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -136,7 +132,7 @@ static GYoutubeHelper * instance = nil;
        }
    };
    // 01: Search videoIds by queryTerm
-//   [self fetchSearchListWithQueryType:queryType queryTerm:queryTerm completionHandler:completion errorHandler:error];
+   [self fetchSearchListWithQueryType:queryType queryTerm:queryTerm completionHandler:completion errorHandler:error];
 
    return nil;
 }

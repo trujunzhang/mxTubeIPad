@@ -1,3 +1,17 @@
+#ifdef __OBJC__
+
+// module
+#import "GTLYouTubeChannel.h"
+#import "GTLYouTubeSubscription.h"
+#import "GTLYouTubeSubscriptionSnippet.h"
+#import "GTLYouTubeThumbnailDetails.h"
+#import "GTLYouTubeThumbnail.h"
+#import "GTLYouTubeChannelSnippet.h"
+
+
+#endif
+
+
 //static NSString * apiKey = @"AIzaSyBd9kf5LB41bYWnxI3pfoxHJ2njRvmAA90";
 //static NSString * kMyClientID = @"632947002586-hsu569tme6lt8635vvoofi5mnkqfkqus.apps.googleusercontent.com";
 //static NSString * kMyClientSecret = @"dHWxjaetid5ckoVMzp0LmzJt";
@@ -6,6 +20,12 @@
 static NSString * kKeychainItemName = @"mxyoutube";
 
 static NSUInteger search_maxResults = 15;
+
+#define YTYouTubeChannel  GTLYouTubeChannel
+#define YTYouTubeSubscription  GTLYouTubeSubscription
+
+
+
 
 
 
