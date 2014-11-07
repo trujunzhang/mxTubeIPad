@@ -24,6 +24,7 @@
 #import "GTLYouTubePlaylistItem.h"
 #import "MAB_GoogleAccessToken.h"
 #import "MAB_GoogleUserCredentials.h"
+#import "MABYT3_APIRequest.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -77,7 +78,7 @@ static GYoutubeHelper * instance = nil;
    self = [super init];
    if (self) {
       [self initYoutubeService];
-      [MAB_GoogleUserCredentials sharedInstance].delegate = self;
+//      [MAB_GoogleUserCredentials sharedInstance].delegate = self;
    }
 
    return self;
@@ -99,20 +100,23 @@ static GYoutubeHelper * instance = nil;
                                                             clientSecret:kMyClientSecret];
    // 3
    [self fetchAuthorizeInfo:auth];
+
+   // 4
+   [self saveMABGoogleAccessToken:[YoutubeAuthDataStore readTokens]];
 }
 
 
 #pragma mark -
 
 
-- (void)saveMABGoogleAccessToken:(GTMOAuth2Authentication *)authentication {
+- (void)saveMABGoogleAccessToken:(YoutubeAuthInfo *)youtubeAuthInfo {
    MAB_GoogleAccessToken * token = [[MAB_GoogleAccessToken alloc] init];
-   token.accessToken = authentication.accessToken;
-   token.refreshToken = authentication.refreshToken;
-   token.tokenTime = authentication.expirationDate;
-   token.tokenType = authentication.tokenType;
+   token.accessToken = youtubeAuthInfo.accessToken;
+   token.refreshToken = youtubeAuthInfo.refreshToken;
+//   token.tokenTime = youtubeAuthInfo.expirationDate;
+//   token.tokenType = youtubeAuthInfo.tokenType;
 
-   [[MAB_GoogleUserCredentials sharedInstance] saveToken:token];
+   [MAB_GoogleUserCredentials sharedInstance].token = token;
 }
 
 
@@ -258,10 +262,21 @@ static GYoutubeHelper * instance = nil;
    // 1
    [self fetchAuthorizeInfo:authentication];
    // 2
-   [[YoutubeAuthDataStore saveAuthAccessToken:authentication.accessToken
-                                 refreshToken:authentication.refreshToken];
+   YoutubeAuthInfo * info = [YoutubeAuthDataStore saveAuthAccessToken:authentication.accessToken
+                                                         refreshToken:authentication.refreshToken];
    // 3
-   [self saveMABGoogleAccessToken:authentication];
+   [self saveMABGoogleAccessToken:info];
+
+   [[MABYT3_APIRequest sharedInstance] LISTActivitiesForURL:[[MABYT3_APIRequest sharedInstance] ActivitiesURLforHomeWithMaxResults:50]
+                                                 andHandler:^(NSMutableArray * results, NSError * error, NSString * nxt) {
+
+                                                     if (!error) {
+                                                        NSLog(@"%@", [@(results.count) stringValue]);
+                                                     }
+                                                     else {
+                                                        NSLog(@"%@", error.description);
+                                                     }
+                                                 }];
 }
 
 
@@ -378,6 +393,9 @@ static GYoutubeHelper * instance = nil;
    self.youtubeAuthUser = nil;
    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.youTubeService.authorizer];
+
+   // 3
+   [YoutubeAuthDataStore resetAuthToken];
 }
 
 

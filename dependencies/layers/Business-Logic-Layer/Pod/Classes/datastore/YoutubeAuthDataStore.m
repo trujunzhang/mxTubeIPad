@@ -50,6 +50,13 @@
 #pragma mark -
 
 
++ (void)resetAuthToken {
+   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+   [defaults setObject:nil forKey:@"GTM_youtube_token"];
+   [defaults synchronize];
+}
+
+
 + (YoutubeAuthInfo *)saveAuthAccessToken:(NSString *)accessToken refreshToken:(NSString *)refreshToken {
    // 1
    YoutubeAuthInfo * info = [[YoutubeAuthInfo alloc] init];
