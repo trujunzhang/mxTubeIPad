@@ -708,7 +708,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 
 
 - (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
-   __block NSString * nxtURLStr = @"";
+   __block NSString * pageToken = nil;
 
    NSMutableURLRequest * request = [self getRequest:urlStr withAuth:NO];
 
@@ -719,13 +719,13 @@ static MABYT3_APIRequest * sharedlst = nil;
        NSMutableArray * array = [[NSMutableArray alloc] init];
 
        if (operation.response.statusCode == 200) {
-          nxtURLStr = [self parseSearchList:urlStr arr:array data:operation.responseData];
+          pageToken = [self parseSearchList:urlStr arr:array data:operation.responseData];
        }
        else {
           error = [self getError:operation.responseData httpresp:operation.response];
        }
        dispatch_async(dispatch_get_main_queue(), ^(void) {
-           handler(array, error, nxtURLStr);
+           handler(array, error, pageToken);
        });
    };
    void (^failBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation * operation, NSError * error) {
@@ -801,7 +801,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 
 - (NSString *)parseSearchList:(NSString *)urlStr arr:(NSMutableArray *)arr data:(NSData *)data {
    NSError * e = nil;
-   NSString * nxtURLStr;
+   NSString * pageToken;
    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
                                                            error:&e];
@@ -815,10 +815,10 @@ static MABYT3_APIRequest * sharedlst = nil;
       }
    }
    if ([dict objectForKey:@"nextPageToken"]) {
-      NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-      nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+      pageToken = [dict objectForKey:@"nextPageToken"];
+//      pageToken = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
    }
-   return nxtURLStr;
+   return pageToken;
 }
 
 

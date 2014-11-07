@@ -159,7 +159,7 @@ static GYoutubeHelper * instance = nil;
                                                                    andMaxResults:10];
    [[MABYT3_APIRequest sharedInstance]
     fetchWithUrl:urlStr
-      andHandler:^(NSMutableArray * results, NSError * error, NSString * nxt) {
+      andHandler:^(NSMutableArray * results, NSError * error, NSString * pageToken) {
           if (!error) {
              completion(results);
           }
