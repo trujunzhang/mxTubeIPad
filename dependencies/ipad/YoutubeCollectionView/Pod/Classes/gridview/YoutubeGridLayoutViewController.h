@@ -18,8 +18,7 @@
 
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
 
-- (id)initWithVideoList:(NSMutableArray *)array;
-- (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)search:(NSString *)text;
+- (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)cleanup;
 @end

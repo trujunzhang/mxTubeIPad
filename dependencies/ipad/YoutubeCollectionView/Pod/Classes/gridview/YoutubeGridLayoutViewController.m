@@ -41,17 +41,6 @@ NSString * lastSearch = @"sketch 3";
 
 @implementation YoutubeGridLayoutViewController
 
-- (instancetype)initWithVideoList:(NSArray *)videoList {
-   self = [super init];
-   if (self) {
-      self.videoList = videoList;
-      [[self collectionView] reloadData];
-   }
-
-   return self;
-}
-
-
 - (void)viewDidLoad {
    [super viewDidLoad];
 

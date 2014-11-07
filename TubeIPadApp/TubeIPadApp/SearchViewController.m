@@ -28,7 +28,6 @@
    // Do any additional setup after loading the view, typically from a nib.
    self.view.backgroundColor = [UIColor clearColor];
 
-//   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
    self.delegate = self;
    self.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
