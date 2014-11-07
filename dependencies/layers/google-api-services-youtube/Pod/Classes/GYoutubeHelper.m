@@ -28,6 +28,12 @@
 static GYoutubeHelper * instance = nil;
 
 
+@interface GYoutubeHelper ()<MAB_GoogleUserCredentialsDelegate> {
+
+}
+@end
+
+
 @implementation GYoutubeHelper
 
 #pragma mark -
@@ -71,6 +77,7 @@ static GYoutubeHelper * instance = nil;
    self = [super init];
    if (self) {
       [self initYoutubeService];
+      [MAB_GoogleUserCredentials sharedInstance].delegate = self;
    }
 
    return self;
@@ -96,6 +103,19 @@ static GYoutubeHelper * instance = nil;
 
 
 #pragma mark -
+
+
+- (void)saveMABGoogleAccessToken:(GTMOAuth2Authentication *)authentication {
+   MAB_GoogleAccessToken * token = [[MAB_GoogleAccessToken alloc] init];
+   token.accessToken = authentication.accessToken;
+   token.refreshToken = authentication.refreshToken;
+   token.tokenTime = authentication.expirationDate;
+   token.tokenType = authentication.tokenType;
+
+   [[MAB_GoogleUserCredentials sharedInstance] saveToken:token];
+}
+
+
 #pragma mark Youtube search.
 
 
@@ -235,15 +255,13 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)saveAuthorizeAndFetchUserInfo:(GTMOAuth2Authentication *)authentication {
-   MAB_GoogleAccessToken * token = [[MAB_GoogleAccessToken alloc] init];
-   token.accessToken = authentication.accessToken;
-   token.refreshToken = authentication.refreshToken;
-   token.tokenTime = authentication.expirationDate;
-   token.tokenType = authentication.tokenType;
-   [[MAB_GoogleUserCredentials sharedInstance] saveToken:token];
-
    // 1
    [self fetchAuthorizeInfo:authentication];
+   // 2
+   [[YoutubeAuthDataStore saveAuthAccessToken:authentication.accessToken
+                                 refreshToken:authentication.refreshToken];
+   // 3
+   [self saveMABGoogleAccessToken:authentication];
 }
 
 

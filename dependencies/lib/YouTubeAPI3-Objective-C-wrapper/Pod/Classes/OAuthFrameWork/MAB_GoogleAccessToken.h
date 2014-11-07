@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface MAB_GoogleAccessToken : NSObject
 
-@property (strong, nonatomic) NSString *accessToken;
-@property (strong, nonatomic) NSString *tokenType;
-@property (nonatomic) NSUInteger expiresIn;
-@property (strong, nonatomic) NSString *refreshToken;
-@property (strong, nonatomic) NSDate *tokenTime;
+@property(strong, nonatomic) NSString * accessToken;
+@property(strong, nonatomic) NSString * tokenType;
+@property(nonatomic) NSUInteger expiresIn;
+@property(strong, nonatomic) NSString * refreshToken;
+@property(strong, nonatomic) NSDate * tokenTime;
 
-- (id) initFromDictionary:(NSDictionary *)textdict;
-- (void) refreshToken:(NSDictionary *)textdict;
+- (id)initFromDictionary:(NSDictionary *)textdict;
+- (void)refreshToken:(NSDictionary *)textdict;
 
 @end

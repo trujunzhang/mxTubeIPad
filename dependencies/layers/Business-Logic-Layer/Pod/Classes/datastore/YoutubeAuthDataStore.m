@@ -46,4 +46,33 @@
 }
 
 
+#pragma mark -
+#pragma mark -
+
+
++ (YoutubeAuthInfo *)saveAuthAccessToken:(NSString *)accessToken refreshToken:(NSString *)refreshToken {
+   // 1
+   YoutubeAuthInfo * info = [[YoutubeAuthInfo alloc] init];
+   info.accessToken = accessToken;
+   info.refreshToken = refreshToken;
+
+   // 2
+   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+   [defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:info] forKey:@"GTM_youtube_token"];
+   [defaults synchronize];
+
+   return info;
+}
+
+
++ (YoutubeAuthInfo *)readTokens {
+   NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+   if ([defaults objectForKey:@"GTM_youtube_token"]) {
+      return [NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:@"GTM_youtube_token"]];
+   } else {
+      return [[YoutubeAuthInfo alloc] init];
+   }
+}
+
+
 @end

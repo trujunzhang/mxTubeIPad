@@ -12,6 +12,8 @@
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "LeftMenuItemTree.h"
+#import "MAB_GoogleUserCredentials.h"
+#import "GTMOAuth2ViewControllerTouch.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -40,20 +42,20 @@
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user {
 
    UIView * headerView = nil;
-   if ([[GYoutubeHelper getInstance] isSignedIn]) {
-      UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
-                                                                   owner:nil
-                                                                 options:nil] lastObject];
-
-      headerView = [userInfoView bind:user];
-   } else {
+//   if ([[GYoutubeHelper getInstance] isSignedIn]) {
+//      UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
+//                                                                   owner:nil
+//                                                                 options:nil] lastObject];
+//
+//      headerView = [userInfoView bind:user];
+//   } else {
       headerView = [[[NSBundle mainBundle] loadNibNamed:@"UserLoginView" owner:nil options:nil] lastObject];
 
       //The setup code (in viewDidLoad in your view controller)
       UITapGestureRecognizer * singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(handleSingleTap:)];
       [headerView addGestureRecognizer:singleFingerTap];
-   }
+//   }
 
    headerView.frame = CGRectMake(0, 0, 256, 70);
 
@@ -95,6 +97,26 @@
       NSLog(@"Success");
 
       [[GYoutubeHelper getInstance] saveAuthorizeAndFetchUserInfo:auth];
+   }
+}
+
+
+- (void)viewController1:(GTMOAuth2ViewControllerTouch *)viewController
+       finishedWithAuth:(GTMOAuth2Authentication *)auth
+                  error:(NSError *)error {
+   if (error != nil) {
+      NSLog(@"Authentication failed");
+   } else {
+      NSLog(@"Authentication succeeded");
+      auth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName
+                                                                   clientID:kMyClientID
+                                                               clientSecret:kMyClientSecret];
+      NSLog(@"Auth = %@", auth);
+      NSLog(@"auth.canAutorize : %@", auth.canAuthorize);
+      NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+      [defaults setObject:auth.code forKey:@"kCode"];
+      [defaults setObject:auth.accessToken forKey:@"kAccessToken"];
+      [defaults setObject:auth.refreshToken forKey:@"kRefreshToken"];
    }
 }
 

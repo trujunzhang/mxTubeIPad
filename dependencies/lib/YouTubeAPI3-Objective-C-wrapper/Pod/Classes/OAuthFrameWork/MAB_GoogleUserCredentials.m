@@ -50,7 +50,9 @@ static MAB_GoogleUserCredentials * sharedCred = nil;
    [defaults synchronize];
    _signedin = YES;
 
-   [self initUser];
+
+
+//   [self initUser];
 }
 
 

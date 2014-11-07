@@ -17,6 +17,9 @@
       self.title = @"";
       self.email = @"";
       self.thumbnailUrl = @"";
+
+      self.accessToken = @"";
+      self.refreshToken = @"";
    }
 
    return self;
@@ -30,6 +33,9 @@
    [aCoder encodeObject:self.title forKey:@"title"];
    [aCoder encodeObject:self.email forKey:@"email"];
    [aCoder encodeObject:self.thumbnailUrl forKey:@"thumbnailUrl"];
+
+   [aCoder encodeObject:self.accessToken forKey:@"accessToken"];
+   [aCoder encodeObject:self.refreshToken forKey:@"refreshToken"];
 }
 
 
@@ -38,8 +44,21 @@
       self.title = [aDecoder decodeObjectForKey:@"title"];
       self.email = [aDecoder decodeObjectForKey:@"email"];
       self.thumbnailUrl = [aDecoder decodeObjectForKey:@"thumbnailUrl"];
+
+      self.accessToken = [aDecoder decodeObjectForKey:@"accessToken"];
+      self.refreshToken = [aDecoder decodeObjectForKey:@"refreshToken"];
    }
    return self;
+}
+
+
++ (void)saveAuthAccessToken:(NSString *)token refreshToken:(NSString *)token1 {
+
+}
+
+
+- (void)readTokens {
+
 }
 
 
