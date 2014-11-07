@@ -32,8 +32,7 @@ NSString * lastSearch = @"sketch 3";
 @property(nonatomic, strong) KRLCollectionViewGridLayout * collectionViewGridLayout;
 @property(nonatomic, strong) NSMutableArray * videoList;
 
-
-//@property(nonatomic, strong) UIImage * placeHoderImage;
+@property(nonatomic) NSUInteger isLoadingMore;
 @property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
 
 @end
@@ -44,13 +43,10 @@ NSString * lastSearch = @"sketch 3";
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   if (lastSearch)
-      [self search:lastSearch];
-
    // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor clearColor];
 
-//   self.placeHoderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
+   self.isLoadingMore = NO;
 
    [self setupCollectionView:self.view];
    [self setupRefresh];
@@ -116,7 +112,7 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return self.videoList.count + 1;
+   return self.videoList.count + self.isLoadingMore ? 1 : 0;
 }
 
 
@@ -195,6 +191,10 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)searchByPageToken {
+   if (self.searchInfo == nil)
+      return;
+
+   NSLog(@"                    ");
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
@@ -212,6 +212,7 @@ NSString * lastSearch = @"sketch 3";
 
 - (void)cleanup {
    self.videoList = [[NSMutableArray alloc] init];
+   self.isLoadingMore = NO;
    [[self collectionView] reloadData];
 }
 @end

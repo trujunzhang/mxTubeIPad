@@ -119,7 +119,7 @@ static GYoutubeHelper * instance = nil;
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:info.queryTeam
                                                                        queryType:info.queryType
                                                                   withParameters:info.parameters
-                                                                   andMaxResults:10];
+                                                                   andMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
           [info setNextPageToken:pageToken];

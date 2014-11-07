@@ -18,6 +18,7 @@
 
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
 
+
 - (void)search:(NSString *)text;
 - (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)cleanup;
