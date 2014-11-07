@@ -18,7 +18,8 @@ static NSString * const identifier = @"GridViewCellIdentifier";
 static NSString * const LOADING_CELL_IDENTIFIER = @"LoadingItemCell";
 
 
-NSString * lastSearch = @"call of duty advanced warfare";
+//NSString * lastSearch = @"call of duty advanced warfare";
+NSString * lastSearch = @"sketch 3";
 //NSString * lastSearch = nil;
 
 
