@@ -7,6 +7,7 @@
 //
 
 #import "MABYT3_APIRequest.h"
+#import "AFHTTPRequestOperation.h"
 
 
 @implementation MABYT3_APIRequest
@@ -703,6 +704,40 @@ static MABYT3_APIRequest * sharedlst = nil;
                               });
 
                           }];
+}
+
+
+
+- (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+   __block NSString * pageToken = nil;
+
+   NSMutableURLRequest * request = [self getRequest:urlStr withAuth:NO];
+
+   AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+
+   void (^completionBlock)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation * operation, id o) {
+       NSError * error = nil;
+       NSMutableArray * array = [[NSMutableArray alloc] init];
+
+       if (operation.response.statusCode == 200) {
+          pageToken = [self parseSearchList:urlStr arr:array data:operation.responseData];
+       }
+       else {
+          error = [self getError:operation.responseData httpresp:operation.response];
+       }
+       dispatch_async(dispatch_get_main_queue(), ^(void) {
+           handler(array, error, pageToken);
+       });
+   };
+   void (^failBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation * operation, NSError * error) {
+       dispatch_async(dispatch_get_main_queue(), ^(void) {
+           handler(nil, error, nil);
+       });
+   };
+
+   [operation setCompletionBlockWithSuccess:completionBlock failure:failBlock];
+   [operation start];
+
 }
 
 
