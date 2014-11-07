@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class GTLYouTubeVideo;
+#import "YoutubeConstants.h"
 
 
 @interface IpadGridViewUserCell : UIView
@@ -17,5 +17,5 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *subscribeBgImage;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *subscribeImage;
 
-- (void)bind:(GTLYouTubeVideo *)video;
+- (void)bind:(YTYouTubeVideo *)video;
 @end

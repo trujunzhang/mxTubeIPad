@@ -7,15 +7,13 @@
 //
 
 #import "IpadGridViewInfoCell.h"
-#import "GTLYouTubeVideo.h"
-#import "GTLYouTubeVideoSnippet.h"
-#import "GTLYouTubeVideoStatistics.h"
+#import "IpadGridViewUserCell.h"
 
 
 @implementation IpadGridViewInfoCell
 
 
-- (void)bind:(GTLYouTubeVideo *)video {
+- (void)bind:(YTYouTubeVideo *)video {
    // 2
    [self.titleLaebl setText:video.snippet.title];
    // 3

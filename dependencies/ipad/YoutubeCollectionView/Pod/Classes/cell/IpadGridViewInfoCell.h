@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class GTLYouTubeVideo;
+#import "YoutubeConstants.h"
 
 
 @interface IpadGridViewInfoCell : UIView
 
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *titleLaebl;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *ratingLabel;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *viewCountLabel;
+@property(unsafe_unretained, nonatomic) IBOutlet UILabel * titleLaebl;
+@property(unsafe_unretained, nonatomic) IBOutlet UILabel * ratingLabel;
+@property(unsafe_unretained, nonatomic) IBOutlet UILabel * viewCountLabel;
 
-- (void)bind:(GTLYouTubeVideo *)video;
+- (void)bind:(YTYouTubeVideo *)video;
 @end

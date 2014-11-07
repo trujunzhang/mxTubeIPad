@@ -6,8 +6,7 @@
 
 #import "YoutubeGridLayoutViewController.h"
 #import "IpadGridViewCell.h"
-#import "GTLYouTubeVideo.h"
-#import "GTLYouTubeVideoSnippet.h"
+
 #import "YKYouTubeVideo.h"
 
 

@@ -7,6 +7,9 @@
 #import "GTLYouTubeThumbnailDetails.h"
 #import "GTLYouTubeThumbnail.h"
 #import "GTLYouTubeChannelSnippet.h"
+#import "GTLYouTubeVideo.h"
+#import "GTLYouTubeVideoSnippet.h"
+#import "GTLYouTubeVideoStatistics.h"
 
 //
 #import "GTLUtilities.h"
@@ -44,6 +47,8 @@ static NSString * kKeychainItemName = @"mxyoutube";
 static NSUInteger search_maxResults = 15;
 
 // module
+
+#define YTYouTubeVideo  GTLYouTubeVideo
 #define YTYouTubeChannel  GTLYouTubeChannel
 #define YTYouTubeSubscription  GTLYouTubeSubscription
 
@@ -53,6 +58,8 @@ static NSUInteger search_maxResults = 15;
 
 
 //
+#define YTQueryYouTube  GTLQueryYouTube
+
 
 
 

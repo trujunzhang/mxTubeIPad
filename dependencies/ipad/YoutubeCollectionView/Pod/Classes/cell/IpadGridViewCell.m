@@ -8,12 +8,6 @@
 
 #import "IpadGridViewCell.h"
 
-#import "GTLYouTubeVideo.h"
-#import "GTLYouTubeVideoSnippet.h"
-#import "GTLYouTubeThumbnailDetails.h"
-#import "GTLYouTubeVideoContentDetails.h"
-#import "GTLYouTubeVideoStatistics.h"
-#import "GTLYouTubeThumbnail.h"
 
 #import "IpadGridViewInfoCell.h"
 #import "IpadGridViewUserCell.h"

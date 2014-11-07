@@ -7,14 +7,12 @@
 //
 
 #import "IpadGridViewUserCell.h"
-#import "GTLYouTubeVideo.h"
-#import "GTLYouTubeVideoSnippet.h"
 
 
 @implementation IpadGridViewUserCell
 
 
-- (void)bind:(GTLYouTubeVideo *)video {
+- (void)bind:(YTYouTubeVideo *)video {
    // 4
    [self.userNameLabel setText:video.snippet.channelTitle];
 }

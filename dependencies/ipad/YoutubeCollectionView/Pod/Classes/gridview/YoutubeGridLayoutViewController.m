@@ -136,7 +136,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
    IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier
                                                                                                  forIndexPath:indexPath];
 
-   GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
+   YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
    [cell bind:video placeholderImage:self.placeHoderImage delegate:self.delegate];
 
    return cell;

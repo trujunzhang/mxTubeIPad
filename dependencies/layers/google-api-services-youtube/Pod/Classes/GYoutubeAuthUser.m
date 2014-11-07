@@ -28,7 +28,7 @@
 }
 
 
-+ (NSString *)getUserThumbnails:(GTLYouTubeChannel *)channel {
++ (NSString *)getUserThumbnails:(YTYouTubeChannel *)channel {
    return channel.snippet.thumbnails.high.url;
 }
 

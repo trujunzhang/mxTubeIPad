@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class GTLYouTubeVideo;
+
+#import "YoutubeConstants.h"
+
 @class IpadGridViewInfoCell;
 @class IpadGridViewUserCell;
 
@@ -16,7 +18,7 @@
 
 @optional
 
-- (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender;
+- (void)gridViewCellTap:(YTYouTubeVideo *)video sender:(id)sender;
 
 @end
 
@@ -31,8 +33,8 @@
 @property(unsafe_unretained, nonatomic) IBOutlet UIView * userView;
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
-@property(nonatomic, strong) GTLYouTubeVideo * video;
+@property(nonatomic, strong) YTYouTubeVideo * video;
 
 
-- (void)bind:(GTLYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
+- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end
