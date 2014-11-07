@@ -43,7 +43,7 @@
 
 // module
 #import "MABYT3_Video.h"
-
+#import "MABYT3_ThumbnailDetails.h"
 
 #endif
 

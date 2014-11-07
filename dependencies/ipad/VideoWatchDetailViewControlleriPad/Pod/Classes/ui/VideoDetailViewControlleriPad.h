@@ -11,18 +11,19 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import <MediaPlayer/MediaPlayer.h>
+#import <google-api-services-youtube/YoutubeConstants.h>
 
 @class WHTopTabBarController;
 
 @class YoutubeGridLayoutViewController;
 @protocol IpadGridViewCellDelegate;
-@class GTLYouTubeVideo;
+
 
 
 @interface VideoDetailViewControlleriPad : UIViewController
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
-@property(nonatomic, strong) GTLYouTubeVideo * video;
+@property(nonatomic, strong) YTYouTubeVideo * video;
 
 @property(nonatomic, strong) UIViewController * videoDetailController;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
@@ -34,7 +35,7 @@
 @property(nonatomic, strong) NSArray * defaultTableControllers;
 
 @property(nonatomic, strong) id youTubeVideo;
-- (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(GTLYouTubeVideo *)video;
+- (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(YTYouTubeVideo *)video;
 
 @end
 

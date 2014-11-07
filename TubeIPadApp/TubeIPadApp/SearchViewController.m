@@ -77,7 +77,7 @@
 #pragma mark - IpadGridViewCellDelegate
 
 
-- (void)gridViewCellTap:(GTLYouTubeVideo *)video sender:(id)sender {
+- (void)gridViewCellTap:(YTYouTubeVideo *)video sender:(id)sender {
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
 

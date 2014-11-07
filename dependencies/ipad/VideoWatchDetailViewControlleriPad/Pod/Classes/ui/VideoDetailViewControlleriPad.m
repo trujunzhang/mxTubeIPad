@@ -25,7 +25,7 @@
 #pragma mark - UIView cycle
 
 
-- (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(GTLYouTubeVideo *)video {
+- (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(YTYouTubeVideo *)video {
    self = [super init];
    if (self) {
       self.delegate = delegate;
