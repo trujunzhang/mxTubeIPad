@@ -148,6 +148,33 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchSearchListWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   //GET https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&maxResults=10&q=channel&type=video&fields=items%2Fid&key={YOUR_API_KEY}
+
+
+   NSDictionary * parameters = @{
+    @"part" : @"id,snippet",
+    @"q" : queryTerm,
+    @"type" : queryType,
+    //@"fields" : @"items/id",
+   };
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:queryTerm
+                                                                  withParameters:parameters
+                                                                   andMaxResults:10];
+   [[MABYT3_APIRequest sharedInstance]
+    LISTSearchItemsForURL:urlStr
+               andHandler:^(NSMutableArray * results, NSError * error, NSString * nxt) {
+
+                   if (!error) {
+                      NSLog(@"%@", [@(results.count) stringValue]);
+                   }
+                   else {
+                      NSLog(@"%@", error.description);
+                   }
+               }];
+}
+
+
+- (void)fetchSearchListWithQueryType111:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    YTServiceYouTube * service = self.youTubeService;
 
    YTQueryYouTube * query = [YTQueryYouTube queryForSearchListWithPart:@"id,snippet"];
