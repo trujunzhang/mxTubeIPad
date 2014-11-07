@@ -108,11 +108,12 @@
 
 
 - (void)segmentAction:(id)sender {
-   if (self.searchBar.text.length > 0) {
-      NSArray * segmentTextContent = [NSArray arrayWithObjects:@"video", @"channel", @"playlist", nil];
-      NSString * queryType = segmentTextContent[self.segment_title.selectedSegmentIndex];
-      [self search:self.searchBar.text withQueryType:queryType];
-   }
+   if (self.searchBar.text.length == 0)
+      return;
+
+   [self search:self.searchBar.text withQueryType:[NSArray arrayWithObjects:@"video",
+                                                                            @"channel",
+                                                                            @"playlist", nil][self.segment_title.selectedSegmentIndex]];
 }
 
 
