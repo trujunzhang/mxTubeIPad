@@ -50,6 +50,8 @@ NSString * lastSearch = @"sketch 3";
 
    [self setupCollectionView:self.view];
    [self setupRefresh];
+
+   [self search:@"sketch 3"];
 }
 
 
@@ -112,7 +114,9 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return self.videoList.count + self.isLoadingMore ? 1 : 0;
+   NSUInteger integer = self.videoList.count;
+   NSUInteger i = integer + (self.isLoadingMore ? 1 : 0);
+   return i;
 }
 
 
@@ -191,18 +195,14 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)searchByPageToken {
-   if (self.searchInfo == nil)
-      return;
-
-   NSLog(@"                    ");
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
        [self.videoList addObjectsFromArray:array];
+       self.isLoadingMore = YES;
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
-       NSString * debug = @"debug";
    };
    [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.searchInfo
                                            completionHandler:completion

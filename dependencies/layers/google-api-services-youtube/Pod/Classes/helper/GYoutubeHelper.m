@@ -122,6 +122,7 @@ static GYoutubeHelper * instance = nil;
                                                                    andMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
+          NSLog(@"pageToken = %@", pageToken);
           [info setNextPageToken:pageToken];
           // 02 Search Videos by videoIds
           [self searchVideoByVideoIds:array

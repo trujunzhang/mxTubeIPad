@@ -87,7 +87,7 @@
    [ImageCacheImplement CacheWithImageView:self.thumbnails
                                    withUrl:video.snippet.thumbnails.standard.url
                            withPlaceholder:image];
-   NSLog(@"url= %@", video.snippet.thumbnails.standard.url);
+//   NSLog(@"url= %@", video.snippet.thumbnails.standard.url);
 
    // UIImageView Touch event
    UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
