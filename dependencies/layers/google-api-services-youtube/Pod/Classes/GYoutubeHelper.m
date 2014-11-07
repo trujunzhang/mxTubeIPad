@@ -151,7 +151,7 @@ static GYoutubeHelper * instance = nil;
    NSDictionary * parameters = @{
     @"part" : @"id,snippet",
     @"q" : queryTerm,
-    //@"fields" : @"items/id",
+    @"fields" : @"items(id/videoId)",
    };
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:queryTerm
                                                                        queryType:@"playlist"
@@ -212,6 +212,28 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchVideoListWithVideoId:(NSString *)videoId
                 completionHandler:(YoutubeResponseBlock)completion
                      errorHandler:(ErrorResponseBlock)errorBlock {
+   YTServiceYouTube * service = self.youTubeService;
+
+   YTQueryYouTube * query = [YTQueryYouTube queryForVideosListWithPart:@"snippet,contentDetails, statistics"];
+   query.identifier = videoId;
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubeSearchListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               if ([[resultList items] count] > 0) {
+                                  completion([resultList items]);
+                               }
+                               errorBlock(error);
+                               _searchListTicket = nil;
+                           }];
+}
+
+
+- (void)fetchVideoListWithVideoId123:(NSString *)videoId
+                   completionHandler:(YoutubeResponseBlock)completion
+                        errorHandler:(ErrorResponseBlock)errorBlock {
    YTServiceYouTube * service = self.youTubeService;
 
    YTQueryYouTube * query = [YTQueryYouTube queryForVideosListWithPart:@"snippet,contentDetails, statistics"];
