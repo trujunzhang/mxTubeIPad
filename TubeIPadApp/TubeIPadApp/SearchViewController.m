@@ -113,8 +113,6 @@
       NSString * queryType = segmentTextContent[self.segment_title.selectedSegmentIndex];
       [self search:self.searchBar.text withQueryType:queryType];
    }
-
-//   [self.newsView reloadType:self.segment_title.selectedSegmentIndex+1];
 }
 
 
