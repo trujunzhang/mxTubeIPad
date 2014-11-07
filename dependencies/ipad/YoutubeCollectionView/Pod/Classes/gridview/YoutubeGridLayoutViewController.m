@@ -210,11 +210,7 @@ NSString * lastSearch = @"call of duty advanced warfare";
    [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.searchInfo
                                            completionHandler:completion
                                                 errorHandler:error];
-//
-//   [[GYoutubeHelper getInstance] searchByQueryWithQueryType:self.queryType
-//                                                  queryTerm:text
-//                                          completionHandler:completion
-//                                               errorHandler:error];
+
 }
 
 

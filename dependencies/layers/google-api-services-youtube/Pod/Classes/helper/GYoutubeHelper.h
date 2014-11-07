@@ -40,7 +40,8 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 
 + (GYoutubeHelper *)getInstance;
 
-- (NSArray *)searchByQueryWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler;
+
+- (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)handler errorHandler:(ErrorResponseBlock)handler1;
 
 - (void)signingOut;
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock;
@@ -50,6 +51,6 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
 
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
-- (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)handler errorHandler:(ErrorResponseBlock)handler1;
+
 
 @end

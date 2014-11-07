@@ -114,25 +114,6 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Youtube search.
 
 
-- (NSArray *)searchByQueryWithQueryType:(NSString *)queryType queryTerm:(NSString *)queryTerm completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
-   YoutubeResponseBlock completion = ^(NSArray * array) {
-       // 02 Search Videos by videoIds
-       [self searchVideoByVideoIds:array
-                 completionHandler:(YoutubeResponseBlock) responseHandler
-                      errorHandler:errorHandler];
-   };
-   ErrorResponseBlock error = ^(NSError * error) {
-       if (error) {
-          errorHandler(error);
-       }
-   };
-   // 01: Search videoIds by queryTerm
-   [self fetchSearchListWithQueryType:queryType queryTerm:queryTerm completionHandler:completion errorHandler:error];
-
-   return nil;
-}
-
-
 - (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    // 01: Search videoIds by queryTerm
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:info.queryTeam

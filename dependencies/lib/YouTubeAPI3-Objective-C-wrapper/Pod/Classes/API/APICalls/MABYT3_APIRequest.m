@@ -143,8 +143,8 @@ static MABYT3_APIRequest * sharedlst = nil;
       paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
    }
    return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=%@&type=%@%@",
-                                     queryType,
                                      term,
+                                     queryType,
                                      paramS];
 }
 
