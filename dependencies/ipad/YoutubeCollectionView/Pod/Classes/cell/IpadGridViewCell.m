@@ -77,7 +77,6 @@
    self.video = video;
    self.delegate = delegate;
 
-
    [self.infoCell bind:video];
    [self.userCell bind:video];
 

@@ -33,7 +33,7 @@ NSString * lastSearch = @"sketch 3";
 @property(nonatomic, strong) NSMutableArray * videoList;
 
 
-@property(nonatomic, strong) UIImage * placeHoderImage;
+//@property(nonatomic, strong) UIImage * placeHoderImage;
 @property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
 
 @end
@@ -50,7 +50,7 @@ NSString * lastSearch = @"sketch 3";
    // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor clearColor];
 
-   self.placeHoderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
+//   self.placeHoderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
 
    [self setupCollectionView:self.view];
    [self setupRefresh];
@@ -124,7 +124,6 @@ NSString * lastSearch = @"sketch 3";
    if (indexPath.item < self.videoList.count) {
       return [self itemCellForIndexPath:indexPath];
    } else {
-//      [self search:lastSearch];
       [self searchByPageToken];
       return [self loadingCellForIndexPath:indexPath];
    }
@@ -135,8 +134,9 @@ NSString * lastSearch = @"sketch 3";
    IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier
                                                                                                  forIndexPath:indexPath];
 
+
    YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
-   [cell bind:video placeholderImage:self.placeHoderImage delegate:self.delegate];
+   [cell bind:video placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"] delegate:self.delegate];
 
    return cell;
 }
