@@ -209,7 +209,7 @@ NSString * lastSearch = @"sketch 3";
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
-       self.videoList = array;
+       [self.videoList addObjectsFromArray:array];
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
@@ -222,8 +222,7 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)cleanup {
-   self.videoList = [[NSArray alloc] init];
-
+   self.videoList = [[NSMutableArray alloc] init];
    [[self collectionView] reloadData];
 }
 @end

@@ -120,8 +120,9 @@ static GYoutubeHelper * instance = nil;
                                                                        queryType:info.queryType
                                                                   withParameters:info.parameters
                                                                    andMaxResults:10];
-   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * string) {
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
+          [info setNextPageToken:pageToken];
           // 02 Search Videos by videoIds
           [self searchVideoByVideoIds:array
                     completionHandler:(YoutubeResponseBlock) responseHandler

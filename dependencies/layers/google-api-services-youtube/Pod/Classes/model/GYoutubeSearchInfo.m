@@ -17,15 +17,16 @@
    if (self) {
       self.queryType = queryType;
       self.queryTeam = team;
-      NSDictionary * parameters = @{
-       @"part" : @"id,snippet",
-       @"fields" : @"items(id/videoId)",
-      };
-      self.parameters = parameters;
+      self.parameters = [[NSMutableDictionary alloc] init];
+      [self.parameters setObject:@"id,snippet" forKey:@"part"];
+      [self.parameters setObject:@"items(id/videoId),nextPageToken" forKey:@"fields"];
    }
 
    return self;
 }
 
 
+- (void)setNextPageToken:(NSString *)pageToken {
+   [self.parameters setObject:pageToken forKey:@"pageToken"];
+}
 @end
