@@ -25,15 +25,14 @@ NSString * lastSearch = @"sketch 3";
 
 @interface YoutubeGridLayoutViewController ()
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
-
-
-@property(nonatomic, strong) UICollectionView * collectionView;
+//@property(nonatomic, strong) UICollectionView * collectionView;
+@property(strong, nonatomic) IBOutlet UICollectionView * collectionView;
 
 @property(nonatomic, strong) KRLCollectionViewGridLayout * collectionViewGridLayout;
-@property(nonatomic, strong) NSMutableArray * videoList;
 
-@property(nonatomic) NSUInteger isLoadingMore;
 @property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
+@property(nonatomic) NSUInteger hasLoadingMore;
+@property(nonatomic, strong) NSMutableArray * videoList;
 
 @end
 
@@ -46,9 +45,9 @@ NSString * lastSearch = @"sketch 3";
    // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor clearColor];
 
-   self.isLoadingMore = NO;
+   self.hasLoadingMore = NO;
 
-   [self setupCollectionView:self.view];
+   [self setupCollectionView];
    [self setupRefresh];
 
    [self search:@"sketch 3"];
@@ -57,7 +56,7 @@ NSString * lastSearch = @"sketch 3";
 
 - (void)setupRefresh {
    self.refreshControl = [[UIRefreshControl alloc] init];
-   self.refreshControl.tintColor = [UIColor clearColor];
+   self.refreshControl.tintColor = [UIColor redColor];
    [self.refreshControl addTarget:self
                            action:@selector(refreshControlAction)
                  forControlEvents:UIControlEventValueChanged];
@@ -68,27 +67,35 @@ NSString * lastSearch = @"sketch 3";
 
 - (void)refreshControlAction {
    // Enter your code for request you are creating here when you pull the collectionView. When the request is completed then the collectionView go to its original position.
+   [self performSelector:@selector(refreshPerform) withObject:(self) afterDelay:(4.0)];
+}
+
+
+- (void)refreshPerform {
    [self.refreshControl endRefreshing];
 }
 
 
-- (void)setupCollectionView:(UIView *)pView {
+- (void)setupCollectionView {
    self.collectionViewGridLayout = [[KRLCollectionViewGridLayout alloc] init];
-   self.collectionView = [[UICollectionView alloc] initWithFrame:pView.frame
-                                            collectionViewLayout:self.collectionViewGridLayout];
+//   self.collectionView = [[UICollectionView alloc] initWithFrame:pView.frame
+//                                            collectionViewLayout:self.collectionViewGridLayout];
+   self.collectionView.collectionViewLayout = self.collectionViewGridLayout;
 
+   self.collectionView.backgroundColor = [UIColor clearColor];
    [self.collectionView setAutoresizesSubviews:YES];
    [self.collectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-   [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER];
+
 
    [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:identifier];
+
+   [self.collectionView registerClass:[UICollectionReusableView class]
+           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                  withReuseIdentifier:LOADING_CELL_IDENTIFIER];
 
 
    self.collectionView.dataSource = self;
    self.collectionView.delegate = self;
-   self.collectionView.backgroundColor = [UIColor clearColor];
-
-   [pView addSubview:self.collectionView];
 
    self.layout.aspectRatio = 1;
    self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -114,31 +121,40 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   NSUInteger integer = self.videoList.count;
-   NSUInteger i = integer + (self.isLoadingMore ? 1 : 0);
-   return i;
+   return self.videoList.count;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   if (indexPath.item < self.videoList.count) {
-      return [self itemCellForIndexPath:indexPath];
-   } else {
-      [self searchByPageToken];
-      return [self loadingCellForIndexPath:indexPath];
-   }
-}
-
-
-- (UICollectionViewCell *)itemCellForIndexPath:(NSIndexPath *)indexPath {
    IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier
                                                                                                  forIndexPath:indexPath];
-
 
    YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
    [cell bind:video placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"] delegate:self.delegate];
 
    return cell;
+}
+
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+
+   UICollectionReusableView * reusableview = nil;
+   if (kind == UICollectionElementKindSectionFooter) {
+      UICollectionReusableView * footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                                                                                 withReuseIdentifier:LOADING_CELL_IDENTIFIER
+                                                                                        forIndexPath:indexPath];
+
+      footerview.backgroundColor = [UIColor redColor];
+
+//      UIActivityIndicatorView * indicatorView = [footerview viewWithTag:123];
+
+//      footerview.frame = CGRectZero;
+//      [indicatorView startAnimating];
+
+      reusableview = footerview;
+   }
+
+   return reusableview;
 }
 
 
@@ -200,7 +216,7 @@ NSString * lastSearch = @"sketch 3";
 
        NSLog(@"leng = %d", array.count);
        [self.videoList addObjectsFromArray:array];
-       self.isLoadingMore = YES;
+       self.hasLoadingMore = YES;
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
@@ -213,7 +229,7 @@ NSString * lastSearch = @"sketch 3";
 
 - (void)cleanup {
    self.videoList = [[NSMutableArray alloc] init];
-   self.isLoadingMore = NO;
+   self.hasLoadingMore = NO;
    [[self collectionView] reloadData];
 }
 @end

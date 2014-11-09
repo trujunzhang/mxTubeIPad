@@ -55,7 +55,7 @@
 
 static NSString * kKeychainItemName = @"mxyoutube";
 
-static NSUInteger search_maxResults = 15;
+static NSUInteger search_maxResults = 35;
 
 // module
 

@@ -13,8 +13,6 @@
 #import "YoutubeAuthDataStore.h"
 #import "YoutubeAuthInfo.h"
 
-#import "MAB_GoogleAccessToken.h"
-#import "MAB_GoogleUserCredentials.h"
 #import "GYoutubeSearchInfo.h"
 
 static GYoutubeHelper * instance = nil;
