@@ -103,6 +103,10 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
+#pragma mark -
+#pragma mark UICollectionViewDataSource
+
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
    return 1;
 }
@@ -140,6 +144,10 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
+#pragma mark -
+#pragma mark Rotate subviews
+
+
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
 
@@ -154,6 +162,10 @@ NSString * lastSearch = @"sketch 3";
 
    self.layout.numberOfItemsPerLine = [(self.numbersPerLineArray[isPortrait ? 0 : 1]) intValue];
 }
+
+
+#pragma mark -
+#pragma mark Search events
 
 
 - (void)search:(NSString *)text {
