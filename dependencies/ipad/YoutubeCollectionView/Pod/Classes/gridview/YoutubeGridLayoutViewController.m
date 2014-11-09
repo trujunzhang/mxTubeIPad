@@ -83,11 +83,6 @@ NSString * lastSearch = @"sketch 3";
            forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                   withReuseIdentifier:@"FooterView"];
 
-//   [self.collectionView registerClass:[UICollectionReusableView class]
-//           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-//                  withReuseIdentifier:LOADING_CELL_IDENTIFIER];
-
-
    self.collectionView.dataSource = self;
    self.collectionView.delegate = self;
 
@@ -139,12 +134,6 @@ NSString * lastSearch = @"sketch 3";
                                                                                         forIndexPath:indexPath];
 
       footerview.backgroundColor = [UIColor redColor];
-
-//      UIActivityIndicatorView * indicatorView = [footerview viewWithTag:123];
-
-//      footerview.frame = CGRectZero;
-//      [indicatorView startAnimating];
-
       reusableview = footerview;
    }
 
@@ -152,28 +141,8 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
-//- (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
-//
-//   UICollectionViewCell * cell = (UICollectionViewCell *)
-//    [self.collectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER forIndexPath:indexPath];
-//
-//   UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//
-//   activityIndicator.color = [UIColor blackColor];
-//   activityIndicator.center = cell.center;
-//
-//   [cell addSubview:activityIndicator];
-//
-//   [activityIndicator startAnimating];
-//
-//   return cell;
-//}
-
-
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
-
-//   [DebugUtils printFrameInfo:self.view.frame withControllerName:@"YoutubeGridLayoutViewController"];// TODO test(log)
 
    [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
 }
