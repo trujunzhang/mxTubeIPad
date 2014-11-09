@@ -13,6 +13,7 @@ target 'TubeIPadApp', :exclusive => true do
   pod "SWRevealViewController", :path => "../dependencies/lib/SWRevealViewController"
   pod "YouTubeAPI3-Objective-C-wrapper", :path => "../dependencies/lib/YouTubeAPI3-Objective-C-wrapper"
   pod "AFNetworking", :path => "../dependencies/lib/AFNetworking"
+  pod "KRLCollectionViewGridLayout", :path => "../dependencies/lib/KRLCollectionViewGridLayout"
 
 
   # ________________collect common library___________________
