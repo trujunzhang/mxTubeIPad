@@ -9,7 +9,8 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/jinthagerman/YoutubeCollectionView.git', :tag => '0.1.0' }
   s.platform = :ios
   s.source_files = 'Pod/Classes/*/*.{h,m}'
-  s.resources = "Pod/Assets/*.*"
+  s.resources = "Pod/Assets/*/*.*"
   s.requires_arc = true
   s.dependency 'KRLCollectionViewGridLayout'
+
 end
