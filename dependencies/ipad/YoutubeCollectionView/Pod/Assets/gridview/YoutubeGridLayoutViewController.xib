@@ -17,6 +17,7 @@
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aQp-aa-bdi">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lH2-Zs-At0">
                         <size key="itemSize" width="10" height="10"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -25,7 +26,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="aQp-aa-bdi" firstAttribute="top" secondItem="48b-sN-5V8" secondAttribute="top" id="LIl-Yn-tE0"/>
                 <constraint firstItem="aQp-aa-bdi" firstAttribute="leading" secondItem="48b-sN-5V8" secondAttribute="leading" id="Qsj-06-qjE"/>

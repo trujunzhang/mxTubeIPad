@@ -78,14 +78,7 @@ NSString * lastSearch = @"sketch 3";
 
 - (void)setupCollectionView {
    self.collectionViewGridLayout = [[KRLCollectionViewGridLayout alloc] init];
-//   self.collectionView = [[UICollectionView alloc] initWithFrame:pView.frame
-//                                            collectionViewLayout:self.collectionViewGridLayout];
    self.collectionView.collectionViewLayout = self.collectionViewGridLayout;
-
-   self.collectionView.backgroundColor = [UIColor clearColor];
-   [self.collectionView setAutoresizesSubviews:YES];
-   [self.collectionView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-
 
    [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:identifier];
 
