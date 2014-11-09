@@ -14,9 +14,7 @@
 #import "GYoutubeSearchInfo.h"
 
 
-static NSString * const identifier = @"GridViewCellIdentifier";
-static NSString * const LOADING_CELL_IDENTIFIER = @"LoadingItemCell";
-
+NSString * youtubeGridIdentifier = @"YoutubeGridLayoutViewIdentifier";
 
 //NSString * lastSearch = @"call of duty advanced warfare";
 NSString * lastSearch = @"sketch 3";
@@ -80,11 +78,14 @@ NSString * lastSearch = @"sketch 3";
    self.collectionViewGridLayout = [[KRLCollectionViewGridLayout alloc] init];
    self.collectionView.collectionViewLayout = self.collectionViewGridLayout;
 
-   [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:identifier];
-
+   [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:youtubeGridIdentifier];
    [self.collectionView registerClass:[UICollectionReusableView class]
            forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                  withReuseIdentifier:LOADING_CELL_IDENTIFIER];
+                  withReuseIdentifier:@"FooterView"];
+
+//   [self.collectionView registerClass:[UICollectionReusableView class]
+//           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+//                  withReuseIdentifier:LOADING_CELL_IDENTIFIER];
 
 
    self.collectionView.dataSource = self;
@@ -119,7 +120,7 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier
+   IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:youtubeGridIdentifier
                                                                                                  forIndexPath:indexPath];
 
    YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
@@ -134,7 +135,7 @@ NSString * lastSearch = @"sketch 3";
    UICollectionReusableView * reusableview = nil;
    if (kind == UICollectionElementKindSectionFooter) {
       UICollectionReusableView * footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                                                                 withReuseIdentifier:LOADING_CELL_IDENTIFIER
+                                                                                 withReuseIdentifier:@""
                                                                                         forIndexPath:indexPath];
 
       footerview.backgroundColor = [UIColor redColor];
@@ -151,22 +152,22 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
-- (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
-
-   UICollectionViewCell * cell = (UICollectionViewCell *)
-    [self.collectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER forIndexPath:indexPath];
-
-   UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-
-   activityIndicator.color = [UIColor blackColor];
-   activityIndicator.center = cell.center;
-
-   [cell addSubview:activityIndicator];
-
-   [activityIndicator startAnimating];
-
-   return cell;
-}
+//- (UICollectionViewCell *)loadingCellForIndexPath:(NSIndexPath *)indexPath {
+//
+//   UICollectionViewCell * cell = (UICollectionViewCell *)
+//    [self.collectionView dequeueReusableCellWithReuseIdentifier:LOADING_CELL_IDENTIFIER forIndexPath:indexPath];
+//
+//   UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//
+//   activityIndicator.color = [UIColor blackColor];
+//   activityIndicator.center = cell.center;
+//
+//   [cell addSubview:activityIndicator];
+//
+//   [activityIndicator startAnimating];
+//
+//   return cell;
+//}
 
 
 - (void)viewDidLayoutSubviews {
