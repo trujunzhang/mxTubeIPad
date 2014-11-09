@@ -22,10 +22,9 @@ NSString * lastSearch = @"sketch 3";
 
 
 @interface YoutubeGridLayoutViewController ()
-@property(nonatomic, strong) UIRefreshControl * refreshControl;
-//@property(nonatomic, strong) UICollectionView * collectionView;
 @property(strong, nonatomic) IBOutlet UICollectionView * collectionView;
 
+@property(nonatomic, strong) UIRefreshControl * refreshControl;
 @property(nonatomic, strong) KRLCollectionViewGridLayout * collectionViewGridLayout;
 
 @property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
