@@ -26,19 +26,9 @@
 
       self = [arrayOfViews objectAtIndex:0];
 
-      [self setupIndicatorView];
-
       self.backgroundColor = [UIColor clearColor];
    }
    return self;
-}
-
-
-- (void)setupIndicatorView {
-   CGRect rect = self.activityIndicatorView.frame;
-   rect.size.width = 40;
-   rect.size.height = 40;
-   self.activityIndicatorView.frame = rect;
 }
 
 
