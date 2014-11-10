@@ -10,8 +10,9 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="140"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2ep-xe-6lZ">
-                    <rect key="frame" x="374" y="60" width="20" height="20"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2ep-xe-6lZ">
+                    <rect key="frame" x="366" y="52" width="37" height="37"/>
+                    <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </activityIndicatorView>
             </subviews>
             <constraints>
