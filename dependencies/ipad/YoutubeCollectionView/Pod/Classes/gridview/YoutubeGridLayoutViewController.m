@@ -24,13 +24,13 @@
 
 - (void)viewDidLoad {
    self.hasLoadingMore = NO;
-   [self.view addSubview:self.collectionView];
+   [self.view addSubview:[self getCollectionView]];
 
    [super viewDidLoad];
 }
 
 
-- (UICollectionView *)collectionView {
+- (UICollectionView *)getCollectionView {
    if (!self.collectionView) {
       CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
