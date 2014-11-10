@@ -9,6 +9,7 @@
 #import "YoutubeGridLayoutViewController.h"
 #import "IpadGridViewCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
+#import "YoutubeFooterView.h"
 
 
 #define CELL_IDENTIFIER @"WaterfallCell"
@@ -47,7 +48,7 @@
       self.collectionView.backgroundColor = [UIColor whiteColor];
       [self.collectionView registerClass:[IpadGridViewCell class]
               forCellWithReuseIdentifier:CELL_IDENTIFIER];
-      [self.collectionView registerClass:[UICollectionReusableView class]
+      [self.collectionView registerClass:[YoutubeFooterView class]
               forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
                      withReuseIdentifier:FOOTER_IDENTIFIER];
    }
@@ -111,26 +112,28 @@
    UICollectionReusableView * reusableView = nil;
 
    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
-      reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                        withReuseIdentifier:FOOTER_IDENTIFIER
-                                                               forIndexPath:indexPath];
-      reusableView.backgroundColor = [UIColor redColor];
-      CGRect rect = reusableView.frame;
+      YoutubeFooterView * footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                          withReuseIdentifier:FOOTER_IDENTIFIER
+                                                                                 forIndexPath:indexPath];
+      footerView.backgroundColor = [UIColor redColor];
+      CGRect rect = footerView.frame;
       rect.size.height = 1;
       if (self.hasLoadingMore) {
          rect.size.height = DEFAULT_LOADING_MORE_HEIGHT;
          [self searchByPageToken];
       }
 
-      reusableView.frame = rect;
+      footerView.frame = rect;
 
       UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
       activityIndicator.color = [UIColor blackColor];
-      activityIndicator.center = reusableView.center;
+      activityIndicator.center = footerView.center;
 
-      [reusableView addSubview:activityIndicator];
+      [footerView addSubview:activityIndicator];
 
       [activityIndicator startAnimating];
+
+      reusableView = footerView;
    }
 
    return reusableView;
