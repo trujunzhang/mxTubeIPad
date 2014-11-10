@@ -116,10 +116,12 @@
                                                                           withReuseIdentifier:FOOTER_IDENTIFIER
                                                                                  forIndexPath:indexPath];
       footerView.hidden = NO;
-      if (self.hasLoadingMore) {
+      if (self.hasLoadingMore == YES) {
          [footerView startAnimation];
-         [self searchByPageToken];
-      } else {
+         [self searchByPageToken]; // Check no pageToken,set hasLoadingMore is No.
+      }
+
+      if (self.hasLoadingMore == NO) {
          footerView.hidden = YES;
          [footerView stopAnimation];
       }
@@ -135,7 +137,7 @@
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-   return [[NSValue valueWithCGSize:CGSizeMake(20, 20)] CGSizeValue];
+   return [[NSValue valueWithCGSize:CGSizeMake(20, 30)] CGSizeValue];
 }
 
 

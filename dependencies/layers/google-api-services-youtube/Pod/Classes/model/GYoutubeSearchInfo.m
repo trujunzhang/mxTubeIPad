@@ -15,6 +15,7 @@
 - (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team {
    self = [super init];
    if (self) {
+      self.pageToken = @"";
       self.queryType = queryType;
       self.queryTeam = team;
       NSDictionary * parameters = @{
@@ -29,6 +30,9 @@
 
 
 - (void)setNextPageToken:(NSString *)pageToken {
-   [self.parameters setObject:pageToken forKey:@"pageToken"];
+   self.pageToken = pageToken;
+
+   if (pageToken)
+      [self.parameters setObject:pageToken forKey:@"pageToken"];
 }
 @end

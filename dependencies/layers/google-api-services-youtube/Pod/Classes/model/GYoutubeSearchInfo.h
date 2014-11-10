@@ -17,6 +17,9 @@
 @property(nonatomic, strong) NSMutableDictionary * parameters;
 @property(nonatomic, copy) NSString * queryTeam;
 
+@property(nonatomic, copy) NSString * pageToken;
 - (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
+
+
 @end

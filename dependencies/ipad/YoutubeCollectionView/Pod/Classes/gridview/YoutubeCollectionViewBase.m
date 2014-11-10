@@ -84,6 +84,10 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)searchByPageToken {
+   if (self.searchInfo.pageToken == nil) {
+      self.hasLoadingMore = NO;
+      return;
+   }
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
