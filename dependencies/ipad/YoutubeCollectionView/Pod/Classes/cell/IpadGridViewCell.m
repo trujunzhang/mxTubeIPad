@@ -85,7 +85,7 @@
 
    // 1
    [ImageCacheImplement CacheWithImageView:self.thumbnails
-                                   withUrl:video.snippet.thumbnails.standard.url
+                                   withUrl:video.snippet.thumbnails.medium.url
                            withPlaceholder:image];
 //   NSLog(@"url= %@", video.snippet.thumbnails.standard.url);
 

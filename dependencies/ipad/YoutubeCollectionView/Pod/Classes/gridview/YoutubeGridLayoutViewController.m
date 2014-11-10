@@ -115,9 +115,14 @@
       YoutubeFooterView * footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                           withReuseIdentifier:FOOTER_IDENTIFIER
                                                                                  forIndexPath:indexPath];
-//      if(self.hasLoadingMore){
+      footerView.hidden = NO;
+      if (self.hasLoadingMore) {
          [footerView startAnimation];
-//      }
+         [self searchByPageToken];
+      } else {
+         footerView.hidden = YES;
+         [footerView stopAnimation];
+      }
 
       reusableView = footerView;
    }

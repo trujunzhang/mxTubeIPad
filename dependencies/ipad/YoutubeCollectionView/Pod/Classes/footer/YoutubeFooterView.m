@@ -32,7 +32,14 @@
 }
 
 
+- (void)stopAnimation {
+   [self.activityIndicatorView stopAnimating];
+}
+
 - (void)startAnimation {
    [self.activityIndicatorView startAnimating];
 }
+
+
+
 @end
