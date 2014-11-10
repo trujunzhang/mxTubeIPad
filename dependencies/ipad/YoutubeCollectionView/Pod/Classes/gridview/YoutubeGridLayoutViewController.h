@@ -7,18 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class KRLCollectionViewGridLayout;
-@protocol IpadGridViewCellDelegate;
+#import "YoutubeCollectionViewController.h"
 
 
-@interface YoutubeGridLayoutViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>
-
-@property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
-
-@property(nonatomic, strong) NSArray * numbersPerLineArray;
-
-
+@interface YoutubeGridLayoutViewController : YoutubeCollectionViewController
 - (void)search:(NSString *)text;
 - (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)cleanup;
