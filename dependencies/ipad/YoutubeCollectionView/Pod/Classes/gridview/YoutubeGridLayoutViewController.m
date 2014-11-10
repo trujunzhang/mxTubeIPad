@@ -26,6 +26,9 @@ NSString * lastSearch = @"sketch 3";
 - (void)viewDidLoad {
    [super viewDidLoad];
 
+   // Do any additional setup after loading the view.
+   self.view.backgroundColor = [UIColor clearColor];
+
    [self setupRefresh];
 
    [self search:@"sketch 3"];

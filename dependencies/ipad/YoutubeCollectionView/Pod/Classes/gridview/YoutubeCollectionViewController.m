@@ -10,17 +10,15 @@
 
 #import "KRLCollectionViewGridLayout.h"
 #import "IpadGridViewCell.h"
-#import "GYoutubeSearchInfo.h"
+#import "CHTCollectionViewWaterfallLayout.h"
 
 
-NSString * youtubeGridIdentifier = @"YoutubeGridLayoutViewIdentifier";
+#define CELL_IDENTIFIER @"WaterfallCell"
+#define HEADER_IDENTIFIER @"WaterfallHeader"
+#define FOOTER_IDENTIFIER @"WaterfallFooter"
 
 
-@interface YoutubeCollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
-
-
-@property(nonatomic, strong) KRLCollectionViewGridLayout * collectionViewGridLayout;
-
+@interface YoutubeCollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 
 @end
 
@@ -30,54 +28,68 @@ NSString * youtubeGridIdentifier = @"YoutubeGridLayoutViewIdentifier";
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   // Do any additional setup after loading the view.
-   self.view.backgroundColor = [UIColor clearColor];
-
    self.hasLoadingMore = NO;
-
-   [self setupCollectionView];
-
+   [self.view addSubview:self.collectionView];
 }
 
 
-- (void)setupCollectionView {
-   self.collectionViewGridLayout = [[KRLCollectionViewGridLayout alloc] init];
-   self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
-                                            collectionViewLayout:self.collectionViewGridLayout];
+- (UICollectionView *)collectionView {
+   if (!_collectionView) {
+      CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
-   [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:youtubeGridIdentifier];
-//   [self.collectionView registerClass:[UICollectionReusableView class]
-//           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-//                  withReuseIdentifier:@"FooterView"];
+      layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+      layout.headerHeight = 65;
+      layout.footerHeight = 210;
+      layout.minimumColumnSpacing = 20;
+      layout.minimumInteritemSpacing = 30;
 
-   self.collectionView.dataSource = self;
-   self.collectionView.delegate = self;
-
-   self.layout.aspectRatio = 1;
-   self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-   self.layout.interitemSpacing = 10;
-   self.layout.lineSpacing = 10;
+      _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+      _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+      _collectionView.dataSource = self;
+      _collectionView.delegate = self;
+      _collectionView.backgroundColor = [UIColor whiteColor];
+      [_collectionView registerClass:[IpadGridViewCell class]
+          forCellWithReuseIdentifier:CELL_IDENTIFIER];
+      [_collectionView registerClass:[UICollectionReusableView class]
+          forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader
+                 withReuseIdentifier:HEADER_IDENTIFIER];
+      [_collectionView registerClass:[UICollectionReusableView class]
+          forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
+                 withReuseIdentifier:FOOTER_IDENTIFIER];
+   }
+   return _collectionView;
 }
 
 
-- (KRLCollectionViewGridLayout *)layout {
-   return (id) self.collectionView.collectionViewLayout;
+#pragma mark - Life Cycle
+
+
+- (void)dealloc {
+   _collectionView.delegate = nil;
+   _collectionView.dataSource = nil;
 }
 
 
-- (void)didReceiveMemoryWarning {
-   [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+   [super viewDidAppear:animated];
+   [self updateLayoutForOrientation:[UIApplication sharedApplication].statusBarOrientation];
 }
 
 
-#pragma mark -
-#pragma mark UICollectionViewDataSource
-
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-   return 1;
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+   [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   [self updateLayoutForOrientation:toInterfaceOrientation];
 }
+
+
+- (void)updateLayoutForOrientation:(UIInterfaceOrientation)orientation {
+   CHTCollectionViewWaterfallLayout * layout =
+    (CHTCollectionViewWaterfallLayout *) self.collectionView.collectionViewLayout;
+   layout.columnCount = [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
+}
+
+
+#pragma mark - UICollectionViewDataSource
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -85,11 +97,16 @@ NSString * youtubeGridIdentifier = @"YoutubeGridLayoutViewIdentifier";
 }
 
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+   return 1;
+}
+
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:youtubeGridIdentifier
+   IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER
                                                                                                  forIndexPath:indexPath];
 
-   YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
+   GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
    [cell bind:video placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"] delegate:self.delegate];
 
    return cell;
@@ -97,38 +114,31 @@ NSString * youtubeGridIdentifier = @"YoutubeGridLayoutViewIdentifier";
 
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+   UICollectionReusableView * reusableView = nil;
 
-   UICollectionReusableView * reusableview = nil;
-   if (kind == UICollectionElementKindSectionFooter) {
-      UICollectionReusableView * footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                                                                 withReuseIdentifier:@""
-                                                                                        forIndexPath:indexPath];
+   if ([kind isEqualToString:CHTCollectionElementKindSectionHeader]) {
+      reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                        withReuseIdentifier:HEADER_IDENTIFIER
+                                                               forIndexPath:indexPath];
 
-      footerview.backgroundColor = [UIColor redColor];
-      reusableview = footerview;
+      CGRect rect = reusableView.frame;
+      reusableView.backgroundColor = [UIColor blueColor];
+   } else if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
+      reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                        withReuseIdentifier:FOOTER_IDENTIFIER
+                                                               forIndexPath:indexPath];
+      reusableView.backgroundColor = [UIColor redColor];
    }
 
-   return reusableview;
+   return reusableView;
 }
 
 
-#pragma mark -
-#pragma mark Rotate subviews
+#pragma mark - CHTCollectionViewDelegateWaterfallLayout
 
 
-- (void)viewDidLayoutSubviews {
-   [super viewDidLayoutSubviews];
-
-   [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
-}
-
-
-- (void)updateLayout:(UIInterfaceOrientation)toInterfaceOrientation {
-   BOOL isPortrait = (toInterfaceOrientation == UIInterfaceOrientationPortrait) || (toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
-
-   NSAssert(self.numbersPerLineArray, @"Please initialize numbersPerLineArray first.");
-
-   self.layout.numberOfItemsPerLine = [(self.numbersPerLineArray[isPortrait ? 0 : 1]) intValue];
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+   return [[NSValue valueWithCGSize:CGSizeMake(20, 20)] CGSizeValue];
 }
 
 
