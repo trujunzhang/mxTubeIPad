@@ -14,6 +14,7 @@
 #import "VideoDetailViewControlleriPad.h"
 
 
+
 @interface SearchViewController ()
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
@@ -62,7 +63,7 @@
    self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
    self.segment_title.frame = CGRectMake(0, 0, 300, 30);
    [self.segment_title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
-   self.segment_title.tintColor=[UIColor redColor];
+   self.segment_title.tintColor = [UIColor redColor];
    self.navigationItem.titleView = self.segment_title;
 }
 
@@ -111,9 +112,7 @@
    if (self.searchBar.text.length == 0)
       return;
 
-   [self search:self.searchBar.text withQueryType:[NSArray arrayWithObjects:@"video",
-                                                                            @"channel",
-                                                                            @"playlist", nil][self.segment_title.selectedSegmentIndex]];
+   [self search:self.searchBar.text withQueryType:SEGMENT_TITLE[self.segment_title.selectedSegmentIndex]];
 }
 
 

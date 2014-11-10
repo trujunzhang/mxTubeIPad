@@ -238,6 +238,8 @@
 			mainGroup = 5ECE0F1C19F8AB500098CF65;
 			productRefGroup = 5ECE0F2619F8AB500098CF65 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+			);
 			projectRoot = "";
 			targets = (
 				5ECE0F2419F8AB500098CF65 /* TubeIPadApp */,
