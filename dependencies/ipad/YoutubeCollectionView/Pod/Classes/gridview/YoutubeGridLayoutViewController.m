@@ -13,6 +13,7 @@
 
 #define CELL_IDENTIFIER @"WaterfallCell"
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
+#define DEFAULT_LOADING_MORE_HEIGHT 180;
 
 
 @interface YoutubeGridLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
@@ -35,7 +36,7 @@
       CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
       layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-      layout.footerHeight = 0;
+      layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
       layout.minimumColumnSpacing = 20;
       layout.minimumInteritemSpacing = 30;
 
@@ -114,6 +115,22 @@
                                                         withReuseIdentifier:FOOTER_IDENTIFIER
                                                                forIndexPath:indexPath];
       reusableView.backgroundColor = [UIColor redColor];
+      CGRect rect = reusableView.frame;
+      rect.size.height = 1;
+      if (self.hasLoadingMore) {
+         rect.size.height = DEFAULT_LOADING_MORE_HEIGHT;
+         [self searchByPageToken];
+      }
+
+      reusableView.frame = rect;
+
+      UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+      activityIndicator.color = [UIColor blackColor];
+      activityIndicator.center = reusableView.center;
+
+      [reusableView addSubview:activityIndicator];
+
+      [activityIndicator startAnimating];
    }
 
    return reusableView;

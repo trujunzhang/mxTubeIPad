@@ -88,8 +88,12 @@ NSString * lastSearch = @"sketch 3";
        [self.refreshControl endRefreshing];
 
        NSLog(@"leng = %d", array.count);
-       [self.videoList addObjectsFromArray:array];
-       self.hasLoadingMore = YES;
+       if (array.count == 0) {
+          self.hasLoadingMore = NO;
+       } else {
+          [self.videoList addObjectsFromArray:array];
+          self.hasLoadingMore = YES;
+       }
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
