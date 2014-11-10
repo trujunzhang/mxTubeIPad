@@ -133,13 +133,6 @@
 }
 
 
-#pragma mark - CHTCollectionViewDelegateWaterfallLayout
-
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-   return [[NSValue valueWithCGSize:CGSizeMake(20, 30)] CGSizeValue];
-}
-
 
 @end
 

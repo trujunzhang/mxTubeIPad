@@ -331,9 +331,9 @@ const NSInteger unionSize = 20;
          NSUInteger columnIndex = [self nextColumnIndexForItem:idx inSection:section];
          CGFloat xOffset = sectionInset.left + (itemWidth + self.minimumColumnSpacing) * columnIndex;
          CGFloat yOffset = [self.columnHeights[section][columnIndex] floatValue];
-         CGSize itemSize = [self.delegate collectionView:self.collectionView
-                                                  layout:self
-                                  sizeForItemAtIndexPath:indexPath];
+
+         CGSize itemSize = [self cellSize];
+
          CGFloat itemHeight = 0;
          if (itemSize.height > 0 && itemSize.width > 0) {
             itemHeight = floorf(itemSize.height * itemWidth / itemSize.width);
@@ -400,6 +400,23 @@ const NSInteger unionSize = 20;
       [self.unionRects addObject:[NSValue valueWithCGRect:CGRectUnion(rect1, rect2)]];
       idx++;
    }
+}
+
+
+- (CGFloat)usableSpace {
+   return (self.collectionViewContentSize.width
+    - self.sectionInset.left
+    - self.sectionInset.right
+    - ((self.columnCount - 1) * 10));
+}
+
+
+- (CGSize)cellSize {
+   CGFloat usableSpace = [self usableSpace];
+   CGFloat cellLength = usableSpace / self.columnCount;
+
+   return CGSizeMake(cellLength,
+    cellLength * (1.0 / 1));
 }
 
 
