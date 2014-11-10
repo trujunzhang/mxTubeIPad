@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class KRLCollectionViewGridLayout;
 @protocol IpadGridViewCellDelegate;
 
 
-@interface YoutubeCollectionViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YoutubeCollectionViewController : UIViewController
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 

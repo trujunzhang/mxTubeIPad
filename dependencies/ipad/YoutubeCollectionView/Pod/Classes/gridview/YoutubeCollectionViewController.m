@@ -8,13 +8,11 @@
 
 #import "YoutubeCollectionViewController.h"
 
-#import "KRLCollectionViewGridLayout.h"
 #import "IpadGridViewCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 
 
 #define CELL_IDENTIFIER @"WaterfallCell"
-#define HEADER_IDENTIFIER @"WaterfallHeader"
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
 
 
@@ -38,7 +36,6 @@
       CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
       layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-      layout.headerHeight = 65;
       layout.footerHeight = 210;
       layout.minimumColumnSpacing = 20;
       layout.minimumInteritemSpacing = 30;
@@ -50,9 +47,6 @@
       _collectionView.backgroundColor = [UIColor whiteColor];
       [_collectionView registerClass:[IpadGridViewCell class]
           forCellWithReuseIdentifier:CELL_IDENTIFIER];
-      [_collectionView registerClass:[UICollectionReusableView class]
-          forSupplementaryViewOfKind:CHTCollectionElementKindSectionHeader
-                 withReuseIdentifier:HEADER_IDENTIFIER];
       [_collectionView registerClass:[UICollectionReusableView class]
           forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
                  withReuseIdentifier:FOOTER_IDENTIFIER];
@@ -116,14 +110,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
    UICollectionReusableView * reusableView = nil;
 
-   if ([kind isEqualToString:CHTCollectionElementKindSectionHeader]) {
-      reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                        withReuseIdentifier:HEADER_IDENTIFIER
-                                                               forIndexPath:indexPath];
-
-      CGRect rect = reusableView.frame;
-      reusableView.backgroundColor = [UIColor blueColor];
-   } else if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
+   if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
       reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                         withReuseIdentifier:FOOTER_IDENTIFIER
                                                                forIndexPath:indexPath];
