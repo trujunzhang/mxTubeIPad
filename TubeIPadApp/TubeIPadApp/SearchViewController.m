@@ -62,6 +62,7 @@
    self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
    self.segment_title.frame = CGRectMake(0, 0, 300, 30);
    [self.segment_title addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+   self.segment_title.tintColor=[UIColor redColor];
    self.navigationItem.titleView = self.segment_title;
 }
 
