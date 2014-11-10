@@ -11,4 +11,5 @@
 @interface YoutubeFooterView : UICollectionReusableView
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
+- (void)startAnimation;
 @end

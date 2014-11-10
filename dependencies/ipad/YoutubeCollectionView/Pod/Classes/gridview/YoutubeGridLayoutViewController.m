@@ -14,7 +14,7 @@
 
 #define CELL_IDENTIFIER @"WaterfallCell"
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
-#define DEFAULT_LOADING_MORE_HEIGHT 180;
+#define DEFAULT_LOADING_MORE_HEIGHT 140;
 
 
 @interface YoutubeGridLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
@@ -115,23 +115,9 @@
       YoutubeFooterView * footerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                           withReuseIdentifier:FOOTER_IDENTIFIER
                                                                                  forIndexPath:indexPath];
-      footerView.backgroundColor = [UIColor redColor];
-      CGRect rect = footerView.frame;
-      rect.size.height = 1;
-      if (self.hasLoadingMore) {
-         rect.size.height = DEFAULT_LOADING_MORE_HEIGHT;
-         [self searchByPageToken];
-      }
-
-      footerView.frame = rect;
-
-      UIActivityIndicatorView * activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-      activityIndicator.color = [UIColor blackColor];
-      activityIndicator.center = footerView.center;
-
-      [footerView addSubview:activityIndicator];
-
-      [activityIndicator startAnimating];
+//      if(self.hasLoadingMore){
+         [footerView startAnimation];
+//      }
 
       reusableView = footerView;
    }
