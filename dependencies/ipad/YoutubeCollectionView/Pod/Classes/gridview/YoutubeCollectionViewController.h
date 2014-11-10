@@ -7,19 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol IpadGridViewCellDelegate;
+#import "YoutubeGridLayoutViewController.h"
 
 
 @interface YoutubeCollectionViewController : UIViewController
 
-@property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
-
-@property(nonatomic, strong) NSArray * numbersPerLineArray;
-
-@property(strong, nonatomic) UICollectionView * collectionView;
-
 @property(nonatomic) NSUInteger hasLoadingMore;
 @property(nonatomic, strong) NSMutableArray * videoList;
+@property(strong, nonatomic) UICollectionView * collectionView;
 
+- (void)search:(NSString *)text;
+- (void)search:(NSString *)text withQueryType:(NSString *)queryType;
+- (void)cleanup;
 @end

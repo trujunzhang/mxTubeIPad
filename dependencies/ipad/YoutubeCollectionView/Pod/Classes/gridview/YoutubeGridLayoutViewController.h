@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "YoutubeCollectionViewController.h"
+@protocol IpadGridViewCellDelegate;
 
 
-@interface YoutubeGridLayoutViewController : YoutubeCollectionViewController
-- (void)search:(NSString *)text;
-- (void)search:(NSString *)text withQueryType:(NSString *)queryType;
-- (void)cleanup;
+@interface YoutubeGridLayoutViewController :YoutubeCollectionViewController
+@property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
+@property(nonatomic, strong) NSArray * numbersPerLineArray;
+
 @end
