@@ -1,5 +1,5 @@
 //
-//  YoutubeCollectionViewController.h
+//  YoutubeCollectionViewBase.h
 //  YoutubePlayApp
 //
 //  Created by djzhang on 10/15/14.
@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YoutubeGridLayoutViewController.h"
 
 
-@interface YoutubeCollectionViewController : UIViewController
+@interface YoutubeCollectionViewBase : UIViewController
 
 @property(nonatomic) NSUInteger hasLoadingMore;
 @property(nonatomic, strong) NSMutableArray * videoList;

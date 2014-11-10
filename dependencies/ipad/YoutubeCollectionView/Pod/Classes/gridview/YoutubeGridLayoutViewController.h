@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YoutubeCollectionViewController.h"
+#import "YoutubeCollectionViewBase.h"
+
 @protocol IpadGridViewCellDelegate;
 
 
-@interface YoutubeGridLayoutViewController :YoutubeCollectionViewController
+@interface YoutubeGridLayoutViewController : YoutubeCollectionViewBase
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
 

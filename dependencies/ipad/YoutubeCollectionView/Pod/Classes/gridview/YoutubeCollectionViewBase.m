@@ -1,13 +1,13 @@
 //
-//  YoutubeCollectionViewController.m
+//  YoutubeCollectionViewBase.m
 //  YoutubePlayApp
 //
 //  Created by djzhang on 10/15/14.
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import "YoutubeCollectionViewBase.h"
 #import <google-api-services-youtube/GYoutubeHelper.h>
-#import "YoutubeCollectionViewController.h"
 #import "GYoutubeSearchInfo.h"
 
 //NSString * lastSearch = @"call of duty advanced warfare";
@@ -15,13 +15,13 @@ NSString * lastSearch = @"sketch 3";
 //NSString * lastSearch = nil;
 
 
-@interface YoutubeCollectionViewController ()
+@interface YoutubeCollectionViewBase ()
 @property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
 @end
 
 
-@implementation YoutubeCollectionViewController
+@implementation YoutubeCollectionViewBase
 
 - (void)viewDidLoad {
    [super viewDidLoad];

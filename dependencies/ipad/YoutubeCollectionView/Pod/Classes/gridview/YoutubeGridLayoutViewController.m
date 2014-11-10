@@ -7,7 +7,6 @@
 //
 
 #import "YoutubeGridLayoutViewController.h"
-
 #import "IpadGridViewCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 
@@ -24,15 +23,15 @@
 @implementation YoutubeGridLayoutViewController
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
-
    self.hasLoadingMore = NO;
    [self.view addSubview:self.collectionView];
+
+   [super viewDidLoad];
 }
 
 
 - (UICollectionView *)collectionView {
-   if (!_collectionView) {
+   if (!self.collectionView) {
       CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
       layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -40,18 +39,18 @@
       layout.minimumColumnSpacing = 20;
       layout.minimumInteritemSpacing = 30;
 
-      _collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-      _collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-      _collectionView.dataSource = self;
-      _collectionView.delegate = self;
-      _collectionView.backgroundColor = [UIColor whiteColor];
-      [_collectionView registerClass:[IpadGridViewCell class]
-          forCellWithReuseIdentifier:CELL_IDENTIFIER];
-      [_collectionView registerClass:[UICollectionReusableView class]
-          forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
-                 withReuseIdentifier:FOOTER_IDENTIFIER];
+      self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+      self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+      self.collectionView.dataSource = self;
+      self.collectionView.delegate = self;
+      self.collectionView.backgroundColor = [UIColor whiteColor];
+      [self.collectionView registerClass:[IpadGridViewCell class]
+              forCellWithReuseIdentifier:CELL_IDENTIFIER];
+      [self.collectionView registerClass:[UICollectionReusableView class]
+              forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
+                     withReuseIdentifier:FOOTER_IDENTIFIER];
    }
-   return _collectionView;
+   return self.collectionView;
 }
 
 
@@ -59,8 +58,8 @@
 
 
 - (void)dealloc {
-   _collectionView.delegate = nil;
-   _collectionView.dataSource = nil;
+   self.collectionView.delegate = nil;
+   self.collectionView.dataSource = nil;
 }
 
 
