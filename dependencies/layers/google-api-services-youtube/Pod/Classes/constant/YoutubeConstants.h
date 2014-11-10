@@ -55,21 +55,13 @@
 
 static NSString * kKeychainItemName = @"mxyoutube";
 
-static NSUInteger search_maxResults = 35;
+static NSUInteger search_maxResults = 15;
 
 typedef NS_ENUM (NSUInteger, YTSegmentItemType) {
    YTSegmentItemVideo,
    YTSegmentItemChannel,
    YTSegmentItemPlaylist
 };
-
-static NSArray * const SEGMENT_TITLE = [NSArray arrayWithObjects:@"video",
-                                                                 @"channel",
-                                                                 @"playlist", nil];
-
-static NSArray * const SEGMENT_IDENTIFIER = [NSArray arrayWithObjects:@"video_identifier",
-                                                                      @"channel_identifier",
-                                                                      @"playlist_identifier", nil];
 
 
 // module

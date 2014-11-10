@@ -14,7 +14,6 @@
 #import "VideoDetailViewControlleriPad.h"
 
 
-
 @interface SearchViewController ()
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
@@ -53,12 +52,7 @@
 
 
 - (void)setupNavigationTitle {
-   NSArray * segmentTextContent = [NSArray arrayWithObjects:
-    @"Videos",
-    @"Channels",
-    @"Playlists",
-     nil];
-   self.segment_title = [[UISegmentedControl alloc] initWithItems:segmentTextContent];
+   self.segment_title = [[UISegmentedControl alloc] initWithItems:[self getSegmentTitlesArray]];
    self.segment_title.selectedSegmentIndex = 0;
    self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
    self.segment_title.frame = CGRectMake(0, 0, 300, 30);
@@ -112,7 +106,8 @@
    if (self.searchBar.text.length == 0)
       return;
 
-   [self search:self.searchBar.text withQueryType:SEGMENT_TITLE[self.segment_title.selectedSegmentIndex]];
+   [self search:self.searchBar.text
+  withQueryType:[self getSegmentTitlesArray][self.segment_title.selectedSegmentIndex]];
 }
 
 

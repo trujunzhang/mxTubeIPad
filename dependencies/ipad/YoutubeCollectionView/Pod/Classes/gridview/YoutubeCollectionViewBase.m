@@ -114,6 +114,21 @@ NSString * lastSearch = @"sketch 3";
    self.hasLoadingMore = NO;
    [[self collectionView] reloadData];
 }
+
+
+#pragma mark -
+#pragma mark
+
+
+- (NSArray *)getSegmentTitlesArray {
+   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+    @"Videos",
+    @"Channels",
+    @"Playlists",
+     nil];
+   return segmentTextContent;
+}
+
 @end
 
 

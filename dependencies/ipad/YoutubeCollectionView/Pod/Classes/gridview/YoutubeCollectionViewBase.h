@@ -19,4 +19,5 @@
 - (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)searchByPageToken;
 - (void)cleanup;
+- (NSArray *)getSegmentTitlesArray;
 @end
