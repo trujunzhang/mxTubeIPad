@@ -19,7 +19,7 @@
 #import "GYoutubeHelper.h"
 
 
-@interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate>
+@interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate, LeftMenuViewBaseDelegate>
 
 @property(nonatomic, strong) SWRevealViewController * revealController;
 
@@ -137,6 +137,15 @@
 
 - (void)FetchYoutubeChannelCompletion:(YoutubeAuthInfo *)info {
    [self.leftViewController refreshChannelInfo:info];
+}
+
+
+#pragma mark -
+#pragma mark LeftMenuViewBaseDelegate
+
+
+- (void)leftMenuEventReponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree {
+
 }
 
 @end
