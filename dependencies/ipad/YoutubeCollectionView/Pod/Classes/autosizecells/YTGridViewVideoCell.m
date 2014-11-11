@@ -79,6 +79,7 @@
                                                                                    video.contentDetails.duration]];
    NSLog(@"duration = %@", string);
    [self.durationLabel setText:string];
+   [self.durationLabel sizeToFit];
 }
 
 
