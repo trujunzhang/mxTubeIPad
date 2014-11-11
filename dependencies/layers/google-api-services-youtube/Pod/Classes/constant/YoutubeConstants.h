@@ -64,6 +64,16 @@ typedef NS_ENUM (NSUInteger, YTSegmentItemType) {
 };
 
 
+typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
+   // Playlist pop-up menu item tags.
+    kUploadsTag = 0,
+   kLikesTag = 1,
+   kFavoritesTag = 2,
+   kWatchHistoryTag = 3,
+   kWatchLaterTag = 4
+};
+
+
 // module
 
 //#define YTYouTubeVideo  GTLYouTubeVideo

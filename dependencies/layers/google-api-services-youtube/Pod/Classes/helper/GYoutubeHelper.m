@@ -274,6 +274,12 @@ static GYoutubeHelper * instance = nil;
           [self.delegate FetchYoutubeChannelCompletion:info];
 
 
+       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
+                                         tagType:kFavoritesTag
+                                      completion:nil
+                                    errorHandler:nil
+       ];
+
        // 2
        [self getUserSubscriptions:self.delegate];
 
@@ -418,6 +424,55 @@ static GYoutubeHelper * instance = nil;
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
                             GTLYouTubeChannelListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               NSArray * array = [resultList items];
+                               if ([array count] > 0) {
+                                  completion(array);
+                               }
+                               errorBlock(error);
+                               _searchListTicket = nil;
+                           }];
+
+}
+
+
+- (NSString *)getPlayListIdByPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(NSInteger)tagType {
+   NSString * playlistID;
+   switch (tagType) {
+      case kUploadsTag:
+         playlistID = playlists.uploads;
+         break;
+      case kLikesTag:
+         playlistID = playlists.likes;
+         break;
+      case kFavoritesTag:
+         playlistID = playlists.favorites;
+         break;
+      case kWatchHistoryTag:
+         playlistID = playlists.watchHistory;
+         break;
+      case kWatchLaterTag:
+         playlistID = playlists.watchLater;
+         break;
+      default:
+         NSAssert(0, @"Unexpected tag: %ld", tagType);
+   }
+   return playlistID;
+}
+
+
+- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   YTServiceYouTube * service = self.youTubeService;
+
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet,contentDetails"];
+
+   NSString * playlistID = [self getPlayListIdByPlaylists:playlists tagType:tagType];
+   query.playlistId = playlistID;
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubePlaylistItemListResponse * resultList,
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
