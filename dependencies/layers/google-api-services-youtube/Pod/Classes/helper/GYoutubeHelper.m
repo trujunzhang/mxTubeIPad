@@ -14,7 +14,7 @@
 #import "YoutubeAuthInfo.h"
 
 #import "GYoutubeSearchInfo.h"
-#import "GTLYouTubePlaylistItemContentDetails.h"
+
 
 static GYoutubeHelper * instance = nil;
 
@@ -124,9 +124,7 @@ static GYoutubeHelper * instance = nil;
           NSLog(@"pageToken = %@", pageToken);
           [info setNextPageToken:pageToken];
           // 02 Search Videos by videoIds
-          [self searchVideoByVideoIds:array
-                    completionHandler:(YoutubeResponseBlock) responseHandler
-                         errorHandler:errorHandler];
+          [self fetchSearchVideoByVideoIds:array completionHandler:responseHandler errorHandler:errorHandler];
        }
        else {
           if (error) {
@@ -138,13 +136,28 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)searchVideoByVideoIds:(NSArray *)searchResultList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+- (void)fetchSearchVideoByVideoIds:(NSArray *)searchResultList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    NSMutableArray * videoIds = [[NSMutableArray alloc] init];
 
    if (searchResultList) {
       // Merge video IDs
       for (YTYouTubeSearchResult * searchResult in searchResultList) {
          [videoIds addObject:searchResult.identifier.videoId];
+      }
+      [self fetchVideoListWithVideoId:[videoIds componentsJoinedByString:@","]
+                    completionHandler:responseHandler
+                         errorHandler:errorHandler];
+   }
+}
+
+
+- (void)fetchPlayListItemVideoByVideoIds:(NSArray *)searchResultList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+   NSMutableArray * videoIds = [[NSMutableArray alloc] init];
+
+   if (searchResultList) {
+      // Merge video IDs
+      for (YTYouTubePlaylistItem * searchResult in searchResultList) {
+         [videoIds addObject:searchResult.contentDetails.videoId];
       }
       [self fetchVideoListWithVideoId:[videoIds componentsJoinedByString:@","]
                     completionHandler:responseHandler
@@ -450,7 +463,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet,contentDetails"];
@@ -464,33 +477,22 @@ static GYoutubeHelper * instance = nil;
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
-                               GTLYouTubePlaylistItem * playlistItem = array[0];
-                               NSString * videoId = playlistItem.contentDetails.videoId;
-                               if ([array count] > 0) {
-                                  completion(array);
-                               }
-                               errorBlock(error);
+
+//                               GTLYouTubePlaylistItem * playlistItem = array[0];
+//                               NSString * videoId = playlistItem.contentDetails.videoId;
+//
+//                               if ([array count] > 0) {
+//                                  responseHandler(array);
+//                               }
+
+                               NSLog(@"pageToken = %@", resultList.nextPageToken);
+//                               [info setNextPageToken:resultList.nextPageToken];
+                               // 02 Search Videos by videoIds
+                               [self fetchPlayListItemVideoByVideoIds:array
+                                                    completionHandler:responseHandler
+                                                         errorHandler:errorHandler];
                            }];
 }
-
-
-//- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-//   NSString * playlistID = [self getPlayListIdByPlaylists:playlists tagType:tagType];
-//   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] PlayListItemsURLforPlayList:playlistID
-//                                                                        withMaxResults:5];
-//   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
-//       if (!error) {
-//          NSLog(@"pageToken = %@", pageToken);
-//
-//       }
-//       else {
-//          if (error) {
-//
-//          }
-//       }
-//   };
-//   [[MABYT3_APIRequest sharedInstance] LISTPlayListItemsForURL:urlStr andHandler:finishedHandler];
-//}
 
 
 @end

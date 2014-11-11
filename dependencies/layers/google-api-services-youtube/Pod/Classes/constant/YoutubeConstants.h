@@ -13,6 +13,8 @@
 #import "GTLYouTubeVideo.h"
 #import "GTLYouTubeVideoSnippet.h"
 #import "GTLYouTubeVideoStatistics.h"
+#import "GTLYouTubePlaylistItem.h"
+#import "GTLYouTubePlaylistItemContentDetails.h"
 
 //
 #import "GTLUtilities.h"
@@ -98,6 +100,7 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 // different
 //#define YTYouTubeSearchResult  GTLYouTubeSearchResult
 #define YTYouTubeSearchResult  MABYT3_SearchItem
+
 
 
 
