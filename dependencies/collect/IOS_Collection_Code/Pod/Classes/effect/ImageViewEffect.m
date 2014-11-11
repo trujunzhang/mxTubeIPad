@@ -16,8 +16,8 @@
    imageView.layer.masksToBounds = YES;
 //   imageView.layer.cornerRadius = 50.0;
    imageView.layer.cornerRadius = cornerRadius;
-   imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-   imageView.layer.borderWidth = 3.0f;
+//   imageView.layer.borderColor = [UIColor clearColor].CGColor;
+//   imageView.layer.borderWidth = 3.0f;
    imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
    imageView.layer.shouldRasterize = YES;
    imageView.clipsToBounds = YES;

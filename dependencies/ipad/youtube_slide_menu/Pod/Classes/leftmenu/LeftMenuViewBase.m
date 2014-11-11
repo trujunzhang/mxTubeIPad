@@ -13,6 +13,7 @@
 #import "UserInfoView.h"
 #import "LeftMenuItemTree.h"
 #import "YoutubeConstants.h"
+#import "ImageViewEffect.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -123,6 +124,7 @@
 
    // 2
    if (menuItemTree.remoteImage) {
+      [ImageViewEffect setEffectImage:cell.imageView withCornerRadius:4.0f];
       [ImageCacheImplement CacheWithImageView:cell.imageView
                                       withUrl:line[1]
                               withPlaceholder:self.placeholderImage
