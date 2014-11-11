@@ -11,6 +11,13 @@
 @class YoutubeAuthInfo;
 
 
+@protocol LeftMenuViewBaseDelegate<NSObject>
+@optional
+
+
+@end
+
+
 @interface LeftMenuViewBase : UIViewController
 
 @property(nonatomic, strong) UIImage * placeholderImage;
@@ -21,4 +28,7 @@
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;
 - (NSArray *)defaultCategories;
 - (NSArray *)signUserCategories;
+
+@property(nonatomic, assign) id<LeftMenuViewBaseDelegate> delegate;
+
 @end

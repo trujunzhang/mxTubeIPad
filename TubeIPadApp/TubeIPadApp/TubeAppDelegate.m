@@ -53,6 +53,7 @@
                                                                                        action:@selector(leftBarButtonItemAction:)];
    //3
    self.leftViewController = [[LeftMenuViewController alloc] init];
+   self.leftViewController.delegate = self;
 
    //6
    self.revealController = [[SWRevealViewController alloc] initWithRearViewController:self.leftViewController
@@ -114,7 +115,6 @@
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    [[LeftRevealHelper sharedLeftRevealHelper] endTabBarToggleWithSelectedIndex:tabBarController.selectedIndex];
 }
-
 
 
 #pragma mark -
