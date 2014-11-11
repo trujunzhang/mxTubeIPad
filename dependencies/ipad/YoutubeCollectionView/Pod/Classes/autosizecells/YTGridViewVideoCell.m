@@ -53,6 +53,12 @@
                                    withUrl:video.snippet.thumbnails.medium.url
                            withPlaceholder:image];
 //   NSLog(@"url= %@", video.snippet.thumbnails.medium.url);
+   // UIImageView Touch event
+   UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                action:@selector(tapDetected)];
+   singleTap.numberOfTapsRequired = 1;
+   [self.videoThumbnails setUserInteractionEnabled:YES];
+   [self.videoThumbnails addGestureRecognizer:singleTap];
 
    // 2
    [self.videoTitle setText:video.snippet.title];
@@ -62,6 +68,15 @@
 
    // 4
    [self.videoChannelTitleLabel setText:video.snippet.channelTitle];
+}
+
+
+- (void)tapDetected {
+   NSLog(@"single Tap on imageview");
+
+   if (self.delegate) {
+      [self.delegate gridViewCellTap:self.video sender:self.delegate];
+   }
 }
 
 
