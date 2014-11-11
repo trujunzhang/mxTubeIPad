@@ -145,8 +145,8 @@
 #pragma mark LeftMenuViewBaseDelegate
 
 
-- (void)leftMenuEventReponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withRow:(NSArray *)row {
-   [self.subscriptionsViewController refreshByLeftMenu:array withModel:menuItemTree withRow:row];
+- (void)leftMenuEventReponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
+   [self.subscriptionsViewController refreshByLeftMenu:array withModel:menuItemTree withTitle:title];
 }
 
 @end

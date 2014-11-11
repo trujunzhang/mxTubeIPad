@@ -79,8 +79,8 @@
 #pragma mark Left menu events
 
 
-- (void)refreshByLeftMenu:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withRow:(NSArray *)row {
-   self.youtubeGridLayoutViewController.title = row[0];
+- (void)refreshByLeftMenu:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
+   self.youtubeGridLayoutViewController.title = title;
 
 }
 
