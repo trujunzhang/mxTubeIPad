@@ -25,8 +25,9 @@
 - (instancetype)initWithItemType:(YTSegmentItemType)queryType withTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
 
++ (NSString *)getIdentifyByItemType:(YTSegmentItemType)itemType;
 + (YTSegmentItemType)getItemTypeByIndex:(int)index;
 + (NSArray *)getSegmentTitlesArray;
-+ (NSString *)getIdentify:(NSString *)title;
+
 
 @end

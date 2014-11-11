@@ -14,7 +14,6 @@
 #import "GYoutubeSearchInfo.h"
 
 
-#define CELL_IDENTIFIER @"WaterfallCell"
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
 #define DEFAULT_LOADING_MORE_HEIGHT 140;
 
@@ -50,7 +49,7 @@
       self.collectionView.backgroundColor = [UIColor whiteColor];
 
       [self.collectionView registerClass:[YTGridViewVideoCell class]
-              forCellWithReuseIdentifier:[GYoutubeSearchInfo getIdentify:[GYoutubeSearchInfo getSegmentTitlesArray][0]]];
+              forCellWithReuseIdentifier:[GYoutubeSearchInfo getIdentifyByItemType:YTSegmentItemVideo]];
 
 //      [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:CELL_IDENTIFIER];
 

@@ -20,7 +20,7 @@
       self.queryType = [GYoutubeSearchInfo getQueryTypeArray][itemType];
       self.queryTeam = team;
       self.itemType = [self getItemType];
-      self.itemIdentify = [GYoutubeSearchInfo getIdentify:[NSString stringWithFormat:@"%@s", self.queryType]];
+      self.itemIdentify = [GYoutubeSearchInfo getIdentifyByItemType:self.itemType];
 
       NSDictionary * parameters = @{
        @"part" : @"id,snippet",
@@ -65,8 +65,16 @@
 }
 
 
-+ (NSString *)getIdentify:(NSString *)title {
-   return [NSString stringWithFormat:@"%@Identifier", title];
++ (NSString *)getIdentifyByItemType:(YTSegmentItemType)itemType {
+   switch (itemType) {
+      case YTSegmentItemVideo:
+         return @"VideoIdentifier";
+      case YTSegmentItemChannel:
+         return @"ChannelIdentifier";
+      case YTSegmentItemPlaylist:
+         return @"PlaylistIdentifier";
+   }
+   return nil;
 }
 
 
