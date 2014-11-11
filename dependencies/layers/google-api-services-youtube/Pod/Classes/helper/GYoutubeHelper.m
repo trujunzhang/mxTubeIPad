@@ -14,6 +14,7 @@
 #import "YoutubeAuthInfo.h"
 
 #import "GYoutubeSearchInfo.h"
+#import "GTLYouTubePlaylistItemContentDetails.h"
 
 static GYoutubeHelper * instance = nil;
 
@@ -173,28 +174,6 @@ static GYoutubeHelper * instance = nil;
                  errorBlock(error);
               }
           }];
-}
-
-
-- (void)fetchVideoListWithVideoId123:(NSString *)videoId
-                   completionHandler:(YoutubeResponseBlock)completion
-                        errorHandler:(ErrorResponseBlock)errorBlock {
-   YTServiceYouTube * service = self.youTubeService;
-
-   YTQueryYouTube * query = [YTQueryYouTube queryForVideosListWithPart:@"snippet,contentDetails, statistics"];
-   query.identifier = videoId;
-
-   _searchListTicket = [service executeQuery:query
-                           completionHandler:^(GTLServiceTicket * ticket,
-                            GTLYouTubeSearchListResponse * resultList,
-                            NSError * error) {
-                               // The contentDetails of the response has the playlists available for "my channel".
-                               if ([[resultList items] count] > 0) {
-                                  completion([resultList items]);
-                               }
-                               errorBlock(error);
-                               _searchListTicket = nil;
-                           }];
 }
 
 
@@ -485,13 +464,33 @@ static GYoutubeHelper * instance = nil;
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
+                               GTLYouTubePlaylistItem * playlistItem = array[0];
+                               NSString * videoId = playlistItem.contentDetails.videoId;
                                if ([array count] > 0) {
                                   completion(array);
                                }
                                errorBlock(error);
-                               _searchListTicket = nil;
                            }];
 }
+
+
+//- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+//   NSString * playlistID = [self getPlayListIdByPlaylists:playlists tagType:tagType];
+//   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] PlayListItemsURLforPlayList:playlistID
+//                                                                        withMaxResults:5];
+//   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+//       if (!error) {
+//          NSLog(@"pageToken = %@", pageToken);
+//
+//       }
+//       else {
+//          if (error) {
+//
+//          }
+//       }
+//   };
+//   [[MABYT3_APIRequest sharedInstance] LISTPlayListItemsForURL:urlStr andHandler:finishedHandler];
+//}
 
 
 @end
