@@ -32,6 +32,10 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/xibViews/*.{h,m}'
   end
 
+  s.subspec 'effect' do |sub|
+    sub.source_files = 'Pod/Classes/effect/*.{h,m}'
+  end
+
   s.dependency 'JMImageCache'
   s.dependency 'ASImageResize'
 

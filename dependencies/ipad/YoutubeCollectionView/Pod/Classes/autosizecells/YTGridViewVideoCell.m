@@ -10,6 +10,7 @@
 #import <YoutubeCollectionView/IpadGridViewCell.h>
 #import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "YTGridViewVideoCell.h"
+#import "ImageViewEffect.h"
 
 
 @interface YTGridViewVideoCell ()
@@ -49,9 +50,11 @@
    // Confirm that the result represents a video. Otherwise, the
    // item will not contain a video ID.
    // 1
+//   [ImageViewEffect setEffectImage:self.videoThumbnails withCornerRadius:70.0f];
    [ImageCacheImplement CacheWithImageView:self.videoThumbnails
                                    withUrl:video.snippet.thumbnails.medium.url
-                           withPlaceholder:image];
+                           withPlaceholder:image
+   ];
 //   NSLog(@"url= %@", video.snippet.thumbnails.medium.url);
    // UIImageView Touch event
    UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
