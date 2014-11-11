@@ -157,6 +157,26 @@
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   NSInteger section = indexPath.section;
+   NSInteger row = indexPath.row;
+
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
+   NSArray * line = menuItemTree.rowsArray[row];
+
+   UIAlertView * messageAlert = [[UIAlertView alloc]
+    initWithTitle:line[0]
+          message:line[1]
+         delegate:nil
+cancelButtonTitle:@"OK"
+otherButtonTitles:nil];
+
+   // Display Alert Message
+   [messageAlert show];
+
+}
+
+
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
    // 1
    [self setupViewController:[user getTableRows]];

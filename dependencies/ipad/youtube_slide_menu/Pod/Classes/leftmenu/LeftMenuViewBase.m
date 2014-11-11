@@ -66,7 +66,6 @@
 //The event handling method
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
    [self loginInTouch];
-   NSString * debug = @"debug";
 }
 
 
@@ -195,11 +194,16 @@
 
 - (NSArray *)signUserCategories {
    NSArray * array = @[
-    @[ @"Subscriptions", @"subscriptions" ],
-    @[ @"What to Watch", @"recommended" ],
-    @[ @"Favorite", @"favorites" ],
-    @[ @"Watch Later", @"watch_later" ],
-    @[ @"Playlists", @"playlists" ],
+    @[ @"Subscriptions", @"subscriptions",
+     [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"What to Watch", @"recommended",
+     [[NSNumber alloc] initWithInt:kWatchHistoryTag] ],
+    @[ @"Favorite", @"favorites",
+     [[NSNumber alloc] initWithInt:kFavoritesTag] ],
+    @[ @"Watch Later", @"watch_later",
+     [[NSNumber alloc] initWithInt:kWatchLaterTag] ],
+    @[ @"Playlists", @"playlists",
+     [[NSNumber alloc] initWithInt:kUploadsTag] ],
    ];
 
 
