@@ -71,6 +71,28 @@
 
    // 4
    [self.videoChannelTitleLabel setText:video.snippet.channelTitle];
+
+   // 5
+   NSUInteger text = video.contentDetails.duration;
+//   NSLog(@" %d= text", text);
+   NSString * string = [self timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d",
+                                                                                   video.contentDetails.duration]];
+   NSLog(@"duration = %@", string);
+   [self.durationLabel setText:string];
+}
+
+
+- (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs {
+   int totalSeconds = [timeSecs intValue];
+
+   int seconds = totalSeconds % 60;
+   int minutes = (totalSeconds / 60) % 60;
+   int hours = totalSeconds / 3600;
+   if (hours == 0) {
+      return [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+   }
+
+   return [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, seconds];
 }
 
 

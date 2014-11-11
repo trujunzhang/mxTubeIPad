@@ -53,6 +53,7 @@
             NSArray * arr = [dur componentsSeparatedByString:@"M"];
             _duration = (60 * [arr[0] integerValue]) + [arr[1] integerValue];
          }
+
       }
       if ([dict objectForKey:@"dimension"]) {
          if ([[dict objectForKey:@"dimension"] isEqualToString:@"3d"]) {
