@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class GYoutubeAuthUser;
 @class YoutubeAuthInfo;
+@class LeftMenuItemTree;
 
 
 @protocol LeftMenuViewBaseDelegate<NSObject>
@@ -26,6 +27,7 @@
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user;
 
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;
+- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)path;
 - (NSArray *)defaultCategories;
 - (NSArray *)signUserCategories;
 

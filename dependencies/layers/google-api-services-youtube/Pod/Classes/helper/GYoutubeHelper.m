@@ -462,6 +462,15 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+- (void)fetchPlaylistItemsListWithTagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
+                                     tagType:kFavoritesTag
+                                  completion:completion
+                                errorHandler:errorBlock
+   ];
+}
+
+
 - (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    YTServiceYouTube * service = self.youTubeService;
 

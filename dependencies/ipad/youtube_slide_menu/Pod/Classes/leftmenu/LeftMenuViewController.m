@@ -163,17 +163,9 @@
 
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
    NSArray * line = menuItemTree.rowsArray[row];
+   int typeValue = [(line[2]) intValue];
 
-   UIAlertView * messageAlert = [[UIAlertView alloc]
-    initWithTitle:line[0]
-          message:line[1]
-         delegate:nil
-cancelButtonTitle:@"OK"
-otherButtonTitles:nil];
-
-   // Display Alert Message
-   [messageAlert show];
-
+   [self tableViewEvent:menuItemTree atIndexPath:indexPath];
 }
 
 

@@ -81,6 +81,7 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 
 #define YTYouTubeChannel  GTLYouTubeChannel
 #define YTYouTubeSubscription  GTLYouTubeSubscription
+#define YTYouTubePlaylistItem  GTLYouTubePlaylistItem
 
 //
 #define YTServiceYouTube  GTLServiceYouTube
@@ -95,6 +96,9 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 // different
 //#define YTYouTubeSearchResult  GTLYouTubeSearchResult
 #define YTYouTubeSearchResult  MABYT3_SearchItem
+
+
+
 
 
 

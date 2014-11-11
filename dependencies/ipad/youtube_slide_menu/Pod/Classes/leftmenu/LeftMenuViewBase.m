@@ -155,6 +155,28 @@
 
 
 #pragma mark -
+#pragma mark TableView events
+
+
+- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
+   NSArray * line = menuItemTree.rowsArray[indexPath.row];
+   int typeValue = [(line[2]) intValue];
+
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+//"GTLYouTubePlaylistItem 0x7a7b6fc0: {snippet:{description,thumbnails,publishedAt,position,channelTitle,playlistId,channelId,resourceId,title} etag:""PSjn-HSKiX6orvNhGZvglLI2lvk/WoyvnFp1c3cX1CBpoZPO3b6P_CE"" id:"FLTNPZCB9I_7d9Rv5wMGndmdBZflORg8ej" contentDetails:{videoId} kind:"youtube#playlistItem"}"
+       NSString * debug = @"debug";
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+   };
+   [[GYoutubeHelper getInstance] fetchPlaylistItemsListWithTagType:typeValue
+                                                        completion:completion
+                                                      errorHandler:error
+   ];
+
+}
+
+
+#pragma mark -
 #pragma mark View methods
 
 

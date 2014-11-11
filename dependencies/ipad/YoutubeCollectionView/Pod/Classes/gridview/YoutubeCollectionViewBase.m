@@ -88,6 +88,7 @@ NSString * lastSearch = @"sketch 3";
       self.hasLoadingMore = NO;
       return;
    }
+
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
