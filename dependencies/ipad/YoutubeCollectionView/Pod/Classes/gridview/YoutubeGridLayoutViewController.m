@@ -39,8 +39,8 @@
 
       layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
       layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
-      layout.minimumColumnSpacing = 20;
-      layout.minimumInteritemSpacing = 30;
+      layout.minimumColumnSpacing = 10;
+      layout.minimumInteritemSpacing = 10;
 
       self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

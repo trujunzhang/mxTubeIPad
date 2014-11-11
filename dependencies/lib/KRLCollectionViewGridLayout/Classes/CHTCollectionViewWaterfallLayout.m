@@ -415,8 +415,8 @@ const NSInteger unionSize = 20;
    CGFloat usableSpace = [self usableSpace];
    CGFloat cellLength = usableSpace / self.columnCount;
 
-   return CGSizeMake(cellLength,
-    cellLength * (1.0 / 1));
+//   return CGSizeMake(cellLength, cellLength * (1.0 / 1));
+   return CGSizeMake(cellLength, cellLength);
 }
 
 
