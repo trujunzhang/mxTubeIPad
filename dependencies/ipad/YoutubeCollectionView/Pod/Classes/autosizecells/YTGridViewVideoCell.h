@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface YTGridViewVideoCell : UICollectionViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *videoThumbnails;
+@property (strong, nonatomic) IBOutlet UILabel *videoTitle;
+@property (strong, nonatomic) IBOutlet UILabel *videoRatingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *videoViewCountLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *videoChannelThumbnails;
+@property (strong, nonatomic) IBOutlet UILabel *videoChannelTitleLabel;
 
 @end
