@@ -81,14 +81,12 @@
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title {
    self.youtubeGridLayoutViewController.title = title;
-
-
+   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
 }
 
 
 - (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
-
-
+   [self.youtubeGridLayoutViewController endPullToRefreshWithResponse:array];
 }
 
 

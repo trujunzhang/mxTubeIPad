@@ -110,10 +110,33 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
+- (void)endPullToRefreshWithResponse:(NSArray *)array {
+   [self.refreshControl endRefreshing];
+
+   NSLog(@"leng = %d", array.count);
+//   self.hasLoadingMore = YES;
+   if (array.count == 0) {
+//      self.hasLoadingMore = NO;
+   } else {
+      [self.videoList addObjectsFromArray:array];
+   }
+   [[self collectionView] reloadData];
+}
+
+
 - (void)cleanup {
    self.videoList = [[NSMutableArray alloc] init];
    self.hasLoadingMore = NO;
    [[self collectionView] reloadData];
+}
+
+
+- (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType  {
+   [self cleanup];
+   [self.refreshControl beginRefreshing];
+
+   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithItemType:itemType withTeam:@""];
+
 }
 
 
