@@ -14,7 +14,7 @@
 
 @protocol LeftMenuViewBaseDelegate<NSObject>
 @optional
-- (void)leftMenuEventReponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
+- (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
 
 @end
 

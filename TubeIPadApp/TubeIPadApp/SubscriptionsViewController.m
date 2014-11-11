@@ -79,9 +79,17 @@
 #pragma mark Left menu events
 
 
-- (void)refreshByLeftMenu:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
+- (void)startToggleLeftMenuWithTitle:(NSString *)title {
    self.youtubeGridLayoutViewController.title = title;
 
+
 }
+
+
+- (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
+
+
+}
+
 
 @end

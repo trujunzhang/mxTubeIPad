@@ -165,6 +165,7 @@
    NSArray * line = menuItemTree.rowsArray[row];
    int typeValue = [(line[2]) intValue];
 
+   [self.delegate startToggleLeftMenuWithTitle:line[0]];
    [self tableViewEvent:menuItemTree atIndexPath:indexPath];
 }
 

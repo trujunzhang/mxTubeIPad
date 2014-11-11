@@ -15,6 +15,7 @@
 
 @property(nonatomic, strong) UIBarButtonItem * revealButtonItem;
 
-- (void)refreshByLeftMenu:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
+- (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
+- (void)startToggleLeftMenuWithTitle:(NSString *)title;
 @end
 
