@@ -165,7 +165,7 @@
    YoutubeResponseBlock completion = ^(NSArray * array) {
 //"GTLYouTubePlaylistItem 0x7a7b6fc0: {snippet:{description,thumbnails,publishedAt,position,channelTitle,playlistId,channelId,resourceId,title} etag:""PSjn-HSKiX6orvNhGZvglLI2lvk/WoyvnFp1c3cX1CBpoZPO3b6P_CE"" id:"FLTNPZCB9I_7d9Rv5wMGndmdBZflORg8ej" contentDetails:{videoId} kind:"youtube#playlistItem"}"
        NSString * debug = @"debug";
-       [self.delegate leftMenuEventReponse:array withModel:menuItemTree];
+       [self.delegate leftMenuEventReponse:array withModel:menuItemTree withRow:line];
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };

@@ -13,6 +13,7 @@
 #import "VideoDetailViewControlleriPad.h"
 
 #import "LeftRevealHelper.h"
+#import "LeftMenuItemTree.h"
 
 
 @interface SubscriptionsViewController ()
@@ -73,5 +74,14 @@
    [self pushViewController:controller animated:YES];
 }
 
+
+#pragma mark -
+#pragma mark Left menu events
+
+
+- (void)refreshByLeftMenu:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withRow:(NSArray *)row {
+   self.youtubeGridLayoutViewController.title = row[0];
+
+}
 
 @end

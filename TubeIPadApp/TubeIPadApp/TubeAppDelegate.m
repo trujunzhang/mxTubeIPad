@@ -9,6 +9,7 @@
 #import "TubeAppDelegate.h"
 
 #import <SWRevealViewController/SWRevealViewController.h>
+#import <youtube_slide_menu/LeftMenuItemTree.h>
 
 #import "LeftMenuViewController.h"
 #import "SubscriptionsViewController.h"
@@ -144,8 +145,8 @@
 #pragma mark LeftMenuViewBaseDelegate
 
 
-- (void)leftMenuEventReponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree {
-
+- (void)leftMenuEventReponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withRow:(NSArray *)row {
+   [self.subscriptionsViewController refreshByLeftMenu:array withModel:menuItemTree withRow:row];
 }
 
 @end

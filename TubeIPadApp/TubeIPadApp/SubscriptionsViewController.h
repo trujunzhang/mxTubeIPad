@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <YoutubeCollectionView/IpadGridViewCell.h>
+@class LeftMenuItemTree;
 
 
 @interface SubscriptionsViewController : UINavigationController<IpadGridViewCellDelegate>
 
 @property(nonatomic, strong) UIBarButtonItem * revealButtonItem;
 
-
-
+- (void)refreshByLeftMenu:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withRow:(NSArray *)row;
 @end
 
