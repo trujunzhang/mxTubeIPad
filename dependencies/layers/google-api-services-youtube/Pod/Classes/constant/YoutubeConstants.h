@@ -60,7 +60,7 @@ static NSUInteger search_maxResults = 15;
 typedef NS_ENUM (NSUInteger, YTSegmentItemType) {
    YTSegmentItemVideo,
    YTSegmentItemChannel,
-   YTSegmentItemPlaylist
+   YTSegmentItemPlaylist           1
 };
 
 

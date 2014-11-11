@@ -13,6 +13,7 @@
 @implementation GYoutubeSearchInfo
 
 
+
 - (instancetype)initWithItemType:(YTSegmentItemType)itemType withTeam:(NSString *)team {
    self = [super init];
    if (self) {

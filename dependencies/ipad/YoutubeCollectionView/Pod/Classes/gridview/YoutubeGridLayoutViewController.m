@@ -7,11 +7,10 @@
 //
 
 #import "YoutubeGridLayoutViewController.h"
-#import "IpadGridViewCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
-#import "YTGridViewVideoCell.h"
 #import "GYoutubeSearchInfo.h"
+#import "YTGridViewVideoCell.h"
 
 
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
@@ -50,8 +49,6 @@
 
       [self.collectionView registerClass:[YTGridViewVideoCell class]
               forCellWithReuseIdentifier:[GYoutubeSearchInfo getIdentifyByItemType:YTSegmentItemVideo]];
-
-//      [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:CELL_IDENTIFIER];
 
       [self.collectionView registerClass:[YoutubeFooterView class]
               forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
@@ -103,7 +100,7 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
+   YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
 
    NSString * cell_identifier = self.searchInfo.itemIdentify;
    YTSegmentItemType itemType = self.searchInfo.itemType;

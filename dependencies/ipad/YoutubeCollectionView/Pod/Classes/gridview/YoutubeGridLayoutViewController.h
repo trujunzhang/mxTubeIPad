@@ -15,5 +15,4 @@
 @interface YoutubeGridLayoutViewController : YoutubeCollectionViewBase
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
-
 @end
