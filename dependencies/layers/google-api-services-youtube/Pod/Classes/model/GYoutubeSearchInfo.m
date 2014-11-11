@@ -13,11 +13,11 @@
 @implementation GYoutubeSearchInfo
 
 
-- (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team {
+- (instancetype)initWithItemType:(YTSegmentItemType)itemType withTeam:(NSString *)team {
    self = [super init];
    if (self) {
       self.pageToken = @"";
-      self.queryType = queryType;
+      self.queryType = [GYoutubeSearchInfo getQueryTypeArray][itemType];
       self.queryTeam = team;
       self.itemType = [self getItemType];
       self.itemIdentify = [GYoutubeSearchInfo getIdentify:[NSString stringWithFormat:@"%@s", self.queryType]];
@@ -55,8 +55,31 @@
 }
 
 
++ (NSArray *)getQueryTypeArray {
+   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+    @"video",
+    @"channel",
+    @"playlist",
+     nil];
+   return segmentTextContent;
+}
+
+
 + (NSString *)getIdentify:(NSString *)title {
    return [NSString stringWithFormat:@"%@Identifier", title];
+}
+
+
++ (YTSegmentItemType)getItemTypeByIndex:(int)index {
+   switch (index) {
+      case 0:
+         return YTSegmentItemVideo;
+      case 1:
+         return YTSegmentItemChannel;
+      case 2:
+         return YTSegmentItemPlaylist;
+   }
+   return YTSegmentItemVideo;
 }
 
 
@@ -69,15 +92,7 @@
          break;
       }
    }
-   switch (index) {
-      case 0:
-         return YTSegmentItemVideo;
-      case 1:
-         return YTSegmentItemChannel;
-      case 2:
-         return YTSegmentItemPlaylist;
-   }
-   return YTSegmentItemVideo;
+   return [GYoutubeSearchInfo getItemTypeByIndex:index];
 }
 
 

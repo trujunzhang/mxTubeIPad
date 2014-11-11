@@ -10,7 +10,6 @@
 
 #import "SearchViewController.h"
 
-#import "IpadGridViewCell.h"
 #import "VideoDetailViewControlleriPad.h"
 #import "GYoutubeSearchInfo.h"
 
@@ -107,8 +106,8 @@
    if (self.searchBar.text.length == 0)
       return;
 
-   [self search:self.searchBar.text
-  withQueryType:[GYoutubeSearchInfo getSegmentTitlesArray][self.segment_title.selectedSegmentIndex]];
+   YTSegmentItemType itemType = [GYoutubeSearchInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex];
+   [self search:self.searchBar.text withItemType:itemType];
 }
 
 

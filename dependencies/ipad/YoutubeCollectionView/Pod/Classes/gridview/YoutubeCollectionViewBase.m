@@ -68,14 +68,14 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)search:(NSString *)text {
-   [self search:text withQueryType:@"video"];
+   [self search:text withItemType:YTSegmentItemVideo];
 }
 
 
-- (void)search:(NSString *)text withQueryType:(NSString *)queryType {
+- (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithQueryType:queryType withTeam:text];
+   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithItemType:itemType withTeam:text];
 
    lastSearch = text;
 
@@ -114,7 +114,6 @@ NSString * lastSearch = @"sketch 3";
    self.hasLoadingMore = NO;
    [[self collectionView] reloadData];
 }
-
 
 
 @end

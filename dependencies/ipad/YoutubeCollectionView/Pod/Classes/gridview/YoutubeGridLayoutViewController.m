@@ -49,16 +49,8 @@
       self.collectionView.delegate = self;
       self.collectionView.backgroundColor = [UIColor whiteColor];
 
-      NSArray * segmentTitlesArray = [GYoutubeSearchInfo getSegmentTitlesArray];
-
-      NSString * identifier = [GYoutubeSearchInfo getIdentify:segmentTitlesArray[0]];
-      //"videoIdentifier"
-      //"VideosIdentifier"
-      //"videosIdentifier"
-      //"VideosIdentifier"
       [self.collectionView registerClass:[YTGridViewVideoCell class]
-              forCellWithReuseIdentifier:identifier];
-//              forCellWithReuseIdentifier:@"videosIdentifier"];
+              forCellWithReuseIdentifier:[GYoutubeSearchInfo getIdentify:[GYoutubeSearchInfo getSegmentTitlesArray][0]]];
 
 //      [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:CELL_IDENTIFIER];
 
@@ -114,15 +106,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
    GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
 
-//   NSString * cell_identifier = self.searchInfo.itemIdentify;
+   NSString * cell_identifier = self.searchInfo.itemIdentify;
    YTSegmentItemType itemType = self.searchInfo.itemType;
-   NSString * cell_identifier;
-   if (itemType == YTSegmentItemVideo) {
-      cell_identifier = @"videosIdentifier";
-   }
 
    UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
                                                                                 forIndexPath:indexPath];
+
+
    if (itemType == YTSegmentItemVideo) {
       YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
       [gridViewVideoCell bind:video

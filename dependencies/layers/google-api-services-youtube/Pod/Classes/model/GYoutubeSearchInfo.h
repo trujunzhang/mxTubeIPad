@@ -22,9 +22,10 @@
 
 @property(nonatomic, copy) NSString * itemIdentify;
 
-- (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team;
+- (instancetype)initWithItemType:(YTSegmentItemType)queryType withTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
 
++ (YTSegmentItemType)getItemTypeByIndex:(int)index;
 + (NSArray *)getSegmentTitlesArray;
 + (NSString *)getIdentify:(NSString *)title;
 
