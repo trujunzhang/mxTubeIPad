@@ -106,32 +106,29 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+   GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
+
    NSString * cell_identifier = [GYoutubeSearchInfo getIdentify:self.searchInfo.queryType];
    YTSegmentItemType itemType = self.searchInfo.itemType;
 
    UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
                                                                                 forIndexPath:indexPath];
-
-   GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
-   switch (itemType) {
-      case YTSegmentItemVideo:
-         YTGridViewVideoCell * videoCell = viewCell;
-         [videoCell bind:video
-        placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
-                delegate:self.delegate];
-         break;
-      case YTSegmentItemChannel:
-         break;
-      case YTSegmentItemPlaylist:
-         break;
+   if (itemType == YTSegmentItemVideo) {
+      YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
+      [gridViewVideoCell bind:video
+             placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
+                     delegate:self.delegate];
    }
-
 
    return viewCell;
 }
 
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:
+            (NSString *)kind
+                                 atIndexPath:
+                                  (NSIndexPath *)indexPath {
    UICollectionReusableView * reusableView = nil;
 
    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
