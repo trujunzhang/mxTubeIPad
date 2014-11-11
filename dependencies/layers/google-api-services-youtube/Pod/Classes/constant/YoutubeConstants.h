@@ -28,6 +28,8 @@
 #import "GTLYouTubeChannelListResponse.h"
 #import "GTLYouTubeSearchResult.h"
 #import "GTLYouTubeResourceId.h"
+#import "GTLYouTubePlaylistItem.h"
+
 
 //
 #import "GTLServiceYouTube.h"
@@ -60,7 +62,7 @@ static NSUInteger search_maxResults = 15;
 typedef NS_ENUM (NSUInteger, YTSegmentItemType) {
    YTSegmentItemVideo,
    YTSegmentItemChannel,
-   YTSegmentItemPlaylist           1
+   YTSegmentItemPlaylist
 };
 
 
