@@ -15,10 +15,13 @@
 @property(nonatomic, copy) NSString * queryType;
 
 @property(nonatomic, strong) NSMutableDictionary * parameters;
-@property(nonatomic, copy) NSString * queryTeam;
 
-@property(nonatomic, copy) NSString * pageToken;
 @property(nonatomic) YTSegmentItemType itemType;
+@property(nonatomic, copy) NSString * queryTeam;
+@property(nonatomic, copy) NSString * pageToken;
+
+@property(nonatomic, copy) NSString * itemIdentify;
+
 - (instancetype)initWithQueryType:(NSString *)queryType withTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
 

@@ -20,6 +20,7 @@
       self.queryType = queryType;
       self.queryTeam = team;
       self.itemType = [self getItemType];
+      self.itemIdentify = [GYoutubeSearchInfo getIdentify:[NSString stringWithFormat:@"%@s", self.queryType]];
 
       NSDictionary * parameters = @{
        @"part" : @"id,snippet",
