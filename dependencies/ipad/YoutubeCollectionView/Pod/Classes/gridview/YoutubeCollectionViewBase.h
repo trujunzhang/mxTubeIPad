@@ -22,4 +22,5 @@
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType )itemType;
 - (void)searchByPageToken;
 - (void)cleanup;
+- (void)cleanupAndShowRefresh;
 @end

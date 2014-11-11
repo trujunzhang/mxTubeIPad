@@ -117,6 +117,12 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
+- (void)cleanupAndShowRefresh {
+   [self cleanup];
+   [self.refreshControl beginRefreshing];
+}
+
+
 @end
 
 

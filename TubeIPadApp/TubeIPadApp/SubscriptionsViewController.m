@@ -81,7 +81,7 @@
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title {
    self.youtubeGridLayoutViewController.title = title;
-
+   [self.youtubeGridLayoutViewController cleanupAndShowRefresh];
 
 }
 
