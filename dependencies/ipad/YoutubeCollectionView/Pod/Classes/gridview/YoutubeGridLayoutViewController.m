@@ -10,6 +10,8 @@
 #import "IpadGridViewCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
+#import "YTGridViewVideoCell.h"
+#import "GYoutubeSearchInfo.h"
 
 
 #define CELL_IDENTIFIER @"WaterfallCell"
@@ -46,8 +48,14 @@
       self.collectionView.dataSource = self;
       self.collectionView.delegate = self;
       self.collectionView.backgroundColor = [UIColor whiteColor];
-      [self.collectionView registerClass:[IpadGridViewCell class]
-              forCellWithReuseIdentifier:CELL_IDENTIFIER];
+
+      NSArray * segmentTitlesArray = [GYoutubeSearchInfo getSegmentTitlesArray];
+
+      [self.collectionView registerClass:[YTGridViewVideoCell class]
+              forCellWithReuseIdentifier:[GYoutubeSearchInfo getIdentify:segmentTitlesArray[0]]];
+
+//      [self.collectionView registerClass:[IpadGridViewCell class] forCellWithReuseIdentifier:CELL_IDENTIFIER];
+
       [self.collectionView registerClass:[YoutubeFooterView class]
               forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter
                      withReuseIdentifier:FOOTER_IDENTIFIER];
@@ -98,13 +106,28 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   IpadGridViewCell * cell = (IpadGridViewCell *) [self.collectionView dequeueReusableCellWithReuseIdentifier:CELL_IDENTIFIER
-                                                                                                 forIndexPath:indexPath];
+   NSString * cell_identifier = [GYoutubeSearchInfo getIdentify:self.searchInfo.queryType];
+   YTSegmentItemType itemType = self.searchInfo.itemType;
+
+   UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
+                                                                                forIndexPath:indexPath];
 
    GTLYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
-   [cell bind:video placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"] delegate:self.delegate];
+   switch (itemType) {
+      case YTSegmentItemVideo:
+         YTGridViewVideoCell * videoCell = viewCell;
+         [videoCell bind:video
+        placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
+                delegate:self.delegate];
+         break;
+      case YTSegmentItemChannel:
+         break;
+      case YTSegmentItemPlaylist:
+         break;
+   }
 
-   return cell;
+
+   return viewCell;
 }
 
 
@@ -131,8 +154,6 @@
 
    return reusableView;
 }
-
-
 
 
 @end

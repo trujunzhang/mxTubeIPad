@@ -16,7 +16,7 @@ NSString * lastSearch = @"sketch 3";
 
 
 @interface YoutubeCollectionViewBase ()
-@property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
+
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
 @end
 
@@ -75,7 +75,7 @@ NSString * lastSearch = @"sketch 3";
 - (void)search:(NSString *)text withQueryType:(NSString *)queryType {
    [self cleanup];
 
-   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithQueryType:@"video" withTeam:text];
+   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithQueryType:queryType withTeam:text];
 
    lastSearch = text;
 
@@ -116,18 +116,6 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
-#pragma mark -
-#pragma mark
-
-
-- (NSArray *)getSegmentTitlesArray {
-   NSArray * segmentTextContent = [NSArray arrayWithObjects:
-    @"Videos",
-    @"Channels",
-    @"Playlists",
-     nil];
-   return segmentTextContent;
-}
 
 @end
 

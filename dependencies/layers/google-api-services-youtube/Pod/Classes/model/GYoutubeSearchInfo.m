@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <google-api-services-youtube/YoutubeConstants.h>
 #import "GYoutubeSearchInfo.h"
 
 
@@ -18,6 +19,8 @@
       self.pageToken = @"";
       self.queryType = queryType;
       self.queryTeam = team;
+      self.itemType = [self getItemType];
+
       NSDictionary * parameters = @{
        @"part" : @"id,snippet",
        @"fields" : @"items(id/videoId),nextPageToken",
@@ -35,4 +38,46 @@
    if (pageToken)
       [self.parameters setObject:pageToken forKey:@"pageToken"];
 }
+
+
+#pragma mark -
+#pragma mark
+
+
++ (NSArray *)getSegmentTitlesArray {
+   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+    @"Videos",
+    @"Channels",
+    @"Playlists",
+     nil];
+   return segmentTextContent;
+}
+
+
++ (NSString *)getIdentify:(NSString *)title {
+   return [NSString stringWithFormat:@"%@Identifier", title];
+}
+
+
+- (YTSegmentItemType)getItemType {
+   int index = 0;
+   NSArray * array = [GYoutubeSearchInfo getSegmentTitlesArray];
+   for (int i = 0; i < array.count; ++i) {
+      if ([self.queryType isEqualToString:array[i]]) {
+         index = i;
+         break;
+      }
+   }
+   switch (index) {
+      case 0:
+         return YTSegmentItemVideo;
+      case 1:
+         return YTSegmentItemChannel;
+      case 2:
+         return YTSegmentItemPlaylist;
+   }
+   return YTSegmentItemVideo;
+}
+
+
 @end

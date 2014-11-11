@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GYoutubeSearchInfo;
 
 
 @interface YoutubeCollectionViewBase : UIViewController
+@property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
 
 @property(nonatomic) NSUInteger hasLoadingMore;
 @property(nonatomic, strong) NSMutableArray * videoList;
@@ -19,5 +21,4 @@
 - (void)search:(NSString *)text withQueryType:(NSString *)queryType;
 - (void)searchByPageToken;
 - (void)cleanup;
-- (NSArray *)getSegmentTitlesArray;
 @end
