@@ -274,11 +274,11 @@ static GYoutubeHelper * instance = nil;
           [self.delegate FetchYoutubeChannelCompletion:info];
 
 
-       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
-                                         tagType:kFavoritesTag
-                                      completion:nil
-                                    errorHandler:nil
-       ];
+//       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
+//                                         tagType:kFavoritesTag
+//                                      completion:nil
+//                                    errorHandler:nil
+//       ];
 
        // 2
        [self getUserSubscriptions:self.delegate];
