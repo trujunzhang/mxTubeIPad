@@ -77,9 +77,9 @@
 //   NSLog(@" %d= text", text);
    NSString * string = [self timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d",
                                                                                    video.contentDetails.duration]];
-   NSLog(@"duration = %@", string);
-   [self.durationLabel setText:string];
-   [self.durationLabel sizeToFit];
+//   NSLog(@"duration = %@", string);
+//   [self.durationLabel setText:string];
+//   [self.durationLabel sizeToFit];
 }
 
 
