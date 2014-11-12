@@ -7,31 +7,40 @@
 //
 
 #import "YoutubeChannelPageViewController.h"
+#import "YoutubeChannelTopCell.h"
+
 
 @interface YoutubeChannelPageViewController ()
 
 @end
 
+
 @implementation YoutubeChannelPageViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+   [super viewDidLoad];
+   // Do any additional setup after loading the view from its nib.
+   UIView * topBanner = [self getTopBanner];
+   [self.view addSubview:topBanner];
 }
+
+
+- (UIView *)getTopBanner {
+   NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"YoutubeChannelTopCell"
+                                                   owner:nil
+                                                 options:nil];
+   YoutubeChannelTopCell * topBanner = [array lastObject];
+
+   topBanner.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+
+   return topBanner;
+}
+
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+   [super didReceiveMemoryWarning];
+   // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
