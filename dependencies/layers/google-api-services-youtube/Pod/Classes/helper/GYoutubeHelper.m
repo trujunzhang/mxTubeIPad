@@ -456,7 +456,7 @@ static GYoutubeHelper * instance = nil;
 
 - (void)fetchPlaylistItemsListWithTagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
-                                     tagType:kFavoritesTag
+                                     tagType:tagType
                                   completion:completion
                                 errorHandler:errorBlock
    ];
@@ -477,13 +477,6 @@ static GYoutubeHelper * instance = nil;
                             NSError * error) {
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
-
-//                               GTLYouTubePlaylistItem * playlistItem = array[0];
-//                               NSString * videoId = playlistItem.contentDetails.videoId;
-//
-//                               if ([array count] > 0) {
-//                                  responseHandler(array);
-//                               }
 
                                NSLog(@"pageToken = %@", resultList.nextPageToken);
 //                               [info setNextPageToken:resultList.nextPageToken];
