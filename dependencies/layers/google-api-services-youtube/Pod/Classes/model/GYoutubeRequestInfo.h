@@ -8,7 +8,7 @@
 
 
 
-@interface GYoutubeSearchInfo : NSObject {
+@interface GYoutubeRequestInfo : NSObject {
 
 
 }

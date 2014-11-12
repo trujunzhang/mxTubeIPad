@@ -11,7 +11,7 @@
 #import "SearchViewController.h"
 
 #import "VideoDetailViewControlleriPad.h"
-#import "GYoutubeSearchInfo.h"
+#import "GYoutubeRequestInfo.h"
 
 
 @interface SearchViewController ()
@@ -52,7 +52,7 @@
 
 
 - (void)setupNavigationTitle {
-   self.segment_title = [[UISegmentedControl alloc] initWithItems:[GYoutubeSearchInfo getSegmentTitlesArray]];
+   self.segment_title = [[UISegmentedControl alloc] initWithItems:[GYoutubeRequestInfo getSegmentTitlesArray]];
    self.segment_title.selectedSegmentIndex = 0;
    self.segment_title.autoresizingMask = UIViewAutoresizingFlexibleWidth;
    self.segment_title.frame = CGRectMake(0, 0, 300, 30);
@@ -106,7 +106,7 @@
    if (self.searchBar.text.length == 0)
       return;
 
-   YTSegmentItemType itemType = [GYoutubeSearchInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex];
+   YTSegmentItemType itemType = [GYoutubeRequestInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex];
    [self search:self.searchBar.text withItemType:itemType];
 }
 

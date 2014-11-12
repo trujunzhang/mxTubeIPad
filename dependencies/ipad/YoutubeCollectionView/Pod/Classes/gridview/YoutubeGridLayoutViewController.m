@@ -9,7 +9,7 @@
 #import "YoutubeGridLayoutViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
-#import "GYoutubeSearchInfo.h"
+#import "GYoutubeRequestInfo.h"
 #import "YTGridViewVideoCell.h"
 
 
@@ -48,7 +48,7 @@
       self.collectionView.backgroundColor = [UIColor whiteColor];
 
       [self.collectionView registerClass:[YTGridViewVideoCell class]
-              forCellWithReuseIdentifier:[GYoutubeSearchInfo getIdentifyByItemType:YTSegmentItemVideo]];
+              forCellWithReuseIdentifier:[GYoutubeRequestInfo getIdentifyByItemType:YTSegmentItemVideo]];
 
       [self.collectionView registerClass:[YoutubeFooterView class]
               forSupplementaryViewOfKind:CHTCollectionElementKindSectionFooter

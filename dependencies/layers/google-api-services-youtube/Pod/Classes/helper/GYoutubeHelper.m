@@ -13,7 +13,7 @@
 #import "YoutubeAuthDataStore.h"
 #import "YoutubeAuthInfo.h"
 
-#import "GYoutubeSearchInfo.h"
+#import "GYoutubeRequestInfo.h"
 
 
 static GYoutubeHelper * instance = nil;
@@ -113,7 +113,7 @@ static GYoutubeHelper * instance = nil;
 #pragma mark Youtube search.
 
 
-- (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+- (void)searchByQueryWithSearchInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    // 01: Search videoIds by queryTerm
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:info.queryTeam
                                                                        queryType:info.queryType

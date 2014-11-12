@@ -14,7 +14,7 @@
 
 @class GYoutubeAuthUser;
 @class YoutubeAuthInfo;
-@class GYoutubeSearchInfo;
+@class GYoutubeRequestInfo;
 
 typedef void (^YoutubeResponseBlock)(NSArray * array);
 typedef void (^ErrorResponseBlock)(NSError * error);
@@ -41,7 +41,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 + (GYoutubeHelper *)getInstance;
 
 
-- (void)searchByQueryWithSearchInfo:(GYoutubeSearchInfo *)info completionHandler:(YoutubeResponseBlock)handler errorHandler:(ErrorResponseBlock)handler1;
+- (void)searchByQueryWithSearchInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)handler errorHandler:(ErrorResponseBlock)handler1;
 
 - (void)signingOut;
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock;

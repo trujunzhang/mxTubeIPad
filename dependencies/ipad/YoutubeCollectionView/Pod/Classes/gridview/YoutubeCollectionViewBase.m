@@ -8,7 +8,7 @@
 
 #import "YoutubeCollectionViewBase.h"
 #import <google-api-services-youtube/GYoutubeHelper.h>
-#import "GYoutubeSearchInfo.h"
+#import "GYoutubeRequestInfo.h"
 
 //NSString * lastSearch = @"call of duty advanced warfare";
 NSString * lastSearch = @"sketch 3";
@@ -75,7 +75,7 @@ NSString * lastSearch = @"sketch 3";
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithItemType:itemType withTeam:text];
+   self.searchInfo = [[GYoutubeRequestInfo alloc] initWithItemType:itemType withTeam:text];
 
    lastSearch = text;
 
@@ -135,7 +135,7 @@ NSString * lastSearch = @"sketch 3";
    [self cleanup];
    [self.refreshControl beginRefreshing];
 
-   self.searchInfo = [[GYoutubeSearchInfo alloc] initWithItemType:itemType withTeam:@""];
+   self.searchInfo = [[GYoutubeRequestInfo alloc] initWithItemType:itemType withTeam:@""];
 
 }
 

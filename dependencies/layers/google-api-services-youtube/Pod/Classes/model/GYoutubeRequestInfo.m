@@ -7,10 +7,10 @@
 //
 
 #import <google-api-services-youtube/YoutubeConstants.h>
-#import "GYoutubeSearchInfo.h"
+#import "GYoutubeRequestInfo.h"
 
 
-@implementation GYoutubeSearchInfo
+@implementation GYoutubeRequestInfo
 
 
 
@@ -18,10 +18,10 @@
    self = [super init];
    if (self) {
       self.pageToken = @"";
-      self.queryType = [GYoutubeSearchInfo getQueryTypeArray][itemType];
+      self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
       self.queryTeam = team;
       self.itemType = [self getItemType];
-      self.itemIdentify = [GYoutubeSearchInfo getIdentifyByItemType:self.itemType];
+      self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
       NSDictionary * parameters = @{
        @"part" : @"id,snippet",
@@ -94,14 +94,14 @@
 
 - (YTSegmentItemType)getItemType {
    int index = 0;
-   NSArray * array = [GYoutubeSearchInfo getSegmentTitlesArray];
+   NSArray * array = [GYoutubeRequestInfo getSegmentTitlesArray];
    for (int i = 0; i < array.count; ++i) {
       if ([self.queryType isEqualToString:array[i]]) {
          index = i;
          break;
       }
    }
-   return [GYoutubeSearchInfo getItemTypeByIndex:index];
+   return [GYoutubeRequestInfo getItemTypeByIndex:index];
 }
 
 

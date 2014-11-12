@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "YoutubeConstants.h"
-@class GYoutubeSearchInfo;
+@class GYoutubeRequestInfo;
 
 
 @interface YoutubeCollectionViewBase : UIViewController
-@property(nonatomic, strong) GYoutubeSearchInfo * searchInfo;
+@property(nonatomic, strong) GYoutubeRequestInfo * searchInfo;
 
 @property(nonatomic) NSUInteger hasLoadingMore;
 @property(nonatomic, strong) NSMutableArray * videoList;
