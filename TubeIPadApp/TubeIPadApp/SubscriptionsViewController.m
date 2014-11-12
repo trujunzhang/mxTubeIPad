@@ -9,16 +9,21 @@
 
 #import "SubscriptionsViewController.h"
 
-#import "YoutubeGridLayoutViewController.h"
+
 #import "VideoDetailViewControlleriPad.h"
 
 #import "LeftRevealHelper.h"
 #import "LeftMenuItemTree.h"
 
+//#import "YoutubeGridLayoutViewController.h"
+#import "YoutubeChannelPageViewController.h"
+
 
 @interface SubscriptionsViewController ()
 
-@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+//@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+
+@property(nonatomic, strong) YoutubeChannelPageViewController * youtubeChannelPageViewController;
 
 @end
 
@@ -32,19 +37,37 @@
    self.tabBarItem.title = @"Subscriptions";
    self.view.backgroundColor = [UIColor clearColor];
 
-   // 2
-   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
-   self.youtubeGridLayoutViewController.title = @"Subscriptions";
-   self.youtubeGridLayoutViewController.delegate = self;
-   self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+   [self setupRootController];
+}
+
+
+- (void)setupRootController {
+// 2
+   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
+   self.youtubeChannelPageViewController.title = @"Subscriptions";
+//   self.youtubeChannelPageViewController.delegate = self;
+//   self.youtubeChannelPageViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    // 2.1
-   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
+   self.youtubeChannelPageViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
 
    //3
-   [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
-
+   [self pushViewController:self.youtubeChannelPageViewController animated:YES];
 }
+
+//- (void)setupRootController {
+//// 2
+//   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
+//   self.youtubeGridLayoutViewController.title = @"Subscriptions";
+//   self.youtubeGridLayoutViewController.delegate = self;
+//   self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+//
+//   // 2.1
+//   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
+//
+//   //3
+//   [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
+//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -81,13 +104,13 @@
 
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title {
-   self.youtubeGridLayoutViewController.title = title;
-   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
+//   self.youtubeGridLayoutViewController.title = title;
+//   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
 }
 
 
 - (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
-   [self.youtubeGridLayoutViewController endPullToRefreshWithResponse:array];
+//   [self.youtubeGridLayoutViewController endPullToRefreshWithResponse:array];
 }
 
 
