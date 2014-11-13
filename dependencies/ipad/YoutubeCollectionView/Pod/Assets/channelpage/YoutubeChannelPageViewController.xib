@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6250"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YoutubeChannelPageViewController">
             <connections>
+                <outlet property="tabbarViewsContainer" destination="FDg-NM-fdT" id="kCp-a3-kJf"/>
+                <outlet property="topBannerContainer" destination="lOX-0K-ajJ" id="d0p-EL-xzY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,16 +16,29 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-0K-ajJ">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-0K-ajJ" userLabel="topBanner">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="135"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FDg-NM-fdT">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDg-NM-fdT" userLabel="tabbarViews">
                     <rect key="frame" x="0.0" y="135" width="600" height="465"/>
                     <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="lOX-0K-ajJ" firstAttribute="leading" secondItem="FDg-NM-fdT" secondAttribute="leading" id="448-ya-I8m"/>
+                <constraint firstAttribute="bottom" secondItem="lOX-0K-ajJ" secondAttribute="bottom" constant="465" id="8vk-4e-55g"/>
+                <constraint firstItem="lOX-0K-ajJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EkI-Cf-xu0"/>
+                <constraint firstItem="lOX-0K-ajJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="K2k-3a-uqx"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="KOo-ks-Y4T"/>
+                <constraint firstItem="lOX-0K-ajJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OPp-3m-zuJ"/>
+                <constraint firstAttribute="bottom" secondItem="FDg-NM-fdT" secondAttribute="bottom" id="gfg-0X-ElZ"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="lOX-0K-ajJ" secondAttribute="bottom" id="hDX-7H-dHD"/>
+                <constraint firstAttribute="bottom" secondItem="FDg-NM-fdT" secondAttribute="bottom" id="hXZ-sf-3O4"/>
+                <constraint firstAttribute="trailing" secondItem="FDg-NM-fdT" secondAttribute="trailing" id="mHg-nt-SiT"/>
+                <constraint firstItem="lOX-0K-ajJ" firstAttribute="trailing" secondItem="FDg-NM-fdT" secondAttribute="trailing" id="yUs-2p-3SW"/>
+            </constraints>
         </view>
     </objects>
 </document>

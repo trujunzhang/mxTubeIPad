@@ -13,6 +13,12 @@
 
 
 @interface YoutubeChannelPageViewController ()
+
+@property (strong, nonatomic) IBOutlet UIView *topBannerContainer;
+@property (strong, nonatomic) IBOutlet UIView *tabbarViewsContainer;
+
+
+
 @property(nonatomic, strong) UIView * topBanner;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
 @property(nonatomic, strong) NSArray * defaultTableControllers;
@@ -31,10 +37,10 @@
 
    // Do any additional setup after loading the view from its nib.
    // 1 
-   CGFloat topBannerBottomPoint = [self makeTopBanner];
+//   CGFloat topBannerBottomPoint = [self makeTopBanner];
 
    // 2
-   [self makeSegmentTabs:topBannerBottomPoint];
+//   [self makeSegmentTabs:topBannerBottomPoint];
 }
 
 
