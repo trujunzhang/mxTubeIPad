@@ -7,6 +7,7 @@
 //
 
 
+#include "YoutubeConstants.h"
 
 @interface GYoutubeRequestInfo : NSObject {
 
@@ -25,6 +26,7 @@
 - (instancetype)initWithItemType:(YTSegmentItemType)queryType withTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
 
++ (NSArray *)getChannelPageSegmentTitlesArray;
 + (NSString *)getIdentifyByItemType:(YTSegmentItemType)itemType;
 + (YTSegmentItemType)getItemTypeByIndex:(int)index;
 + (NSArray *)getSegmentTitlesArray;

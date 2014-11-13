@@ -13,7 +13,6 @@
 @implementation GYoutubeRequestInfo
 
 
-
 - (instancetype)initWithItemType:(YTSegmentItemType)itemType withTeam:(NSString *)team {
    self = [super init];
    if (self) {
@@ -44,6 +43,16 @@
 
 #pragma mark -
 #pragma mark
+
+
++ (NSArray *)getChannelPageSegmentTitlesArray {
+   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+    @"Activity",
+    @"Channels",
+    @"Playlists",
+     nil];
+   return segmentTextContent;
+}
 
 
 + (NSArray *)getSegmentTitlesArray {
