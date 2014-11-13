@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="134"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="youtube_cover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d9c-z3-aRF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youtube_cover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d9c-z3-aRF">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="channel_photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-np-hxa">
@@ -18,6 +18,12 @@
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="d9c-z3-aRF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="42S-57-823"/>
+                <constraint firstAttribute="bottom" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="42" id="YL6-32-cH0"/>
+                <constraint firstItem="d9c-z3-aRF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yhh-Nn-x6f"/>
+                <constraint firstAttribute="trailing" secondItem="d9c-z3-aRF" secondAttribute="trailing" id="rgc-DJ-ekM"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
