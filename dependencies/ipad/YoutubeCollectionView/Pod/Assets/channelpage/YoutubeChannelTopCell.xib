@@ -6,7 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YoutubeChannelTopCell">
             <connections>
+                <outlet property="channelPhoto" destination="TLe-np-hxa" id="pI6-pw-BiY"/>
+                <outlet property="channelSubscribedState" destination="Z9N-uJ-T6f" id="Afl-6j-7y5"/>
+                <outlet property="channelSubscriberCount" destination="M3o-Ch-s1G" id="hAH-Er-yax"/>
+                <outlet property="channelTitle" destination="zBd-sB-knc" id="cgI-Ry-AU9"/>
                 <outlet property="shadowView" destination="APC-yp-537" id="5IZ-1M-hdR"/>
+                <outlet property="youtubeCover" destination="d9c-z3-aRF" id="b2s-sI-cHw"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

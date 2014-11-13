@@ -12,4 +12,19 @@
 
 @property (strong, nonatomic) IBOutlet UIView *shadowView;
 
+
+@property (strong, nonatomic) IBOutlet UIImageView *youtubeCover;
+
+@property (strong, nonatomic) IBOutlet UIImageView *channelPhoto;
+
+@property (strong, nonatomic) IBOutlet UILabel *channelTitle;
+
+@property (strong, nonatomic) IBOutlet UILabel *channelSubscriberCount;
+
+@property (strong, nonatomic) IBOutlet UIButton *channelSubscribedState;
+
+
+
+
+
 @end
