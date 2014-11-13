@@ -6,15 +6,21 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <YoutubeCollectionView/YoutubeGridLayoutViewController.h>
 #import "YoutubeChannelPageViewController.h"
 #import "YoutubeChannelTopCell.h"
-#import "UIView+Shadow.h"
-#import "GYoutubeRequestInfo.h"
+#import "WHTopTabBarController.h"
 
 
 @interface YoutubeChannelPageViewController ()
 @property(nonatomic, strong) UIView * topBanner;
-@property(nonatomic, strong) UISegmentedControl * pageSegmentController;
+@property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
+@property(nonatomic, strong) NSArray * defaultTableControllers;
+
+@property(nonatomic, strong) YoutubeGridLayoutViewController * firstViewController;
+@property(nonatomic, strong) YoutubeGridLayoutViewController * secondViewController;
+@property(nonatomic, strong) YoutubeGridLayoutViewController * thirdViewController;
+
 @end
 
 
@@ -25,43 +31,48 @@
 
    // Do any additional setup after loading the view from its nib.
    // 1 
-   self.topBanner = [self makeTopBanner];
-   [self.view addSubview:self.topBanner];
+   CGFloat topBannerBottomPoint = [self makeTopBanner];
 
    // 2
-   [self makeSegmentWithRect:self.topBanner.frame];
-   [self addSeperatorForSegment:self.pageSegmentController];
+   [self makeSegmentTabs:topBannerBottomPoint];
 }
 
 
-- (void)addSeperatorForSegment:(UISegmentedControl *)segmentedControll {
-   for (int i = 0; i < [segmentedControll.subviews count]; i++) {
-      [[segmentedControll.subviews objectAtIndex:i] setTintColor:nil];
-      if (![[segmentedControll.subviews objectAtIndex:i] isSelected]) {
-         UIColor * tintcolor = [UIColor blackColor];
-         [[segmentedControll.subviews objectAtIndex:i] setTintColor:tintcolor];
-      }
-      else {
-         UIColor * tintcolor = [UIColor blueColor];
-         [[segmentedControll.subviews objectAtIndex:i] setTintColor:tintcolor];
-      }
-   }
+- (void)makeSegmentTabs:(CGFloat)point {
+   self.videoTabBarController = [[WHTopTabBarController alloc] init];
+   self.videoTabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
+   CGRect rect = CGRectMake(0, point, 0, 0);
+   self.videoTabBarController.view.frame = rect;
+
+   // 1
+   self.firstViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.firstViewController.title = @"First";
+   self.firstViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
+
+   // 2
+   self.secondViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.secondViewController.title = @"Second";
+   self.secondViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
+
+   // 3
+   self.thirdViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.thirdViewController.title = @"Third";
+   self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
+
+   self.defaultTableControllers = [NSArray arrayWithObjects:
+    self.firstViewController,
+    self.secondViewController,
+    self.thirdViewController,
+     nil];
+
+   self.videoTabBarController.viewControllers = self.defaultTableControllers;
+
+   [self.view addSubview:self.videoTabBarController.view];
 }
 
 
-- (void)makeSegmentWithRect:(CGRect)rect {
-   self.pageSegmentController = [[UISegmentedControl alloc] initWithItems:[GYoutubeRequestInfo getChannelPageSegmentTitlesArray]];
-
-   self.pageSegmentController.selectedSegmentIndex = 0;
-   self.pageSegmentController.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-   self.pageSegmentController.frame = CGRectMake(0, rect.origin.y + rect.size.height, 300, 30);
-   self.pageSegmentController.center = self.view.center;
-   self.pageSegmentController.tintColor = [UIColor redColor];
-}
-
-
-- (UIView *)makeTopBanner {
+- (CGFloat)makeTopBanner {
    CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
    CGFloat statusbarHeight = statusRect.size.height;
    CGFloat navbarHeight = 46;
@@ -75,7 +86,10 @@
 
    topView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
-   return topView;
+   self.topBanner = topView;
+   [self.view addSubview:self.topBanner];
+
+   return rect.origin.y + rect.size.height;
 }
 
 
