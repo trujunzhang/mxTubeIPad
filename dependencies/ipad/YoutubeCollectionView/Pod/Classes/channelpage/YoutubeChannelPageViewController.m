@@ -31,11 +31,6 @@
    CGFloat statusbarHeight = statusRect.size.height;
    CGFloat navbarHeight = 46;
 
-//   NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"YoutubeChannelTopCell"
-//                                                   owner:self
-//                                                 options:nil];
-//   YoutubeChannelTopCell * topView = [array lastObject];
-
    YoutubeChannelTopCell * topView = [[YoutubeChannelTopCell alloc] init];
 
    CGRect rect = self.view.bounds;
@@ -46,31 +41,7 @@
    topView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
 
-
    return topView;
-}
-
-
-- (void)viewDidAppear:(BOOL)animated {
-   [super viewDidAppear:animated];
-
-
-}
-
-
-- (void)viewDidLayoutSubviews {
-   [super viewDidLayoutSubviews];
-
-   [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
-}
-
-
-- (void)updateLayout:(UIInterfaceOrientation)orientation {
-//   [self.topBanner makeInsetShadowWithRadius:14.0
-//                                       Color:[UIColor colorWithRed:100.0 green:0.0 blue:0.0 alpha:0.2]
-//                                  Directions:[NSArray arrayWithObjects:@"bottom", nil]];
-
-
 }
 
 
