@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YoutubeChannelTopCell">
             <connections>
-                <outlet property="backgroundView" destination="APC-yp-537" id="ghE-1O-Z11"/>
+                <outlet property="shadowView" destination="APC-yp-537" id="5IZ-1M-hdR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="134"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APC-yp-537" userLabel="backgroundView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="134"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APC-yp-537" userLabel="shadowView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youtube_cover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d9c-z3-aRF">

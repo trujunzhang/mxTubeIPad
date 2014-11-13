@@ -7,9 +7,26 @@
 //
 
 #import "YoutubeChannelTopCell.h"
+#import "UIView+Shadow.h"
 
 
 @implementation YoutubeChannelTopCell
 
+- (id)init {
+   NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"YoutubeChannelTopCell" owner:self options:nil];
+   id mainView = [subviewArray objectAtIndex:0];
+
+
+   self.shadowView.backgroundColor = [UIColor whiteColor];
+
+   self.shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+   self.shadowView.layer.shadowOffset = CGSizeMake(2, 2);
+   self.shadowView.layer.shadowOpacity = 1;
+   self.shadowView.layer.shadowRadius = 1.0;
+
+
+
+   return mainView;
+}
 
 @end

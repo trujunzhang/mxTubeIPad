@@ -10,6 +10,6 @@
 
 @interface YoutubeChannelTopCell : UIView
 
-@property (strong, nonatomic) IBOutlet UIView *backgroundView;
+@property (strong, nonatomic) IBOutlet UIView *shadowView;
 
 @end
