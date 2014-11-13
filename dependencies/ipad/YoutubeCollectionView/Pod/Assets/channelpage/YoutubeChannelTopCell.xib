@@ -10,6 +10,10 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="134"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="APC-yp-537" userLabel="backgroundView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="134"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youtube_cover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d9c-z3-aRF">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
                 </imageView>
@@ -48,6 +52,7 @@
                 <constraint firstAttribute="bottom" secondItem="Z9N-uJ-T6f" secondAttribute="bottom" constant="5" id="4Ip-Rn-bfw"/>
                 <constraint firstItem="zBd-sB-knc" firstAttribute="leading" secondItem="M3o-Ch-s1G" secondAttribute="leading" id="GQE-mt-3oo"/>
                 <constraint firstAttribute="trailing" secondItem="Z9N-uJ-T6f" secondAttribute="trailing" constant="8" id="Knc-4M-dCS"/>
+                <constraint firstAttribute="trailing" secondItem="APC-yp-537" secondAttribute="trailing" id="Mf9-43-Z7b"/>
                 <constraint firstItem="zBd-sB-knc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="NoJ-eZ-h94"/>
                 <constraint firstAttribute="bottom" secondItem="M3o-Ch-s1G" secondAttribute="bottom" id="QjH-H6-RNt"/>
                 <constraint firstAttribute="bottom" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="42" id="YL6-32-cH0"/>
@@ -55,7 +60,10 @@
                 <constraint firstItem="M3o-Ch-s1G" firstAttribute="top" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="21" id="bt0-TN-x5e"/>
                 <constraint firstItem="Z9N-uJ-T6f" firstAttribute="top" secondItem="zBd-sB-knc" secondAttribute="top" id="dnr-oF-cdL"/>
                 <constraint firstAttribute="bottom" secondItem="zBd-sB-knc" secondAttribute="bottom" constant="16" id="f08-IX-zFA"/>
+                <constraint firstItem="APC-yp-537" firstAttribute="leading" secondItem="d9c-z3-aRF" secondAttribute="leading" id="mTp-1L-idI"/>
                 <constraint firstItem="Z9N-uJ-T6f" firstAttribute="top" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="5" id="msn-NY-K67"/>
+                <constraint firstItem="APC-yp-537" firstAttribute="top" secondItem="d9c-z3-aRF" secondAttribute="top" id="ol3-0z-mhw"/>
+                <constraint firstItem="APC-yp-537" firstAttribute="bottom" secondItem="M3o-Ch-s1G" secondAttribute="bottom" id="rC5-ox-1bI"/>
                 <constraint firstAttribute="trailing" secondItem="d9c-z3-aRF" secondAttribute="trailing" id="rgc-DJ-ekM"/>
                 <constraint firstItem="zBd-sB-knc" firstAttribute="trailing" secondItem="M3o-Ch-s1G" secondAttribute="trailing" id="t5r-ZR-90f"/>
             </constraints>
