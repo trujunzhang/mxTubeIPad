@@ -36,6 +36,10 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/effect/*.{h,m}'
   end
 
+  s.subspec 'UIView-Shadow-Maker' do |sub|
+    sub.source_files = 'Pod/Classes/UIView-Shadow-Maker/*.{h,m}'
+  end
+
   s.dependency 'JMImageCache'
   s.dependency 'ASImageResize'
 
