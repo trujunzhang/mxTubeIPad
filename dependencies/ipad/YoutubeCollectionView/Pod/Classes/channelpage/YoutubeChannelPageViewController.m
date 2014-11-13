@@ -26,10 +26,18 @@
 
 
 - (UIView *)getTopBanner {
+   CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
+   CGFloat statusbarHeight = statusRect.size.height;
+   CGFloat navbarHeight = 46;
+
    NSArray * array = [[NSBundle mainBundle] loadNibNamed:@"YoutubeChannelTopCell"
                                                    owner:nil
                                                  options:nil];
    YoutubeChannelTopCell * topBanner = [array lastObject];
+   CGRect rect = self.view.bounds;
+   rect.origin.y = statusbarHeight + navbarHeight;
+   rect.size.height = topBanner.frame.size.height;
+   topBanner.frame = rect;
 
    topBanner.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
@@ -41,6 +49,17 @@
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
 }
+
+//.Layer_3 {
+//   background-image: url("Layer 3.png");
+//   position: absolute;
+//   left: 2px;
+//   top: 97px;
+//   width: 125px;
+//   height: 33px;
+//   z-index: 6;
+//}
+
 
 
 @end
