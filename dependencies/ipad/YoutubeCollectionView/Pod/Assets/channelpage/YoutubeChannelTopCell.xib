@@ -16,24 +16,48 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="channel_photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-np-hxa">
                     <rect key="frame" x="7" y="2" width="68" height="68"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Adobe Acrobat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBd-sB-knc">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adobe Acrobat" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBd-sB-knc">
                     <rect key="frame" x="4" y="97" width="180" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="JOD-el-SAc"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="27,033 subscribers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3o-Ch-s1G">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27,033 subscribers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3o-Ch-s1G">
                     <rect key="frame" x="4" y="113" width="180" height="21"/>
                     <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="11"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9N-uJ-T6f">
+                    <rect key="frame" x="480" y="97" width="112" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="112" id="15C-ic-s0I"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="12"/>
+                    <state key="normal" title="  Subscribed" image="mt_subscribed_icon.png" backgroundImage="mt_subscribe_button_bg.png">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="d9c-z3-aRF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="42S-57-823"/>
+                <constraint firstAttribute="bottom" secondItem="Z9N-uJ-T6f" secondAttribute="bottom" constant="5" id="4Ip-Rn-bfw"/>
+                <constraint firstItem="zBd-sB-knc" firstAttribute="leading" secondItem="M3o-Ch-s1G" secondAttribute="leading" id="GQE-mt-3oo"/>
+                <constraint firstAttribute="trailing" secondItem="Z9N-uJ-T6f" secondAttribute="trailing" constant="8" id="Knc-4M-dCS"/>
+                <constraint firstItem="zBd-sB-knc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="NoJ-eZ-h94"/>
+                <constraint firstAttribute="bottom" secondItem="M3o-Ch-s1G" secondAttribute="bottom" id="QjH-H6-RNt"/>
                 <constraint firstAttribute="bottom" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="42" id="YL6-32-cH0"/>
                 <constraint firstItem="d9c-z3-aRF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yhh-Nn-x6f"/>
+                <constraint firstItem="M3o-Ch-s1G" firstAttribute="top" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="21" id="bt0-TN-x5e"/>
+                <constraint firstItem="Z9N-uJ-T6f" firstAttribute="top" secondItem="zBd-sB-knc" secondAttribute="top" id="dnr-oF-cdL"/>
+                <constraint firstAttribute="bottom" secondItem="zBd-sB-knc" secondAttribute="bottom" constant="16" id="f08-IX-zFA"/>
+                <constraint firstItem="Z9N-uJ-T6f" firstAttribute="top" secondItem="d9c-z3-aRF" secondAttribute="bottom" constant="5" id="msn-NY-K67"/>
                 <constraint firstAttribute="trailing" secondItem="d9c-z3-aRF" secondAttribute="trailing" id="rgc-DJ-ekM"/>
+                <constraint firstItem="zBd-sB-knc" firstAttribute="trailing" secondItem="M3o-Ch-s1G" secondAttribute="trailing" id="t5r-ZR-90f"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -41,6 +65,8 @@
     </objects>
     <resources>
         <image name="channel_photo.jpg" width="100" height="100"/>
+        <image name="mt_subscribe_button_bg.png" width="92" height="34"/>
+        <image name="mt_subscribed_icon.png" width="16" height="16"/>
         <image name="youtube_cover.jpg" width="2058" height="342"/>
     </resources>
 </document>

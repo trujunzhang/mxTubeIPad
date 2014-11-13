@@ -50,16 +50,5 @@
    // Dispose of any resources that can be recreated.
 }
 
-//.Layer_3 {
-//   background-image: url("Layer 3.png");
-//   position: absolute;
-//   left: 2px;
-//   top: 97px;
-//   width: 125px;
-//   height: 33px;
-//   z-index: 6;
-//}
-
-
 
 @end
