@@ -24,16 +24,6 @@
       self.shadowView.layer.shadowRadius = 1.0;
 
       [self bind:subscription];
-//      [self.channelTitle setText:subscription.snippet.title];
-
-//      NSString * url = subscription.snippet.thumbnails.high.url;
-//      UIImageView * view = self.youtubeCover;
-//      [ImageCacheImplement CacheWithImageView:view
-//                                      withUrl:url
-//                              withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
-//      ];
-//
-//
    }
    return mainView;
 }
@@ -46,10 +36,11 @@
 //   UILabel * channelSubscriberCount;
 //   UIButton * channelSubscribedState;
 
-   [ImageCacheImplement CacheWithImageView:self.youtubeCover
+   [ImageCacheImplement CacheWithImageView:self.channelPhoto
                                    withUrl:subscription.snippet.thumbnails.high.url
                            withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
    ];
+
 
    [self.channelTitle setText:subscription.snippet.title];
 
