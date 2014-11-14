@@ -59,7 +59,6 @@
 
    NSMutableArray * tabControllersArray = [[NSMutableArray alloc] init];
    for (NSString * title in [GYoutubeRequestInfo getChannelPageSegmentTitlesArray]) {
-      // 1
       YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
       controller.title = title;
       controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
