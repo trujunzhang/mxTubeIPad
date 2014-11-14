@@ -30,6 +30,7 @@
 
 
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
+- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
 - (BOOL)hasNextPage;
 

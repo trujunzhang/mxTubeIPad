@@ -77,7 +77,8 @@ NSString * lastSearch = @"sketch 3";
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:text];
+   [self.youtubeRequestInfo resetSearchWithItemType:itemType withQueryTeam:text];
+//   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:text];
 
    lastSearch = text;
 
@@ -131,7 +132,7 @@ NSString * lastSearch = @"sketch 3";
    [self cleanup];
    [self.refreshControl beginRefreshing];
 
-   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:@""];
+//   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:@""];
 
 }
 
