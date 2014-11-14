@@ -46,32 +46,32 @@
 
 
 + (NSArray *)getChannelPageSegmentTitlesArray {
-   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+   NSArray * array = [NSArray arrayWithObjects:
     @"Activity",
     @"Videos",
     @"Playlists",
      nil];
-   return segmentTextContent;
+   return array;
 }
 
 
 + (NSArray *)getSegmentTitlesArray {
-   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+   NSArray * array = [NSArray arrayWithObjects:
     @"Videos",
     @"Channels",
     @"Playlists",
      nil];
-   return segmentTextContent;
+   return array;
 }
 
 
 + (NSArray *)getQueryTypeArray {
-   NSArray * segmentTextContent = [NSArray arrayWithObjects:
+   NSArray * array = [NSArray arrayWithObjects:
     @"video",
     @"channel",
     @"playlist",
      nil];
-   return segmentTextContent;
+   return array;
 }
 
 
