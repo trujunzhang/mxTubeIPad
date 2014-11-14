@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface YoutubeChannelPageViewController : UIViewController
+
+- (instancetype)initWithChannelId:(NSString *)channelId;
 
 @end

@@ -18,6 +18,7 @@
 @property(strong, nonatomic) IBOutlet UIView * topBannerContainer;
 @property(strong, nonatomic) IBOutlet UIView * tabbarViewsContainer;
 
+@property(nonatomic, copy) NSString * channelId;
 
 @property(nonatomic, strong) UIView * topBanner;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
@@ -32,10 +33,18 @@
 
 @implementation YoutubeChannelPageViewController
 
+- (instancetype)initWithChannelId:(NSString *)channelId {
+   self = [super init];
+   if (self) {
+      self.channelId = channelId;
+   }
+
+   return self;
+}
+
+
 - (void)viewDidLoad {
    [super viewDidLoad];
-
-
 
    // Do any additional setup after loading the view from its nib.
    // 1 
