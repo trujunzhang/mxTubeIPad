@@ -14,6 +14,7 @@
 #import "YoutubeAuthInfo.h"
 
 #import "GYoutubeRequestInfo.h"
+#import "GTLYouTubeActivityListResponse.h"
 
 
 static GYoutubeHelper * instance = nil;
@@ -290,6 +291,10 @@ static GYoutubeHelper * instance = nil;
 - (void)getUserSubscriptions:(id<GYoutubeHelperDelegate>)delegate {
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
+
+       [self getActivityListWithChannelId:@"UCl78QGX_hfK6zT8Mc-2w8GA"];
+       NSString * debug = @"debug";
+
        if (delegate)
           [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
    };
@@ -459,13 +464,13 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchPlaylistItemsListWithTagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
                                      tagType:tagType
-                                  completion:completion
+                           CompletionHandler:completion
                                 errorHandler:errorBlock
    ];
 }
 
 
-- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType CompletionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet,contentDetails"];
@@ -486,6 +491,45 @@ static GYoutubeHelper * instance = nil;
                                [self fetchPlayListItemVideoByVideoIds:array
                                                     completionHandler:responseHandler
                                                          errorHandler:errorHandler];
+                           }];
+}
+
+
+- (void)getActivityListWithChannelId:(NSString *)channelId {
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+       NSString * debug = @"debug";
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [self fetchActivityListWithChannelId:channelId
+                      CompletionHandler:completion
+                           errorHandler:error];
+}
+- (void)fetchActivityListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
+
+}
+
+- (void)fetchActivityListWithChannelId1232:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
+   YTServiceYouTube * service = self.youTubeService;
+
+   GTLQueryYouTube * query = [GTLQueryYouTube queryForActivitiesListWithPart:@"snippet,contentDetails"];
+   query.maxResults = search_maxResults;
+   query.channelId = channelId;
+   query.fields = @"items(contentDetails,id,kind,snippet),nextPageToken";
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubeActivityListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               NSArray * array = [resultList items];
+
+                               NSString * nextPageToken = resultList.nextPageToken;
+                               NSLog(@"pageToken = %@", nextPageToken);
+//                               [info setNextPageToken:resultList.nextPageToken];
+                               // 02 Search Videos by videoIds
+                               completion(array);
                            }];
 }
 

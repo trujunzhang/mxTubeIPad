@@ -20,6 +20,7 @@
       NSString * title = subscription.snippet.title;
       if ([title isEqualToString:@"Adobe Acrobat"]) {
          NSString * debug = @"debug";
+         //"channelId" -> "UCl78QGX_hfK6zT8Mc-2w8GA"
       }
       NSString * thumbnailsUrl = subscription.snippet.thumbnails.high.url;
       NSArray * row = @[ title, thumbnailsUrl ];
