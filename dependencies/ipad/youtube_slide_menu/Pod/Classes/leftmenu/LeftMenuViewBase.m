@@ -163,8 +163,6 @@
    int typeValue = [(line[2]) intValue];
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
-//"GTLYouTubePlaylistItem 0x7a7b6fc0: {snippet:{description,thumbnails,publishedAt,position,channelTitle,playlistId,channelId,resourceId,title} etag:""PSjn-HSKiX6orvNhGZvglLI2lvk/WoyvnFp1c3cX1CBpoZPO3b6P_CE"" id:"FLTNPZCB9I_7d9Rv5wMGndmdBZflORg8ej" contentDetails:{videoId} kind:"youtube#playlistItem"}"
-       NSString * debug = @"debug";
        [self.delegate endToggleLeftMenuEventWithResponse:array withModel:menuItemTree withTitle:line[0]];
    };
    ErrorResponseBlock error = ^(NSError * error) {
@@ -193,23 +191,22 @@
 
 - (NSArray *)defaultCategories {
    NSArray * array = @[
-    @[ @"Autos & Vehicles", @"Autos" ],
-    @[ @"Comedy", @"Comedy" ],
-    @[ @"Education", @"Education" ],
-    @[ @"Entertainment", @"Entertainment" ],
-    @[ @"File & Animation", @"Film" ],
-    @[ @"Gaming", @"Games" ],
-    @[ @"Howto & Style", @"Howto" ],
-    @[ @"Music", @"Music" ],
-    @[ @"News & Politics", @"News" ],
-    @[ @"Nonprofits & Activism", @"Nonprofit" ],
-    @[ @"People & Blogs", @"People" ],
-    @[ @"Pets & Animals", @"Animals" ],
-    @[ @"Science & Technology", @"Tech" ],
-    @[ @"Sports", @"Sports" ],
-    @[ @"Travel & Events", @"Travel" ],
+    @[ @"Autos & Vehicles", @"Autos", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Comedy", @"Comedy", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Education", @"Education", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Entertainment", @"Entertainment", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"File & Animation", @"Film", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Gaming", @"Games", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Howto & Style", @"Howto", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Music", @"Music", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"News & Politics", @"News", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Nonprofits & Activism", @"Nonprofit", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"People & Blogs", @"People", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Pets & Animals", @"Animals", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Science & Technology", @"Tech", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Sports", @"Sports", [[NSNumber alloc] initWithInt:kUploadsTag] ],
+    @[ @"Travel & Events", @"Travel", [[NSNumber alloc] initWithInt:kUploadsTag] ],
    ];
-
 
    return array;
 }
@@ -228,7 +225,6 @@
     @[ @"Playlists", @"playlists",
      [[NSNumber alloc] initWithInt:kUploadsTag] ],
    ];
-
 
    return array;
 }
