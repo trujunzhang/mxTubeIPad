@@ -159,22 +159,22 @@
 #pragma mark TableView events
 
 
-- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
-   enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
-   switch (itemType) {
-      case LMenuTreeUser:
-         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath];
-         break;
-      case LMenuTreeSubscriptions: {
-         YTYouTubeSubscription * subscription = self.authUser.subscriptions[indexPath.row];
-         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
-      }
-         break;
-      default:
-
-         break;
-   }
-}
+//- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
+//   enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
+//   switch (itemType) {
+//      case LMenuTreeUser:
+//         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath];
+//         break;
+//      case LMenuTreeSubscriptions: {
+//         YTYouTubeSubscription * subscription = self.authUser.subscriptions[indexPath.row];
+//         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
+//      }
+//         break;
+//      default:
+//
+//         break;
+//   }
+//}
 
 
 - (void)tableViewEventForUser:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {

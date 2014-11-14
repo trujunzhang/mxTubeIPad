@@ -31,6 +31,7 @@
 
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;
 - (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)path;
+- (void)tableViewEventForUser:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath;
 - (NSArray *)defaultCategories;
 - (NSArray *)signUserCategories;
 

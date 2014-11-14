@@ -166,9 +166,20 @@
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
    NSArray * line = menuItemTree.rowsArray[row];
 
-   [self.delegate startToggleLeftMenuWithTitle:line[0]];
-
-   [self tableViewEvent:menuItemTree atIndexPath:indexPath];
+   enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
+   switch (itemType) {
+      case LMenuTreeUser:
+         [self.delegate startToggleLeftMenuWithTitle:line[0]];
+         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath];
+         break;
+      case LMenuTreeSubscriptions: {
+         YTYouTubeSubscription * subscription = self.authUser.subscriptions[indexPath.row];
+         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
+      }
+         break;
+      case LMenuTreeCategories: {
+      }
+   }
 }
 
 

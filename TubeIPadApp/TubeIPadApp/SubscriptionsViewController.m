@@ -131,7 +131,12 @@
 
 
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription {
-   NSString * debug = @"debug";
+   // 1
+   YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] init];
+   controller.channelId = subscription.snippet.resourceId.channelId;
+
+   // 2
+   self.viewControllers = [NSArray arrayWithObject:controller];
 }
 
 
