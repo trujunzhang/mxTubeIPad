@@ -41,7 +41,7 @@
 
    [self setupRootController];
 
-   [self changeRootView];// test
+//   [self changeRootView];// test
 }
 
 
@@ -117,6 +117,8 @@
 
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title {
+   [self changeRootView];
+
 //   self.youtubeGridLayoutViewController.title = title;
 //   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
 }
@@ -132,9 +134,14 @@
 
 
 - (void)changeRootView {
-//   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
+   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
 
+//   [self pushViewController:self.youtubeChannelPageViewController animated:YES];
 //   self.rootViewController.view = self.youtubeChannelPageViewController.view;
+
+   self.viewControllers = [NSArray arrayWithObject:self.youtubeChannelPageViewController];
+
+
 }
 
 
