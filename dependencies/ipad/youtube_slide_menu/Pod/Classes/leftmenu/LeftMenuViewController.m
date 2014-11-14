@@ -28,10 +28,10 @@
 
 @implementation LeftMenuViewController
 
-
 - (void)setupViewController:(NSArray *)subscriptionsArray {
    LeftMenuItemTree * defaultMenuItemTree =
     [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
+                                   itemType:LMenuTreeCategories
                                   rowsArray:[self defaultCategories]
                                   hideTitle:NO
                                 remoteImage:NO
@@ -42,12 +42,14 @@
    if ([[GYoutubeHelper getInstance] isSignedIn]) {
       LeftMenuItemTree * signUserMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  "
+                                      itemType:LMenuTreeUser
                                      rowsArray:[self signUserCategories]
                                      hideTitle:YES
                                    remoteImage:NO
                                 cellIdentifier:@"SignUserCellIdentifier"];
       LeftMenuItemTree * subscriptionsMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
+                                      itemType:LMenuTreeSubscriptions
                                      rowsArray:subscriptionsArray
                                      hideTitle:NO
                                    remoteImage:YES
@@ -165,6 +167,7 @@
    NSArray * line = menuItemTree.rowsArray[row];
 
    [self.delegate startToggleLeftMenuWithTitle:line[0]];
+
    [self tableViewEvent:menuItemTree atIndexPath:indexPath];
 }
 
