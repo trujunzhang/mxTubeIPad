@@ -14,9 +14,8 @@
 
 @interface YoutubeChannelPageViewController ()
 
-@property (strong, nonatomic) IBOutlet UIView *topBannerContainer;
-@property (strong, nonatomic) IBOutlet UIView *tabbarViewsContainer;
-
+@property(strong, nonatomic) IBOutlet UIView * topBannerContainer;
+@property(strong, nonatomic) IBOutlet UIView * tabbarViewsContainer;
 
 
 @property(nonatomic, strong) UIView * topBanner;
@@ -35,21 +34,27 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
+
+
    // Do any additional setup after loading the view from its nib.
    // 1 
-//   CGFloat topBannerBottomPoint = [self makeTopBanner];
+   [self makeTopBanner:self.topBannerContainer];
 
    // 2
-//   [self makeSegmentTabs:topBannerBottomPoint];
+   [self makeSegmentTabs:self.tabbarViewsContainer];
+
+
+   if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+      self.edgesForExtendedLayout = UIRectEdgeNone;
+      self.automaticallyAdjustsScrollViewInsets = NO;
+   }
 }
 
 
-- (void)makeSegmentTabs:(CGFloat)point {
-   self.videoTabBarController = [[WHTopTabBarController alloc] init];
-   self.videoTabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
-   CGRect rect = CGRectMake(0, point, 0, 0);
-   self.videoTabBarController.view.frame = rect;
+- (void)makeSegmentTabs:(UIView *)parentView {
+   WHTopTabBarController * tabBarController = [[WHTopTabBarController alloc] init];
+   tabBarController.view.frame = parentView.bounds;
+   tabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 1
    self.firstViewController = [[YoutubeGridLayoutViewController alloc] init];
@@ -72,30 +77,20 @@
     self.thirdViewController,
      nil];
 
-   self.videoTabBarController.viewControllers = self.defaultTableControllers;
+   tabBarController.viewControllers = self.defaultTableControllers;
 
-   [self.view addSubview:self.videoTabBarController.view];
+   self.videoTabBarController = tabBarController;
+
+   [parentView addSubview:self.videoTabBarController.view];
 }
 
 
-- (CGFloat)makeTopBanner {
-   CGRect statusRect = [[UIApplication sharedApplication] statusBarFrame];
-   CGFloat statusbarHeight = statusRect.size.height;
-   CGFloat navbarHeight = 46;
-
+- (void)makeTopBanner:(UIView *)parentView {
    YoutubeChannelTopCell * topView = [[YoutubeChannelTopCell alloc] init];
-
-   CGRect rect = self.view.bounds;
-   rect.origin.y = statusbarHeight + navbarHeight;
-   rect.size.height = topView.frame.size.height;
-   topView.frame = rect;
-
-   topView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+   topView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    self.topBanner = topView;
-   [self.view addSubview:self.topBanner];
-
-   return rect.origin.y + rect.size.height;
+   [parentView addSubview:self.topBanner];
 }
 
 
