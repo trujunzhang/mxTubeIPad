@@ -17,6 +17,7 @@
 
 //#import "YoutubeGridLayoutViewController.h"
 #import "YoutubeChannelPageViewController.h"
+#import "YoutubeGridLayoutViewController.h"
 
 
 @interface SubscriptionsViewController ()
@@ -117,9 +118,9 @@
 
 
 - (void)startToggleLeftMenuWithTitle:(NSString *)title {
-   [self changeRootView];
+   UIViewController * controller = [self changeRootView:title];
 
-//   self.youtubeGridLayoutViewController.title = title;
+   controller.title = title;
 //   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
 }
 
@@ -133,15 +134,19 @@
 #pragma mark Change root view
 
 
-- (void)changeRootView {
-   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
+- (YoutubeChannelPageViewController *)changeRootView:(NSString *)title {
+   if (title.length > 7) {
+      YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
+      controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+      self.viewControllers = [NSArray arrayWithObject:controller];
 
-//   [self pushViewController:self.youtubeChannelPageViewController animated:YES];
-//   self.rootViewController.view = self.youtubeChannelPageViewController.view;
+      return controller;
+   } else {
+      YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] init];
+      self.viewControllers = [NSArray arrayWithObject:controller];
 
-   self.viewControllers = [NSArray arrayWithObject:self.youtubeChannelPageViewController];
-
-
+      return controller;
+   }
 }
 
 
