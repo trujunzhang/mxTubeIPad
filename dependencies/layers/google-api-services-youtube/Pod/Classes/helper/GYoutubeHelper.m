@@ -415,7 +415,6 @@ static GYoutubeHelper * instance = nil;
    YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"brandingSettings,statistics"];
 //   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
    query.identifier = identifier;
-   query.fields = @"";
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,

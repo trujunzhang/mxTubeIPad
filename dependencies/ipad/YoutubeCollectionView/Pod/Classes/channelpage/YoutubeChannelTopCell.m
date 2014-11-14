@@ -7,7 +7,10 @@
 //
 
 #import <IOS_Collection_Code/ImageCacheImplement.h>
+#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "YoutubeChannelTopCell.h"
+#import "GTLYouTubeChannelBrandingSettings.h"
+#import "GTLYouTubeImageSettings.h"
 
 
 @implementation YoutubeChannelTopCell
@@ -40,6 +43,23 @@
                                    withUrl:subscription.snippet.thumbnails.high.url
                            withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
    ];
+
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+       self.currentChannel = array[0];
+
+       NSString * url = self.currentChannel.brandingSettings.image.bannerMobileHdImageUrl;
+       [ImageCacheImplement CacheWithImageView:self.youtubeCover
+                                       withUrl:url
+                               withPlaceholder:[UIImage imageNamed:@"channel_default_banner.jpg"]
+       ];
+
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[GYoutubeHelper getInstance] fetchChannelListWithIdentifier:subscription.snippet.resourceId.JSON[@"channelId"]
+                                                     completion:completion
+                                                   errorHandler:error];
 
 //   [ImageCacheImplement CacheWithImageView:self.channelPhoto
 //                                   withUrl:subscription.snippet.thumbnails.high.url
