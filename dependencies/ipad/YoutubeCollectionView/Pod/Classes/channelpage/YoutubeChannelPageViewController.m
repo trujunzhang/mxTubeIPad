@@ -53,11 +53,19 @@
    // 2
    [self makeSegmentTabs:self.tabbarViewsContainer];
 
+   // 3
+   [self initFirstTabController];
+
 
    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
       self.edgesForExtendedLayout = UIRectEdgeNone;
       self.automaticallyAdjustsScrollViewInsets = NO;
    }
+}
+
+
+- (id)initFirstTabController {
+
 }
 
 

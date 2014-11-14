@@ -130,7 +130,7 @@
 }
 
 
-- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription {
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription {
    // 1
    YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] initWithChannelId:subscription.snippet.resourceId.channelId];
 
