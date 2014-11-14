@@ -6,29 +6,51 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "YoutubeChannelTopCell.h"
 
 
 @implementation YoutubeChannelTopCell
-
-- (id)init {
+- (instancetype)initWithSubscription:(YTYouTubeSubscription *)subscription {
    NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"YoutubeChannelTopCell" owner:self options:nil];
-   id mainView = [subviewArray objectAtIndex:0];
+   UIView * mainView = [subviewArray objectAtIndex:0];
+   if (self) {
+      self.shadowView.backgroundColor = [UIColor whiteColor];
 
+      self.shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+      self.shadowView.layer.shadowOffset = CGSizeMake(2, 2);
+      self.shadowView.layer.shadowOpacity = 1;
+      self.shadowView.layer.shadowRadius = 1.0;
 
-   self.shadowView.backgroundColor = [UIColor whiteColor];
+      [self bind:subscription];
+//      [self.channelTitle setText:subscription.snippet.title];
 
-   self.shadowView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-   self.shadowView.layer.shadowOffset = CGSizeMake(2, 2);
-   self.shadowView.layer.shadowOpacity = 1;
-   self.shadowView.layer.shadowRadius = 1.0;
-
-
+//      NSString * url = subscription.snippet.thumbnails.high.url;
+//      UIImageView * view = self.youtubeCover;
+//      [ImageCacheImplement CacheWithImageView:view
+//                                      withUrl:url
+//                              withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
+//      ];
+//
+//
+   }
    return mainView;
 }
 
 
 - (void)bind:(YTYouTubeSubscription *)subscription {
+//   UIImageView * youtubeCover;
+//   UIImageView * channelPhoto;
+//   UILabel * channelTitle;
+//   UILabel * channelSubscriberCount;
+//   UIButton * channelSubscribedState;
+
+   [ImageCacheImplement CacheWithImageView:self.youtubeCover
+                                   withUrl:subscription.snippet.thumbnails.high.url
+                           withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
+   ];
+
+   [self.channelTitle setText:subscription.snippet.title];
 
 }
 @end

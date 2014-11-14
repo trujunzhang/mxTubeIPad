@@ -20,8 +20,9 @@
 
 @property(nonatomic, strong) YTYouTubeSubscription * subscription;
 
-@property(nonatomic, strong) UIView * topBanner;
+@property(nonatomic, strong) YoutubeChannelTopCell * topBanner;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
+
 @property(nonatomic, strong) NSArray * defaultTableControllers;
 
 @property(nonatomic, strong) YoutubeGridLayoutViewController * firstViewController;
@@ -47,11 +48,12 @@
    [super viewDidLoad];
 
    // Do any additional setup after loading the view from its nib.
-   // 1 
+   // 1
    [self makeTopBanner:self.topBannerContainer];
 
    // 2
    [self makeSegmentTabs:self.tabbarViewsContainer];
+
 
    // 3
    [self initFirstTabController];
@@ -64,7 +66,17 @@
 }
 
 
-- (id)initFirstTabController {
+//- (void)viewDidAppear:(BOOL)animated {
+//   [super viewDidAppear:animated];
+//
+//   // 1
+////   [self.topBanner bind:self.subscription];
+//   [self.topBanner bind:nil];
+//
+//}
+
+
+- (void)initFirstTabController {
 
 }
 
@@ -90,12 +102,9 @@
 
 
 - (void)makeTopBanner:(UIView *)parentView {
-   YoutubeChannelTopCell * topView = [[YoutubeChannelTopCell alloc] init];
-   topView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+   self.topBanner = [[YoutubeChannelTopCell alloc] initWithSubscription:self.subscription];
+   self.topBanner.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-   [topView bind:self.subscription];
-
-   self.topBanner = topView;
    [parentView addSubview:self.topBanner];
 }
 

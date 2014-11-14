@@ -25,6 +25,8 @@
 
 @property(strong, nonatomic) IBOutlet UIButton * channelSubscribedState;
 
+@property(nonatomic, strong) YTYouTubeSubscription * subscription;
 
-- (void)bind:(YTYouTubeSubscription *)subscription;
+
+- (instancetype)initWithSubscription:(GTLYouTubeSubscription *)subscription;
 @end
