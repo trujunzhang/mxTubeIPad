@@ -25,14 +25,19 @@ static MABYT3_APIRequest * sharedlst = nil;
 
 
 - (NSString *)ActivitiesURLforUser:(MABYT3_Channel *)channel withMaxResults:(NSInteger)max {
+   return [self ActivitiesURLforUserWithChannelId:channel.identifier withMaxResults:max];
+}
+
+
+- (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withMaxResults:(NSInteger)max {
 
    if (max != 5) {
       return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@&maxResults=%@",
-                                        channel.identifier,
+                                        channelId,
                                         [@(max) stringValue]];
    }
    return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@",
-                                     channel.identifier];
+                                     channelId];
 }
 
 

@@ -506,31 +506,25 @@ static GYoutubeHelper * instance = nil;
                       CompletionHandler:completion
                            errorHandler:error];
 }
+
+
 - (void)fetchActivityListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
-
-}
-
-- (void)fetchActivityListWithChannelId1232:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
-   YTServiceYouTube * service = self.youTubeService;
-
-   GTLQueryYouTube * query = [GTLQueryYouTube queryForActivitiesListWithPart:@"snippet,contentDetails"];
-   query.maxResults = search_maxResults;
-   query.channelId = channelId;
-   query.fields = @"items(contentDetails,id,kind,snippet),nextPageToken";
-
-   _searchListTicket = [service executeQuery:query
-                           completionHandler:^(GTLServiceTicket * ticket,
-                            GTLYouTubeActivityListResponse * resultList,
-                            NSError * error) {
-                               // The contentDetails of the response has the playlists available for "my channel".
-                               NSArray * array = [resultList items];
-
-                               NSString * nextPageToken = resultList.nextPageToken;
-                               NSLog(@"pageToken = %@", nextPageToken);
-//                               [info setNextPageToken:resultList.nextPageToken];
-                               // 02 Search Videos by videoIds
-                               completion(array);
-                           }];
+   // 01: Search videoIds by queryTerm
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:channelId
+                                                                              withMaxResults:search_maxResults];
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+       if (!error) {
+          NSLog(@"pageToken = %@", pageToken);
+          // 02 Search Videos by videoIds
+//          [self fetchSearchVideoByVideoIds:array completionHandler:responseHandler errorHandler:errorHandler];
+       }
+       else {
+          if (error) {
+             errorHandler(error);
+          }
+       }
+   };
+   [[MABYT3_APIRequest sharedInstance] LISTActivitiesForURL:urlStr andHandler:finishedHandler];
 }
 
 
