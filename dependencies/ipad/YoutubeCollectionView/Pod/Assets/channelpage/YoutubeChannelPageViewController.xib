@@ -27,17 +27,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="lOX-0K-ajJ" firstAttribute="leading" secondItem="FDg-NM-fdT" secondAttribute="leading" id="448-ya-I8m"/>
-                <constraint firstAttribute="bottom" secondItem="lOX-0K-ajJ" secondAttribute="bottom" constant="465" id="8vk-4e-55g"/>
-                <constraint firstItem="lOX-0K-ajJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EkI-Cf-xu0"/>
-                <constraint firstItem="lOX-0K-ajJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="K2k-3a-uqx"/>
-                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="KOo-ks-Y4T"/>
-                <constraint firstItem="lOX-0K-ajJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OPp-3m-zuJ"/>
-                <constraint firstAttribute="bottom" secondItem="FDg-NM-fdT" secondAttribute="bottom" id="gfg-0X-ElZ"/>
-                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="lOX-0K-ajJ" secondAttribute="bottom" id="hDX-7H-dHD"/>
-                <constraint firstAttribute="bottom" secondItem="FDg-NM-fdT" secondAttribute="bottom" id="hXZ-sf-3O4"/>
-                <constraint firstAttribute="trailing" secondItem="FDg-NM-fdT" secondAttribute="trailing" id="mHg-nt-SiT"/>
-                <constraint firstItem="lOX-0K-ajJ" firstAttribute="trailing" secondItem="FDg-NM-fdT" secondAttribute="trailing" id="yUs-2p-3SW"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8cp-Hi-kKH"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="lOX-0K-ajJ" secondAttribute="bottom" id="HUt-JB-fUU"/>
+                <constraint firstAttribute="bottom" secondItem="FDg-NM-fdT" secondAttribute="bottom" id="HZa-1u-ht1"/>
+                <constraint firstAttribute="trailing" secondItem="FDg-NM-fdT" secondAttribute="trailing" id="HqL-e5-4xM"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="lOX-0K-ajJ" secondAttribute="top" constant="135" id="Kvr-pq-8AW"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="trailing" secondItem="lOX-0K-ajJ" secondAttribute="trailing" id="aBe-mb-cgt"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="eUy-Ut-mri"/>
+                <constraint firstItem="FDg-NM-fdT" firstAttribute="leading" secondItem="lOX-0K-ajJ" secondAttribute="leading" id="lHx-uN-Bta"/>
             </constraints>
         </view>
     </objects>
