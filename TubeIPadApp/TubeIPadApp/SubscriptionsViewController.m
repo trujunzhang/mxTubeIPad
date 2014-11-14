@@ -134,6 +134,8 @@
    // 1
    YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] initWithSubscription:subscription];
 
+   controller.delegate = self;
+
    // 2
    self.viewControllers = [NSArray arrayWithObject:controller];
 }

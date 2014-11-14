@@ -11,7 +11,7 @@
 
 @interface YoutubeChannelPageViewController : UIViewController
 
-
+@property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 - (instancetype)initWithSubscription:(YTYouTubeSubscription *)subscription;
 
 @end
