@@ -9,25 +9,34 @@
 
 #include "YoutubeConstants.h"
 
+
 @interface GYoutubeRequestInfo : NSObject {
 
 
 }
+
+@property(nonatomic, strong) NSMutableArray * videoList;
+
+@property(nonatomic) BOOL hasLoadingMore;
 @property(nonatomic, copy) NSString * queryType;
 
 @property(nonatomic, strong) NSMutableDictionary * parameters;
 
 @property(nonatomic) YTSegmentItemType itemType;
 @property(nonatomic, copy) NSString * queryTeam;
-@property(nonatomic, copy) NSString * pageToken;
+@property(nonatomic, copy) NSString * nextPageToken;
 
 @property(nonatomic, copy) NSString * itemIdentify;
 
-- (instancetype)initWithItemType:(YTSegmentItemType)queryType withTeam:(NSString *)team;
+
+- (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
 - (void)setNextPageToken:(NSString *)token;
+- (BOOL)hasNextPage;
 
 + (NSArray *)getChannelPageSegmentTitlesArray;
+- (void)appendNextPageData:(NSArray *)array;
 + (NSString *)getIdentifyByItemType:(YTSegmentItemType)itemType;
+- (void)cleanup;
 + (YTSegmentItemType)getItemTypeByIndex:(int)index;
 + (NSArray *)getSegmentTitlesArray;
 

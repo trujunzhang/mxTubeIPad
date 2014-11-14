@@ -25,7 +25,6 @@
 @implementation YoutubeGridLayoutViewController
 
 - (void)viewDidLoad {
-   self.hasLoadingMore = NO;
    [self.view addSubview:[self getCollectionView]];
 
    [super viewDidLoad];
@@ -84,7 +83,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return self.videoList.count;
+   return self.youtubeRequestInfo.videoList.count;
 }
 
 
@@ -94,16 +93,15 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   YTYouTubeVideo * video = [self.videoList objectAtIndex:indexPath.row];
-
-   NSString * cell_identifier = self.searchInfo.itemIdentify;
-   YTSegmentItemType itemType = self.searchInfo.itemType;
+   NSString * cell_identifier = self.youtubeRequestInfo.itemIdentify;
+   YTSegmentItemType itemType = self.youtubeRequestInfo.itemType;
 
    UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
                                                                                 forIndexPath:indexPath];
 
 
    if (itemType == YTSegmentItemVideo) {
+      YTYouTubeVideo * video = [self.youtubeRequestInfo.videoList objectAtIndex:indexPath.row];
       YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
       [gridViewVideoCell bind:video
              placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
@@ -115,10 +113,8 @@
 
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
-           viewForSupplementaryElementOfKind:
-            (NSString *)kind
-                                 atIndexPath:
-                                  (NSIndexPath *)indexPath {
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath {
    UICollectionReusableView * reusableView = nil;
 
    if ([kind isEqualToString:CHTCollectionElementKindSectionFooter]) {
@@ -126,12 +122,11 @@
                                                                           withReuseIdentifier:FOOTER_IDENTIFIER
                                                                                  forIndexPath:indexPath];
       footerView.hidden = NO;
-      if (self.hasLoadingMore == YES) {
-         [footerView startAnimation];
-         [self searchByPageToken]; // Check no pageToken,set hasLoadingMore is No.
-      }
 
-      if (self.hasLoadingMore == NO) {
+      if (self.youtubeRequestInfo.hasLoadingMore) {
+         [footerView startAnimation];
+         [self searchByPageToken]; // Check no nextPageToken,set hasLoadingMore is No.
+      } else {
          footerView.hidden = YES;
          [footerView stopAnimation];
       }

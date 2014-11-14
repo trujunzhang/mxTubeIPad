@@ -240,7 +240,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
                                  }
                               }
                               else {
@@ -538,7 +538,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
                                  }
                               }
                               else {
@@ -602,7 +602,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
                                  }
                               }
                               else {
@@ -768,7 +768,7 @@ static MABYT3_APIRequest * sharedlst = nil;
    }
    if ([dict objectForKey:@"nextPageToken"]) {
       pageToken = [dict objectForKey:@"nextPageToken"];
-//      pageToken = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+//      nextPageToken = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
    }
    return pageToken;
 }
@@ -831,7 +831,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
                                  }
                               }
                               else {
@@ -895,7 +895,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
                                  }
                               }
                               else {
@@ -1019,7 +1019,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&pageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
                                  }
                               }
                               else {

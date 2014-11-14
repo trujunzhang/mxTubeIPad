@@ -12,7 +12,7 @@
 
 
 @interface YoutubeCollectionViewBase : UIViewController
-@property(nonatomic, strong) GYoutubeRequestInfo * searchInfo;
+@property(nonatomic, strong) GYoutubeRequestInfo * youtubeRequestInfo;
 
 @property(nonatomic) NSUInteger hasLoadingMore;
 @property(nonatomic, strong) NSMutableArray * videoList;

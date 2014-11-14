@@ -122,7 +122,7 @@ static GYoutubeHelper * instance = nil;
                                                                    andMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
-          NSLog(@"pageToken = %@", pageToken);
+          NSLog(@"nextPageToken = %@", pageToken);
           [info setNextPageToken:pageToken];
           // 02 Search Videos by videoIds
           [self fetchSearchVideoByVideoIds:array completionHandler:responseHandler errorHandler:errorHandler];
@@ -504,7 +504,7 @@ static GYoutubeHelper * instance = nil;
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
 
-                               NSLog(@"pageToken = %@", resultList.nextPageToken);
+                               NSLog(@"nextPageToken = %@", resultList.nextPageToken);
 //                               [info setNextPageToken:resultList.nextPageToken];
                                // 02 Search Videos by videoIds
                                [self fetchPlayListItemVideoByVideoIds:array
@@ -533,7 +533,7 @@ static GYoutubeHelper * instance = nil;
                                                                               withMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
-          NSLog(@"pageToken = %@", pageToken);
+          NSLog(@"nextPageToken = %@", pageToken);
           // 02 Search Videos by videoIds
 //          [self fetchSearchVideoByVideoIds:array completionHandler:responseHandler errorHandler:errorHandler];
        }

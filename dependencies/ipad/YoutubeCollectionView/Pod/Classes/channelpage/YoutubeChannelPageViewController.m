@@ -104,6 +104,8 @@
 - (void)tabBarController:(WHTopTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    NSUInteger integer = tabBarController.selectedIndex;
    NSString * debug = @"debug";
+
+
 }
 
 

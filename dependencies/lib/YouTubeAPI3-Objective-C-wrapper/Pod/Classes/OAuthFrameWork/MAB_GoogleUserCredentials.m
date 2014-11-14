@@ -157,7 +157,7 @@ static MAB_GoogleUserCredentials * sharedCred = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtSubURL = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/subscriptions?part=id,snippet,contentDetails&maxResults=50&mine=true&pageToken=%@&key=%@",
+                                    nxtSubURL = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/subscriptions?part=id,snippet,contentDetails&maxResults=50&mine=true&nextPageToken=%@&key=%@",
                                                                            pagetoken,
                                                                            apiKey];
                                     [self resumeSub];
@@ -201,7 +201,7 @@ static MAB_GoogleUserCredentials * sharedCred = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtSubURL = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/subscriptions?part=id,snippet,contentDetails&maxResults=50&mine=true&pageToken=%@&key=%@",
+                                    nxtSubURL = [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/subscriptions?part=id,snippet,contentDetails&maxResults=50&mine=true&nextPageToken=%@&key=%@",
                                                                            pagetoken,
                                                                            apiKey];
                                     [self resumeSub];

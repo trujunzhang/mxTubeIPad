@@ -13,36 +13,103 @@
 @implementation GYoutubeRequestInfo
 
 
-- (instancetype)initWithItemType:(YTSegmentItemType)itemType withTeam:(NSString *)team {
+#pragma mark - for search
+
+
+- (instancetype)init {
    self = [super init];
    if (self) {
-      self.pageToken = @"";
-      self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
-      self.queryTeam = team;
-      self.itemType = [self getItemType];
-      self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
-
-      NSDictionary * parameters = @{
-       @"part" : @"id,snippet",
-       @"fields" : @"items(id/videoId),nextPageToken",
-      };
-      self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+      self.nextPageToken = @"";
+      self.hasLoadingMore = NO;
    }
 
    return self;
 }
 
 
+- (instancetype)initWithSearchItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
+   self = [super init];
+   if (self) {
+      [self resetSearchWithItemType:itemType withQueryTeam:queryTeam];
+   }
+
+   return self;
+}
+
+
+#pragma mark - search
+
+
+- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
+   self.nextPageToken = @"";
+   self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
+   self.queryTeam = team;
+   self.itemType = [self getItemType];
+   self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
+
+   NSDictionary * parameters = @{
+    @"part" : @"id,snippet",
+    @"fields" : @"items(id/videoId),nextPageToken",
+   };
+   self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+}
+
+
 - (void)setNextPageToken:(NSString *)pageToken {
-   self.pageToken = pageToken;
+   self.nextPageToken = pageToken;
 
    if (pageToken)
-      [self.parameters setObject:pageToken forKey:@"pageToken"];
+      [self.parameters setObject:pageToken forKey:@"nextPageToken"];
 }
 
 
 #pragma mark -
 #pragma mark
+
+
+- (YTSegmentItemType)getItemType {
+   int index = 0;
+   NSArray * array = [GYoutubeRequestInfo getSegmentTitlesArray];
+   for (int i = 0; i < array.count; ++i) {
+      if ([self.queryType isEqualToString:array[i]]) {
+         index = i;
+         break;
+      }
+   }
+   return [GYoutubeRequestInfo getItemTypeByIndex:index];
+}
+
+
+#pragma mark -
+#pragma mark - next page
+- (void)cleanup {
+   self.videoList = [[NSMutableArray alloc] init];
+   self.hasLoadingMore = NO;
+}
+
+
+- (BOOL)hasNextPage {
+   if (self.nextPageToken == nil) {
+      self.hasLoadingMore = NO;
+   }
+   return self.hasLoadingMore;
+}
+
+
+- (void)appendNextPageData:(NSArray *)array {
+   NSLog(@"leng = %d", array.count);
+   self.hasLoadingMore = YES;
+   if (array.count == 0) {
+      self.hasLoadingMore = NO;
+   } else {
+      [self.videoList addObjectsFromArray:array];
+   }
+}
+
+
+#pragma mark  Constant
+
+
 
 
 + (NSArray *)getChannelPageSegmentTitlesArray {
@@ -98,19 +165,6 @@
          return YTSegmentItemPlaylist;
    }
    return YTSegmentItemVideo;
-}
-
-
-- (YTSegmentItemType)getItemType {
-   int index = 0;
-   NSArray * array = [GYoutubeRequestInfo getSegmentTitlesArray];
-   for (int i = 0; i < array.count; ++i) {
-      if ([self.queryType isEqualToString:array[i]]) {
-         index = i;
-         break;
-      }
-   }
-   return [GYoutubeRequestInfo getItemTypeByIndex:index];
 }
 
 

@@ -31,6 +31,8 @@ NSString * lastSearch = @"sketch 3";
 
    [self setupRefresh];
 
+   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] init];
+
 //   [self search:@"sketch 3"];
 }
 
@@ -75,7 +77,7 @@ NSString * lastSearch = @"sketch 3";
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   self.searchInfo = [[GYoutubeRequestInfo alloc] initWithItemType:itemType withTeam:text];
+   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:text];
 
    lastSearch = text;
 
@@ -84,27 +86,21 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)searchByPageToken {
-   if (self.searchInfo.pageToken == nil) {
-      self.hasLoadingMore = NO;
+   if ([self.youtubeRequestInfo hasNextPage] == NO)
       return;
-   }
+
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
-       NSLog(@"leng = %d", array.count);
-       self.hasLoadingMore = YES;
-       if (array.count == 0) {
-          self.hasLoadingMore = NO;
-       } else {
-          [self.videoList addObjectsFromArray:array];
-       }
+       [self.youtubeRequestInfo appendNextPageData:array];
+
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };
-   self.hasLoadingMore = YES;
-   [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.searchInfo
+//   self.hasLoadingMore = YES;
+   [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.youtubeRequestInfo
                                            completionHandler:completion
                                                 errorHandler:error];
 }
@@ -118,24 +114,24 @@ NSString * lastSearch = @"sketch 3";
    if (array.count == 0) {
 //      self.hasLoadingMore = NO;
    } else {
-      [self.videoList addObjectsFromArray:array];
+//      [self.videoList addObjectsFromArray:array];
    }
    [[self collectionView] reloadData];
 }
 
 
 - (void)cleanup {
-   self.videoList = [[NSMutableArray alloc] init];
-   self.hasLoadingMore = NO;
+   [self.youtubeRequestInfo cleanup];
+
    [[self collectionView] reloadData];
 }
 
 
-- (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType  {
+- (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType {
    [self cleanup];
    [self.refreshControl beginRefreshing];
 
-   self.searchInfo = [[GYoutubeRequestInfo alloc] initWithItemType:itemType withTeam:@""];
+   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:@""];
 
 }
 
