@@ -7,7 +7,6 @@
 //
 
 #import "YoutubeChannelTopCell.h"
-#import "UIView+Shadow.h"
 
 
 @implementation YoutubeChannelTopCell
@@ -25,8 +24,11 @@
    self.shadowView.layer.shadowRadius = 1.0;
 
 
-
    return mainView;
 }
 
+
+- (void)bind:(YTYouTubeSubscription *)subscription {
+
+}
 @end

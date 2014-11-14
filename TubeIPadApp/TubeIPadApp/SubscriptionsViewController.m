@@ -132,7 +132,7 @@
 
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription {
    // 1
-   YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] initWithChannelId:subscription.snippet.resourceId.channelId];
+   YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] initWithSubscription:subscription];
 
    // 2
    self.viewControllers = [NSArray arrayWithObject:controller];

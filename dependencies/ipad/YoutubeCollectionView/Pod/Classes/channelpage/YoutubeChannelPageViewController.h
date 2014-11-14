@@ -11,6 +11,7 @@
 
 @interface YoutubeChannelPageViewController : UIViewController
 
-- (instancetype)initWithChannelId:(NSString *)channelId;
+
+- (instancetype)initWithSubscription:(YTYouTubeSubscription *)subscription;
 
 @end

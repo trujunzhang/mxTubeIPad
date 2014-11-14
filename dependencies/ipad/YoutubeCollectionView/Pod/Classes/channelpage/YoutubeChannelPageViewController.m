@@ -18,7 +18,7 @@
 @property(strong, nonatomic) IBOutlet UIView * topBannerContainer;
 @property(strong, nonatomic) IBOutlet UIView * tabbarViewsContainer;
 
-@property(nonatomic, copy) NSString * channelId;
+@property(nonatomic, strong) YTYouTubeSubscription * subscription;
 
 @property(nonatomic, strong) UIView * topBanner;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
@@ -33,10 +33,10 @@
 
 @implementation YoutubeChannelPageViewController
 
-- (instancetype)initWithChannelId:(NSString *)channelId {
+- (instancetype)initWithSubscription:(YTYouTubeSubscription *)subscription {
    self = [super init];
    if (self) {
-      self.channelId = channelId;
+      self.subscription = subscription;
    }
 
    return self;
@@ -92,6 +92,8 @@
 - (void)makeTopBanner:(UIView *)parentView {
    YoutubeChannelTopCell * topView = [[YoutubeChannelTopCell alloc] init];
    topView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+   [topView bind:self.subscription];
 
    self.topBanner = topView;
    [parentView addSubview:self.topBanner];
