@@ -161,9 +161,9 @@ static GYoutubeHelper * instance = nil;
          NSString * channelId = resourceId.JSON[@"channelId"];
          [channelds addObject:channelId];
       }
-      [self fetchChannelListWithIdentifier:[channelds componentsJoinedByString:@","]
-                                completion:responseHandler
-                              errorHandler:errorHandler];
+//      [self fetchChannelListWithIdentifier:[channelds componentsJoinedByString:@","]
+//                                completion:responseHandler
+//                              errorHandler:errorHandler];
    }
 }
 
@@ -282,7 +282,6 @@ static GYoutubeHelper * instance = nil;
        if (self.delegate)
           [self.delegate FetchYoutubeChannelCompletion:info];
 
-
 //       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
 //                                         tagType:kFavoritesTag
 //                                      completion:nil
@@ -309,6 +308,8 @@ static GYoutubeHelper * instance = nil;
        self.youtubeAuthUser.subscriptions = array;
 
 //       [self getActivityListWithChannelId:@"UCl78QGX_hfK6zT8Mc-2w8GA"];
+//       [self fetchChannelListWithIdentifier:@"UCl78QGX_hfK6zT8Mc-2w8GA" completion:nil errorHandler:nil];
+
 
        if (delegate)
           [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
@@ -410,10 +411,11 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchChannelListWithIdentifier:(NSString *)identifier completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    YTServiceYouTube * service = self.youTubeService;
 
-   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,brandingSettings"];
+//   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,brandingSettings"];
+   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"brandingSettings,statistics"];
 //   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
    query.identifier = identifier;
-
+   query.fields = @"";
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
