@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "YoutubeConstants.h"
 @class GYoutubeAuthUser;
 @class YoutubeAuthInfo;
 @class LeftMenuItemTree;
@@ -16,7 +17,7 @@
 @optional
 - (void)startToggleLeftMenuWithTitle:(NSString *)title;
 - (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
-
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription;
 @end
 
 

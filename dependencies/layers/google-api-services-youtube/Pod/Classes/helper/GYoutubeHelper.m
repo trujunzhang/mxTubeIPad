@@ -330,15 +330,17 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchSubscriptionsListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    YTServiceYouTube * service = self.youTubeService;
 
-   YTQueryYouTube * query = [YTQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet,contentDetails"];
+   YTQueryYouTube * query = [YTQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
 //   YTQueryYouTube * query = [YTQueryYouTube queryForSubscriptionsListWithPart:@"id,snippet"];
-   query.maxResults = 10;
+   query.maxResults = 50;
    query.channelId = channelId;
+   query.fields = @"items/snippet(title,resourceId,thumbnails),nextPageToken";
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
                             GTLYouTubeSubscriptionListResponse * resultList,
                             NSError * error) {
+                               NSString * nextPageToken = resultList.nextPageToken;
                                // The contentDetails of the response has the playlists available for "my channel".
                                if ([[resultList items] count] > 0) {
                                   completion([resultList items]);

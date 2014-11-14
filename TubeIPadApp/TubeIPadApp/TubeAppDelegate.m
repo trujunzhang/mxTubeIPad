@@ -154,4 +154,9 @@
    [self.subscriptionsViewController endToggleLeftMenuEventWithResponse:array withModel:menuItemTree withTitle:title];
 }
 
+
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription {
+   [self.subscriptionsViewController endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
+}
+
 @end

@@ -18,6 +18,9 @@
    NSMutableArray * rows = [[NSMutableArray alloc] init];
    for (YTYouTubeSubscription * subscription in self.subscriptions) {
       NSString * title = subscription.snippet.title;
+      if ([title isEqualToString:@"Adobe Acrobat"]) {
+         NSString * debug = @"debug";
+      }
       NSString * thumbnailsUrl = subscription.snippet.thumbnails.high.url;
       NSArray * row = @[ title, thumbnailsUrl ];
 

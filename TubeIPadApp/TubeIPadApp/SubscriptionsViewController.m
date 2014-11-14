@@ -130,6 +130,11 @@
 }
 
 
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription {
+   NSString * debug = @"debug";
+}
+
+
 #pragma mark -
 #pragma mark Change root view
 

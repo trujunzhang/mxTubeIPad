@@ -17,5 +17,6 @@
 
 - (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
 - (void)startToggleLeftMenuWithTitle:(NSString *)title;
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription;
 @end
 
