@@ -11,6 +11,7 @@
 
 
 @implementation YoutubeChannelTopCell
+
 - (instancetype)initWithSubscription:(YTYouTubeSubscription *)subscription {
    NSArray * subviewArray = [[NSBundle mainBundle] loadNibNamed:@"YoutubeChannelTopCell" owner:self options:nil];
    UIView * mainView = [subviewArray objectAtIndex:0];

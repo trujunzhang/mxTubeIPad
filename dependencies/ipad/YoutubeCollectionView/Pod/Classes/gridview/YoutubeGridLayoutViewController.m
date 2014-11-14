@@ -67,19 +67,13 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-   [super viewDidAppear:animated];
-   [self updateLayoutForOrientation:[UIApplication sharedApplication].statusBarOrientation];
+- (void)viewDidLayoutSubviews {
+   [super viewDidLayoutSubviews];
+   [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
 }
 
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-   [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-   [self updateLayoutForOrientation:toInterfaceOrientation];
-}
-
-
-- (void)updateLayoutForOrientation:(UIInterfaceOrientation)orientation {
+- (void)updateLayout:(UIInterfaceOrientation)orientation {
    CHTCollectionViewWaterfallLayout * layout =
     (CHTCollectionViewWaterfallLayout *) self.collectionView.collectionViewLayout;
    layout.columnCount = [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];

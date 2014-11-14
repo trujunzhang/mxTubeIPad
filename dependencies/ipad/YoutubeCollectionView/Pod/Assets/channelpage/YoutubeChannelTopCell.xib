@@ -23,7 +23,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="130"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youtube_cover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d9c-z3-aRF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youtube_cover.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d9c-z3-aRF">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="channel_photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-np-hxa">
