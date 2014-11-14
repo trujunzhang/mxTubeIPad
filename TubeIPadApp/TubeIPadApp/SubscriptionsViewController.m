@@ -25,6 +25,8 @@
 
 @property(nonatomic, strong) YoutubeChannelPageViewController * youtubeChannelPageViewController;
 
+@property(nonatomic, strong) UIViewController * rootViewController;
+
 @end
 
 
@@ -38,10 +40,21 @@
    self.view.backgroundColor = [UIColor clearColor];
 
    [self setupRootController];
+
+   [self changeRootView];// test
 }
 
 
 - (void)setupRootController {
+   self.rootViewController = [[UIViewController alloc] init];
+   self.rootViewController.view.frame = self.view.bounds;
+   self.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+   [self pushViewController:self.rootViewController animated:NO];
+}
+
+
+- (void)setupRootController123 {
 // 2
    self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
    self.youtubeChannelPageViewController.title = @"Subscriptions";
@@ -111,6 +124,17 @@
 
 - (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
 //   [self.youtubeGridLayoutViewController endPullToRefreshWithResponse:array];
+}
+
+
+#pragma mark -
+#pragma mark Change root view
+
+
+- (void)changeRootView {
+//   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
+
+//   self.rootViewController.view = self.youtubeChannelPageViewController.view;
 }
 
 
