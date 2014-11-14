@@ -10,6 +10,7 @@
 #import "YoutubeChannelPageViewController.h"
 #import "YoutubeChannelTopCell.h"
 #import "WHTopTabBarController.h"
+#import "GYoutubeRequestInfo.h"
 
 
 @interface YoutubeChannelPageViewController ()
@@ -56,31 +57,18 @@
    tabBarController.view.frame = parentView.bounds;
    tabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-   // 1
-   self.firstViewController = [[YoutubeGridLayoutViewController alloc] init];
-   self.firstViewController.title = @"First";
-   self.firstViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
+   NSMutableArray * tabControllersArray = [[NSMutableArray alloc] init];
+   for (NSString * title in [GYoutubeRequestInfo getChannelPageSegmentTitlesArray]) {
+      // 1
+      YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
+      controller.title = title;
+      controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
+      [tabControllersArray addObject:controller];
+   }
 
-   // 2
-   self.secondViewController = [[YoutubeGridLayoutViewController alloc] init];
-   self.secondViewController.title = @"Second";
-   self.secondViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
-
-   // 3
-   self.thirdViewController = [[YoutubeGridLayoutViewController alloc] init];
-   self.thirdViewController.title = @"Third";
-   self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
-
-   self.defaultTableControllers = [NSArray arrayWithObjects:
-    self.firstViewController,
-    self.secondViewController,
-    self.thirdViewController,
-     nil];
-
-   tabBarController.viewControllers = self.defaultTableControllers;
+   tabBarController.viewControllers = tabControllersArray;
 
    self.videoTabBarController = tabBarController;
-
    [parentView addSubview:self.videoTabBarController.view];
 }
 

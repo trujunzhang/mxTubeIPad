@@ -48,7 +48,7 @@
 + (NSArray *)getChannelPageSegmentTitlesArray {
    NSArray * segmentTextContent = [NSArray arrayWithObjects:
     @"Activity",
-    @"Channels",
+    @"Videos",
     @"Playlists",
      nil];
    return segmentTextContent;
