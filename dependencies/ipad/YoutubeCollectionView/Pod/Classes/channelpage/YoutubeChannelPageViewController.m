@@ -61,7 +61,7 @@
    for (NSString * title in [GYoutubeRequestInfo getChannelPageSegmentTitlesArray]) {
       YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
       controller.title = title;
-      controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
+      controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
       [tabControllersArray addObject:controller];
    }
 

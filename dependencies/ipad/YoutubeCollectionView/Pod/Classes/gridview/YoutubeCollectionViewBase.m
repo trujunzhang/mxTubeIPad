@@ -31,7 +31,7 @@ NSString * lastSearch = @"sketch 3";
 
    [self setupRefresh];
 
-//   [self search:@"sketch 3"];
+   [self search:@"sketch 3"];
 }
 
 
