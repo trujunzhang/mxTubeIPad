@@ -22,6 +22,7 @@
 
 @interface LeftMenuViewBase : UIViewController
 
+@property(nonatomic, strong) GYoutubeAuthUser * authUser;
 @property(nonatomic, strong) UIImage * placeholderImage;
 @property(nonatomic, strong) NSArray * tableSectionArray;
 

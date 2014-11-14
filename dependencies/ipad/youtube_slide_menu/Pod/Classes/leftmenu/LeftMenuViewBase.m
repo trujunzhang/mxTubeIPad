@@ -156,11 +156,22 @@
 
 #pragma mark -
 #pragma mark TableView events
-- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
 
+
+- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
+   enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
+   switch (itemType) {
+      case LMenuTreeUser:
+         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath;
+         break;
+      default:
+//         [self.delegate endToggleLeftMenuEventWithChannelPageWithModel:menuItemTree];
+         break;
+   }
 }
 
-- (void)tableViewEvent123:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
+
+- (void)tableViewEventForUser:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
    NSArray * line = menuItemTree.rowsArray[indexPath.row];
    int typeValue = [(line[2]) intValue];
 

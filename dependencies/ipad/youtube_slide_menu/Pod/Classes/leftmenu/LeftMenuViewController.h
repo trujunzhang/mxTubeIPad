@@ -17,6 +17,7 @@
 @interface LeftMenuViewController : LeftMenuViewBase
 
 
+
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user;
 - (void)refreshChannelInfo:(YoutubeAuthInfo *)info;
 @end

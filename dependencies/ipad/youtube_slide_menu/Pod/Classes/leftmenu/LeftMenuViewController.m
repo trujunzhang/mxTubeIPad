@@ -173,6 +173,7 @@
 
 
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
+   self.authUser = user;
    // 1
    [self setupViewController:[user getTableRows]];
    [self setupSlideTableViewWithAuthInfo:nil];
