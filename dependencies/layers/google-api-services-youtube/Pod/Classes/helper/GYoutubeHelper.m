@@ -152,6 +152,22 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+- (void)fetchChannelListBySubscriptionList:(NSArray *)subscriptionList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+   NSMutableArray * channelds = [[NSMutableArray alloc] init];
+   if (subscriptionList) {
+      // Merge video IDs
+      for (YTYouTubeSubscription * searchResult in subscriptionList) {
+         GTLYouTubeResourceId * resourceId = searchResult.snippet.resourceId;
+         NSString * channelId = resourceId.JSON[@"channelId"];
+         [channelds addObject:channelId];
+      }
+      [self fetchChannelListWithIdentifier:[channelds componentsJoinedByString:@","]
+                                completion:responseHandler
+                              errorHandler:errorHandler];
+   }
+}
+
+
 - (void)fetchPlayListItemVideoByVideoIds:(NSArray *)searchResultList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    NSMutableArray * videoIds = [[NSMutableArray alloc] init];
 
@@ -292,15 +308,16 @@ static GYoutubeHelper * instance = nil;
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.youtubeAuthUser.subscriptions = array;
 
-       [self getActivityListWithChannelId:@"UCl78QGX_hfK6zT8Mc-2w8GA"];
-       NSString * debug = @"debug";
+//       [self getActivityListWithChannelId:@"UCl78QGX_hfK6zT8Mc-2w8GA"];
 
        if (delegate)
           [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
+
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
+
    [self fetchSubscriptionsListWithChannelId:self.youtubeAuthUser.channel.identifier
                            CompletionHandler:completion
                                 errorHandler:error];
@@ -347,11 +364,11 @@ static GYoutubeHelper * instance = nil;
                             NSError * error) {
                                NSString * nextPageToken = resultList.nextPageToken;
                                // The contentDetails of the response has the playlists available for "my channel".
-                               if ([[resultList items] count] > 0) {
-                                  completion([resultList items]);
+                               NSArray * array = [resultList items];
+                               if ([array count] > 0) {
+                                  completion(array);
                                }
                                errorBlock(error);
-                               _searchListTicket = nil;
                            }];
 }
 
@@ -393,9 +410,10 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchChannelListWithIdentifier:(NSString *)identifier completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    YTServiceYouTube * service = self.youTubeService;
 
-   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
+   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails,brandingSettings"];
 //   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
    query.identifier = identifier;
+
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,

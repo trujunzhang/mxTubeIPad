@@ -41,6 +41,10 @@
                            withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
    ];
 
+//   [ImageCacheImplement CacheWithImageView:self.channelPhoto
+//                                   withUrl:subscription.snippet.thumbnails.high.url
+//                           withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
+//   ];
 
    [self.channelTitle setText:subscription.snippet.title];
 
