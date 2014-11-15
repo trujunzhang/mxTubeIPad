@@ -10,6 +10,11 @@
 #import "GYoutubeRequestInfo.h"
 
 
+@interface GYoutubeRequestInfo ()
+
+@end
+
+
 @implementation GYoutubeRequestInfo
 
 
@@ -55,7 +60,7 @@
 }
 
 
-- (void)setNextPageToken:(NSString *)pageToken {
+- (void)putNextPageToken:(NSString *)pageToken {
    self.nextPageToken = pageToken;
 
    if (pageToken)
@@ -82,6 +87,8 @@
 
 #pragma mark -
 #pragma mark - next page
+
+
 - (void)cleanup {
    self.videoList = [[NSMutableArray alloc] init];
    self.hasLoadingMore = NO;
@@ -108,8 +115,6 @@
 
 
 #pragma mark  Constant
-
-
 
 
 + (NSArray *)getChannelPageSegmentTitlesArray {

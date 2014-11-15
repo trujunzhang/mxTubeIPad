@@ -123,7 +123,7 @@ static GYoutubeHelper * instance = nil;
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);
-          [info setNextPageToken:pageToken];
+          [info putNextPageToken:pageToken];
           // 02 Search Videos by videoIds
           [self fetchSearchVideoByVideoIds:array completionHandler:responseHandler errorHandler:errorHandler];
        }
