@@ -240,7 +240,8 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
+//                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = pagetoken;
                                  }
                               }
                               else {

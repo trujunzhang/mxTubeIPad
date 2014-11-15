@@ -28,7 +28,10 @@
 @property(nonatomic, copy) NSString * itemIdentify;
 
 
+@property(nonatomic, copy) NSString * channelId;
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
+
+- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType;
 - (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
 - (void)putNextPageToken:(NSString *)token;
 - (BOOL)hasNextPage;

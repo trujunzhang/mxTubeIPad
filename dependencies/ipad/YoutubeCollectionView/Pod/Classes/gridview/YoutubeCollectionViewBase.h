@@ -24,4 +24,5 @@
 - (void)endPullToRefreshWithResponse:(NSArray *)array;
 - (void)cleanup;
 - (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType;
+- (void)fetchListByType:(enum YTSegmentItemType)type withChannelId:(NSString * )channelId;
 @end

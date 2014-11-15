@@ -44,6 +44,19 @@
 #pragma mark - search
 
 
+- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType {
+   self.queryType = @"";
+   self.queryTeam = @"";
+
+   self.itemType = [self getItemType];
+   self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
+
+   self.hasLoadingMore = YES;
+
+   self.parameters = [[NSMutableDictionary alloc] init];
+}
+
+
 - (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
    self.queryTeam = team;

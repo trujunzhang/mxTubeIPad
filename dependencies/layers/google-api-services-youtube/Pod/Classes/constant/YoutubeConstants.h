@@ -48,6 +48,8 @@
 // module
 #import "MABYT3_Video.h"
 #import "MABYT3_ThumbnailDetails.h"
+#import "MABYT3_SearchItem.h"
+#include "MABYT3_Activity.h"
 
 #endif
 
@@ -100,6 +102,10 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 // different
 //#define YTYouTubeSearchResult  GTLYouTubeSearchResult
 #define YTYouTubeSearchResult  MABYT3_SearchItem
+
+#define YTYouTubeActivity  MABYT3_Activity
+
+
 
 
 

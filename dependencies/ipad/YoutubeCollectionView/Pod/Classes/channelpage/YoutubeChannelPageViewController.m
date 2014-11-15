@@ -11,6 +11,7 @@
 #import "YoutubeChannelTopCell.h"
 #import "WHTopTabBarController.h"
 #import "GYoutubeRequestInfo.h"
+#import "YoutubeCollectionViewBase.h"
 
 
 @interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate>
@@ -53,6 +54,9 @@
 
    // 2
    [self makeSegmentTabs:self.tabbarViewsContainer];
+
+   // 3
+   [self fetchListWithController:self.defaultTableControllers[0] withType:YTSegmentItemVideo];
 
    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
       self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -106,6 +110,11 @@
    NSString * debug = @"debug";
 
 
+}
+
+
+- (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(enum YTSegmentItemType)type {
+   [controller fetchListByType:type withChannelId:self.subscription.snippet.resourceId.JSON[@"channelId"]];
 }
 
 

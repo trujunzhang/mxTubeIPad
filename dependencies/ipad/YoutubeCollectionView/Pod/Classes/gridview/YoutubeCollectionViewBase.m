@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import "YoutubeGridLayoutViewController.h"
 #import "YoutubeCollectionViewBase.h"
 #import <google-api-services-youtube/GYoutubeHelper.h>
 #import "GYoutubeRequestInfo.h"
@@ -137,6 +138,41 @@ NSString * lastSearch = @"sketch 3";
 }
 
 
+#pragma mark -
+#pragma mark
+
+
+- (void)fetchListByType:(enum YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
+   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
+
+   [self cleanup];
+
+   [self.youtubeRequestInfo resetSearchWithItemType:itemType];
+   self.youtubeRequestInfo.channelId = channelId;
+
+   [self fetchListByPageToken];
+
+}
+
+
+- (void)fetchListByPageToken {
+   if ([self.youtubeRequestInfo hasNextPage] == NO)
+      return;
+
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+       [self.refreshControl endRefreshing];
+
+       [self.youtubeRequestInfo appendNextPageData:array];
+
+       [[self collectionView] reloadData];
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[GYoutubeHelper getInstance] fetchActivityListWithChannelId:self.youtubeRequestInfo.channelId
+                                              CompletionHandler:completion
+                                                   errorHandler:error];
+}
 @end
 
 
