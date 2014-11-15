@@ -11,6 +11,14 @@
 @class GYoutubeRequestInfo;
 
 
+@protocol YoutubeCollectionNextPageDelegate<NSObject>
+
+@optional
+- (void)executeNextPageTask;
+
+@end
+
+
 @interface YoutubeCollectionViewBase : UIViewController
 @property(nonatomic, strong) GYoutubeRequestInfo * youtubeRequestInfo;
 
@@ -24,5 +32,6 @@
 - (void)endPullToRefreshWithResponse:(NSArray *)array;
 - (void)cleanup;
 - (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType;
-- (void)fetchListByType:(enum YTSegmentItemType)type withChannelId:(NSString * )channelId;
+- (void)fetchListByType:(enum YTSegmentItemType)type withChannelId:(NSString *)channelId;
+- (void)fetchListByPageToken;
 @end

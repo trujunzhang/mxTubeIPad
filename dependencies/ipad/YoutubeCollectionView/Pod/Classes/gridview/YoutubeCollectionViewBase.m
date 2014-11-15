@@ -148,7 +148,7 @@ NSString * lastSearch = @"sketch 3";
    [self.youtubeRequestInfo resetSearchWithItemType:itemType];
    self.youtubeRequestInfo.channelId = channelId;
 
-   [self fetchListByPageToken];
+//   [self fetchListByPageToken];
 }
 
 

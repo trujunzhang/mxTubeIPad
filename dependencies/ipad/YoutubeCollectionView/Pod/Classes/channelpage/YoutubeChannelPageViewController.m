@@ -15,7 +15,7 @@
 #import "YoutubeParser.h"
 
 
-@interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate>
+@interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate,YoutubeCollectionNextPageDelegate>
 
 @property(strong, nonatomic) IBOutlet UIView * topBannerContainer;
 @property(strong, nonatomic) IBOutlet UIView * tabbarViewsContainer;
@@ -26,6 +26,8 @@
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
 
 @property(nonatomic, strong) NSMutableArray * defaultTableControllers;
+
+@property(nonatomic, strong) YoutubeGridLayoutViewController * selectedController;
 
 @property(nonatomic, strong) YoutubeGridLayoutViewController * firstViewController;
 @property(nonatomic, strong) YoutubeGridLayoutViewController * secondViewController;
@@ -75,6 +77,7 @@
    for (NSString * title in [GYoutubeRequestInfo getChannelPageSegmentTitlesArray]) {
       YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
       controller.delegate = self.delegate;
+      controller.nextPageDelegate = self;
       controller.title = title;
       controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
       [self.defaultTableControllers addObject:controller];
@@ -113,7 +116,18 @@
 
 
 - (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(enum YTSegmentItemType)type {
+   self.selectedController = controller;
    [controller fetchListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
+}
+
+
+#pragma mark -
+#pragma mark YoutubeCollectionNextPageDelegate
+
+
+- (void)executeNextPageTask {
+   [self.selectedController fetchListByPageToken];
+
 }
 
 
