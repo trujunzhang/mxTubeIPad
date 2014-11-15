@@ -98,6 +98,7 @@
    rect.size.width = 256;
    self.tableView = [[STCollapseTableView alloc] initWithFrame:rect style:UITableViewStylePlain];
    self.tableView.backgroundColor = [UIColor clearColor];
+   self.tableView.showsVerticalScrollIndicator = NO;
    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
    self.tableView.dataSource = self;
    self.tableView.delegate = self;
