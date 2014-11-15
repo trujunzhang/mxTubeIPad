@@ -499,17 +499,6 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)getActivityListWithChannelId:(NSString *)channelId {
-   YoutubeResponseBlock completion = ^(NSArray * array) {
-       NSString * debug = @"debug";
-   };
-   ErrorResponseBlock error = ^(NSError * error) {
-       NSString * debug = @"debug";
-   };
-   [self fetchActivityListWithRequestInfo:channelId
-                        CompletionHandler:completion
-                             errorHandler:error];
-}
 
 
 - (void)fetchActivityListWithRequestInfo:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {

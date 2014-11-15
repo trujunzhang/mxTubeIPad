@@ -79,7 +79,6 @@ NSString * lastSearch = @"sketch 3";
    [self cleanup];
 
    [self.youtubeRequestInfo resetSearchWithItemType:itemType withQueryTeam:text];
-//   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:text];
 
    lastSearch = text;
 
@@ -101,7 +100,6 @@ NSString * lastSearch = @"sketch 3";
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };
-//   self.hasLoadingMore = YES;
    [[GYoutubeHelper getInstance] searchByQueryWithRequestInfo:self.youtubeRequestInfo
                                             completionHandler:completion
                                                  errorHandler:error];
@@ -168,7 +166,7 @@ NSString * lastSearch = @"sketch 3";
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:self.youtubeRequestInfo.channelId
+   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:self.youtubeRequestInfo
                                                 CompletionHandler:completion
                                                      errorHandler:error];
 }
