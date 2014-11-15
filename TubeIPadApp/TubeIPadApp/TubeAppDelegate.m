@@ -44,7 +44,7 @@
    self.tabBarController.delegate = self;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
 
-//   self.tabBarController.selectedIndex = 1; //test
+   self.tabBarController.selectedIndex = 1; //test
 
    //2. the first right tab bar item
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];

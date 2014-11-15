@@ -24,7 +24,6 @@
 
 @property(nonatomic) YTSegmentItemType itemType;
 @property(nonatomic, copy) NSString * queryTeam;
-@property(nonatomic, copy) NSString * nextPageToken;
 
 @property(nonatomic, copy) NSString * itemIdentify;
 

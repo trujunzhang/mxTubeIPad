@@ -24,7 +24,6 @@
 - (instancetype)init {
    self = [super init];
    if (self) {
-      self.nextPageToken = @"";
       self.hasLoadingMore = NO;
    }
 
@@ -46,11 +45,12 @@
 
 
 - (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
-   self.nextPageToken = @"";
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
    self.queryTeam = team;
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
+
+   self.hasLoadingMore = YES;
 
    NSDictionary * parameters = @{
     @"part" : @"id,snippet",
@@ -61,10 +61,11 @@
 
 
 - (void)putNextPageToken:(NSString *)pageToken {
-   self.nextPageToken = pageToken;
-
-   if (pageToken)
+   if (pageToken) {
       [self.parameters setObject:pageToken forKey:@"nextPageToken"];
+   } else {
+      self.hasLoadingMore = NO;
+   }
 }
 
 
@@ -96,9 +97,6 @@
 
 
 - (BOOL)hasNextPage {
-   if (self.nextPageToken == nil) {
-      self.hasLoadingMore = NO;
-   }
    return self.hasLoadingMore;
 }
 
