@@ -14,4 +14,5 @@
 
 + (NSString *)getVideoIdsByActivityList:searchResultList;
 
++ (NSString *)getVideoIdsBySearchResult:(id)searchResultList;
 @end

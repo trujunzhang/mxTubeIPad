@@ -126,9 +126,9 @@ static GYoutubeHelper * instance = nil;
           NSLog(@"nextPageToken = %@", pageToken);
           [info putNextPageToken:pageToken];
 
-//          [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsByActivityList:array]// used
-//                        completionHandler:responseHandler
-//                             errorHandler:errorHandler];
+          [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsBySearchResult:array]
+                        completionHandler:responseHandler
+                             errorHandler:errorHandler];
        }
        else {
           if (error) {
@@ -138,22 +138,6 @@ static GYoutubeHelper * instance = nil;
    };
    [[MABYT3_APIRequest sharedInstance] fetchWithUrl:urlStr andHandler:finishedHandler];
 }
-
-
-//- (void)fetchSearchVideoByVideoIds:(NSArray *)searchResultList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
-//   NSMutableArray * videoIds = [[NSMutableArray alloc] init];
-//
-//   if (searchResultList) {
-//      NSString * videoIds = [YoutubeParser getVideoIdsByActivityList:searchResultList];
-//      // Merge video IDs
-//      for (YTYouTubeActivity * searchResult in searchResultList) {
-////         [videoIds addObject:searchResult.contentDetails.upload.videoId];
-//      }
-//      [self fetchVideoListWithVideoId:[videoIds componentsJoinedByString:@","]
-//                    completionHandler:responseHandler
-//                         errorHandler:errorHandler];
-//   }
-//}
 
 
 - (void)fetchChannelListBySubscriptionList:(NSArray *)subscriptionList completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {

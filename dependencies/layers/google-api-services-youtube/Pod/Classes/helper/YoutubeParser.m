@@ -19,4 +19,15 @@
    }
    return [videoIds componentsJoinedByString:@","];
 }
+
+
++ (NSString *)getVideoIdsBySearchResult:searchResultList {
+   NSMutableArray * videoIds = [[NSMutableArray alloc] init];
+   for (YTYouTubeSearchResult * searchResult in searchResultList) {
+      [videoIds addObject:searchResult.identifier.videoId];
+   }
+   return [videoIds componentsJoinedByString:@","];
+}
+
+
 @end
