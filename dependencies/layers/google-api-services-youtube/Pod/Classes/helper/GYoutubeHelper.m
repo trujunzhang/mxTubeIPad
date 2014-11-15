@@ -144,10 +144,8 @@ static GYoutubeHelper * instance = nil;
    NSMutableArray * channelds = [[NSMutableArray alloc] init];
    if (subscriptionList) {
       // Merge video IDs
-      for (YTYouTubeSubscription * searchResult in subscriptionList) {
-         GTLYouTubeResourceId * resourceId = searchResult.snippet.resourceId;
-         NSString * channelId = resourceId.JSON[@"channelId"];
-         [channelds addObject:channelId];
+      for (YTYouTubeSubscription * subscription in subscriptionList) {
+         [channelds addObject:[YoutubeParser getChannelId:subscription]];
       }
 //      [self fetchChannelListWithIdentifier:[channelds componentsJoinedByString:@","]
 //                                completion:responseHandler
@@ -514,13 +512,15 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchActivityListWithChannelId:(NSString *)channelId CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
+- (void)fetchActivityListWithChannelId:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
    // 01: Search videoIds by queryTerm
-   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:channelId
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:info.channelId
                                                                               withMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);
+          [info putNextPageToken:pageToken];
+
           // 02 Search Videos by videoIds
           [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsByActivityList:array]
                         completionHandler:completion

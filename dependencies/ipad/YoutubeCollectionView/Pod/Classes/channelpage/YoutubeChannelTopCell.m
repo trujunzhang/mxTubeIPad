@@ -11,6 +11,7 @@
 #import "YoutubeChannelTopCell.h"
 #import "GTLYouTubeChannelBrandingSettings.h"
 #import "GTLYouTubeImageSettings.h"
+#import "YoutubeParser.h"
 
 
 @implementation YoutubeChannelTopCell
@@ -57,7 +58,7 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchChannelListWithIdentifier:subscription.snippet.resourceId.JSON[@"channelId"]
+   [[GYoutubeHelper getInstance] fetchChannelListWithIdentifier:[YoutubeParser getChannelId:subscription]
                                                      completion:completion
                                                    errorHandler:error];
 

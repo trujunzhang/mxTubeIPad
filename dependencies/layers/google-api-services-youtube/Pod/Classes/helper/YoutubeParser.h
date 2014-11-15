@@ -15,4 +15,5 @@
 + (NSString *)getVideoIdsByActivityList:searchResultList;
 
 + (NSString *)getVideoIdsBySearchResult:(id)searchResultList;
++ (NSString *)getChannelId:(YTYouTubeSubscription *)subscription;
 @end

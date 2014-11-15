@@ -12,6 +12,7 @@
 #import "WHTopTabBarController.h"
 #import "GYoutubeRequestInfo.h"
 #import "YoutubeCollectionViewBase.h"
+#import "YoutubeParser.h"
 
 
 @interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate>
@@ -108,13 +109,11 @@
 - (void)tabBarController:(WHTopTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    NSUInteger integer = tabBarController.selectedIndex;
    NSString * debug = @"debug";
-
-
 }
 
 
 - (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(enum YTSegmentItemType)type {
-   [controller fetchListByType:type withChannelId:self.subscription.snippet.resourceId.JSON[@"channelId"]];
+   [controller fetchListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }
 
 

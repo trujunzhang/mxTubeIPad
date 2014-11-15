@@ -143,7 +143,7 @@ NSString * lastSearch = @"sketch 3";
 
 
 - (void)fetchListByType:(enum YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
-   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
+//   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
 
    [self cleanup];
 
