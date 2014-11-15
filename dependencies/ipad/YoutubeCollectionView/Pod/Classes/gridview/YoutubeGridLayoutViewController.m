@@ -125,7 +125,7 @@
 
       if (self.youtubeRequestInfo.hasLoadingMore) {
          [footerView startAnimation];
-         [self searchByPageToken]; // Check no nextPageToken,set hasLoadingMore is No.
+//         [self searchByPageToken]; // Check no nextPageToken,set hasLoadingMore is No.
       } else {
          footerView.hidden = YES;
          [footerView stopAnimation];
