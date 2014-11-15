@@ -94,7 +94,9 @@
    [super viewDidLoad];
 
    // 1
-   self.tableView = [[STCollapseTableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+   CGRect rect = self.view.frame;
+   rect.size.width = 256;
+   self.tableView = [[STCollapseTableView alloc] initWithFrame:rect style:UITableViewStylePlain];
    self.tableView.backgroundColor = [UIColor clearColor];
    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
    self.tableView.dataSource = self;
