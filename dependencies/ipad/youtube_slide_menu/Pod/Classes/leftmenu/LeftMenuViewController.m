@@ -174,7 +174,7 @@
          break;
       case LMenuTreeSubscriptions: {
          YTYouTubeSubscription * subscription = self.authUser.subscriptions[indexPath.row];
-         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
+         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription withTitle:line[0]];
       }
          break;
       case LMenuTreeCategories: {

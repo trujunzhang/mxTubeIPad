@@ -155,8 +155,8 @@
 }
 
 
-- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription {
-   [self.subscriptionsViewController endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription withTitle:(NSString * )title {
+   [self.subscriptionsViewController endToggleLeftMenuEventForChannelPageWithSubscription:subscription withTitle:title];
 }
 
 @end

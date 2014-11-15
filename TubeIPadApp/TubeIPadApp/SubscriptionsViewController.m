@@ -55,19 +55,19 @@
 }
 
 
-- (void)setupRootController123 {
-// 2
-   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
-   self.youtubeChannelPageViewController.title = @"Subscriptions";
-//   self.youtubeChannelPageViewController.delegate = self;
-//   self.youtubeChannelPageViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
-
-   // 2.1
-   self.youtubeChannelPageViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
-
-   //3
-   [self pushViewController:self.youtubeChannelPageViewController animated:YES];
-}
+//- (void)setupRootController123 {
+//// 2
+//   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
+//   self.youtubeChannelPageViewController.title = @"Subscriptions";
+////   self.youtubeChannelPageViewController.delegate = self;
+////   self.youtubeChannelPageViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+//
+//   // 2.1
+//   self.youtubeChannelPageViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
+//
+//   //3
+//   [self pushViewController:self.youtubeChannelPageViewController animated:YES];
+//}
 
 //- (void)setupRootController {
 //// 2
@@ -130,10 +130,11 @@
 }
 
 
-- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription {
+- (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription withTitle:(NSString *)title {
    // 1
    YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] initWithSubscription:subscription];
-
+   controller.navigationItem.leftBarButtonItem = self.revealButtonItem;
+   controller.title = title;
    controller.delegate = self;
 
    // 2
