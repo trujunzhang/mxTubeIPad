@@ -14,7 +14,7 @@
 #import "GYoutubeRequestInfo.h"
 
 
-@interface SearchViewController ()
+@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate>
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
 @end
@@ -29,6 +29,7 @@
    self.view.backgroundColor = [UIColor clearColor];
 
    self.delegate = self;
+   self.nextPageDelegate = self;
    self.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    [self setupNavigationRightItem];
@@ -85,7 +86,8 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-   [self search:searchBar.text];
+   YTSegmentItemType itemType = [GYoutubeRequestInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex];
+   [self search:self.searchBar.text withItemType:itemType];
    [searchBar resignFirstResponder];
 }
 
@@ -108,6 +110,15 @@
 
    YTSegmentItemType itemType = [GYoutubeRequestInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex];
    [self search:self.searchBar.text withItemType:itemType];
+}
+
+
+#pragma mark -
+#pragma mark YoutubeCollectionNextPageDelegate
+
+
+- (void)executeNextPageTask {
+   [self searchByPageToken];
 }
 
 

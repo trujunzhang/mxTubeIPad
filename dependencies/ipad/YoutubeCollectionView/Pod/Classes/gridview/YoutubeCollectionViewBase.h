@@ -26,7 +26,6 @@
 @property(nonatomic, strong) NSMutableArray * videoList;
 @property(strong, nonatomic) UICollectionView * collectionView;
 
-- (void)search:(NSString *)text;
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType;
 - (void)searchByPageToken;
 - (void)endPullToRefreshWithResponse:(NSArray *)array;

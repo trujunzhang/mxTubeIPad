@@ -13,7 +13,7 @@
 
 
 
-@interface SearchViewController : YoutubeGridLayoutViewController<IpadGridViewCellDelegate, UISearchBarDelegate>
+@interface SearchViewController : YoutubeGridLayoutViewController
 
 @end
 

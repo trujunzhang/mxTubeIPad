@@ -70,11 +70,6 @@ NSString * lastSearch = @"sketch 3";
 #pragma mark Search events
 
 
-- (void)search:(NSString *)text {
-   [self search:text withItemType:YTSegmentItemVideo];
-}
-
-
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
@@ -82,7 +77,7 @@ NSString * lastSearch = @"sketch 3";
 
    lastSearch = text;
 
-   [self searchByPageToken];
+//   [self searchByPageToken];
 }
 
 

@@ -75,14 +75,6 @@
 
 - (void)putNextPageToken:(NSString *)pageToken {
    if (pageToken) {
-      [self.parameters setObject:pageToken forKey:@"nextPageToken"];
-   } else {
-      self.hasLoadingMore = NO;
-   }
-}
-
-- (void)addNextPageToken:(NSString *)pageToken {
-   if (pageToken) {
       [self.parameters setObject:pageToken forKey:@"pageToken"];
    } else {
       self.hasLoadingMore = NO;
