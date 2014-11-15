@@ -25,19 +25,30 @@ static MABYT3_APIRequest * sharedlst = nil;
 
 
 - (NSString *)ActivitiesURLforUser:(MABYT3_Channel *)channel withMaxResults:(NSInteger)max {
-   return [self ActivitiesURLforUserWithChannelId:channel.identifier withMaxResults:max];
+   return [self ActivitiesURLforUserWithChannelId:channel.identifier withParameters:nil withMaxResults:max];
 }
 
 
-- (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withMaxResults:(NSInteger)max {
-
+- (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
+   NSString * paramS = [self getParameterString:params];
    if (max != 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@&maxResults=%@",
-                                        channelId,
-                                        [@(max) stringValue]];
+      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
    }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@",
-                                     channelId];
+   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@%@",
+                                     channelId, paramS];
+
+//   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=%@&type=%@%@",
+//                                     term,
+//                                     queryType,
+//                                     paramS];
+//
+//   if (max != 5) {
+//      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@&maxResults=%@",
+//                                        channelId,
+//                                        [@(max) stringValue]];
+//   }
+//   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@",
+//                                     channelId];
 }
 
 
@@ -140,10 +151,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 
 - (NSString *)VideoSearchURLforTerm:(NSString *)term queryType:(NSString *)queryType withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max {
 
-   NSString * paramS = @"";
-   for (NSString * key in [params allKeys]) {
-      paramS = [NSString stringWithFormat:@"%@&%@=%@", paramS, key, [params objectForKey:key]];
-   }
+   NSString * paramS = [self getParameterString:params];
    if (max != 5) {
       paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
    }
@@ -151,6 +159,15 @@ static MABYT3_APIRequest * sharedlst = nil;
                                      term,
                                      queryType,
                                      paramS];
+}
+
+
+- (NSString *)getParameterString:(NSDictionary *)params {
+   NSString * paramS = @"";
+   for (NSString * key in [params allKeys]) {
+      paramS = [NSString stringWithFormat:@"%@&%@=%@", paramS, key, [params objectForKey:key]];
+   }
+   return paramS;
 }
 
 

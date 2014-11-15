@@ -34,6 +34,7 @@
 - (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType;
 - (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
 - (void)putNextPageToken:(NSString *)token;
+- (void)addNextPageToken:(NSString *)pageToken;
 - (BOOL)hasNextPage;
 
 + (NSArray *)getChannelPageSegmentTitlesArray;

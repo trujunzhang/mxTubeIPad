@@ -499,16 +499,15 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-
-
 - (void)fetchActivityListWithRequestInfo:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
    // 01: Search videoIds by queryTerm
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:info.channelId
+                                                                              withParameters:info.parameters
                                                                               withMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);
-          [info putNextPageToken:pageToken];
+          [info addNextPageToken:pageToken];
 
           // 02 Search Videos by videoIds
           [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsByActivityList:array]
