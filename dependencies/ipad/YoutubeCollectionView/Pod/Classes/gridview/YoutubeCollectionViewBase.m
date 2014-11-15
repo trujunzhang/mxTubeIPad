@@ -102,9 +102,9 @@ NSString * lastSearch = @"sketch 3";
    ErrorResponseBlock error = ^(NSError * error) {
    };
 //   self.hasLoadingMore = YES;
-   [[GYoutubeHelper getInstance] searchByQueryWithSearchInfo:self.youtubeRequestInfo
-                                           completionHandler:completion
-                                                errorHandler:error];
+   [[GYoutubeHelper getInstance] searchByQueryWithRequestInfo:self.youtubeRequestInfo
+                                            completionHandler:completion
+                                                 errorHandler:error];
 }
 
 
@@ -168,9 +168,9 @@ NSString * lastSearch = @"sketch 3";
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchActivityListWithChannelId:self.youtubeRequestInfo.channelId
-                                              CompletionHandler:completion
-                                                   errorHandler:error];
+   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:self.youtubeRequestInfo.channelId
+                                                CompletionHandler:completion
+                                                     errorHandler:error];
 }
 @end
 
