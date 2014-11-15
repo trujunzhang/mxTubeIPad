@@ -192,7 +192,7 @@ static GYoutubeHelper * instance = nil;
 - (void)fetchVideoListWithVideoId:(NSString *)videoIds completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideo:videoIds withMaxResults:5];
 
-   [[MABYT3_APIRequest sharedInstance]
+    [[MABYT3_APIRequest sharedInstance]
     LISTVideosForURL:urlStr
           andHandler:^(NSMutableArray * results, NSError * error, NSString * pageToken) {
               if (!error) {
