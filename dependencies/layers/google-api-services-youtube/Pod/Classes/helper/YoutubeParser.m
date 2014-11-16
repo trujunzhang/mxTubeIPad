@@ -21,7 +21,7 @@
 }
 
 
-+ (NSString *)getVideoIdsBySearchResult:searchResultList {
++ (NSString *)getVideoIdsBySearchResult:(NSMutableArray *)searchResultList {
    NSMutableArray * videoIds = [[NSMutableArray alloc] init];
    for (YTYouTubeSearchResult * searchResult in searchResultList) {
       [videoIds addObject:searchResult.identifier.videoId];

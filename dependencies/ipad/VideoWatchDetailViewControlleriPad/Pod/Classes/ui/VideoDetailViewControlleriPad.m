@@ -6,8 +6,8 @@
 
 #import "YoutubeGridLayoutViewController.h"
 #import "IpadGridViewCell.h"
-
 #import "YKYouTubeVideo.h"
+#include "YoutubeParser.h"
 
 
 @interface VideoDetailViewControlleriPad ()<YoutubeCollectionNextPageDelegate>

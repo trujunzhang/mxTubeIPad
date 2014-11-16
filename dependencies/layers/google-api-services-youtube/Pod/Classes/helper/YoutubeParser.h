@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "YoutubeConstants.h"
 
 
@@ -14,7 +13,9 @@
 
 + (NSString *)getVideoIdsByActivityList:searchResultList;
 
-+ (NSString *)getVideoIdsBySearchResult:(id)searchResultList;
++ (NSString *)getVideoIdsBySearchResult:(NSMutableArray *)searchResultList;
+
 + (NSString *)getChannelId:(YTYouTubeSubscription *)subscription;
 + (NSString *)getWatchVideoId:(YTYouTubeVideo *)video;
+
 @end
