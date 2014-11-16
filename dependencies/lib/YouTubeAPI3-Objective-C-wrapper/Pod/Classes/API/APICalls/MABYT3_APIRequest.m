@@ -149,6 +149,15 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
+- (NSString *)VideoSearchURLforTermWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
+   NSString * paramS = [self getParameterString:params];
+   if (max != 5) {
+      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
+   }
+   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?%@", paramS];
+}
+
+
 - (NSString *)VideoSearchURLforTerm:(NSString *)term queryType:(NSString *)queryType withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max {
 
    NSString * paramS = [self getParameterString:params];

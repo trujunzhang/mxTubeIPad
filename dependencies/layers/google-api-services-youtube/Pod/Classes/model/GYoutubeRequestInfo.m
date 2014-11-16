@@ -67,15 +67,17 @@
 }
 
 
-- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
+- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
-   self.queryTeam = team;
+   self.queryTeam = queryTeam;
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
    self.hasLoadingMore = YES;
 
    NSDictionary * parameters = @{
+    @"q" : self.queryTeam,
+    @"type" : self.queryType,
     @"part" : @"id,snippet",
     @"fields" : @"items(id/videoId),nextPageToken",
    };

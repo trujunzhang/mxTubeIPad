@@ -117,10 +117,13 @@ static GYoutubeHelper * instance = nil;
 
 - (void)searchByQueryWithRequestInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    // 01: Search videoIds by queryTerm
-   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:info.queryTeam
-                                                                       queryType:info.queryType
-                                                                  withParameters:info.parameters
-                                                                   andMaxResults:search_maxResults];
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTermWithParameters:info.parameters
+                                                                                withMaxResults:search_maxResults];
+
+//   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTerm:info.queryTeam
+//                                                                       queryType:info.queryType
+//                                                                  withParameters:
+//                                                                   andMaxResults:search_maxResults];
    void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);

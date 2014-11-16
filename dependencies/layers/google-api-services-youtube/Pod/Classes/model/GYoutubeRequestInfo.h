@@ -33,7 +33,7 @@
 
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfo;
-- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
+- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam;
 - (void)putNextPageToken:(NSString *)token;
 - (BOOL)hasNextPage;
 
