@@ -15,7 +15,7 @@
 #import "YoutubeParser.h"
 
 
-@interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate,YoutubeCollectionNextPageDelegate>
+@interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate, YoutubeCollectionNextPageDelegate>
 
 @property(strong, nonatomic) IBOutlet UIView * topBannerContainer;
 @property(strong, nonatomic) IBOutlet UIView * tabbarViewsContainer;

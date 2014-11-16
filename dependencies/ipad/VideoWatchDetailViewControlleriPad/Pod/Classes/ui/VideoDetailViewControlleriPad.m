@@ -10,7 +10,7 @@
 #import "YKYouTubeVideo.h"
 
 
-@interface VideoDetailViewControlleriPad ()
+@interface VideoDetailViewControlleriPad ()<YoutubeCollectionNextPageDelegate>
 
 @property(strong, nonatomic) IBOutlet UIView * videoPlayView;
 @property(strong, nonatomic) IBOutlet UIView * detailView;
@@ -70,6 +70,7 @@
    self.thirdViewController.delegate = self.delegate;
    self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
    self.thirdViewController.title = @"Suggestions";
+   self.thirdViewController.nextPageDelegate = self;
 
    // 2
    self.videoDetailController = [[UIViewController alloc] init];
@@ -238,6 +239,15 @@
 
 - (void)setupUIViewVerticalLayout {
 
+}
+
+
+#pragma mark -
+#pragma mark YoutubeCollectionNextPageDelegate
+
+
+- (void)executeNextPageTask {
+   [self.thirdViewController searchByPageToken];
 }
 
 

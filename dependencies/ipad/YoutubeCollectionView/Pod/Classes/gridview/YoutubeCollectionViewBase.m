@@ -12,7 +12,7 @@
 #import "GYoutubeRequestInfo.h"
 
 //NSString * lastSearch = @"call of duty advanced warfare";
-NSString * lastSearch = @"sketch 3";
+//NSString * lastSearch = @"sketch 3";
 //NSString * lastSearch = nil;
 
 
@@ -73,11 +73,7 @@ NSString * lastSearch = @"sketch 3";
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   [self.youtubeRequestInfo resetSearchWithItemType:itemType withQueryTeam:text];
-
-   lastSearch = text;
-
-//   [self searchByPageToken];
+   [self.youtubeRequestInfo resetRequestInfoWithItemType:itemType withQueryTeam:text];
 }
 
 
@@ -132,7 +128,7 @@ NSString * lastSearch = @"sketch 3";
 
 
 #pragma mark -
-#pragma mark
+#pragma mark  Fetch Activity list by channelID
 
 
 - (void)fetchListByType:(enum YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
@@ -140,14 +136,46 @@ NSString * lastSearch = @"sketch 3";
 
    [self cleanup];
 
-   [self.youtubeRequestInfo resetSearchWithItemType:itemType];
+   [self.youtubeRequestInfo resetRequestInfo];
    self.youtubeRequestInfo.channelId = channelId;
-
-//   [self fetchListByPageToken];
 }
 
 
 - (void)fetchListByPageToken {
+   if ([self.youtubeRequestInfo hasNextPage] == NO)
+      return;
+
+   YoutubeResponseBlock completion = ^(NSArray * array) {
+       [self.refreshControl endRefreshing];
+
+       [self.youtubeRequestInfo appendNextPageData:array];
+
+       [[self collectionView] reloadData];
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:self.youtubeRequestInfo
+                                                CompletionHandler:completion
+                                                     errorHandler:error];
+}
+
+
+#pragma mark -
+#pragma mark  Fetch suggestion list by videoID
+
+
+- (void)fetchSuggestionListByVideoId:(NSString *)videoId {
+//   videoId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
+
+   [self cleanup];
+
+   [self.youtubeRequestInfo resetRequestInfo];
+   self.youtubeRequestInfo.channelId = videoId;
+}
+
+
+- (void)fetchSuggestionListByPageToken {
    if ([self.youtubeRequestInfo hasNextPage] == NO)
       return;
 

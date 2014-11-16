@@ -34,7 +34,7 @@
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
    self = [super init];
    if (self) {
-      [self resetSearchWithItemType:itemType withQueryTeam:queryTeam];
+      [self resetRequestInfoWithItemType:itemType withQueryTeam:queryTeam];
    }
 
    return self;
@@ -44,7 +44,7 @@
 #pragma mark - search
 
 
-- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType {
+- (void)resetRequestInfo {
    self.queryType = @"";
    self.queryTeam = @"";
 
@@ -57,7 +57,7 @@
 }
 
 
-- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
+- (void)resetRequestInfoWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
    self.queryTeam = team;
    self.itemType = [self getItemType];

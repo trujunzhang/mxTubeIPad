@@ -31,8 +31,8 @@
 
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
 
-- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType;
-- (void)resetSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
+- (void)resetRequestInfo;
+- (void)resetRequestInfoWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
 - (void)putNextPageToken:(NSString *)token;
 - (BOOL)hasNextPage;
 
