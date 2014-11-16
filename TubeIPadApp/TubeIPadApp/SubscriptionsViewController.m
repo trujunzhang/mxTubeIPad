@@ -117,7 +117,7 @@
 #pragma mark Left menu events
 
 
-- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)type {
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType {
    // 1
    self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
    self.youtubeGridLayoutViewController.title = title;
@@ -133,7 +133,7 @@
    [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
 
    // 4
-   [self.youtubeGridLayoutViewController fetchPlayListByType:type];
+   [self.youtubeGridLayoutViewController fetchPlayListByType:playlistItemsType];
 }
 
 

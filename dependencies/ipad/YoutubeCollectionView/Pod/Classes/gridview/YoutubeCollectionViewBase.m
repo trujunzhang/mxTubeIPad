@@ -169,10 +169,10 @@
 #pragma mark  Fetch Activity list by channelID
 
 
-- (void)fetchPlayListByType:(enum YTPlaylistItemsType)itemType {
+- (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType {
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfoForPlayList:itemType];
+   [self.youtubeRequestInfo resetRequestInfoForPlayList:playlistItemsType];
 }
 
 

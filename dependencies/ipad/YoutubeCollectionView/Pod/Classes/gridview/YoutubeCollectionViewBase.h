@@ -33,7 +33,7 @@
 - (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType;
 - (void)fetchActivityListByType:(enum YTSegmentItemType)type withChannelId:(NSString *)channelId;
 - (void)fetchActivityListByPageToken;
-- (void)fetchPlayListByType:(enum YTPlaylistItemsType)itemType;
+- (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType;
 - (void)fetchPlayListByPageToken;
 - (void)fetchSuggestionListByVideoId:(NSString *)videoId;
 - (void)fetchSuggestionListByPageToken;

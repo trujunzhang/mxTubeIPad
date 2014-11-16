@@ -53,6 +53,7 @@
    self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
 }
 
+
 - (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType {
    self.itemType = YTSegmentItemVideo;
 
@@ -63,13 +64,7 @@
 
    self.hasLoadingMore = YES;
 
-//   NSDictionary * parameters = @{
-//    @"part" : @"id,snippet",
-//    @"type" : @"video",
-//    @"relatedToVideoId" : videoId,
-//    @"fields" : @"items(id/videoId),nextPageToken",
-//   };
-//   self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+   self.playlistItemsType = playlistItemsType;
 }
 
 

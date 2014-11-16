@@ -145,8 +145,8 @@
 #pragma mark LeftMenuViewBaseDelegate
 
 
-- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)type {
-   [self.subscriptionsViewController startToggleLeftMenuWithTitle:title withType:type];
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType {
+   [self.subscriptionsViewController startToggleLeftMenuWithTitle:title withType:playlistItemsType];
 }
 
 

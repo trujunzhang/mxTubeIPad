@@ -29,6 +29,8 @@
 
 @property(nonatomic, copy) NSString * channelId;
 
+@property(nonatomic) enum YTPlaylistItemsType playlistItemsType;
+
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
 
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
