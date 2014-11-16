@@ -46,6 +46,8 @@
 
    NSDictionary * parameters = @{
     @"part" : @"id,snippet",
+    @"type" : @"video",
+    @"relatedToVideoId" : videoId,
     @"fields" : @"items(id/videoId),nextPageToken",
    };
    self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
