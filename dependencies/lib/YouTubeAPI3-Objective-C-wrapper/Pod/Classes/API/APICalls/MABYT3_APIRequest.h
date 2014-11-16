@@ -47,6 +47,7 @@
 - (NSString *) ChannelSearchURLforTerm:(NSString *)term withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max;
 - (NSString *) PlayListSearchURLforTerm:(NSString *)term withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max;
 
+- (NSString *)VideoURLforVideoWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
 - (NSString *) VideoURLforVideo:(NSString *)videoId withMaxResults:(NSInteger)max;
 - (NSString *) ChannelURLforId:(NSString *)channelId withMaxResults:(NSInteger)max;
 

@@ -247,7 +247,7 @@
 
 
 - (void)executeNextPageTask {
-   [self.thirdViewController searchByPageToken];
+   [self.thirdViewController fetchSuggestionListByPageToken];
 }
 
 

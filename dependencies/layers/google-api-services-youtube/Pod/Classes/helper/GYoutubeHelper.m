@@ -524,4 +524,28 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+- (void)fetchSuggestionListWithRequestInfo:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
+   // 01: Search videoIds by queryTerm
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideoWithParameters:info.parameters
+                                                                           withMaxResults:search_maxResults];
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+       if (!error) {
+          NSLog(@"nextPageToken = %@", pageToken);
+          [info putNextPageToken:pageToken];
+
+          // 02 Search Videos by videoIds
+          [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsByActivityList:array]
+                        completionHandler:completion
+                             errorHandler:errorHandler];
+       }
+       else {
+          if (error) {
+             errorHandler(error);
+          }
+       }
+   };
+   [[MABYT3_APIRequest sharedInstance] LISTVideosForURL:urlStr andHandler:finishedHandler];
+}
+
+
 @end

@@ -170,7 +170,7 @@
 
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfo];
+   [self.youtubeRequestInfo resetRequestInfoForSuggestionList];
    self.youtubeRequestInfo.channelId = videoId;
 }
 
@@ -189,9 +189,9 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:self.youtubeRequestInfo
-                                                CompletionHandler:completion
-                                                     errorHandler:error];
+   [[GYoutubeHelper getInstance] fetchSuggestionListWithRequestInfo:self.youtubeRequestInfo
+                                                  CompletionHandler:completion
+                                                       errorHandler:error];
 }
 @end
 

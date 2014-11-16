@@ -33,4 +33,5 @@
 - (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType;
 - (void)fetchListByType:(enum YTSegmentItemType)type withChannelId:(NSString *)channelId;
 - (void)fetchListByPageToken;
+- (void)fetchSuggestionListByPageToken;
 @end

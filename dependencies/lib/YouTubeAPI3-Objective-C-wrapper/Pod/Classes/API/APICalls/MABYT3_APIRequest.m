@@ -201,6 +201,19 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
+- (NSString *)VideoURLforVideoWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
+   NSString * paramS = @"";
+   for (NSString * key in [params allKeys]) {
+      paramS = [NSString stringWithFormat:@"%@&%@=%@", paramS, key, [params objectForKey:key]];
+   }
+   if (max != 5) {
+      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
+   }
+   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/videos?%@",
+                                     paramS];
+}
+
+
 - (NSString *)VideoURLforVideo:(NSString *)videoId withMaxResults:(NSInteger)max {
 
    if (max == 5) {
@@ -1037,7 +1050,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                                  if ([dict objectForKey:@"nextPageToken"]) {
                                     NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = [NSString stringWithFormat:@"%@&nextPageToken=%@", urlStr, pagetoken];
+                                    nxtURLStr = pagetoken;
                                  }
                               }
                               else {

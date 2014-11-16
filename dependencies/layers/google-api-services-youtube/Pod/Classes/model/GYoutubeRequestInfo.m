@@ -42,7 +42,9 @@
 
 
 #pragma mark - search
+- (void)resetRequestInfoForSuggestionList {
 
+}
 
 - (void)resetRequestInfo {
    self.queryType = @"";
