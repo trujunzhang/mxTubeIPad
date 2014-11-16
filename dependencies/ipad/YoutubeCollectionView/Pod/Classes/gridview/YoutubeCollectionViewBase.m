@@ -23,6 +23,15 @@
 
 
 @implementation YoutubeCollectionViewBase
+- (instancetype)init {
+   self = [super init];
+   if (self) {
+      self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] init];
+   }
+
+   return self;
+}
+
 
 - (void)viewDidLoad {
    [super viewDidLoad];
@@ -31,10 +40,6 @@
    self.view.backgroundColor = [UIColor clearColor];
 
    [self setupRefresh];
-
-   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] init];
-
-//   [self search:@"sketch 3"];
 }
 
 
