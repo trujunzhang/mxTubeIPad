@@ -14,16 +14,16 @@
 @protocol YoutubeCollectionNextPageDelegate<NSObject>
 
 @optional
+- (void)executeRefreshTask;
 - (void)executeNextPageTask;
-
 @end
 
 
 @interface YoutubeCollectionViewBase : UIViewController
 @property(nonatomic, strong) GYoutubeRequestInfo * youtubeRequestInfo;
 
-@property(nonatomic, strong) NSMutableArray * videoList;
 @property(strong, nonatomic) UICollectionView * collectionView;
+@property(nonatomic, assign) id<YoutubeCollectionNextPageDelegate> nextPageDelegate;
 
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType;
 - (void)searchByPageToken;

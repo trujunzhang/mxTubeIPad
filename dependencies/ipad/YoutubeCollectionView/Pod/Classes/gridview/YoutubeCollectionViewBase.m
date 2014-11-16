@@ -61,6 +61,8 @@
 
 
 - (void)refreshPerform {
+   [self cleanup];
+   [self.nextPageDelegate executeRefreshTask];
    [self.refreshControl endRefreshing];
 }
 
@@ -102,9 +104,14 @@
 }
 
 
-- (void)cleanup {
-   [self.youtubeRequestInfo cleanup];
+- (void)refresh {
+   [self.youtubeRequestInfo resetInfo];
+   [[self collectionView] reloadData];
+}
 
+
+- (void)cleanup {
+   [self.youtubeRequestInfo resetInfo];
    [[self collectionView] reloadData];
 }
 

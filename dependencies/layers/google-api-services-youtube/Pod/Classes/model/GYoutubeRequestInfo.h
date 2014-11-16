@@ -43,7 +43,7 @@
 + (NSArray *)getChannelPageSegmentTitlesArray;
 - (void)appendNextPageData:(NSArray *)array;
 + (NSString *)getIdentifyByItemType:(YTSegmentItemType)itemType;
-- (void)cleanup;
+- (void)resetInfo;
 + (YTSegmentItemType)getItemTypeByIndex:(int)index;
 + (NSArray *)getSegmentTitlesArray;
 

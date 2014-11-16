@@ -137,7 +137,7 @@
 #pragma mark - next page
 
 
-- (void)cleanup {
+- (void)resetInfo {
    self.videoList = [[NSMutableArray alloc] init];
    self.hasLoadingMore = NO;
 }
