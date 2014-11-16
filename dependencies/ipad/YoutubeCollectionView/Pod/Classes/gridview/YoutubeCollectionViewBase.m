@@ -104,12 +104,6 @@
 }
 
 
-- (void)refresh {
-   [self.youtubeRequestInfo resetInfo];
-   [[self collectionView] reloadData];
-}
-
-
 - (void)cleanup {
    [self.youtubeRequestInfo resetInfo];
    [[self collectionView] reloadData];
