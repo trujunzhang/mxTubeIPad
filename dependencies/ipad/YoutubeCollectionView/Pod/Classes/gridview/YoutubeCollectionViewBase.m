@@ -23,13 +23,13 @@
 
 
 @implementation YoutubeCollectionViewBase
-- (instancetype)init {
-   self = [super init];
-   if (self) {
+
+
+- (GYoutubeRequestInfo *)getYoutubeRequestInfo {
+   if (self.youtubeRequestInfo == nil) {
       self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] init];
    }
-
-   return self;
+   return self.youtubeRequestInfo;
 }
 
 
@@ -80,32 +80,32 @@
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfoForSearchWithItemType:itemType withQueryTeam:text];
+   [[self getYoutubeRequestInfo] resetRequestInfoForSearchWithItemType:itemType withQueryTeam:text];
 }
 
 
 - (void)searchByPageToken {
-   if ([self.youtubeRequestInfo hasNextPage] == NO)
+   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
       return;
 
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
-       [self.youtubeRequestInfo appendNextPageData:array];
+       [[self getYoutubeRequestInfo] appendNextPageData:array];
 
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };
-   [[GYoutubeHelper getInstance] searchByQueryWithRequestInfo:self.youtubeRequestInfo
+   [[GYoutubeHelper getInstance] searchByQueryWithRequestInfo:[self getYoutubeRequestInfo]
                                             completionHandler:completion
                                                  errorHandler:error];
 }
 
 
 - (void)cleanup {
-   [self.youtubeRequestInfo resetInfo];
+   [[self getYoutubeRequestInfo] resetInfo];
    [[self collectionView] reloadData];
 }
 
@@ -119,26 +119,26 @@
 
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfo];
-   self.youtubeRequestInfo.channelId = channelId;
+   [[self getYoutubeRequestInfo] resetRequestInfo];
+   [self getYoutubeRequestInfo].channelId = channelId;
 }
 
 
 - (void)fetchActivityListByPageToken {
-   if ([self.youtubeRequestInfo hasNextPage] == NO)
+   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
       return;
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
-       [self.youtubeRequestInfo appendNextPageData:array];
+       [[self getYoutubeRequestInfo] appendNextPageData:array];
 
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:self.youtubeRequestInfo
+   [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:[self getYoutubeRequestInfo]
                                                 CompletionHandler:completion
                                                      errorHandler:error];
 }
@@ -151,25 +151,25 @@
 - (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType {
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfoForPlayList:playlistItemsType];
+   [[self getYoutubeRequestInfo] resetRequestInfoForPlayList:playlistItemsType];
 }
 
 
 - (void)fetchPlayListByPageToken {
-   if ([self.youtubeRequestInfo hasNextPage] == NO)
+   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
       return;
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];
 
-       [self.youtubeRequestInfo appendNextPageData:array];
+       [[self getYoutubeRequestInfo] appendNextPageData:array];
 
        [[self collectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchPlaylistItemsListWithRequestInfo:self.youtubeRequestInfo
+   [[GYoutubeHelper getInstance] fetchPlaylistItemsListWithRequestInfo:[self getYoutubeRequestInfo]
                                                             completion:completion
                                                           errorHandler:error
    ];
@@ -184,7 +184,7 @@
 //   videoId = @"mOQ5DzROpuo";
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfoForSuggestionList:videoId];
+   [[self getYoutubeRequestInfo] resetRequestInfoForSuggestionList:videoId];
 }
 
 

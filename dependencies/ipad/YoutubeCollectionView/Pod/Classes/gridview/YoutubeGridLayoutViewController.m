@@ -92,7 +92,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return self.youtubeRequestInfo.videoList.count;
+   return [self getYoutubeRequestInfo].videoList.count;
 }
 
 
@@ -102,15 +102,15 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   NSString * cell_identifier = self.youtubeRequestInfo.itemIdentify;
-   YTSegmentItemType itemType = self.youtubeRequestInfo.itemType;
+   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
+   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
 
    UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
                                                                                 forIndexPath:indexPath];
 
 
    if (itemType == YTSegmentItemVideo) {
-      YTYouTubeVideo * video = [self.youtubeRequestInfo.videoList objectAtIndex:indexPath.row];
+      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
       YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
       [gridViewVideoCell bind:video
              placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
@@ -132,7 +132,7 @@
                                                                                  forIndexPath:indexPath];
       footerView.hidden = NO;
 
-      if (self.youtubeRequestInfo.hasLoadingMore) {
+      if ([self getYoutubeRequestInfo].hasLoadingMore) {
          [footerView startAnimation];
          [self.nextPageDelegate executeNextPageTask];
       } else {

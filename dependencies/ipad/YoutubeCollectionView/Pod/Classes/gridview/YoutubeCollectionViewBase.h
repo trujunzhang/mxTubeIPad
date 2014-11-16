@@ -25,6 +25,7 @@
 @property(strong, nonatomic) UICollectionView * collectionView;
 @property(nonatomic, assign) id<YoutubeCollectionNextPageDelegate> nextPageDelegate;
 
+- (GYoutubeRequestInfo *)getYoutubeRequestInfo;
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType;
 - (void)searchByPageToken;
 - (void)cleanup;
