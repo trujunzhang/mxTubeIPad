@@ -19,6 +19,5 @@
 @property(nonatomic, strong) NSArray * subscriptions;
 
 - (NSArray *)getTableRows;
-+ (NSString *)getUserThumbnails:(YTYouTubeChannel *)channel;
 
 @end

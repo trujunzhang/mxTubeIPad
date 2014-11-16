@@ -15,6 +15,8 @@
 #import "GTLYouTubeVideoStatistics.h"
 #import "GTLYouTubePlaylistItem.h"
 #import "GTLYouTubePlaylistItemContentDetails.h"
+#import "GTLYouTubeChannelBrandingSettings.h"
+#import "GTLYouTubeImageSettings.h"
 
 //
 #import "GTLUtilities.h"

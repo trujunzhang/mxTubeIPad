@@ -41,17 +41,18 @@
 //   UIButton * channelSubscribedState;
 
    [ImageCacheImplement CacheWithImageView:self.channelPhoto
-                                   withUrl:subscription.snippet.thumbnails.high.url
+                                   withUrl:[YoutubeParser getSubscriptionSnippetThumbnailUrl:subscription]
                            withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
    ];
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        self.currentChannel = array[0];
 
-       NSString * url = self.currentChannel.brandingSettings.image.bannerMobileHdImageUrl;
+       NSString * url = [YoutubeParser getBannerImageUrl:self.currentChannel];
        [ImageCacheImplement CacheWithImageView:self.youtubeCover
                                        withUrl:url
                                withPlaceholder:[UIImage imageNamed:@"channel_default_banner.jpg"]
+//                                          size:CGSizeMake(32, 32)];
        ];
 
    };

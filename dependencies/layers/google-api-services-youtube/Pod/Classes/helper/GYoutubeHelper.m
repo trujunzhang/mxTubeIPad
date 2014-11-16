@@ -255,12 +255,11 @@ static GYoutubeHelper * instance = nil;
        // 1
        GTLYouTubeChannel * channel = array[0];
        // save user title
-       NSString * title = channel.snippet.title;
-       NSString * email = self.youTubeService.authorizer.userEmail;
-       NSString * thumbnailUrl = [GYoutubeAuthUser getUserThumbnails:channel];
-       YoutubeAuthInfo * info = [[[YoutubeAuthDataStore alloc] init] saveAuthUserChannelWithTitle:title
-                                                                                        withEmail:email
-                                                                                 withThumbmailUrl:thumbnailUrl];
+       YoutubeAuthInfo * info = [[[YoutubeAuthDataStore alloc] init]
+        saveAuthUserChannelWithTitle:channel.snippet.title
+                           withEmail:self.youTubeService.authorizer.userEmail
+                    withThumbmailUrl:[YoutubeParser getChannelSnippetThumbnailUrl:channel]
+       ];
        self.youtubeAuthUser.channel = channel;
 
        if (self.delegate)

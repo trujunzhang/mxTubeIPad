@@ -40,7 +40,6 @@
             withPlaceholder:placeHolder
         withCompletionBlock:^(UIImage * downloadedImage) {
             view.image = [downloadedImage resizedImageToSize:size];
-            view.tag = 2;//2=fetch finished
         }];
 }
 

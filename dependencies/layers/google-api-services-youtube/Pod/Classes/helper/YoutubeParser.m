@@ -38,4 +38,19 @@
 + (NSString *)getWatchVideoId:(YTYouTubeVideo *)video {
    return video.identifier;
 }
+
+
++ (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel {
+   return channel.brandingSettings.image.bannerMobileHdImageUrl;;
+}
+
+
++ (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription {
+   return subscription.snippet.thumbnails.high.url;
+}
+
++ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel {
+   return channel.snippet.thumbnails.high.url;
+}
+
 @end

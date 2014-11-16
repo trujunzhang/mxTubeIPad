@@ -9,6 +9,7 @@
 #import "GYoutubeAuthUser.h"
 
 #import "YoutubeConstants.h"
+#import "YoutubeParser.h"
 
 
 @implementation GYoutubeAuthUser
@@ -22,7 +23,7 @@
          NSString * debug = @"debug";
          //"channelId" -> "UCl78QGX_hfK6zT8Mc-2w8GA"
       }
-      NSString * thumbnailsUrl = subscription.snippet.thumbnails.high.url;
+      NSString * thumbnailsUrl = [YoutubeParser getSubscriptionSnippetThumbnailUrl:subscription];
       NSArray * row = @[ title, thumbnailsUrl ];
 
       [rows addObject:row];
@@ -32,9 +33,6 @@
 }
 
 
-+ (NSString *)getUserThumbnails:(YTYouTubeChannel *)channel {
-   return channel.snippet.thumbnails.high.url;
-}
 
 
 @end

@@ -18,4 +18,7 @@
 + (NSString *)getChannelId:(YTYouTubeSubscription *)subscription;
 + (NSString *)getWatchVideoId:(YTYouTubeVideo *)video;
 
++ (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel;
++ (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;
++ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel;
 @end
