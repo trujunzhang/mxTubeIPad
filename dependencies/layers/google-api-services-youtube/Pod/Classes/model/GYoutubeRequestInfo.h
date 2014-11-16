@@ -31,6 +31,8 @@
 
 @property(nonatomic) enum YTPlaylistItemsType playlistItemsType;
 
+@property(nonatomic, copy) NSString * nextPageToken;
+
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType;
 - (void)resetRequestInfo;

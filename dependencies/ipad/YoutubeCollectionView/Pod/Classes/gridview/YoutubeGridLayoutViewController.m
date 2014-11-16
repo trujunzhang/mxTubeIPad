@@ -31,6 +31,15 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated {
+   [super viewDidAppear:animated];
+
+   NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
+   NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
+
+}
+
+
 - (UICollectionView *)getCollectionView {
    if (!self.collectionView) {
       CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
@@ -125,12 +134,7 @@
 
       if (self.youtubeRequestInfo.hasLoadingMore) {
          [footerView startAnimation];
-
-
          [self.nextPageDelegate executeNextPageTask];
-//         [self searchByPageToken]; // Check no nextPageToken,set hasLoadingMore is No.
-
-
       } else {
          footerView.hidden = YES;
          [footerView stopAnimation];

@@ -42,6 +42,7 @@
 
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
+   self.nextPageToken = @"";
    self.hasLoadingMore = YES;
 
    NSDictionary * parameters = @{
@@ -62,6 +63,7 @@
 
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
+   self.nextPageToken = @"";
    self.hasLoadingMore = YES;
 
    self.playlistItemsType = playlistItemsType;
@@ -75,6 +77,7 @@
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
+   self.nextPageToken = @"";
    self.hasLoadingMore = YES;
 
    self.parameters = [[NSMutableDictionary alloc] init];
@@ -87,6 +90,7 @@
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
+   self.nextPageToken = @"";
    self.hasLoadingMore = YES;
 
    NSDictionary * parameters = @{
@@ -100,10 +104,14 @@
 
 
 - (void)putNextPageToken:(NSString *)pageToken {
-   if (pageToken) {
-      [self.parameters setObject:pageToken forKey:@"pageToken"];
-   } else {
+   if ([self.nextPageToken isEqualToString:@""]) { // First request
+      self.nextPageToken = pageToken;
+   }
+
+   if ([self.nextPageToken isEqualToString:@""] == NO && [pageToken isEqualToString:self.nextPageToken]) {
       self.hasLoadingMore = NO;
+   } else {
+      [self.parameters setObject:pageToken forKey:@"pageToken"];
    }
 }
 
