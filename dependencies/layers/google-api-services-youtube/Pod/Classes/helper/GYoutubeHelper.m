@@ -472,8 +472,12 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchPlaylistItemsListWithRequestInfo:(GYoutubeRequestInfo *)info completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)handler {
-
+- (void)fetchPlaylistItemsListWithRequestInfo:(GYoutubeRequestInfo *)info completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
+                                     tagType:info.playlistItemsType
+                           CompletionHandler:completion
+                                errorHandler:errorBlock
+   ];
 }
 
 
