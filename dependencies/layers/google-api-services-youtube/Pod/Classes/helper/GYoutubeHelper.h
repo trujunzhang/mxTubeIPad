@@ -55,6 +55,7 @@ typedef void (^ErrorResponseBlock)(NSError * error);
 - (GTMOAuth2ViewControllerTouch *)getYoutubeOAuth2ViewControllerTouchWithTouchDelegate:(id)touchDelegate leftBarDelegate:(id)leftBarDelegate cancelAction:(SEL)cancelAction;
 
 @property(nonatomic, weak) id<GYoutubeHelperDelegate> delegate;
+- (void)fetchPlaylistItemsListWithRequestInfo:(GYoutubeRequestInfo *)info completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)handler;
 
 
 @end

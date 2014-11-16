@@ -19,7 +19,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6G-nQ-LwO">
-                        <rect key="frame" x="0.0" y="142" width="250" height="78"/>
+                        <rect key="frame" x="0.0" y="142" width="250" height="76"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sony Vegas Pro 13 - Tutorial for Beginners [COMPLETE]Sony Vegas Pro 13 - Tutorial for Beginners [COMPLETE]" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="430" translatesAutoresizingMaskIntoConstraints="NO" id="UaT-FM-grl">
                                 <rect key="frame" x="8" y="-2" width="230" height="48"/>
@@ -79,6 +79,7 @@
             <connections>
                 <outlet property="videoChannelThumbnails" destination="Huh-ei-kAq" id="9bb-1X-Na8"/>
                 <outlet property="videoChannelTitleLabel" destination="T04-PU-1nz" id="Yua-hc-C6w"/>
+                <outlet property="videoInfoContainer" destination="D6G-nQ-LwO" id="ymd-al-0BC"/>
                 <outlet property="videoRatingLabel" destination="0is-3u-cbe" id="pdt-fK-AZT"/>
                 <outlet property="videoThumbnails" destination="2UO-cI-BHY" id="VAy-Rp-tde"/>
                 <outlet property="videoTitle" destination="UaT-FM-grl" id="vEM-oF-eNN"/>

@@ -18,6 +18,9 @@
 @property(strong, nonatomic) IBOutlet UILabel * videoChannelTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *durationLabel;
 
+@property (strong, nonatomic) IBOutlet UIView *videoInfoContainer;
+
+
 
 - (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end

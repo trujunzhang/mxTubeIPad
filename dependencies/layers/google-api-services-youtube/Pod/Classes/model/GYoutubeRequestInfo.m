@@ -53,6 +53,25 @@
    self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
 }
 
+- (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType {
+   self.itemType = YTSegmentItemVideo;
+
+   self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
+   self.queryTeam = @"";
+
+   self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
+
+   self.hasLoadingMore = YES;
+
+//   NSDictionary * parameters = @{
+//    @"part" : @"id,snippet",
+//    @"type" : @"video",
+//    @"relatedToVideoId" : videoId,
+//    @"fields" : @"items(id/videoId),nextPageToken",
+//   };
+//   self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+}
+
 
 - (void)resetRequestInfo {
    self.queryType = @"";

@@ -32,6 +32,7 @@
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
 
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
+- (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType;
 - (void)resetRequestInfo;
 - (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam;
 - (void)putNextPageToken:(NSString *)token;

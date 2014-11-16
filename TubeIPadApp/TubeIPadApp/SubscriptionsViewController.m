@@ -20,9 +20,9 @@
 #import "YoutubeGridLayoutViewController.h"
 
 
-@interface SubscriptionsViewController ()
+@interface SubscriptionsViewController ()<IpadGridViewCellDelegate, YoutubeCollectionNextPageDelegate>
 
-//@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
 
 @property(nonatomic, strong) YoutubeChannelPageViewController * youtubeChannelPageViewController;
 
@@ -117,11 +117,23 @@
 #pragma mark Left menu events
 
 
-- (void)startToggleLeftMenuWithTitle:(NSString *)title {
-   UIViewController * controller = [self changeRootView:title];
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)type {
+   // 1
+   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.youtubeGridLayoutViewController.title = title;
+   self.youtubeGridLayoutViewController.delegate = self;
+   self.youtubeGridLayoutViewController.nextPageDelegate = self;
+   self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
-   controller.title = title;
-//   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
+   // 2
+   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
+   self.viewControllers = [NSArray arrayWithObject:self.youtubeGridLayoutViewController];
+
+   // 3
+   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
+
+   // 4
+   [self.youtubeGridLayoutViewController fetchPlayListByType:type];
 }
 
 
@@ -143,22 +155,11 @@
 
 
 #pragma mark -
-#pragma mark Change root view
+#pragma mark YoutubeCollectionNextPageDelegate
 
 
-- (YoutubeChannelPageViewController *)changeRootView:(NSString *)title {
-   if (title.length > 7) {
-      YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
-      controller.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
-      self.viewControllers = [NSArray arrayWithObject:controller];
-
-      return controller;
-   } else {
-      YoutubeChannelPageViewController * controller = [[YoutubeChannelPageViewController alloc] init];
-      self.viewControllers = [NSArray arrayWithObject:controller];
-
-      return controller;
-   }
+- (void)executeNextPageTask {
+   [self.youtubeGridLayoutViewController fetchPlayListByPageToken];
 }
 
 

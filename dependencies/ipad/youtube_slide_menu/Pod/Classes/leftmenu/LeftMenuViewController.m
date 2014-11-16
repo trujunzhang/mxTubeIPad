@@ -172,8 +172,8 @@
    enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
    switch (itemType) {
       case LMenuTreeUser:
-         [self.delegate startToggleLeftMenuWithTitle:line[0]];
-         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath];
+         [self.delegate startToggleLeftMenuWithTitle:line[0] withType:[(line[2]) intValue]];
+//         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath];
          break;
       case LMenuTreeSubscriptions: {
          YTYouTubeSubscription * subscription = self.authUser.subscriptions[indexPath.row];

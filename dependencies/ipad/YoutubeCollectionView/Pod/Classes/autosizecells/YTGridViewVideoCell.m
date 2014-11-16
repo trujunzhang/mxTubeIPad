@@ -80,6 +80,12 @@
 //   NSLog(@"duration = %@", string);
 //   [self.durationLabel setText:string];
 //   [self.durationLabel sizeToFit];
+
+
+   self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(2, 2);
+   self.videoInfoContainer.layer.shadowOpacity = 1;
+   self.videoInfoContainer.layer.shadowRadius = 1.0;
 }
 
 
