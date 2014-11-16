@@ -73,7 +73,7 @@
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType {
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfoWithItemType:itemType withQueryTeam:text];
+   [self.youtubeRequestInfo resetRequestInfoForSearchWithItemType:itemType withQueryTeam:text];
 }
 
 
@@ -166,32 +166,15 @@
 
 
 - (void)fetchSuggestionListByVideoId:(NSString *)videoId {
-//   videoId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
-
+   videoId = @"mOQ5DzROpuo";
    [self cleanup];
 
-   [self.youtubeRequestInfo resetRequestInfoForSuggestionList];
-   self.youtubeRequestInfo.channelId = videoId;
+   [self.youtubeRequestInfo resetRequestInfoForSuggestionList:videoId];
 }
 
 
 - (void)fetchSuggestionListByPageToken {
-   if ([self.youtubeRequestInfo hasNextPage] == NO)
-      return;
-
-   YoutubeResponseBlock completion = ^(NSArray * array) {
-       [self.refreshControl endRefreshing];
-
-       [self.youtubeRequestInfo appendNextPageData:array];
-
-       [[self collectionView] reloadData];
-   };
-   ErrorResponseBlock error = ^(NSError * error) {
-       NSString * debug = @"debug";
-   };
-   [[GYoutubeHelper getInstance] fetchSuggestionListWithRequestInfo:self.youtubeRequestInfo
-                                                  CompletionHandler:completion
-                                                       errorHandler:error];
+   [self searchByPageToken];
 }
 @end
 

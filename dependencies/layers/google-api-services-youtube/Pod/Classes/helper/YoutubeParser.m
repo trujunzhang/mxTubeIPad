@@ -33,4 +33,9 @@
 + (NSString *)getChannelId:(YTYouTubeSubscription *)subscription {
    return subscription.snippet.resourceId.JSON[@"channelId"];
 }
+
+
++ (NSString *)getWatchVideoId:(YTYouTubeVideo *)video {
+   return video.identifier;
+}
 @end

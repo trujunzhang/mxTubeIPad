@@ -64,12 +64,16 @@
    // 1
    self.firstViewController = [[UIViewController alloc] init];
    self.firstViewController.title = @"Comments";
+
    self.secondViewController = [[UIViewController alloc] init];
    self.secondViewController.title = @"More From";
+
    self.thirdViewController = [[YoutubeGridLayoutViewController alloc] init];
    self.thirdViewController.delegate = self.delegate;
    self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
    self.thirdViewController.title = @"Suggestions";
+
+   [self.thirdViewController fetchSuggestionListByVideoId:[YoutubeParser getWatchVideoId:self.video]];
    self.thirdViewController.nextPageDelegate = self;
 
    // 2
@@ -129,7 +133,7 @@
 
 - (void)setupPlayer:(UIView *)pView {
    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-   self.youTubeVideo = [[YKYouTubeVideo alloc] initWithVideoId:self.video.identifier];
+   self.youTubeVideo = [[YKYouTubeVideo alloc] initWithVideoId:[YoutubeParser getWatchVideoId:self.video]];
 
    //Fetch thumbnail
    [self.youTubeVideo parseWithCompletion:^(NSError * error) {

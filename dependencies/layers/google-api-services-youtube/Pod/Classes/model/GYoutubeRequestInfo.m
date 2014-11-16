@@ -31,20 +31,26 @@
 }
 
 
-- (instancetype)initWithSearchItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
-   self = [super init];
-   if (self) {
-      [self resetRequestInfoWithItemType:itemType withQueryTeam:queryTeam];
-   }
-
-   return self;
-}
-
-
 #pragma mark - search
-- (void)resetRequestInfoForSuggestionList {
 
+
+- (void)resetRequestInfoForSuggestionList:(NSString *)videoId {
+   self.itemType = YTSegmentItemVideo;
+
+   self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
+   self.queryTeam = @"";
+
+   self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
+
+   self.hasLoadingMore = YES;
+
+   NSDictionary * parameters = @{
+    @"part" : @"id,snippet",
+    @"fields" : @"items(id/videoId),nextPageToken",
+   };
+   self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
 }
+
 
 - (void)resetRequestInfo {
    self.queryType = @"";
@@ -59,7 +65,7 @@
 }
 
 
-- (void)resetRequestInfoWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
+- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
    self.queryTeam = team;
    self.itemType = [self getItemType];

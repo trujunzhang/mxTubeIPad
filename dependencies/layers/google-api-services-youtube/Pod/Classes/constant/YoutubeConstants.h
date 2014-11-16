@@ -51,6 +51,10 @@
 #import "MABYT3_SearchItem.h"
 #include "MABYT3_Activity.h"
 
+
+
+// common
+#include "YoutubeParser.h"
 #endif
 
 

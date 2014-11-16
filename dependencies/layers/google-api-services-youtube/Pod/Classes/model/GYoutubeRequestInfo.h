@@ -31,9 +31,9 @@
 
 - (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
 
-- (void)resetRequestInfoForSuggestionList;
+- (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfo;
-- (void)resetRequestInfoWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
+- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)team;
 - (void)putNextPageToken:(NSString *)token;
 - (BOOL)hasNextPage;
 
