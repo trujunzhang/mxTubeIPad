@@ -16,7 +16,6 @@
 @protocol LeftMenuViewBaseDelegate<NSObject>
 @optional
 - (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType;
-- (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title;
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription withTitle:(id)title;
 @end
 
@@ -30,8 +29,7 @@
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user;
 
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;
-- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)path;
-- (void)tableViewEventForUser:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath;
+
 - (NSArray *)defaultCategories;
 - (NSArray *)signUserCategories;
 

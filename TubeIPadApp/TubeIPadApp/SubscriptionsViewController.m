@@ -130,15 +130,7 @@
    self.viewControllers = [NSArray arrayWithObject:self.youtubeGridLayoutViewController];
 
    // 3
-   [self.youtubeGridLayoutViewController cleanupAndStartPullToRefreshWithItemType:YTSegmentItemVideo];
-
-   // 4
    [self.youtubeGridLayoutViewController fetchPlayListByType:playlistItemsType];
-}
-
-
-- (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
-//   [self.youtubeGridLayoutViewController endPullToRefreshWithResponse:array];
 }
 
 

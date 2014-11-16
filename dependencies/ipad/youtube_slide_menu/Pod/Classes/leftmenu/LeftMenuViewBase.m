@@ -156,45 +156,6 @@
 
 
 #pragma mark -
-#pragma mark TableView events
-
-
-//- (void)tableViewEvent:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
-//   enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
-//   switch (itemType) {
-//      case LMenuTreeUser:
-//         [self tableViewEventForUser:menuItemTree atIndexPath:indexPath];
-//         break;
-//      case LMenuTreeSubscriptions: {
-//         YTYouTubeSubscription * subscription = self.authUser.subscriptions[indexPath.row];
-//         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription];
-//      }
-//         break;
-//      default:
-//
-//         break;
-//   }
-//}
-
-
-- (void)tableViewEventForUser:(LeftMenuItemTree *)menuItemTree atIndexPath:(NSIndexPath *)indexPath {
-   NSArray * line = menuItemTree.rowsArray[indexPath.row];
-   int typeValue = [(line[2]) intValue];
-
-   YoutubeResponseBlock completion = ^(NSArray * array) {
-       [self.delegate endToggleLeftMenuEventWithResponse:array withModel:menuItemTree withTitle:line[0]];
-   };
-   ErrorResponseBlock error = ^(NSError * error) {
-   };
-   [[GYoutubeHelper getInstance] fetchPlaylistItemsListWithTagType:typeValue
-                                                        completion:completion
-                                                      errorHandler:error
-   ];
-
-}
-
-
-#pragma mark -
 #pragma mark View methods
 
 

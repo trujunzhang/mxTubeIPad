@@ -102,32 +102,10 @@
 }
 
 
-- (void)endPullToRefreshWithResponse:(NSArray *)array {
-   [self.refreshControl endRefreshing];
-
-   NSLog(@"leng = %d", array.count);
-//   self.hasLoadingMore = YES;
-   if (array.count == 0) {
-//      self.hasLoadingMore = NO;
-   } else {
-//      [self.videoList addObjectsFromArray:array];
-   }
-   [[self collectionView] reloadData];
-}
-
-
 - (void)cleanup {
    [self.youtubeRequestInfo cleanup];
 
    [[self collectionView] reloadData];
-}
-
-
-- (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType {
-   [self cleanup];
-   [self.refreshControl beginRefreshing];
-
-   self.youtubeRequestInfo = [[GYoutubeRequestInfo alloc] initWithSearchItemType:itemType withQueryTeam:@""];
 }
 
 

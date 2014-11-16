@@ -150,9 +150,6 @@
 }
 
 
-- (void)endToggleLeftMenuEventWithResponse:(NSArray *)array withModel:(LeftMenuItemTree *)menuItemTree withTitle:(NSString *)title {
-   [self.subscriptionsViewController endToggleLeftMenuEventWithResponse:array withModel:menuItemTree withTitle:title];
-}
 
 
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription withTitle:(NSString *)title {

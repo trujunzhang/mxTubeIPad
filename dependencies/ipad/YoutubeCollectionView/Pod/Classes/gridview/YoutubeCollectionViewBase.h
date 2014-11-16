@@ -22,15 +22,12 @@
 @interface YoutubeCollectionViewBase : UIViewController
 @property(nonatomic, strong) GYoutubeRequestInfo * youtubeRequestInfo;
 
-@property(nonatomic) NSUInteger hasLoadingMore;
 @property(nonatomic, strong) NSMutableArray * videoList;
 @property(strong, nonatomic) UICollectionView * collectionView;
 
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType;
 - (void)searchByPageToken;
-- (void)endPullToRefreshWithResponse:(NSArray *)array;
 - (void)cleanup;
-- (void)cleanupAndStartPullToRefreshWithItemType:(YTSegmentItemType)itemType;
 - (void)fetchActivityListByType:(enum YTSegmentItemType)type withChannelId:(NSString *)channelId;
 - (void)fetchActivityListByPageToken;
 - (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType;

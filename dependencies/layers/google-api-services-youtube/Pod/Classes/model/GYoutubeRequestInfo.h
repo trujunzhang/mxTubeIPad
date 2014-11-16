@@ -31,8 +31,6 @@
 
 @property(nonatomic) enum YTPlaylistItemsType playlistItemsType;
 
-- (instancetype)initWithSearchItemType:(YTSegmentItemType)queryType withQueryTeam:(NSString *)team;
-
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType;
 - (void)resetRequestInfo;
