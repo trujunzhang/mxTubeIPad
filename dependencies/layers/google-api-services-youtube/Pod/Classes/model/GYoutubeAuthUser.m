@@ -19,20 +19,15 @@
    NSMutableArray * rows = [[NSMutableArray alloc] init];
    for (YTYouTubeSubscription * subscription in self.subscriptions) {
       NSString * title = subscription.snippet.title;
-      if ([title isEqualToString:@"Adobe Acrobat"]) {
-         NSString * debug = @"debug";
-         //"channelId" -> "UCl78QGX_hfK6zT8Mc-2w8GA"
-      }
       NSString * thumbnailsUrl = [YoutubeParser getSubscriptionSnippetThumbnailUrl:subscription];
-      NSArray * row = @[ title, thumbnailsUrl ];
+      NSString * channelId = [YoutubeParser getChannelId:subscription];
+      NSArray * row = @[ title, thumbnailsUrl, [NSString stringWithFormat:@"_left_menu_%@", channelId] ];
 
       [rows addObject:row];
    }
 
    return [rows copy];
 }
-
-
 
 
 @end

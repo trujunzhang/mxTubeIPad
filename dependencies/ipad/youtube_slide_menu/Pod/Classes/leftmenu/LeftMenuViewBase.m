@@ -126,9 +126,14 @@
    if (menuItemTree.remoteImage) {
       [ImageViewEffect setEffectImage:cell.imageView withCornerRadius:4.0f];
       [ImageCacheImplement CacheWithImageView:cell.imageView
+                                          key:line[2]
                                       withUrl:line[1]
                               withPlaceholder:self.placeholderImage
-                                         size:CGSizeMake(32, 32)];
+      ];
+//      [ImageCacheImplement CacheWithImageView:cell.imageView
+//                                      withUrl:line[1]
+//                              withPlaceholder:self.placeholderImage
+//                                         size:CGSizeMake(32, 32)];
    } else {
       cell.imageView.image = [UIImage imageNamed:line[1]];
       cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
