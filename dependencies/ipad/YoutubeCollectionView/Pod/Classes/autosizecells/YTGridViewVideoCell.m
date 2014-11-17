@@ -11,6 +11,7 @@
 #import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "YTGridViewVideoCell.h"
 #import "ImageViewEffect.h"
+#import "UIView+WhenTappedBlocks.h"
 
 
 @interface YTGridViewVideoCell ()
@@ -57,11 +58,15 @@
    ];
 //   NSLog(@"url= %@", video.snippet.thumbnails.medium.url);
    // UIImageView Touch event
-   UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                action:@selector(tapDetected)];
-   singleTap.numberOfTapsRequired = 1;
-   [self.videoThumbnails setUserInteractionEnabled:YES];
-   [self.videoThumbnails addGestureRecognizer:singleTap];
+//   UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                                action:@selector(tapDetected)];
+//   singleTap.numberOfTapsRequired = 1;
+//   [self.videoThumbnails setUserInteractionEnabled:YES];
+//   [self.videoThumbnails addGestureRecognizer:singleTap];
+   [self.videoThumbnails whenTouchedUp:^{
+       [self tapDetected];
+//       NSLog(@"I was touched up!");
+   }];
 
    // 2
    [self.videoTitle setText:video.snippet.title];
