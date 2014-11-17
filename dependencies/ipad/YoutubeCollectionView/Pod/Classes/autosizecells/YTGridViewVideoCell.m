@@ -9,6 +9,7 @@
 #import <google-api-services-youtube/YoutubeConstants.h>
 #import <YoutubeCollectionView/IpadGridViewCell.h>
 #import <IOS_Collection_Code/ImageCacheImplement.h>
+#import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "YTGridViewVideoCell.h"
 #import "ImageViewEffect.h"
 #import "UIView+WhenTappedBlocks.h"
@@ -45,6 +46,57 @@
 
 
 - (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
+   self.video = video;
+   self.delegate = delegate;
+
+   // Confirm that the result represents a video. Otherwise, the
+   // item will not contain a video ID.
+   // 1
+   ASImageNode * imageNode = [[ASImageNode alloc] init];
+   imageNode.backgroundColor = [UIColor lightGrayColor];
+   imageNode.frame = self.videoThumbnailsContainer.bounds;
+   [self.videoThumbnailsContainer addSubview:imageNode.view];
+
+//   [ImageViewEffect setEffectImage:self.videoThumbnails withCornerRadius:70.0f];
+   [ImageCacheImplement CacheWithImageView:imageNode
+                                   withUrl:video.snippet.thumbnails.medium.url
+                           withPlaceholder:image
+   ];
+
+   // configure the button
+   imageNode.userInteractionEnabled = YES; // opt into touch handling
+   [imageNode addTarget:self
+                 action:@selector(tapDetected)
+       forControlEvents:ASControlNodeEventTouchUpInside];
+
+
+   // 2
+   [self.videoTitle setText:video.snippet.title];
+   // 3
+   [self.videoRatingLabel setText:[NSString stringWithFormat:@"%@", video.statistics.likeCount]];
+   [self.videoViewCountLabel setText:[NSString stringWithFormat:@"%@", video.statistics.viewCount]];
+
+   // 4
+   [self.videoChannelTitleLabel setText:video.snippet.channelTitle];
+
+   // 5
+   NSUInteger text = video.contentDetails.duration;
+//   NSLog(@" %d= text", text);
+   NSString * string = [self timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d",
+                                                                                   video.contentDetails.duration]];
+//   NSLog(@"duration = %@", string);
+//   [self.durationLabel setText:string];
+//   [self.durationLabel sizeToFit];
+
+
+   self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(2, 2);
+   self.videoInfoContainer.layer.shadowOpacity = 1;
+   self.videoInfoContainer.layer.shadowRadius = 1.0;
+}
+
+
+- (void)bind123:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
    self.video = video;
    self.delegate = delegate;
 

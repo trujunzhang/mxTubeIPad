@@ -10,16 +10,18 @@
 
 
 @interface YTGridViewVideoCell : UICollectionViewCell
-@property(strong, nonatomic) IBOutlet UIImageView * videoThumbnails;
+
+@property(strong, nonatomic) IBOutlet UIView * videoThumbnailsContainer;
+@property(strong, nonatomic) UIImageView * videoThumbnails;
+
 @property(strong, nonatomic) IBOutlet UILabel * videoTitle;
 @property(strong, nonatomic) IBOutlet UILabel * videoRatingLabel;
 @property(strong, nonatomic) IBOutlet UILabel * videoViewCountLabel;
 @property(strong, nonatomic) IBOutlet UIImageView * videoChannelThumbnails;
 @property(strong, nonatomic) IBOutlet UILabel * videoChannelTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *durationLabel;
+@property(strong, nonatomic) IBOutlet UILabel * durationLabel;
 
-@property (strong, nonatomic) IBOutlet UIView *videoInfoContainer;
-
+@property(strong, nonatomic) IBOutlet UIView * videoInfoContainer;
 
 
 - (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;

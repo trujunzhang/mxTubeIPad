@@ -12,12 +12,6 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2UO-cI-BHY">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="142"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="142" id="4PB-uQ-uw7"/>
-                        </constraints>
-                    </imageView>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6G-nQ-LwO">
                         <rect key="frame" x="0.0" y="142" width="250" height="76"/>
                         <subviews>
@@ -68,20 +62,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sM-gq-2cT" userLabel="videoThumbnailsContainer">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="142"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <constraints>
-                <constraint firstItem="2UO-cI-BHY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KR3-7g-f4j"/>
-                <constraint firstAttribute="trailing" secondItem="2UO-cI-BHY" secondAttribute="trailing" id="VOG-lt-eOJ"/>
-                <constraint firstItem="2UO-cI-BHY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dSj-kp-eec"/>
-            </constraints>
             <connections>
                 <outlet property="videoChannelThumbnails" destination="Huh-ei-kAq" id="9bb-1X-Na8"/>
                 <outlet property="videoChannelTitleLabel" destination="T04-PU-1nz" id="Yua-hc-C6w"/>
                 <outlet property="videoInfoContainer" destination="D6G-nQ-LwO" id="ymd-al-0BC"/>
                 <outlet property="videoRatingLabel" destination="0is-3u-cbe" id="pdt-fK-AZT"/>
-                <outlet property="videoThumbnails" destination="2UO-cI-BHY" id="VAy-Rp-tde"/>
+                <outlet property="videoThumbnailsContainer" destination="4sM-gq-2cT" id="GW0-Mx-QHs"/>
                 <outlet property="videoTitle" destination="UaT-FM-grl" id="vEM-oF-eNN"/>
                 <outlet property="videoViewCountLabel" destination="Qav-5w-n3N" id="Nee-Zu-aYq"/>
             </connections>
