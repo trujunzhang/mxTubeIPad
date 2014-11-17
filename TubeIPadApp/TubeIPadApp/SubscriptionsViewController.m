@@ -41,19 +41,19 @@
    self.tabBarItem.title = @"Subscriptions";
    self.view.backgroundColor = [UIColor clearColor];
 
-   [self setupRootController];
+//   [self setupRootController]; // test
 
 //   [self changeRootView];// test
 }
 
 
-- (void)setupRootController {
-   self.rootViewController = [[UIViewController alloc] init];
-   self.rootViewController.view.frame = self.view.bounds;
-   self.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
-   [self pushViewController:self.rootViewController animated:NO];
-}
+//- (void)setupRootController {
+//   self.rootViewController = [[UIViewController alloc] init];
+//   self.rootViewController.view.frame = self.view.bounds;
+//   self.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//
+//   [self pushViewController:self.rootViewController animated:NO];
+//}
 
 
 //- (void)setupRootController123 {
