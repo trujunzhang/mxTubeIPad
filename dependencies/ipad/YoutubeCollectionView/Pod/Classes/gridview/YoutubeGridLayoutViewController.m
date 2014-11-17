@@ -140,24 +140,24 @@
 }
 
 
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
-//   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
-//
-//   UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
-//                                                                                forIndexPath:indexPath];
-//
-//
-//   if (itemType == YTSegmentItemVideo) {
-//      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-//      YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
-//      [gridViewVideoCell bind:video
-//             placeholderImage:self.placeHolderImage
-//                     delegate:self.delegate];
-//   }
-//
-//   return viewCell;
-//}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
+   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
+
+   UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
+                                                                                forIndexPath:indexPath];
+
+
+   if (itemType == YTSegmentItemVideo) {
+      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+      YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
+      [gridViewVideoCell bind:video
+             placeholderImage:self.placeHolderImage
+                     delegate:self.delegate];
+   }
+
+   return viewCell;
+}
 
 
 //- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

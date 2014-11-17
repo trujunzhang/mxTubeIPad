@@ -8,6 +8,8 @@
 
 #import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YTGridVideoCellNode.h"
+#import "YoutubeParser.h"
+#import "ImageCacheImplement.h"
 
 
 @interface YTGridVideoCellNode () {
@@ -29,18 +31,18 @@
 
    _kittenSize = size;
 
+   [self setupUI];
+
    return self;
 }
 
 
-- (instancetype)init {
-   if (!(self = [super init]))
-      return nil;
+- (void)setupUI {
 
-//   _textNode = [[ASTextNode alloc] init];
-//   [self addSubnode:_textNode];
-
-   return self;
+   // kitten image, with a purple background colour serving as placeholder
+   _imageNode = [[ASImageNode alloc] init];
+   _imageNode.backgroundColor = [UIColor purpleColor];
+   [self addSubnode:_imageNode];
 }
 
 
@@ -54,6 +56,7 @@
 
 
 - (void)layout {
+   _imageNode.frame = CGRectMake(0, 0, _kittenSize.width, 142);
 //   _textNode.frame = CGRectInset(self.bounds, kHorizontalPadding, kVerticalPadding);
 }
 
@@ -61,6 +64,17 @@
 - (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
    self.video = video;
    self.delegate = delegate;
+
+//   [YoutubeParser getChannelId:video];
+   NSString * videoThumbnailsUrl = video.snippet.thumbnails.medium.url;
+   NSString * videoTitleValue = video.snippet.title;
+   NSString * channelTitleValue = video.snippet.channelTitle;
+
+   [ImageCacheImplement CacheWithImageView:_imageNode
+                                       key:video.identifier
+                                   withUrl:videoThumbnailsUrl
+                           withPlaceholder:placeholder
+   ];
 
    self.backgroundColor = [UIColor redColor];
 

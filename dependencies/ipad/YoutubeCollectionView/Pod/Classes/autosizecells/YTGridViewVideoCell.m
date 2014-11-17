@@ -49,6 +49,10 @@
    self.video = video;
    self.delegate = delegate;
 
+   NSString * videoThumbnailsUrl = video.snippet.thumbnails.medium.url;
+   NSString * videoTitleValue = video.snippet.title;
+   NSString * channelTitleValue = video.snippet.channelTitle;
+
    // Confirm that the result represents a video. Otherwise, the
    // item will not contain a video ID.
    // 1
@@ -58,9 +62,10 @@
    [self.videoThumbnailsContainer addSubview:imageNode.view];
 
 //   [ImageViewEffect setEffectImage:self.videoThumbnails withCornerRadius:70.0f];
+
    [ImageCacheImplement CacheWithImageView:imageNode
                                        key:video.identifier
-                                   withUrl:video.snippet.thumbnails.medium.url
+                                   withUrl:videoThumbnailsUrl
                            withPlaceholder:image
                                 completion:^(UIImage * image) {
                                 }];
@@ -73,13 +78,13 @@
 
 
    // 2
-   [self.videoTitle setText:video.snippet.title];
+   [self.videoTitle setText:videoTitleValue];
    // 3
    [self.videoRatingLabel setText:[NSString stringWithFormat:@"%@", video.statistics.likeCount]];
    [self.videoViewCountLabel setText:[NSString stringWithFormat:@"%@", video.statistics.viewCount]];
 
    // 4
-   [self.videoChannelTitleLabel setText:video.snippet.channelTitle];
+   [self.videoChannelTitleLabel setText:channelTitleValue];
 
    // 5
    NSUInteger text = video.contentDetails.duration;
