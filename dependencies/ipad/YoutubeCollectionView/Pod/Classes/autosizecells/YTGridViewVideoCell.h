@@ -12,7 +12,6 @@
 @interface YTGridViewVideoCell : UICollectionViewCell
 
 @property(strong, nonatomic) IBOutlet UIView * videoThumbnailsContainer;
-@property(strong, nonatomic) UIImageView * videoThumbnails;
 
 @property(strong, nonatomic) IBOutlet UILabel * videoTitle;
 @property(strong, nonatomic) IBOutlet UILabel * videoRatingLabel;

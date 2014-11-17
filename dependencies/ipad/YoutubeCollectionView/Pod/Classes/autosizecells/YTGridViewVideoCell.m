@@ -86,65 +86,19 @@
 //   NSLog(@" %d= text", text);
    NSString * string = [self timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d",
                                                                                    video.contentDetails.duration]];
-//   NSLog(@"duration = %@", string);
-//   [self.durationLabel setText:string];
-//   [self.durationLabel sizeToFit];
 
 
+   // 6
    self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(2, 2);
-   self.videoInfoContainer.layer.shadowOpacity = 1;
+   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(1, 1);
+   self.videoInfoContainer.layer.shadowOpacity = 0.8;
    self.videoInfoContainer.layer.shadowRadius = 1.0;
-}
 
-
-- (void)bind123:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
-   self.video = video;
-   self.delegate = delegate;
-
-   // Confirm that the result represents a video. Otherwise, the
-   // item will not contain a video ID.
-   // 1
-//   [ImageViewEffect setEffectImage:self.videoThumbnails withCornerRadius:70.0f];
-   [ImageCacheImplement CacheWithImageView:self.videoThumbnails
-                                   withUrl:video.snippet.thumbnails.medium.url
-                           withPlaceholder:image
-   ];
-//   NSLog(@"url= %@", video.snippet.thumbnails.medium.url);
-   // UIImageView Touch event
-//   UITapGestureRecognizer * singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                                action:@selector(tapDetected)];
-//   singleTap.numberOfTapsRequired = 1;
-//   [self.videoThumbnails setUserInteractionEnabled:YES];
-//   [self.videoThumbnails addGestureRecognizer:singleTap];
-   [self.videoThumbnails whenTouchedUp:^{
-       [self tapDetected];
-//       NSLog(@"I was touched up!");
-   }];
-
-   // 2
-   [self.videoTitle setText:video.snippet.title];
-   // 3
-   [self.videoRatingLabel setText:[NSString stringWithFormat:@"%@", video.statistics.likeCount]];
-   [self.videoViewCountLabel setText:[NSString stringWithFormat:@"%@", video.statistics.viewCount]];
-
-   // 4
-   [self.videoChannelTitleLabel setText:video.snippet.channelTitle];
-
-   // 5
-   NSUInteger text = video.contentDetails.duration;
-//   NSLog(@" %d= text", text);
-   NSString * string = [self timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d",
-                                                                                   video.contentDetails.duration]];
-//   NSLog(@"duration = %@", string);
-//   [self.durationLabel setText:string];
-//   [self.durationLabel sizeToFit];
-
-
-   self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(2, 2);
-   self.videoInfoContainer.layer.shadowOpacity = 1;
-   self.videoInfoContainer.layer.shadowRadius = 1.0;
+   // 7
+   self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+   self.layer.shadowOffset = CGSizeMake(-2, -2);
+   self.layer.shadowOpacity = 1;
+   self.layer.shadowRadius = 1.0;
 }
 
 
