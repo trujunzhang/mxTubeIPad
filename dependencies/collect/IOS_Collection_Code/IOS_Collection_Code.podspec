@@ -40,6 +40,12 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/UIView-Shadow-Maker/*.{h,m}'
   end
 
+  s.subspec 'JMWhenTapped' do |sub|
+    sub.source_files = 'Pod/Classes/JMWhenTapped/*.{h,m}'
+  end
+
+
+
   s.dependency 'JMImageCache'
   s.dependency 'ASImageResize'
 
