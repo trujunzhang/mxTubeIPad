@@ -104,15 +104,14 @@
 
 
 - (void)putNextPageToken:(NSString *)pageToken {
+   if ([self.nextPageToken isEqualToString:@""] == NO && [pageToken isEqualToString:self.nextPageToken]) {
+      self.hasLoadingMore = NO;
+   }
    if ([self.nextPageToken isEqualToString:@""]) { // First request
       self.nextPageToken = pageToken;
    }
 
-   if ([self.nextPageToken isEqualToString:@""] == NO && [pageToken isEqualToString:self.nextPageToken]) {
-      self.hasLoadingMore = NO;
-   } else {
-      [self.parameters setObject:pageToken forKey:@"pageToken"];
-   }
+   [self.parameters setObject:pageToken forKey:@"pageToken"];
 }
 
 

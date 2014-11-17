@@ -61,7 +61,6 @@
 
 
 - (void)refreshPerform {
-   [self cleanup];
    [self.nextPageDelegate executeRefreshTask];
    [self.refreshControl endRefreshing];
 }

@@ -250,6 +250,11 @@
 #pragma mark YoutubeCollectionNextPageDelegate
 
 
+- (void)executeRefreshTask {
+   [self.thirdViewController fetchSuggestionListByVideoId:[YoutubeParser getWatchVideoId:self.video]];
+}
+
+
 - (void)executeNextPageTask {
    [self.thirdViewController fetchSuggestionListByPageToken];
 }

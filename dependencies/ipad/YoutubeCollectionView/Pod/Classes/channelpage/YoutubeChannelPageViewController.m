@@ -117,12 +117,18 @@
 
 - (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(enum YTSegmentItemType)type {
    self.selectedController = controller;
-   [controller fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
+   [self.selectedController fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }
 
 
 #pragma mark -
 #pragma mark YoutubeCollectionNextPageDelegate
+
+
+- (void)executeRefreshTask {
+   [self.selectedController fetchActivityListByType:YTSegmentItemVideo
+                                      withChannelId:[YoutubeParser getChannelId:self.subscription]];
+}
 
 
 - (void)executeNextPageTask {

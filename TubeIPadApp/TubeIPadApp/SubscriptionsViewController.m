@@ -28,6 +28,7 @@
 
 @property(nonatomic, strong) UIViewController * rootViewController;
 
+@property(nonatomic) enum YTPlaylistItemsType playlistItemsType;
 @end
 
 
@@ -130,6 +131,7 @@
    self.viewControllers = [NSArray arrayWithObject:self.youtubeGridLayoutViewController];
 
    // 3
+   self.playlistItemsType = playlistItemsType;
    [self.youtubeGridLayoutViewController fetchPlayListByType:playlistItemsType];
 }
 
@@ -148,6 +150,11 @@
 
 #pragma mark -
 #pragma mark YoutubeCollectionNextPageDelegate
+
+
+- (void)executeRefreshTask {
+   [self.youtubeGridLayoutViewController fetchPlayListByType:self.playlistItemsType];
+}
 
 
 - (void)executeNextPageTask {

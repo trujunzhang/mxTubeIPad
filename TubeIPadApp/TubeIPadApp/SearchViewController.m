@@ -86,16 +86,12 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-   YTSegmentItemType itemType = [GYoutubeRequestInfo getItemTypeByIndex:self.segment_title.selectedSegmentIndex];
-   [self search:self.searchBar.text withItemType:itemType];
+   [self segmentAction:nil];
    [searchBar resignFirstResponder];
 }
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-   if (searchText.length == 0) {
-      [self cleanup];
-   }
 
 }
 
@@ -115,6 +111,11 @@
 
 #pragma mark -
 #pragma mark YoutubeCollectionNextPageDelegate
+
+
+- (void)executeRefreshTask {
+   [self segmentAction:nil];
+}
 
 
 - (void)executeNextPageTask {

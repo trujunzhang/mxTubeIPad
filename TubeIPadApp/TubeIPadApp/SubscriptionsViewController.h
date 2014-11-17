@@ -15,6 +15,7 @@
 
 @property(nonatomic, strong) UIBarButtonItem * revealButtonItem;
 
+
 - (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType;
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription withTitle:(NSString *)title;
 @end
