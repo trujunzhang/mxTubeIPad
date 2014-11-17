@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
    [self.view addSubview:[self getCollectionView]];
 
+   self.placeHolderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
+
    [super viewDidLoad];
 }
 
@@ -113,7 +115,7 @@
       YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
       YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
       [gridViewVideoCell bind:video
-             placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
+             placeholderImage:self.placeHolderImage
                      delegate:self.delegate];
    }
 

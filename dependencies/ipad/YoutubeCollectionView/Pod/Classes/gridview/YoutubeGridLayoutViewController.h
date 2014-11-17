@@ -18,4 +18,5 @@
 
 
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
+@property(nonatomic, strong) UIImage * placeHolderImage;
 @end
