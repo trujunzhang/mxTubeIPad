@@ -128,7 +128,6 @@
       [ImageCacheImplement CacheWithImageView:cell.imageView
                                       withUrl:line[1]
                               withPlaceholder:self.placeholderImage
-//                                 withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
                                          size:CGSizeMake(32, 32)];
    } else {
       cell.imageView.image = [UIImage imageNamed:line[1]];

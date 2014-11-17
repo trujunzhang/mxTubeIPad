@@ -59,6 +59,7 @@
 
 //   [ImageViewEffect setEffectImage:self.videoThumbnails withCornerRadius:70.0f];
    [ImageCacheImplement CacheWithImageView:imageNode
+                                       key:video.identifier
                                    withUrl:video.snippet.thumbnails.medium.url
                            withPlaceholder:image
    ];
