@@ -150,6 +150,7 @@
 - (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType {
    [self cleanup];
 
+   NSLog(@" *** fetchPlayListByType = %d", [[self getYoutubeRequestInfo] hasNextPage]);
    [[self getYoutubeRequestInfo] resetRequestInfoForPlayList:playlistItemsType];
 }
 
@@ -157,6 +158,8 @@
 - (void)fetchPlayListByPageToken {
    if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
       return;
+
+   NSLog(@" *** fetchPlayListByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
 
    YoutubeResponseBlock completion = ^(NSArray * array) {
        [self.refreshControl endRefreshing];

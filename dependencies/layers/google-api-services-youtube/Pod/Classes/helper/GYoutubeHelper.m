@@ -464,33 +464,30 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchPlaylistItemsListWithTagType:(enum YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+//   [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
+//                                 requestInfo:tagType
+//                           CompletionHandler:completion
+//                                errorHandler:errorBlock
+//   ];
+}
+
+
+- (void)fetchPlaylistItemsListWithRequestInfo:(GYoutubeRequestInfo *)info completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+
    [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
-                                     tagType:tagType
+                                 requestInfo:info
                            CompletionHandler:completion
                                 errorHandler:errorBlock
    ];
 }
 
 
-- (void)fetchPlaylistItemsListWithRequestInfo:(GYoutubeRequestInfo *)info completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-
-   YoutubeResponseBlock completionHandler = ^(NSArray * array) {
-
-   };
-   [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
-                                     tagType:info.playlistItemsType
-                           CompletionHandler:completionHandler
-                                errorHandler:errorBlock
-   ];
-}
-
-
-- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(enum YTPlaylistItemsType)tagType CompletionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+- (void)fetchPlaylistItemsListWithPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists requestInfo:(GYoutubeRequestInfo *)requestInfo CompletionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
    YTServiceYouTube * service = self.youTubeService;
 
    GTLQueryYouTube * query = [GTLQueryYouTube queryForPlaylistItemsListWithPart:@"snippet,contentDetails"];
 
-   NSString * playlistID = [self getPlayListIdByPlaylists:playlists tagType:tagType];
+   NSString * playlistID = [self getPlayListIdByPlaylists:playlists tagType:requestInfo.playlistItemsType];
    query.playlistId = playlistID;
 
    _searchListTicket = [service executeQuery:query
@@ -501,6 +498,8 @@ static GYoutubeHelper * instance = nil;
                                NSArray * array = [resultList items];
 
                                NSLog(@"nextPageToken = %@", resultList.nextPageToken);
+                               [requestInfo putNextPageToken:resultList.nextPageToken];
+
 //                               [info setNextPageToken:resultList.nextPageToken];
                                // 02 Search Videos by videoIds
                                [self fetchPlayListItemVideoByVideoIds:array

@@ -104,6 +104,10 @@
 
 
 - (void)putNextPageToken:(NSString *)pageToken {
+   if (pageToken == nil || [pageToken isEqualToString:@""]) {
+      self.hasLoadingMore = NO;
+      return;
+   }
    if ([self.nextPageToken isEqualToString:@""] == NO && [pageToken isEqualToString:self.nextPageToken]) {
       self.hasLoadingMore = NO;
    }
@@ -149,12 +153,7 @@
 
 - (void)appendNextPageData:(NSArray *)array {
    NSLog(@"leng = %d", array.count);
-   self.hasLoadingMore = YES;
-   if (array.count == 0) {
-      self.hasLoadingMore = NO;
-   } else {
-      [self.videoList addObjectsFromArray:array];
-   }
+   [self.videoList addObjectsFromArray:array];
 }
 
 
