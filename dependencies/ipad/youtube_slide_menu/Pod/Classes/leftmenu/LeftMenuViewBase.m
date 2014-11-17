@@ -15,6 +15,7 @@
 #import "YoutubeConstants.h"
 #import "ImageViewEffect.h"
 #import "GYoutubeAuthUser.h"
+#import "UIImage+Resize.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -124,20 +125,17 @@
 
    // 2
    if (menuItemTree.remoteImage) {
-      [ImageViewEffect setEffectImage:cell.imageView withCornerRadius:4.0f];
+      [ImageViewEffect setEffectImage:cell.imageView withCornerRadius:3.0f];
       [ImageCacheImplement CacheWithImageView:cell.imageView
                                           key:line[2]
                                       withUrl:line[1]
                               withPlaceholder:self.placeholderImage
+                                       resize:CGSizeMake(32, 32)
       ];
-//      [ImageCacheImplement CacheWithImageView:cell.imageView
-//                                      withUrl:line[1]
-//                              withPlaceholder:self.placeholderImage
-//                                         size:CGSizeMake(32, 32)];
    } else {
       cell.imageView.image = [UIImage imageNamed:line[1]];
-      cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
    }
+   cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
    // 3
    cell.selectedBackgroundView = [
@@ -147,7 +145,7 @@
 
 
 - (UIImage *)imageWithColor:(UIColor *)color {
-   CGRect rect = CGRectMake(0, 0, 26, 26);
+   CGRect rect = CGRectMake(0, 0, 32, 32);
    // Create a 1 by 1 pixel context
    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
    [color setFill];

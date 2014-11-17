@@ -15,19 +15,47 @@
 @implementation ImageCacheImplement
 
 + (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder {
+   [ImageCacheImplement CacheWithImageView:node
+                                       key:key
+                                   withUrl:url
+                           withPlaceholder:placeHolder
+                                completion:^(UIImage * downloadedImage) {
+                                    node.image = downloadedImage;
+                                }];
+}
+
+
++ (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder completion:(void (^)(UIImage *))completion {
    NSString * imageKey = key;
    UIImage * cacheImage = [[JMImageCache sharedCache] cachedImageForKey:imageKey];
    if (cacheImage) {
       node.image = cacheImage;
       return;
    }
-   node.image = placeHolder;
 
+   node.image = placeHolder;
    [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
                                        key:imageKey
-                           completionBlock:^(UIImage * downloadedImage) {
-                               node.image = downloadedImage;
-                           }];
+                           completionBlock:completion];
+}
+
+
++ (void)CacheWithImageView:(UIImageView *)view key:(id)key withUrl:(id)url withPlaceholder:(UIImage *)placeHolder resize:(CGSize)resize {
+   NSString * imageKey = key;
+   UIImage * cacheImage = [[JMImageCache sharedCache] cachedImageForKey:imageKey];
+   if (cacheImage) {
+      view.image = [cacheImage resizedImageToSize:resize];
+      return;
+   }
+
+   view.image = placeHolder;
+   [ImageCacheImplement CacheWithImageView:view
+                                       key:key
+                                   withUrl:url
+                           withPlaceholder:placeHolder
+                                completion:^(UIImage * downloadedImage) {
+                                    view.image = [downloadedImage resizedImageToSize:resize];
+                                }];
 }
 
 

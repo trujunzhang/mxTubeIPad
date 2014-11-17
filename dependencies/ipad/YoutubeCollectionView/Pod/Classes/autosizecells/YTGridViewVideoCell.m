@@ -62,7 +62,8 @@
                                        key:video.identifier
                                    withUrl:video.snippet.thumbnails.medium.url
                            withPlaceholder:image
-   ];
+                                completion:^(UIImage * image) {
+                                }];
 
    // configure the button
    imageNode.userInteractionEnabled = YES; // opt into touch handling
