@@ -46,4 +46,5 @@
  */
 @property (nonatomic, assign) CGFloat aspectRatio;
 
+- (CGSize)cellSize;
 @end

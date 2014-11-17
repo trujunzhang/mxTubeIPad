@@ -10,7 +10,27 @@
 #import "YTGridVideoCellNode.h"
 
 
+@interface YTGridVideoCellNode () {
+   CGSize _kittenSize;
+
+   ASImageNode * _imageNode;
+   ASTextNode * _textNode;
+   ASDisplayNode * _divider;
+}
+@end
+
+
 @implementation YTGridVideoCellNode
+
+
+- (instancetype)initWithCellNodeOfSize:(CGSize)size {
+   if (!(self = [super init]))
+      return nil;
+
+   _kittenSize = size;
+
+   return self;
+}
 
 
 - (instancetype)init {
@@ -29,8 +49,7 @@
 //   CGSize textNodeSize = [_textNode measure:availableSize];
 
 //   return CGSizeMake(textNodeSize.width), ceilf(2 * kVerticalPadding + textNodeSize.height));
-   CGSize size;
-   return size;
+   return _kittenSize;
 }
 
 
@@ -43,6 +62,7 @@
    self.video = video;
    self.delegate = delegate;
 
+   self.backgroundColor = [UIColor redColor];
 
 }
 

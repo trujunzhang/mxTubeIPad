@@ -127,10 +127,12 @@
 
    if (itemType == YTSegmentItemVideo) {
       YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] init];
+      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:[self.layout cellSize]];
       [videoCellNode bind:video
          placeholderImage:self.placeHolderImage
                  delegate:self.delegate];
+
+      node = videoCellNode;
    }
 
 
