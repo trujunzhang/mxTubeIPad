@@ -12,6 +12,7 @@
 #import "GYoutubeRequestInfo.h"
 #import "YTGridViewVideoCell.h"
 #import "KRLCollectionViewGridLayout.h"
+#import "YTGridVideoCellNode.h"
 
 
 @interface YoutubeGridLayoutViewController ()<ASCollectionViewDataSource, ASCollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
@@ -108,6 +109,8 @@
 
 
 - (ASCellNode *)collectionView:(ASCollectionView *)collectionView nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
+   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
+   ASCellNode * node;
 //   ASCellNode * node = [[ASCellNode alloc] init];
 //
 //   ASImageNode * imageNode = [[ASImageNode alloc] init];
@@ -117,10 +120,19 @@
 //
 //   [node addSubnode:imageNode];
 
-   NSString * text = [NSString stringWithFormat:@"[%ld.%ld] says hi", indexPath.section, indexPath.item];
-   ASTextCellNode * node = [[ASTextCellNode alloc] init];
-   node.text = text;
-   node.backgroundColor = [UIColor redColor];
+//   NSString * text = [NSString stringWithFormat:@"[%ld.%ld] says hi", indexPath.section, indexPath.item];
+//   ASTextCellNode * node = [[ASTextCellNode alloc] init];
+//   node.text = text;
+//   node.backgroundColor = [UIColor redColor];
+
+   if (itemType == YTSegmentItemVideo) {
+      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] init];
+      [videoCellNode bind:video
+         placeholderImage:self.placeHolderImage
+                 delegate:self.delegate];
+   }
+
 
    return node;
 }
