@@ -10,6 +10,7 @@
 #import "YoutubeCollectionViewBase.h"
 
 @protocol IpadGridViewCellDelegate;
+@class KRLCollectionViewGridLayout;
 
 
 @interface YoutubeGridLayoutViewController : YoutubeCollectionViewBase
@@ -19,4 +20,5 @@
 
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
 @property(nonatomic, strong) UIImage * placeHolderImage;
+@property(nonatomic, strong) KRLCollectionViewGridLayout * layout;
 @end

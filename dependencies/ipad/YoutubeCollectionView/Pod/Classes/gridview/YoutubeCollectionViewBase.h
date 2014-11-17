@@ -22,7 +22,7 @@
 @interface YoutubeCollectionViewBase : UIViewController
 @property(nonatomic, strong) GYoutubeRequestInfo * youtubeRequestInfo;
 
-@property(strong, nonatomic) UICollectionView * collectionView;
+@property(strong, nonatomic) ASCollectionView * collectionView;
 @property(nonatomic, assign) id<YoutubeCollectionNextPageDelegate> nextPageDelegate;
 
 - (GYoutubeRequestInfo *)getYoutubeRequestInfo;
