@@ -46,8 +46,9 @@
       self.layout = [[KRLCollectionViewGridLayout alloc] init];
       self.layout.aspectRatio = 1;
       self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-      self.layout.interitemSpacing = 10;
+      self.layout.interitemSpacing = 30;
       self.layout.lineSpacing = 10;
+      self.layout.aspectRatio = 1.1;
       self.layout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
 
@@ -118,13 +119,13 @@
          placeholderImage:self.placeHolderImage
                  delegate:self.delegate];
 
+//      videoCellNode.backgroundColor = [UIColor redColor];
+
       node = videoCellNode;
    }
 
    return node;
 }
-
-
 
 
 @end

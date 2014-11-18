@@ -188,8 +188,9 @@
     CGFloat cellLength = usableSpace / self.numberOfItemsPerLine;
 
     if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
-        return CGSizeMake(cellLength,
-                          cellLength * (1.0 / self.aspectRatio));
+       CGSize size = CGSizeMake(cellLength,
+                              cellLength * (1.0 / self.aspectRatio));
+       return size;
     } else {
         return CGSizeMake(cellLength * self.aspectRatio,
                           cellLength);
