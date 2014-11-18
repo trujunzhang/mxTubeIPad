@@ -19,7 +19,9 @@
    ASImageNode * _imageNode;
 
    ASDisplayNode * _infoContainerNode;
+
    ASImageNode * _channelImageNode;
+   ASTextNode * _titleNode;
 }
 @end
 
@@ -53,11 +55,26 @@
    // 2.1
    _channelImageNode = [[ASImageNode alloc] init];
    [_infoContainerNode addSubnode:_channelImageNode];
+
+   // 2.2
+   _titleNode = [[ASTextNode alloc] init];
+   [_infoContainerNode addSubnode:_titleNode];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
    return _kittenSize;
+}
+
+
+- (NSDictionary *)textStyle {
+   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+
+   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+   style.paragraphSpacing = 0.5 * font.lineHeight;
+   style.hyphenationFactor = 1.0;
+
+   return @{ NSFontAttributeName : font, NSParagraphStyleAttributeName : style };
 }
 
 
@@ -68,10 +85,13 @@
 
    // 2
    CGFloat infoContainerHeight = _kittenSize.height - thumbnailHeight;
-   _infoContainerNode.frame = CGRectMake(0, thumbnailHeight, _kittenSize.width, infoContainerHeight);
+   _infoContainerNode.frame = CGRectMake(0, thumbnailHeight + 4, _kittenSize.width, infoContainerHeight - 4);
 
    // 2.1
    _channelImageNode.frame = CGRectMake(0, 0, 32, 32);
+
+   // 2.2
+   _titleNode.frame = CGRectMake(40, 0, 102, 32);
 }
 
 
@@ -90,9 +110,13 @@
                            withPlaceholder:placeholder
    ];
 
-   self.backgroundColor = [UIColor clearColor];
+   // configure the button
+   _imageNode.userInteractionEnabled = YES; // opt into touch handling
+   [_imageNode addTarget:self
+                  action:@selector(buttonTapped:)
+        forControlEvents:ASControlNodeEventTouchUpInside];
 
-   // 2
+   // 2.1
    NSString * channelIdentifier = video.snippet.channelId;
 
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
@@ -106,6 +130,16 @@
                                                           completion:completionBlock
                                                         errorHandler:nil];
 
+   // 2.2
+   _titleNode.attributedString = [[NSAttributedString alloc] initWithString:videoTitleValue
+                                                                 attributes:[self textStyle]];
+
+}
+
+
+- (void)buttonTapped:(id)buttonTapped {
+   if (self.delegate)
+      [self.delegate gridViewCellTap:self.video sender:self.delegate];
 }
 
 @end
