@@ -90,7 +90,7 @@
                            withPlaceholder:placeholder
    ];
 
-   self.backgroundColor = [UIColor redColor];
+   self.backgroundColor = [UIColor clearColor];
 
    // 2
    NSString * channelIdentifier = video.snippet.channelId;
