@@ -76,7 +76,7 @@
 - (NSDictionary *)textStyleForVideoTitle {
    NSString * fontName = @"HelveticaNeue";
 //   fontName = @"ChalkboardSE-Regular";
-   UIFont * font = [UIFont fontWithName:fontName size:12.0f];
+   UIFont * font = [UIFont fontWithName:fontName size:14.0f];
 
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
    style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -89,7 +89,7 @@
 
 
 - (NSDictionary *)textStyleForChannelTitle {
-   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
 
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
    style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -117,8 +117,8 @@
    CGFloat titleLeftX = 58;
    _channelImageNode.frame = CGRectMake(0, 0, titleLeftX - 8, titleLeftX - 4);
    CGFloat titleWidth = _kittenSize.width - titleLeftX;
-   _videoTitleNode.frame = CGRectMake(titleLeftX, 0, titleWidth, 32);
-   _channelTitleNode.frame = CGRectMake(titleLeftX, 32, titleWidth, 32);
+   _videoTitleNode.frame = CGRectMake(titleLeftX, 0, titleWidth, 36);
+   _channelTitleNode.frame = CGRectMake(titleLeftX, 36, titleWidth, 32);
 }
 
 
