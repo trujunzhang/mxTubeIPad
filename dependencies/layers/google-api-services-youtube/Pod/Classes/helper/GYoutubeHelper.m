@@ -181,7 +181,7 @@ static GYoutubeHelper * instance = nil;
     LISTVideosForURL:urlStr
           andHandler:^(NSMutableArray * results, NSError * error, NSString * pageToken) {
               if (!error) {
-                 completion(results);
+                 completion(results, nil);
               }
               else {
                  NSLog(@"%@", error.description);
@@ -251,7 +251,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)getUserInfo {
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        // 1
        GTLYouTubeChannel * channel = array[0];
        // save user title
@@ -291,7 +291,7 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)getUserSubscriptions:(id<GYoutubeHelperDelegate>)delegate {
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.youtubeAuthUser.subscriptions = array;
 
 //       [self getActivityListWithChannelId:@"UCl78QGX_hfK6zT8Mc-2w8GA"];
@@ -354,7 +354,7 @@ static GYoutubeHelper * instance = nil;
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
                                if ([array count] > 0) {
-                                  completion(array);
+                                  completion(array, nil);
                                }
                                errorBlock(error);
                            }];
@@ -387,7 +387,7 @@ static GYoutubeHelper * instance = nil;
                                NSArray * array = [resultList items];
                                GTLYouTubePlaylistItem * item = array[0];
                                if ([array count] > 0) {
-                                  completion(array);
+                                  completion(array, nil);
                                }
                                errorBlock(error);
                                _searchListTicket = nil;
@@ -410,7 +410,7 @@ static GYoutubeHelper * instance = nil;
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
                                if ([array count] > 0) {
-                                  completion(array);
+                                  completion(array, nil);
                                }
                                errorBlock(error);
                                _searchListTicket = nil;
@@ -433,7 +433,7 @@ static GYoutubeHelper * instance = nil;
                                // The contentDetails of the response has the playlists available for "my channel".
                                NSArray * array = [resultList items];
                                if ([array count] > 0) {
-                                  completion(array);
+                                  completion(array, nil);
                                }
                                errorBlock(error);
                                _searchListTicket = nil;
@@ -468,6 +468,8 @@ static GYoutubeHelper * instance = nil;
        }
    };
    [[MABYT3_APIRequest sharedInstance] LISTChannelsForURL:urlStr andHandler:finishedHandler];
+
+   return nil;
 }
 
 
@@ -487,7 +489,7 @@ static GYoutubeHelper * instance = nil;
                                NSArray * array = [resultList items];
                                GTLYouTubeChannel * channel = array[0];
                                if ([array count] > 0) {
-                                  completion(array);
+                                  completion(array, nil);
                                }
                                errorBlock(error);
                                _searchListTicket = nil;

@@ -25,7 +25,7 @@
    self.view.backgroundColor = [UIColor clearColor]; // = transparent
 
 
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        NSString * debug = @"debug";
    };
    ErrorResponseBlock error = ^(NSError * error) {

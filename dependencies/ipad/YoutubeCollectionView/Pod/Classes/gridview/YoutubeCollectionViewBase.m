@@ -88,7 +88,7 @@
       return;
 
 
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        [self.refreshControl endRefreshing];
 
        [[self getYoutubeRequestInfo] appendNextPageData:array];
@@ -127,7 +127,7 @@
    if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
       return;
 
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        [self.refreshControl endRefreshing];
 
        [[self getYoutubeRequestInfo] appendNextPageData:array];
@@ -161,7 +161,7 @@
 
    NSLog(@" *** fetchPlayListByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
 
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        [self.refreshControl endRefreshing];
 
        [[self getYoutubeRequestInfo] appendNextPageData:array];

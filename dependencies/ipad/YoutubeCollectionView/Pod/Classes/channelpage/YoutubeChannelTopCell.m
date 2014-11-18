@@ -45,7 +45,7 @@
                            withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
    ];
 
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
 
        NSString * url = [YoutubeParser getBannerImageUrl:self.currentChannel];

@@ -23,7 +23,7 @@
    [super viewDidLoad];
    // Do any additional setup after loading the view, typically from a nib.
 
-   YoutubeResponseBlock completion = ^(NSArray * array) {
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        NSString * debug = @"debug";
    };
    ErrorResponseBlock error = ^(NSError * error) {
