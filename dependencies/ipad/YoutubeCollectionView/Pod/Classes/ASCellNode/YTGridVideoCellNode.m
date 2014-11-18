@@ -74,24 +74,33 @@
 
 
 - (NSDictionary *)textStyleForVideoTitle {
-   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+   NSString * fontName = @"HelveticaNeue";
+//   fontName = @"ChalkboardSE-Regular";
+   UIFont * font = [UIFont fontWithName:fontName size:12.0f];
 
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
    style.paragraphSpacing = 0.5 * font.lineHeight;
    style.hyphenationFactor = 1.0;
+   style.lineBreakMode = NSLineBreakByTruncatingTail;
 
    return @{ NSFontAttributeName : font, NSParagraphStyleAttributeName : style };
 }
 
 
 - (NSDictionary *)textStyleForChannelTitle {
-   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:8.0f];
+   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:10.0f];
 
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
    style.paragraphSpacing = 0.5 * font.lineHeight;
    style.hyphenationFactor = 1.0;
+   style.lineBreakMode = NSLineBreakByTruncatingTail;
 
-   return @{ NSFontAttributeName : font, NSParagraphStyleAttributeName : style };
+   return @{
+    NSFontAttributeName : font,
+    NSParagraphStyleAttributeName : style,
+    NSStrokeColorAttributeName : [UIColor yellowColor],
+    NSForegroundColorAttributeName : [UIColor redColor]
+   };
 }
 
 
@@ -105,10 +114,11 @@
    _infoContainerNode.frame = CGRectMake(0, thumbnailHeight + 8, _kittenSize.width, infoContainerHeight - 4);
 
    // 2.1
-   CGFloat titleLeftX = 62;
+   CGFloat titleLeftX = 58;
    _channelImageNode.frame = CGRectMake(0, 0, titleLeftX - 8, titleLeftX - 4);
-   _videoTitleNode.frame = CGRectMake(titleLeftX, 0, 114, 32);
-   _channelTitleNode.frame = CGRectMake(titleLeftX, 32, 114, 32);
+   CGFloat titleWidth = 100;//_kittenSize.width - titleLeftX;
+   _videoTitleNode.frame = CGRectMake(titleLeftX, 0, titleWidth, 32);
+   _channelTitleNode.frame = CGRectMake(titleLeftX, 32, titleWidth, 32);
 }
 
 
