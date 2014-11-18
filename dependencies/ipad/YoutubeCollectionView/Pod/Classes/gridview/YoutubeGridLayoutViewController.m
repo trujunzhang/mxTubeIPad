@@ -37,7 +37,7 @@
    NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
    NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
 
-   [self.nextPageDelegate executeNextPageTask];
+   [self.nextPageDelegate executeNextPageTask]; // test
 }
 
 

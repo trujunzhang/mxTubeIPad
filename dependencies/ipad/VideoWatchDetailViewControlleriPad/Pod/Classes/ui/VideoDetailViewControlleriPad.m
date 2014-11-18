@@ -46,6 +46,8 @@
    [self setupPlayer:self.videoPlayView];
 
    self.title = self.video.snippet.title;
+
+//   [self executeRefreshTask];// test
 }
 
 
