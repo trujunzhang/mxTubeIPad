@@ -243,7 +243,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTActivitiesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)LISTActivitiesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
@@ -308,7 +308,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTChannelSectionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler {
+- (void)LISTChannelSectionsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    NSMutableArray * arr = [[NSMutableArray alloc] init];
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
@@ -360,14 +360,14 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error);
+                                  handler(arr, error, nil);
                               });
 
                           }];
 }
 
 
-- (void)LISTChannelsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler {
+- (void)LISTChannelsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    NSMutableArray * arr = [[NSMutableArray alloc] init];
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
@@ -419,14 +419,14 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error);
+                                  handler(arr, error, nil);
                               });
 
                           }];
 }
 
 
-- (void)LISTGuideCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler {
+- (void)LISTGuideCategoriesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    NSMutableArray * arr = [[NSMutableArray alloc] init];
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
@@ -477,14 +477,14 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error);
+                                  handler(arr, error, nil);
                               });
 
                           }];
 }
 
 
-- (void)LISTLanguagesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler {
+- (void)LISTLanguagesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    NSMutableArray * arr = [[NSMutableArray alloc] init];
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
@@ -535,14 +535,14 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error);
+                                  handler(arr, error, nil);
                               });
 
                           }];
 }
 
 
-- (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
@@ -606,7 +606,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
@@ -670,7 +670,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTRegionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler {
+- (void)LISTRegionsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    NSMutableArray * arr = [[NSMutableArray alloc] init];
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
@@ -721,7 +721,7 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error);
+                                  handler(arr, error, nil);
                               });
 
                           }];
@@ -732,7 +732,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 #pragma mark fetch youtube search
 
 
-- (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)fetchWithUrl:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
    __block NSString * pageToken = nil;
 
    NSMutableURLRequest * request = [self getRequest:urlStr withAuth:NO];
@@ -834,7 +834,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
@@ -898,7 +898,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
@@ -962,7 +962,7 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (void)LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler {
+- (void)LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    NSMutableArray * arr = [[NSMutableArray alloc] init];
    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
@@ -1014,14 +1014,14 @@ static MABYT3_APIRequest * sharedlst = nil;
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error);
+                                  handler(arr, error, nil);
                               });
 
                           }];
 }
 
 
-- (void)LISTVideosForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler {
+- (void)LISTVideosForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";
    NSMutableArray * arr = [[NSMutableArray alloc] init];
