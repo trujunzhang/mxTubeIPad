@@ -445,7 +445,8 @@ static GYoutubeHelper * instance = nil;
 - (NSString *)fetchChannelThumbnailsWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    NSString * thumbnailUrl = [YoutubeParser checkAndAppendThumbnailWithChannelId:channelId];
    if (thumbnailUrl) {
-      completion(nil, thumbnailUrl);
+//      completion(nil, thumbnailUrl);
+      return thumbnailUrl;
    }
    NSDictionary * parameters = @{
     @"part" : @"snippet",

@@ -159,16 +159,22 @@
 
 - (void)showChannelThumbnail:(NSString *)channelId {
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
-//       [ImageViewEffect setEffectImage:_channelImageNode.view withCornerRadius:10.0f];
        [ImageCacheImplement CacheWithImageView:_channelImageNode
                                            key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
                                        withUrl:respObject
                                withPlaceholder:nil
        ];
    };
-   [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
-                                                          completion:completionBlock
-                                                        errorHandler:nil];
+   NSString * responseUrl = [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
+                                                                                   completion:completionBlock
+                                                                                 errorHandler:nil];
+   if (responseUrl) {
+      [ImageCacheImplement CacheWithImageView:_channelImageNode
+                                          key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
+                                      withUrl:responseUrl
+                              withPlaceholder:nil
+      ];
+   }
 
    _channelImageNode.imageModificationBlock = ^UIImage *(UIImage * image) {
        UIImage * modifiedImage = nil;
@@ -176,7 +182,7 @@
 
        UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
 
-       [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:10.0] addClip];
+       [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:14.0] addClip];
        [image drawInRect:rect];
        modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
 
