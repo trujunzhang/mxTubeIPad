@@ -11,6 +11,7 @@
 #import "YoutubeParser.h"
 #import "ImageCacheImplement.h"
 #import "GYoutubeHelper.h"
+#import "ImageViewEffect.h"
 
 
 @interface YTGridVideoCellNode () {
@@ -72,8 +73,19 @@
 }
 
 
-- (NSDictionary *)textStyle {
+- (NSDictionary *)textStyleForVideoTitle {
    UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+
+   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+   style.paragraphSpacing = 0.5 * font.lineHeight;
+   style.hyphenationFactor = 1.0;
+
+   return @{ NSFontAttributeName : font, NSParagraphStyleAttributeName : style };
+}
+
+
+- (NSDictionary *)textStyleForChannelTitle {
+   UIFont * font = [UIFont fontWithName:@"HelveticaNeue" size:8.0f];
 
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
    style.paragraphSpacing = 0.5 * font.lineHeight;
@@ -93,8 +105,8 @@
    _infoContainerNode.frame = CGRectMake(0, thumbnailHeight + 8, _kittenSize.width, infoContainerHeight - 4);
 
    // 2.1
-   CGFloat titleLeftX = 68;
-   _channelImageNode.frame = CGRectMake(0, 0, titleLeftX - 8, titleLeftX - 8);
+   CGFloat titleLeftX = 62;
+   _channelImageNode.frame = CGRectMake(0, 0, titleLeftX - 8, titleLeftX - 4);
    _videoTitleNode.frame = CGRectMake(titleLeftX, 0, 114, 32);
    _channelTitleNode.frame = CGRectMake(titleLeftX, 32, 114, 32);
 }
@@ -125,6 +137,7 @@
    NSString * channelIdentifier = video.snippet.channelId;
 
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
+       [ImageViewEffect setEffectImage:_channelImageNode.view withCornerRadius:10.0f];
        [ImageCacheImplement CacheWithImageView:_channelImageNode
                                            key:[YoutubeParser getThumbnailKeyWithChannelId:channelIdentifier]
                                        withUrl:respObject
@@ -137,10 +150,10 @@
 
    // 2.2
    _videoTitleNode.attributedString = [[NSAttributedString alloc] initWithString:videoTitleValue
-                                                                      attributes:[self textStyle]];
+                                                                      attributes:[self textStyleForVideoTitle]];
 
    _channelTitleNode.attributedString = [[NSAttributedString alloc] initWithString:channelTitleValue
-                                                                        attributes:[self textStyle]];
+                                                                        attributes:[self textStyleForChannelTitle]];
 }
 
 
