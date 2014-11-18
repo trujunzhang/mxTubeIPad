@@ -42,12 +42,12 @@
 - (void)setupUI {
    // 1
    _imageNode = [[ASImageNode alloc] init];
-   _imageNode.backgroundColor = [UIColor purpleColor];
+   _imageNode.backgroundColor = [UIColor clearColor];
    [self addSubnode:_imageNode];
 
    // 2
    _infoContainerNode = [[ASDisplayNode alloc] init];
-   _infoContainerNode.backgroundColor = [UIColor blueColor];
+   _infoContainerNode.backgroundColor = [UIColor clearColor];
    [self addSubnode:_infoContainerNode];
 
    // 2.1
@@ -67,8 +67,8 @@
    _imageNode.frame = CGRectMake(0, 0, _kittenSize.width, thumbnailHeight);
 
    // 2
-   CGFloat infoContainerHeight = _kittenSize.height = thumbnailHeight;
-   _infoContainerNode.frame = CGRectMake(0, 0, _kittenSize.width, infoContainerHeight);
+   CGFloat infoContainerHeight = _kittenSize.height - thumbnailHeight;
+   _infoContainerNode.frame = CGRectMake(0, thumbnailHeight, _kittenSize.width, infoContainerHeight);
 
    // 2.1
    _channelImageNode.frame = CGRectMake(0, 0, 32, 32);
