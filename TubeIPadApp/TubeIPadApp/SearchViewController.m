@@ -43,7 +43,9 @@
    searchBar.showsCancelButton = YES;
    searchBar.userInteractionEnabled = YES;
    searchBar.placeholder = @"Search";
-//   searchBar.text = @"sketch 3";//test
+
+   [self search:@"sketch 3" withItemType:YTSegmentItemVideo];// test
+   [self searchByPageToken];// test
 
    searchBar.delegate = self;
 
