@@ -28,6 +28,7 @@
 
 
 - (NSString *)ActivitiesURLforUser:(MABYT3_Channel *)channel withMaxResults:(NSInteger)max;
+- (NSString *)ChannelURLWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
 - (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withParameters:(NSDictionary *)params  withMaxResults:(NSInteger)max;
 - (NSString *)ActivitiesURLforHomeWithMaxResults:(NSInteger)max;
 - (NSString *)ActivitiesURLforMeWithMaxResults:(NSInteger)max;

@@ -10,14 +10,16 @@
 #import "YTGridVideoCellNode.h"
 #import "YoutubeParser.h"
 #import "ImageCacheImplement.h"
+#import "GYoutubeHelper.h"
 
 
 @interface YTGridVideoCellNode () {
    CGSize _kittenSize;
 
    ASImageNode * _imageNode;
-   ASTextNode * _textNode;
-   ASDisplayNode * _divider;
+
+   ASDisplayNode * _infoContainerNode;
+   ASImageNode * _channelImageNode;
 }
 @end
 
@@ -38,26 +40,38 @@
 
 
 - (void)setupUI {
-
-   // kitten image, with a purple background colour serving as placeholder
+   // 1
    _imageNode = [[ASImageNode alloc] init];
    _imageNode.backgroundColor = [UIColor purpleColor];
    [self addSubnode:_imageNode];
+
+   // 2
+   _infoContainerNode = [[ASDisplayNode alloc] init];
+   _infoContainerNode.backgroundColor = [UIColor blueColor];
+   [self addSubnode:_infoContainerNode];
+
+   // 2.1
+   _channelImageNode = [[ASImageNode alloc] init];
+   [_infoContainerNode addSubnode:_channelImageNode];
 }
 
 
 - (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-//   CGSize availableSize = CGSizeMake(constrainedSize.width - 2 * kHorizontalPadding, constrainedSize.height - 2 * kVerticalPadding);
-//   CGSize textNodeSize = [_textNode measure:availableSize];
-
-//   return CGSizeMake(textNodeSize.width), ceilf(2 * kVerticalPadding + textNodeSize.height));
    return _kittenSize;
 }
 
 
 - (void)layout {
-   _imageNode.frame = CGRectMake(0, 0, _kittenSize.width, 142);
-//   _textNode.frame = CGRectInset(self.bounds, kHorizontalPadding, kVerticalPadding);
+   // 1
+   CGFloat thumbnailHeight = 142;
+   _imageNode.frame = CGRectMake(0, 0, _kittenSize.width, thumbnailHeight);
+
+   // 2
+   CGFloat infoContainerHeight = _kittenSize.height = thumbnailHeight;
+   _infoContainerNode.frame = CGRectMake(0, 0, _kittenSize.width, infoContainerHeight);
+
+   // 2.1
+   _channelImageNode.frame = CGRectMake(0, 0, 32, 32);
 }
 
 
@@ -65,8 +79,8 @@
    self.video = video;
    self.delegate = delegate;
 
-//   [YoutubeParser getChannelId:video];
-   NSString * videoThumbnailsUrl = video.snippet.thumbnails.medium.url;
+   // 1
+   NSString * videoThumbnailsUrl = [YoutubeParser getVideoSnippetThumbnails:video];
    NSString * videoTitleValue = video.snippet.title;
    NSString * channelTitleValue = video.snippet.channelTitle;
 
@@ -77,6 +91,12 @@
    ];
 
    self.backgroundColor = [UIColor redColor];
+
+   // 2
+   NSString * channelIdentifier = video.snippet.channelId;
+   [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelIdentifier
+                                                          completion:nil
+                                                        errorHandler:nil];
 
 }
 

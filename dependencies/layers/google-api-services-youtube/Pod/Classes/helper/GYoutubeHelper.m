@@ -438,6 +438,59 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+- (void)fetchChannelThumbnailsWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   YTServiceYouTube * service = self.youTubeService;
+
+   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"snippet"];
+//   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
+//   query.identifier = channelId;
+//   query.fields = @"items/snippet(thumbnails)";
+
+   NSDictionary * parameters = @{
+    @"part" : @"snippet",
+    @"id" : channelId,
+    @"fields" : @"items/snippet(thumbnails)",
+   };
+   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ChannelURLWithParameters:parameters
+                                                                     withMaxResults:search_maxResults];
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+       if (!error) {
+          NSString * debug = @"debug";
+       }
+       else {
+          if (error) {
+
+          }
+       }
+   };
+   [[MABYT3_APIRequest sharedInstance] LISTChannelsForURL:urlStr andHandler:finishedHandler];
+}
+
+
+- (void)fetchChannelThumbnailsWithChannelId123:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   YTServiceYouTube * service = self.youTubeService;
+
+   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"snippet"];
+//   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
+   query.identifier = channelId;
+   query.fields = @"items/snippet(thumbnails)";
+
+   _searchListTicket = [service executeQuery:query
+                           completionHandler:^(GTLServiceTicket * ticket,
+                            GTLYouTubeChannelListResponse * resultList,
+                            NSError * error) {
+                               // The contentDetails of the response has the playlists available for "my channel".
+                               NSArray * array = [resultList items];
+                               GTLYouTubeChannel * channel = array[0];
+                               if ([array count] > 0) {
+                                  completion(array);
+                               }
+                               errorBlock(error);
+                               _searchListTicket = nil;
+                           }];
+}
+
+
 - (NSString *)getPlayListIdByPlaylists:(GTLYouTubeChannelContentDetailsRelatedPlaylists *)playlists tagType:(NSInteger)tagType {
    NSString * playlistID;
    switch (tagType) {

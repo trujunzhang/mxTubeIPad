@@ -49,8 +49,13 @@
    return subscription.snippet.thumbnails.high.url;
 }
 
+
 + (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel {
    return channel.snippet.thumbnails.high.url;
 }
 
+
++ (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideo *)video {
+   return video.snippet.thumbnails.medium.url;
+}
 @end

@@ -16,9 +16,12 @@
 + (NSString *)getVideoIdsBySearchResult:(NSMutableArray *)searchResultList;
 
 + (NSString *)getChannelId:(YTYouTubeSubscription *)subscription;
+
++ (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideo *)video;
 + (NSString *)getWatchVideoId:(YTYouTubeVideo *)video;
 
 + (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel;
 + (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;
 + (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel;
+
 @end
