@@ -52,19 +52,19 @@ typedef void (^MABYoutubeResponseBlock)(NSMutableArray * array, NSError * error,
 - (NSString *)ChannelURLforId:(NSString *)channelId withMaxResults:(NSInteger)max;
 
 
-- (void)LISTActivitiesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
+- (void)LISTActivitiesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTChannelSectionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
-- (void)LISTChannelsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
+- (void)LISTChannelsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTGuideCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void)LISTLanguagesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void)LISTRegionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
-- (void)fetchWithUrl:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
-- (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
-- (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
+- (void)fetchWithUrl:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
+- (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
+- (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
-- (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
-- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
-- (void)LISTVideosForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *, NSString *))handler;
+- (void)LISTVideosForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
+- (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
+- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 
 
 - (void)LIKEVideo:(NSString *)videoId andHandler:(void (^)(NSError *, BOOL))handler;

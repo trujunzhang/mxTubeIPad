@@ -120,7 +120,7 @@ static GYoutubeHelper * instance = nil;
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTermWithParameters:info.parameters
                                                                                 withMaxResults:search_maxResults];
 
-   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSObject *) = ^(NSMutableArray * array, NSError * error, NSObject * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);
           [info putNextPageToken:pageToken];
@@ -179,7 +179,7 @@ static GYoutubeHelper * instance = nil;
 
    [[MABYT3_APIRequest sharedInstance]
     LISTVideosForURL:urlStr
-          andHandler:^(NSMutableArray * results, NSError * error, NSString * pageToken) {
+          andHandler:^(NSMutableArray * results, NSError * error, NSObject * pageToken) {
               if (!error) {
                  completion(results, nil);
               }
@@ -454,7 +454,7 @@ static GYoutubeHelper * instance = nil;
    };
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ChannelURLWithParameters:parameters
                                                                      withMaxResults:search_maxResults];
-   void (^finishedHandler)(NSMutableArray *, NSError *) = ^(NSMutableArray * array, NSError * error) {
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSObject *) = ^(NSMutableArray * array, NSError * error, NSObject * pageToken) {
        if (!error) {
           YTYouTubeMABChannel * mabyt3Channel = array[0];
           NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
@@ -573,7 +573,7 @@ static GYoutubeHelper * instance = nil;
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:info.channelId
                                                                               withParameters:info.parameters
                                                                               withMaxResults:search_maxResults];
-   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSObject *) = ^(NSMutableArray * array, NSError * error, NSObject * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);
           [info putNextPageToken:pageToken];
@@ -597,7 +597,7 @@ static GYoutubeHelper * instance = nil;
    // 01: Search videoIds by queryTerm
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideoWithParameters:info.parameters
                                                                            withMaxResults:search_maxResults];
-   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+   void (^finishedHandler)(NSMutableArray *, NSError *, NSObject *) = ^(NSMutableArray * array, NSError * error, NSObject * pageToken) {
        if (!error) {
           NSLog(@"nextPageToken = %@", pageToken);
           [info putNextPageToken:pageToken];
