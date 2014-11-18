@@ -14,11 +14,23 @@
 
 @implementation ImageCacheImplement
 
-+ (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder {
++ (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)resize {
    [ImageCacheImplement CacheWithImageView:node
                                        key:key
                                    withUrl:url
                            withPlaceholder:placeHolder
+                                completion:^(UIImage * downloadedImage) {
+                                    UIImage * image = [downloadedImage resizedImageToSize:resize];
+                                    node.image = image;
+                                }];
+}
+
+
++ (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder {
+   [ImageCacheImplement CacheWithImageView:node
+                                       key:key
+                                   withUrl:url
+                           withPlaceholder:placeholder
                                 completion:^(UIImage * downloadedImage) {
                                     node.image = downloadedImage;
                                 }];
@@ -40,7 +52,7 @@
 }
 
 
-+ (void)CacheWithImageView:(UIImageView *)view key:(id)key withUrl:(id)url withPlaceholder:(UIImage *)placeHolder resize:(CGSize)resize {
++ (void)CacheWithImageView:(UIImageView *)view key:(id)key withUrl:(id)url withPlaceholder:(UIImage *)placeholder resize:(CGSize)resize {
    NSString * imageKey = key;
    UIImage * cacheImage = [[JMImageCache sharedCache] cachedImageForKey:imageKey];
    if (cacheImage) {
@@ -48,19 +60,19 @@
       return;
    }
 
-   view.image = placeHolder;
+   view.image = placeholder;
    [ImageCacheImplement CacheWithImageView:view
                                        key:key
                                    withUrl:url
-                           withPlaceholder:placeHolder
+                           withPlaceholder:placeholder
                                 completion:^(UIImage * downloadedImage) {
                                     view.image = [downloadedImage resizedImageToSize:resize];
                                 }];
 }
 
 
-+ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder withCompletionBlock:(CacheCompletionBlock)completionBlock {
-   view.image = placeHolder;
++ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder withCompletionBlock:(CacheCompletionBlock)completionBlock {
+   view.image = placeholder;
 
    [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
                            completionBlock:^(UIImage * downloadedImage) {

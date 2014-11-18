@@ -14,6 +14,9 @@
 #import "ImageViewEffect.h"
 
 
+CGFloat thumbnailHeight = 142;
+
+
 @interface YTGridVideoCellNode () {
    CGSize _kittenSize;
 
@@ -106,7 +109,6 @@
 
 - (void)layout {
    // 1
-   CGFloat thumbnailHeight = 142;
    _imageNode.frame = CGRectMake(0, 0, _kittenSize.width, thumbnailHeight);
 
    // 2
@@ -135,6 +137,7 @@
                                        key:video.identifier
                                    withUrl:videoThumbnailsUrl
                            withPlaceholder:placeholder
+                                      size:CGSizeMake(_kittenSize.width, thumbnailHeight)
    ];
 
    // configure the button
