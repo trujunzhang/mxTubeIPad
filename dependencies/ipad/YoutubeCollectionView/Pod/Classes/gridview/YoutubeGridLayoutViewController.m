@@ -37,7 +37,7 @@
    NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
    NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
 
-//   [self.nextPageDelegate executeNextPageTask]; // test
+   [self.nextPageDelegate executeNextPageTask]; // test
 }
 
 
@@ -87,8 +87,7 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   int moreCount = [[self getYoutubeRequestInfo] hasLoadingMore] ? 1 : 0;
-   return [self getYoutubeRequestInfo].videoList.count + moreCount;
+   return [self getYoutubeRequestInfo].videoList.count;
 }
 
 
@@ -100,15 +99,7 @@
 - (ASCellNode *)collectionView:(ASCollectionView *)collectionView nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
    ASCellNode * node;
 
-   NSUInteger count = [self getYoutubeRequestInfo].videoList.count;
-
-   if ([[self getYoutubeRequestInfo] hasLoadingMore] && indexPath.row == count) {
-      node = [[ASCellNode alloc] init];
-      node.backgroundColor = [UIColor redColor];
-      [self.nextPageDelegate executeNextPageTask]; // test
-   } else {
-      node = [self getCellNodeAtIndexPath:indexPath];
-   }
+   node = [self getCellNodeAtIndexPath:indexPath];
 
    return node;
 }
@@ -132,6 +123,8 @@
 
    return node;
 }
+
+
 
 
 @end
