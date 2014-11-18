@@ -265,9 +265,9 @@ static GYoutubeHelper * instance = nil;
        if (self.delegate)
           [self.delegate FetchYoutubeChannelCompletion:info];
 
-       [self fetchChannelThumbnailsWithChannelId:channel.identifier
-                                      completion:nil
-                                    errorHandler:nil];
+//       [self fetchChannelThumbnailsWithChannelId:channel.identifier
+//                                      completion:nil
+//                                    errorHandler:nil];
 
 //       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
 //                                         tagType:kFavoritesTag
@@ -459,7 +459,7 @@ static GYoutubeHelper * instance = nil;
           YTYouTubeMABChannel * mabyt3Channel = array[0];
           NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
           [YoutubeParser AppendThumbnailWithChannelId:channelId withThumbnailUrl:thumbnailUrl];
-          NSString * debug = @"debug";
+          completion(nil, thumbnailUrl);
        }
        else {
           if (error) {

@@ -94,8 +94,16 @@
 
    // 2
    NSString * channelIdentifier = video.snippet.channelId;
+
+   YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
+       [ImageCacheImplement CacheWithImageView:_channelImageNode
+                                           key:[YoutubeParser getThumbnailKeyWithChannelId:channelIdentifier]
+                                       withUrl:respObject
+                               withPlaceholder:nil
+       ];
+   };
    [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelIdentifier
-                                                          completion:nil
+                                                          completion:completionBlock
                                                         errorHandler:nil];
 
 }
