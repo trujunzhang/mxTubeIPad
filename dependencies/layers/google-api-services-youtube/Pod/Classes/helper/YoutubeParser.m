@@ -58,4 +58,10 @@
 + (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideo *)video {
    return video.snippet.thumbnails.medium.url;
 }
+
+
++ (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel {
+   YTYouTubeMABThumbmail * thumbnail = channel.snippet.thumbnails[@"default"];
+   return thumbnail.url;
+}
 @end

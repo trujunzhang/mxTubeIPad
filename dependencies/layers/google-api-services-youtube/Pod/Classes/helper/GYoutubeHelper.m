@@ -265,6 +265,10 @@ static GYoutubeHelper * instance = nil;
        if (self.delegate)
           [self.delegate FetchYoutubeChannelCompletion:info];
 
+       [self fetchChannelThumbnailsWithChannelId:channel.identifier
+                                      completion:nil
+                                    errorHandler:nil];
+
 //       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
 //                                         tagType:kFavoritesTag
 //                                      completion:nil
@@ -439,13 +443,6 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchChannelThumbnailsWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   YTServiceYouTube * service = self.youTubeService;
-
-   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"snippet"];
-//   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
-//   query.identifier = channelId;
-//   query.fields = @"items/snippet(thumbnails)";
-
    NSDictionary * parameters = @{
     @"part" : @"snippet",
     @"id" : channelId,
@@ -453,8 +450,10 @@ static GYoutubeHelper * instance = nil;
    };
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ChannelURLWithParameters:parameters
                                                                      withMaxResults:search_maxResults];
-   void (^finishedHandler)(NSMutableArray *, NSError *, NSString *) = ^(NSMutableArray * array, NSError * error, NSString * pageToken) {
+   void (^finishedHandler)(NSMutableArray *, NSError *) = ^(NSMutableArray * array, NSError * error) {
        if (!error) {
+          YTYouTubeMABChannel * mabyt3Channel = array[0];
+          NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
           NSString * debug = @"debug";
        }
        else {

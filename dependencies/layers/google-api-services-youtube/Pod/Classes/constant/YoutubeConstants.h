@@ -49,9 +49,11 @@
 
 // module
 #import "MABYT3_Video.h"
+#import "MABYT3_Thumbnail.h"
 #import "MABYT3_ThumbnailDetails.h"
 #import "MABYT3_SearchItem.h"
 #include "MABYT3_Activity.h"
+#import "MABYT3_Channel.h"
 
 
 
@@ -95,10 +97,14 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 #define YTYouTubeChannel  GTLYouTubeChannel
 #define YTYouTubeSubscription  GTLYouTubeSubscription
 #define YTYouTubePlaylistItem  GTLYouTubePlaylistItem
+#define YTYouTubeMABThumbmail  MABYT3_Thumbnail
+#define YTYouTubeMABChannel  MABYT3_Channel
+
 
 //
 #define YTServiceYouTube  GTLServiceYouTube
 #define YTOAuth2Authentication  GTMOAuth2Authentication
+
 
 
 

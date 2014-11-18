@@ -24,4 +24,5 @@
 + (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;
 + (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel;
 
++ (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel;
 @end
