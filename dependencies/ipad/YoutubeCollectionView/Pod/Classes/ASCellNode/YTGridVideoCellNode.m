@@ -21,7 +21,8 @@
    ASDisplayNode * _infoContainerNode;
 
    ASImageNode * _channelImageNode;
-   ASTextNode * _titleNode;
+   ASTextNode * _videoTitleNode;
+   ASTextNode * _channelTitleNode;
 }
 @end
 
@@ -29,7 +30,7 @@
 @implementation YTGridVideoCellNode
 
 
-- (instancetype)initWithCellNodeOfSize:(CGSize)size {
+- (instancetype)initWithCellNodeOfSize:(CGSize)size { //242,242
    if (!(self = [super init]))
       return nil;
 
@@ -57,8 +58,12 @@
    [_infoContainerNode addSubnode:_channelImageNode];
 
    // 2.2
-   _titleNode = [[ASTextNode alloc] init];
-   [_infoContainerNode addSubnode:_titleNode];
+   _videoTitleNode = [[ASTextNode alloc] init];
+   [_infoContainerNode addSubnode:_videoTitleNode];
+
+   // 2.3
+   _channelTitleNode = [[ASTextNode alloc] init];
+   [_infoContainerNode addSubnode:_channelTitleNode];
 }
 
 
@@ -85,13 +90,13 @@
 
    // 2
    CGFloat infoContainerHeight = _kittenSize.height - thumbnailHeight;
-   _infoContainerNode.frame = CGRectMake(0, thumbnailHeight + 4, _kittenSize.width, infoContainerHeight - 4);
+   _infoContainerNode.frame = CGRectMake(0, thumbnailHeight + 8, _kittenSize.width, infoContainerHeight - 4);
 
    // 2.1
-   _channelImageNode.frame = CGRectMake(0, 0, 32, 32);
-
-   // 2.2
-   _titleNode.frame = CGRectMake(40, 0, 102, 32);
+   CGFloat titleLeftX = 68;
+   _channelImageNode.frame = CGRectMake(0, 0, titleLeftX - 8, titleLeftX - 8);
+   _videoTitleNode.frame = CGRectMake(titleLeftX, 0, 114, 32);
+   _channelTitleNode.frame = CGRectMake(titleLeftX, 32, 114, 32);
 }
 
 
@@ -131,9 +136,11 @@
                                                         errorHandler:nil];
 
    // 2.2
-   _titleNode.attributedString = [[NSAttributedString alloc] initWithString:videoTitleValue
-                                                                 attributes:[self textStyle]];
+   _videoTitleNode.attributedString = [[NSAttributedString alloc] initWithString:videoTitleValue
+                                                                      attributes:[self textStyle]];
 
+   _channelTitleNode.attributedString = [[NSAttributedString alloc] initWithString:channelTitleValue
+                                                                        attributes:[self textStyle]];
 }
 
 
