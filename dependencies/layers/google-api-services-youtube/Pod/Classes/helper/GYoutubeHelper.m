@@ -442,7 +442,11 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchChannelThumbnailsWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+- (NSString *)fetchChannelThumbnailsWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   NSString * thumbnailUrl = [YoutubeParser checkAndAppendThumbnailWithChannelId:channelId];
+   if (thumbnailUrl) {
+      return thumbnailUrl;
+   }
    NSDictionary * parameters = @{
     @"part" : @"snippet",
     @"id" : channelId,
@@ -454,6 +458,7 @@ static GYoutubeHelper * instance = nil;
        if (!error) {
           YTYouTubeMABChannel * mabyt3Channel = array[0];
           NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
+          [YoutubeParser AppendThumbnailWithChannelId:channelId withThumbnailUrl:thumbnailUrl];
           NSString * debug = @"debug";
        }
        else {

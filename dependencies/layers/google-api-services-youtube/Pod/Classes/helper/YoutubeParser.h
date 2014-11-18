@@ -9,6 +9,8 @@
 #import "YoutubeConstants.h"
 
 
+
+
 @interface YoutubeParser : NSObject
 
 + (NSString *)getVideoIdsByActivityList:searchResultList;
@@ -25,4 +27,7 @@
 + (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel;
 
 + (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel;
++ (NSString *)getThumbnailKeyWithChannelId:(NSString *)channelId;
++ (NSString *)checkAndAppendThumbnailWithChannelId:(NSString *)channelId;
++ (void)AppendThumbnailWithChannelId:(NSString *)channelId withThumbnailUrl:(NSString *)thumbnailUrl;
 @end

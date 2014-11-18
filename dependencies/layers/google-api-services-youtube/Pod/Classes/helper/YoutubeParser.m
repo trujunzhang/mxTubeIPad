@@ -9,7 +9,22 @@
 #import "YoutubeParser.h"
 
 
+NSMutableDictionary * channelIdThumbnailDictionary;
+
+
+@interface YoutubeParser ()
+
+@end
+
+
 @implementation YoutubeParser
+
++ (NSMutableDictionary *)getChannelIdThumbnailDictionary {
+   if (channelIdThumbnailDictionary == nil) {
+      channelIdThumbnailDictionary = [[NSMutableDictionary alloc] init];
+   }
+   return channelIdThumbnailDictionary;
+}
 
 
 + (NSString *)getVideoIdsByActivityList:searchResultList {
@@ -63,5 +78,29 @@
 + (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel {
    YTYouTubeMABThumbmail * thumbnail = channel.snippet.thumbnails[@"default"];
    return thumbnail.url;
+}
+
+
++ (NSString *)getThumbnailKeyWithChannelId:(NSString *)channelId {
+   return [NSString stringWithFormat:@"_cache_key_%@", channelId];
+}
+
+
++ (NSString *)checkAndAppendThumbnailWithChannelId:(NSString *)channelId {
+   NSMutableDictionary * dictionary = [YoutubeParser getChannelIdThumbnailDictionary];
+   NSString * value = [dictionary objectForKey:channelId];
+   if (value) {
+      return value;
+   }
+//   else {
+//      [dictionary setValue:nil forKey:keyWithChannelId];
+//   }
+   return nil;
+}
+
+
++ (void)AppendThumbnailWithChannelId:(NSString *)channelId withThumbnailUrl:(NSString *)thumbnailUrl {
+   NSMutableDictionary * dictionary = [YoutubeParser getChannelIdThumbnailDictionary];
+   [dictionary setValue:thumbnailUrl forKey:channelId];
 }
 @end
