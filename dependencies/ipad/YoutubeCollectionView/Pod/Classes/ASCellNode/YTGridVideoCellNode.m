@@ -144,19 +144,9 @@
         forControlEvents:ASControlNodeEventTouchUpInside];
 
    // 2.1
-   NSString * channelIdentifier = video.snippet.channelId;
+   NSString * channelId = video.snippet.channelId;
 
-   YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
-       [ImageViewEffect setEffectImage:_channelImageNode.view withCornerRadius:10.0f];
-       [ImageCacheImplement CacheWithImageView:_channelImageNode
-                                           key:[YoutubeParser getThumbnailKeyWithChannelId:channelIdentifier]
-                                       withUrl:respObject
-                               withPlaceholder:nil
-       ];
-   };
-   [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelIdentifier
-                                                          completion:completionBlock
-                                                        errorHandler:nil];
+   [self showChannelThumbnail:channelId];
 
    // 2.2
    _videoTitleNode.attributedString = [[NSAttributedString alloc] initWithString:videoTitleValue
@@ -164,6 +154,21 @@
 
    _channelTitleNode.attributedString = [[NSAttributedString alloc] initWithString:channelTitleValue
                                                                         attributes:[self textStyleForChannelTitle]];
+}
+
+
+- (void)showChannelThumbnail:(NSString *)channelId {
+   YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
+       [ImageViewEffect setEffectImage:_channelImageNode.view withCornerRadius:10.0f];
+       [ImageCacheImplement CacheWithImageView:_channelImageNode
+                                           key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
+                                       withUrl:respObject
+                               withPlaceholder:nil
+       ];
+   };
+   [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
+                                                          completion:completionBlock
+                                                        errorHandler:nil];
 }
 
 
