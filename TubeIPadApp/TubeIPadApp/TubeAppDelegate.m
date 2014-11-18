@@ -35,7 +35,7 @@
 @implementation TubeAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   [ImageCacheImplement removeAllObjects];
+//   [ImageCacheImplement removeAllObjects];
    [GYoutubeHelper getInstance].delegate = self;
 
    //1

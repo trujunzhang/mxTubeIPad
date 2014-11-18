@@ -61,7 +61,8 @@
 
 
 - (void)refreshPerform {
-   [self.nextPageDelegate executeRefreshTask];
+//   [self.nextPageDelegate executeRefreshTask];//used
+   [self.nextPageDelegate executeNextPageTask];//test
    [self.refreshControl endRefreshing];
 }
 
@@ -193,6 +194,7 @@
 - (void)fetchSuggestionListByPageToken {
    [self searchByPageToken];
 }
+
 @end
 
 
