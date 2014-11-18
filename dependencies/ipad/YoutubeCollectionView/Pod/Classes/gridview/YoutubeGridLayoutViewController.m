@@ -102,7 +102,7 @@
 
    NSUInteger count = [self getYoutubeRequestInfo].videoList.count;
 
-   if (indexPath.row == count) {
+   if ([[self getYoutubeRequestInfo] hasLoadingMore] && indexPath.row == count) {
       node = [[ASCellNode alloc] init];
       node.backgroundColor = [UIColor redColor];
       [self.nextPageDelegate executeNextPageTask]; // test
