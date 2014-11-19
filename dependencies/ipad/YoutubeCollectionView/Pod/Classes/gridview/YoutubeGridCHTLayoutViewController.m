@@ -195,7 +195,7 @@
    CGFloat usableSpace = [self usableSpace];
    CGFloat cellLength = usableSpace / self.layout.columnCount;
 
-   CGSize size = CGSizeMake(cellLength, cellLength);
+   CGSize size = CGSizeMake(cellLength, cellLength + 12);
    return size;
 }
 
