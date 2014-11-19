@@ -30,4 +30,6 @@
 + (NSString *)getThumbnailKeyWithChannelId:(NSString *)channelId;
 + (NSString *)checkAndAppendThumbnailWithChannelId:(NSString *)channelId;
 + (void)AppendThumbnailWithChannelId:(NSString *)channelId withThumbnailUrl:(NSString *)thumbnailUrl;
++ (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs;
++ (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs;
 @end

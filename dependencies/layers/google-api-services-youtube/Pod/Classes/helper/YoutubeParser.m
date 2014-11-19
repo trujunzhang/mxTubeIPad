@@ -103,4 +103,24 @@ NSMutableDictionary * channelIdThumbnailDictionary;
    NSMutableDictionary * dictionary = [YoutubeParser getChannelIdThumbnailDictionary];
    [dictionary setValue:thumbnailUrl forKey:channelId];
 }
+
+
++ (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs {
+   return [YoutubeParser timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d", timeSecs]];
+}
+
+
++ (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs {
+   int totalSeconds = [timeSecs intValue];
+
+   int seconds = totalSeconds % 60;
+   int minutes = (totalSeconds / 60) % 60;
+   int hours = totalSeconds / 3600;
+   if (hours == 0) {
+      return [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+   }
+
+   return [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, seconds];
+}
+
 @end

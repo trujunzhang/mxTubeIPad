@@ -13,6 +13,7 @@
 #import "YTGridViewVideoCell.h"
 #import "ImageViewEffect.h"
 #import "UIView+WhenTappedBlocks.h"
+#import "YoutubeParser.h"
 
 
 @interface YTGridViewVideoCell ()
@@ -61,14 +62,11 @@
    imageNode.frame = self.videoThumbnailsContainer.bounds;
    [self.videoThumbnailsContainer addSubview:imageNode.view];
 
-//   [ImageViewEffect setEffectImage:self.videoThumbnails withCornerRadius:70.0f];
-
    [ImageCacheImplement CacheWithImageView:imageNode
                                        key:video.identifier
                                    withUrl:videoThumbnailsUrl
                            withPlaceholder:image
-                                completion:^(UIImage * image) {
-                                }];
+   ];
 
    // configure the button
    imageNode.userInteractionEnabled = YES; // opt into touch handling
@@ -88,36 +86,20 @@
 
    // 5
    NSUInteger text = video.contentDetails.duration;
-//   NSLog(@" %d= text", text);
-   NSString * string = [self timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d",
-                                                                                   video.contentDetails.duration]];
+   NSString * string = [YoutubeParser timeFormatConvertToSecondsWithInteger:video.contentDetails.duration];
 
 
    // 6
-   self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(1, 1);
-   self.videoInfoContainer.layer.shadowOpacity = 0.8;
-   self.videoInfoContainer.layer.shadowRadius = 1.0;
+//   self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(1, 1);
+//   self.videoInfoContainer.layer.shadowOpacity = 0.8;
+//   self.videoInfoContainer.layer.shadowRadius = 1.0;
 
    // 7
-   self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-   self.layer.shadowOffset = CGSizeMake(-2, -2);
-   self.layer.shadowOpacity = 1;
-   self.layer.shadowRadius = 1.0;
-}
-
-
-- (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs {
-   int totalSeconds = [timeSecs intValue];
-
-   int seconds = totalSeconds % 60;
-   int minutes = (totalSeconds / 60) % 60;
-   int hours = totalSeconds / 3600;
-   if (hours == 0) {
-      return [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-   }
-
-   return [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, seconds];
+//   self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//   self.layer.shadowOffset = CGSizeMake(-2, -2);
+//   self.layer.shadowOpacity = 1;
+//   self.layer.shadowRadius = 1.0;
 }
 
 
