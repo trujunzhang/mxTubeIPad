@@ -59,6 +59,7 @@
 
 // common
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
+@class YoutubeGridLayoutViewController;
 
 #endif
 
@@ -117,6 +118,8 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 #define YTYouTubeSearchResult  MABYT3_SearchItem
 
 #define YTYouTubeActivity  MABYT3_Activity
+
+#define YTCollectionViewController YoutubeGridLayoutViewController
 
 
 
