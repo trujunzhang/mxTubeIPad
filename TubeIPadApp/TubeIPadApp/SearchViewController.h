@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import <YoutubeCollectionView/YoutubeGridLayoutViewController.h>
+#import "CollectionConstant.h"
 
 
-
-
-@interface SearchViewController : YoutubeGridLayoutViewController
+@interface SearchViewController : YTCollectionViewController
 
 @end
 

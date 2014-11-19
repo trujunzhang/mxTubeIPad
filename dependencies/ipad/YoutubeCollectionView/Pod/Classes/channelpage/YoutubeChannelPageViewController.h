@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CollectionConstant.h"
 
 @interface YoutubeChannelPageViewController : UIViewController
 

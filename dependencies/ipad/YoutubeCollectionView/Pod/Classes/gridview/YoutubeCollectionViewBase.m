@@ -6,14 +6,12 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "YoutubeGridLayoutViewController.h"
-#import "YoutubeCollectionViewBase.h"
-#import <google-api-services-youtube/GYoutubeHelper.h>
-#import "GYoutubeRequestInfo.h"
 
-//NSString * lastSearch = @"call of duty advanced warfare";
-//NSString * lastSearch = @"sketch 3";
-//NSString * lastSearch = nil;
+
+
+#import "YoutubeCollectionViewBase.h"
+#import "GYoutubeRequestInfo.h"
+#import "GYoutubeHelper.h"
 
 
 @interface YoutubeCollectionViewBase ()

@@ -12,10 +12,7 @@
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "LeftMenuItemTree.h"
-#import "YoutubeConstants.h"
 #import "ImageViewEffect.h"
-#import "GYoutubeAuthUser.h"
-#import "UIImage+Resize.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>

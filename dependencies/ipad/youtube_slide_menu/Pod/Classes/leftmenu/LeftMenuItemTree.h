@@ -19,12 +19,12 @@ typedef NS_ENUM (NSUInteger, LeftMenuItemTreeType) {
 @interface LeftMenuItemTree : NSObject
 
 @property(nonatomic, copy) NSString * title;
-@property(nonatomic) enum LeftMenuItemTreeType itemType;
+@property(nonatomic, assign) LeftMenuItemTreeType itemType;
 @property(nonatomic, strong) NSArray * rowsArray;
 @property(nonatomic) BOOL hideTitle;
 @property(nonatomic) BOOL remoteImage;
 @property(nonatomic, copy) NSString * cellIdentifier;
 
 
-- (id)initWithTitle:(NSString *)string itemType:(enum LeftMenuItemTreeType)type rowsArray:(NSArray *)array hideTitle:(BOOL)title remoteImage:(BOOL)image cellIdentifier:(NSString *)identifier;
+- (id)initWithTitle:(NSString *)string itemType:(LeftMenuItemTreeType)type rowsArray:(NSArray *)array hideTitle:(BOOL)title remoteImage:(BOOL)image cellIdentifier:(NSString *)identifier;
 @end

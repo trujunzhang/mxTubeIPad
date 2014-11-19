@@ -145,11 +145,9 @@
 #pragma mark LeftMenuViewBaseDelegate
 
 
-- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType {
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType {
    [self.subscriptionsViewController startToggleLeftMenuWithTitle:title withType:playlistItemsType];
 }
-
-
 
 
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription withTitle:(NSString *)title {

@@ -17,7 +17,7 @@
 @implementation LeftMenuItemTree
 
 
-- (instancetype)initWithTitle:(NSString *)title itemType:(enum LeftMenuItemTreeType)type rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage cellIdentifier:(NSString *)cellIdentifier {
+- (instancetype)initWithTitle:(NSString *)title itemType:(LeftMenuItemTreeType)type rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage cellIdentifier:(NSString *)cellIdentifier {
    self = [super init];
    if (self) {
       self.title = title;

@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "YoutubeCollectionViewBase.h"
 
-@protocol IpadGridViewCellDelegate;
 @class KRLCollectionViewGridLayout;
+@protocol IpadGridViewCellDelegate;
 
 
 @interface YoutubeGridLayoutViewController : YoutubeCollectionViewBase

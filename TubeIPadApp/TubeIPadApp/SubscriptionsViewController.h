@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <YoutubeCollectionView/IpadGridViewCell.h>
+#import "GYoutubeRequestInfo.h"
 @class LeftMenuItemTree;
 
 
@@ -16,7 +17,7 @@
 @property(nonatomic, strong) UIBarButtonItem * revealButtonItem;
 
 
-- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType;
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType;
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(GTLYouTubeSubscription *)subscription withTitle:(NSString *)title;
 @end
 

@@ -9,26 +9,21 @@
 
 #import "SubscriptionsViewController.h"
 
-
 #import "VideoDetailViewControlleriPad.h"
 
 #import "LeftRevealHelper.h"
-#import "LeftMenuItemTree.h"
-
-//#import "YoutubeGridLayoutViewController.h"
 #import "YoutubeChannelPageViewController.h"
-#import "YoutubeGridLayoutViewController.h"
 
 
 @interface SubscriptionsViewController ()<IpadGridViewCellDelegate, YoutubeCollectionNextPageDelegate>
 
-@property(nonatomic, strong) YoutubeGridLayoutViewController * youtubeGridLayoutViewController;
+@property(nonatomic, strong) YTCollectionViewController * youtubeGridLayoutViewController;
 
 @property(nonatomic, strong) YoutubeChannelPageViewController * youtubeChannelPageViewController;
 
 @property(nonatomic, strong) UIViewController * rootViewController;
 
-@property(nonatomic) enum YTPlaylistItemsType playlistItemsType;
+@property(nonatomic, assign) YTPlaylistItemsType playlistItemsType;
 @end
 
 
@@ -72,7 +67,7 @@
 
 //- (void)setupRootController {
 //// 2
-//   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
+//   self.youtubeGridLayoutViewController = [[YTCollectionViewController alloc] init];
 //   self.youtubeGridLayoutViewController.title = @"Subscriptions";
 //   self.youtubeGridLayoutViewController.delegate = self;
 //   self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
@@ -118,9 +113,9 @@
 #pragma mark Left menu events
 
 
-- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType {
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType {
    // 1
-   self.youtubeGridLayoutViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.youtubeGridLayoutViewController = [[YTCollectionViewController alloc] init];
    self.youtubeGridLayoutViewController.title = title;
    self.youtubeGridLayoutViewController.delegate = self;
    self.youtubeGridLayoutViewController.nextPageDelegate = self;

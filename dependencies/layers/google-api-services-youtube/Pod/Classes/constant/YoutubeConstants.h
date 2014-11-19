@@ -59,19 +59,8 @@
 
 // common
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
-#import "YoutubeGridLayoutViewController.h"
 
 #endif
-
-
-//static NSString * apiKey = @"AIzaSyBd9kf5LB41bYWnxI3pfoxHJ2njRvmAA90";
-//static NSString * kMyClientID = @"632947002586-hsu569tme6lt8635vvoofi5mnkqfkqus.apps.googleusercontent.com";
-//static NSString * kMyClientSecret = @"dHWxjaetid5ckoVMzp0LmzJt";
-//static NSString * scope = @"https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtubepartner-channel-audit https://www.googleapis.com/auth/youtube.upload";
-
-static NSString * kKeychainItemName = @"mxyoutube";
-
-static NSUInteger search_maxResults = 15;
 
 
 // module
@@ -102,9 +91,6 @@ static NSUInteger search_maxResults = 15;
 #define YTYouTubeSearchResult  MABYT3_SearchItem
 
 #define YTYouTubeActivity  MABYT3_Activity
-
-#define YTCollectionViewController YoutubeGridLayoutViewController
-
 
 
 

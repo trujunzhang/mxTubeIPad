@@ -6,12 +6,9 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <YoutubeCollectionView/YoutubeGridLayoutViewController.h>
 #import "YoutubeChannelPageViewController.h"
 #import "YoutubeChannelTopCell.h"
 #import "WHTopTabBarController.h"
-#import "GYoutubeRequestInfo.h"
-#import "YoutubeCollectionViewBase.h"
 #import "YoutubeParser.h"
 
 
@@ -27,11 +24,11 @@
 
 @property(nonatomic, strong) NSMutableArray * defaultTableControllers;
 
-@property(nonatomic, strong) YoutubeGridLayoutViewController * selectedController;
+@property(nonatomic, strong) YTCollectionViewController * selectedController;
 
-@property(nonatomic, strong) YoutubeGridLayoutViewController * firstViewController;
-@property(nonatomic, strong) YoutubeGridLayoutViewController * secondViewController;
-@property(nonatomic, strong) YoutubeGridLayoutViewController * thirdViewController;
+@property(nonatomic, strong) YTCollectionViewController * firstViewController;
+@property(nonatomic, strong) YTCollectionViewController * secondViewController;
+@property(nonatomic, strong) YTCollectionViewController * thirdViewController;
 
 @end
 
@@ -75,7 +72,7 @@
 
    self.defaultTableControllers = [[NSMutableArray alloc] init];
    for (NSString * title in [GYoutubeRequestInfo getChannelPageSegmentTitlesArray]) {
-      YoutubeGridLayoutViewController * controller = [[YoutubeGridLayoutViewController alloc] init];
+      YTCollectionViewController * controller = [[YTCollectionViewController alloc] init];
       controller.delegate = self.delegate;
       controller.nextPageDelegate = self;
       controller.title = title;
@@ -115,7 +112,7 @@
 }
 
 
-- (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(YTSegmentItemType)type {
+- (void)fetchListWithController:(YTCollectionViewController *)controller withType:(YTSegmentItemType)type {
    self.selectedController = controller;
    [self.selectedController fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }

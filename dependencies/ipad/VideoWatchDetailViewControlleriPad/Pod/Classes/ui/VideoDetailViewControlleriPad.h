@@ -12,11 +12,10 @@
 
 #import <MediaPlayer/MediaPlayer.h>
 #import <google-api-services-youtube/YoutubeConstants.h>
+#import "CollectionConstant.h"
 
 @class WHTopTabBarController;
-
 @protocol IpadGridViewCellDelegate;
-
 
 
 @interface VideoDetailViewControlleriPad : UIViewController

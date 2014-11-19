@@ -169,7 +169,7 @@
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
    NSArray * line = menuItemTree.rowsArray[row];
 
-   enum LeftMenuItemTreeType itemType = menuItemTree.itemType;
+   LeftMenuItemTreeType itemType = menuItemTree.itemType;
    switch (itemType) {
       case LMenuTreeUser:
          [self.delegate startToggleLeftMenuWithTitle:line[0] withType:[(line[2]) intValue]];

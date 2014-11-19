@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "YoutubeConstants.h"
+#import "GYoutubeRequestInfo.h"
+
 @class GYoutubeAuthUser;
 @class YoutubeAuthInfo;
 @class LeftMenuItemTree;
@@ -15,7 +16,7 @@
 
 @protocol LeftMenuViewBaseDelegate<NSObject>
 @optional
-- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(enum YTPlaylistItemsType)playlistItemsType;
+- (void)startToggleLeftMenuWithTitle:(NSString *)title withType:(YTPlaylistItemsType)playlistItemsType;
 - (void)endToggleLeftMenuEventForChannelPageWithSubscription:(YTYouTubeSubscription *)subscription withTitle:(id)title;
 @end
 
