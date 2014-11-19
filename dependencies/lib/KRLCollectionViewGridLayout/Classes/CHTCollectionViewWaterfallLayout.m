@@ -331,9 +331,9 @@ const NSInteger unionSize = 20;
          NSUInteger columnIndex = [self nextColumnIndexForItem:idx inSection:section];
          CGFloat xOffset = sectionInset.left + (itemWidth + self.minimumColumnSpacing) * columnIndex;
          CGFloat yOffset = [self.columnHeights[section][columnIndex] floatValue];
-
-         CGSize itemSize = [self cellSize];
-
+         CGSize itemSize = [self.delegate collectionView:self.collectionView
+                                                  layout:self
+                                  sizeForItemAtIndexPath:indexPath];
          CGFloat itemHeight = 0;
          if (itemSize.height > 0 && itemSize.width > 0) {
             itemHeight = floorf(itemSize.height * itemWidth / itemSize.width);
@@ -394,29 +394,17 @@ const NSInteger unionSize = 20;
    idx = 0;
    NSInteger itemCounts = [self.allItemAttributes count];
    while (idx < itemCounts) {
-      CGRect rect1 = ((UICollectionViewLayoutAttributes *) self.allItemAttributes[idx]).frame;
-      idx = MIN(idx + unionSize, itemCounts) - 1;
-      CGRect rect2 = ((UICollectionViewLayoutAttributes *) self.allItemAttributes[idx]).frame;
-      [self.unionRects addObject:[NSValue valueWithCGRect:CGRectUnion(rect1, rect2)]];
-      idx++;
+      CGRect unionRect = ((UICollectionViewLayoutAttributes *) self.allItemAttributes[idx]).frame;
+      NSInteger rectEndIndex = MIN(idx + unionSize, itemCounts);
+
+      for (NSInteger i = idx + 1; i < rectEndIndex; i++) {
+         unionRect = CGRectUnion(unionRect, ((UICollectionViewLayoutAttributes *) self.allItemAttributes[i]).frame);
+      }
+
+      idx = rectEndIndex;
+
+      [self.unionRects addObject:[NSValue valueWithCGRect:unionRect]];
    }
-}
-
-
-- (CGFloat)usableSpace {
-   return (self.collectionViewContentSize.width
-    - self.sectionInset.left
-    - self.sectionInset.right
-    - ((self.columnCount - 1) * 10));
-}
-
-
-- (CGSize)cellSize {
-   CGFloat usableSpace = [self usableSpace];
-   CGFloat cellLength = usableSpace / self.columnCount;
-
-//   return CGSizeMake(cellLength, cellLength * (1.0 / 1));
-   return CGSizeMake(cellLength, cellLength);
 }
 
 

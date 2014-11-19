@@ -16,7 +16,7 @@
 #define DEFAULT_LOADING_MORE_HEIGHT 140;
 
 
-@interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
+@interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
 @property(strong, nonatomic) ASCollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
 @end
@@ -46,8 +46,14 @@
 
       self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
       self.layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
-      self.layout.minimumColumnSpacing = 10;
-      self.layout.minimumInteritemSpacing = 10;
+      self.layout.minimumColumnSpacing = 20;
+      self.layout.minimumInteritemSpacing = 30;
+
+//      self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+//      self.layout.headerHeight = 15;
+//      self.layout.footerHeight = 10;
+//      self.layout.minimumColumnSpacing = 20;
+//      self.layout.minimumInteritemSpacing = 30;
 
       self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.layout];
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -142,6 +148,31 @@
    }
 
    return reusableView;
+}
+
+
+#pragma mark - CHTCollectionViewDelegateWaterfallLayout
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+   return [self cellSize];
+}
+
+
+- (CGSize)cellSize {
+   CGFloat usableSpace = [self usableSpace];
+   CGFloat cellLength = usableSpace / self.layout.columnCount;
+
+   CGSize size = CGSizeMake(cellLength, cellLength);
+   return size;
+}
+
+
+- (CGFloat)usableSpace {
+   return (self.layout.collectionViewContentSize.width
+    - self.layout.sectionInset.left
+    - self.layout.sectionInset.right
+    - ((self.layout.columnCount - 1) * self.layout.minimumColumnSpacing));
 }
 
 
