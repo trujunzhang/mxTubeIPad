@@ -54,7 +54,7 @@
       self.layout.minimumInteritemSpacing = 30;
 
 
-      self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.layout];
+      self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
       self.collectionView.dataSource = self;
       self.collectionView.delegate = self;
@@ -82,6 +82,7 @@
 
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
+   _collectionView.frame = self.view.bounds;
    [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
 }
 
@@ -122,6 +123,18 @@
 
    return viewCell;
 }
+
+
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
+//   UICollectionViewCell * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
+//                                                                                    forIndexPath:indexPath];
+//   ASCellNode * node = [self getCellNodeAtIndexPath:indexPath];
+//   UIView * view = node.view;
+//   [viewCell addSubview:view];
+//
+//   return viewCell;
+//}
 
 
 - (ASCellNode *)getCellNodeAtIndexPath:(NSIndexPath *)indexPath {
