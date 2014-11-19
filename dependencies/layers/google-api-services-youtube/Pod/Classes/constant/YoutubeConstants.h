@@ -59,7 +59,7 @@
 
 // common
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
-@class YoutubeGridLayoutViewController;
+#import "YoutubeGridLayoutViewController.h"
 
 #endif
 
@@ -72,22 +72,6 @@
 static NSString * kKeychainItemName = @"mxyoutube";
 
 static NSUInteger search_maxResults = 15;
-
-typedef NS_ENUM (NSUInteger, YTSegmentItemType) {
-   YTSegmentItemVideo,
-   YTSegmentItemChannel,
-   YTSegmentItemPlaylist
-};
-
-
-typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
-   // Playlist pop-up menu item tags.
-    kUploadsTag = 0,
-   kLikesTag = 1,
-   kFavoritesTag = 2,
-   kWatchHistoryTag = 3,
-   kWatchLaterTag = 4
-};
 
 
 // module

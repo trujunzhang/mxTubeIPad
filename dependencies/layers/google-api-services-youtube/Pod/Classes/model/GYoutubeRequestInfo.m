@@ -55,7 +55,7 @@
 }
 
 
-- (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType {
+- (void)resetRequestInfoForPlayList:(YTPlaylistItemsType)playlistItemsType {
    self.itemType = YTSegmentItemVideo;
 
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
@@ -84,7 +84,7 @@
 }
 
 
-- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
+- (void)resetRequestInfoForSearchWithItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
    self.queryTeam = queryTeam;
    self.itemType = [self getItemType];

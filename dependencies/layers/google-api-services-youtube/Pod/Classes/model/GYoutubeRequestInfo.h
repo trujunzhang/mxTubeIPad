@@ -10,10 +10,24 @@
 #include "YoutubeConstants.h"
 
 
-@interface GYoutubeRequestInfo : NSObject {
+typedef NS_ENUM (NSUInteger, YTSegmentItemType) {
+   YTSegmentItemVideo,
+   YTSegmentItemChannel,
+   YTSegmentItemPlaylist
+};
 
 
-}
+typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
+   // Playlist pop-up menu item tags.
+    kUploadsTag = 0,
+   kLikesTag = 1,
+   kFavoritesTag = 2,
+   kWatchHistoryTag = 3,
+   kWatchLaterTag = 4
+};
+
+
+@interface GYoutubeRequestInfo : NSObject
 
 @property(nonatomic, strong) NSMutableArray * videoList;
 
@@ -29,14 +43,14 @@
 
 @property(nonatomic, copy) NSString * channelId;
 
-@property(nonatomic) enum YTPlaylistItemsType playlistItemsType;
+@property(nonatomic, assign) YTPlaylistItemsType playlistItemsType;
 
 @property(nonatomic, copy) NSString * nextPageToken;
 
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
-- (void)resetRequestInfoForPlayList:(enum YTPlaylistItemsType)playlistItemsType;
+- (void)resetRequestInfoForPlayList:(YTPlaylistItemsType)playlistItemsType;
 - (void)resetRequestInfo;
-- (void)resetRequestInfoForSearchWithItemType:(enum YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam;
+- (void)resetRequestInfoForSearchWithItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam;
 - (void)putNextPageToken:(NSString *)token;
 - (BOOL)hasNextPage;
 

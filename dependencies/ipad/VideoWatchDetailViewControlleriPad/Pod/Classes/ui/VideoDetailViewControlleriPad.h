@@ -15,7 +15,6 @@
 
 @class WHTopTabBarController;
 
-@class YoutubeGridLayoutViewController;
 @protocol IpadGridViewCellDelegate;
 
 
@@ -30,7 +29,7 @@
 
 @property(nonatomic, strong) UIViewController * firstViewController;
 @property(nonatomic, strong) UIViewController * secondViewController;
-@property(nonatomic, strong) YoutubeGridLayoutViewController * thirdViewController;
+@property(nonatomic, strong) YTCollectionViewController * thirdViewController;
 
 @property(nonatomic, strong) NSArray * defaultTableControllers;
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YoutubeConstants.h"
+#import "GYoutubeRequestInfo.h"
 
 @class GYoutubeRequestInfo;
 
@@ -31,9 +32,9 @@
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType;
 - (void)searchByPageToken;
 - (void)cleanup;
-- (void)fetchActivityListByType:(enum YTSegmentItemType)type withChannelId:(NSString *)channelId;
+- (void)fetchActivityListByType:(YTSegmentItemType)type withChannelId:(NSString *)channelId;
 - (void)fetchActivityListByPageToken;
-- (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType;
+- (void)fetchPlayListByType:(YTPlaylistItemsType)playlistItemsType;
 - (void)fetchPlayListByPageToken;
 - (void)fetchSuggestionListByVideoId:(NSString *)videoId;
 - (void)fetchSuggestionListByPageToken;

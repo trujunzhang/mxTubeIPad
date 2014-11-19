@@ -4,7 +4,6 @@
 
 #import "WHTopTabBarController.h"
 
-#import "YoutubeGridLayoutViewController.h"
 #import "IpadGridViewCell.h"
 #import "YKYouTubeVideo.h"
 #include "YoutubeParser.h"
@@ -70,7 +69,7 @@
    self.secondViewController = [[UIViewController alloc] init];
    self.secondViewController.title = @"More From";
 
-   self.thirdViewController = [[YoutubeGridLayoutViewController alloc] init];
+   self.thirdViewController = [[YTCollectionViewController alloc] init];
    self.thirdViewController.delegate = self.delegate;
    self.thirdViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"2", nil];
    self.thirdViewController.title = @"Suggestions";

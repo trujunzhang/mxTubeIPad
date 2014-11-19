@@ -122,7 +122,7 @@
 #pragma mark  Fetch Activity list by channelID
 
 
-- (void)fetchActivityListByType:(enum YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
+- (void)fetchActivityListByType:(YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
 //   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
 
    [self cleanup];
@@ -156,7 +156,7 @@
 #pragma mark  Fetch Activity list by channelID
 
 
-- (void)fetchPlayListByType:(enum YTPlaylistItemsType)playlistItemsType {
+- (void)fetchPlayListByType:(YTPlaylistItemsType)playlistItemsType {
    [self cleanup];
 
    NSLog(@" *** fetchPlayListByType = %d", [[self getYoutubeRequestInfo] hasNextPage]);

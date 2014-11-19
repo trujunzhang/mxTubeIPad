@@ -115,7 +115,7 @@
 }
 
 
-- (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(enum YTSegmentItemType)type {
+- (void)fetchListWithController:(YoutubeGridLayoutViewController *)controller withType:(YTSegmentItemType)type {
    self.selectedController = controller;
    [self.selectedController fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }
