@@ -46,7 +46,7 @@
 }
 
 
-- (void)setCollectionView:(UICollectionView *)collectionView {
+- (void)setUICollectionView:(UICollectionView *)collectionView {
    self.baseCollectionView = collectionView;
 }
 

@@ -27,6 +27,8 @@
 
    self.placeHolderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
 
+   [self setUICollectionView:self.collectionView];
+
    [super viewDidLoad];
 }
 
