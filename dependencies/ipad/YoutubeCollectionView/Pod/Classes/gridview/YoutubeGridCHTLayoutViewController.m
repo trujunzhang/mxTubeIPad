@@ -18,7 +18,7 @@
 
 
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
-
+@property(strong, nonatomic) ASCollectionView * collectionView;
 @end
 
 
@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
    [self.view addSubview:[self getCollectionView]];
-
+   [self setUICollectionView:self.collectionView];
    [super viewDidLoad];
 }
 
