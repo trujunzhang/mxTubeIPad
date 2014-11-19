@@ -9,7 +9,6 @@
 #import "YoutubeGridCHTLayoutViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
-#import "GYoutubeRequestInfo.h"
 #import "YTGridViewVideoCell.h"
 
 
@@ -19,6 +18,7 @@
 
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 @property(strong, nonatomic) ASCollectionView * collectionView;
+@property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
 @end
 
 
@@ -42,14 +42,14 @@
 
 - (UICollectionView *)getCollectionView {
    if (!self.collectionView) {
-      CHTCollectionViewWaterfallLayout * layout = [[CHTCollectionViewWaterfallLayout alloc] init];
+      self.layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
-      layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-      layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
-      layout.minimumColumnSpacing = 10;
-      layout.minimumInteritemSpacing = 10;
+      self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+      self.layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
+      self.layout.minimumColumnSpacing = 10;
+      self.layout.minimumInteritemSpacing = 10;
 
-      self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+      self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.layout];
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
       self.collectionView.dataSource = self;
       self.collectionView.delegate = self;
@@ -82,9 +82,7 @@
 
 
 - (void)updateLayout:(UIInterfaceOrientation)orientation {
-   CHTCollectionViewWaterfallLayout * layout =
-    (CHTCollectionViewWaterfallLayout *) self.collectionView.collectionViewLayout;
-   layout.columnCount = [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
+   self.layout.columnCount = [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
 }
 
 
