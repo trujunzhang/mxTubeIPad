@@ -20,6 +20,7 @@
 
 static NSString * kKeychainItemName = @"mxyoutube";
 static NSUInteger search_maxResults = 15;
+
 static GYoutubeHelper * instance = nil;
 
 
@@ -72,7 +73,6 @@ static GYoutubeHelper * instance = nil;
    self = [super init];
    if (self) {
       [self initYoutubeService];
-//      [MAB_GoogleUserCredentials sharedInstance].delegate = self;
    }
 
    return self;
@@ -525,7 +525,7 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchPlaylistItemsListWithTagType:( YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+- (void)fetchPlaylistItemsListWithTagType:(YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
 //   [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
 //                                 requestInfo:tagType
 //                           CompletionHandler:completion

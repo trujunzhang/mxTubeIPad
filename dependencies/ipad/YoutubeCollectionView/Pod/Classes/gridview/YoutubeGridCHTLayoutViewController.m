@@ -18,7 +18,7 @@
 
 
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
-@property(strong, nonatomic) ASCollectionView * collectionView;
+@property(strong, nonatomic) UICollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
 @property(nonatomic, strong) UIImage * placeHolderImage;
 @end
@@ -109,7 +109,7 @@
    NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
    YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
 
-   UICollectionView * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
+   UICollectionViewCell * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
                                                                                 forIndexPath:indexPath];
 
 
@@ -129,7 +129,9 @@
 //   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
 //   UICollectionViewCell * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
 //                                                                                    forIndexPath:indexPath];
-//   ASCellNode * node = [self getCellNodeAtIndexPath:indexPath];
+//   CGSize size = [self cellSize];
+//   viewCell.frame = CGRectMake(0, 0, size.width, size.height);
+//   ASCellNode * node = [self getCellNodeAtIndexPath:indexPath size:size];
 //   UIView * view = node.view;
 //   [viewCell addSubview:view];
 //
@@ -137,7 +139,7 @@
 //}
 
 
-- (ASCellNode *)getCellNodeAtIndexPath:(NSIndexPath *)indexPath {
+- (ASCellNode *)getCellNodeAtIndexPath:(NSIndexPath *)indexPath size:(CGSize)size {
 
    ASCellNode * node;
 
@@ -145,7 +147,8 @@
 
    if (itemType == YTSegmentItemVideo) {
       YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:[self cellSize]];
+
+      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:size];
       [videoCellNode bind:video
          placeholderImage:self.placeHolderImage
                  delegate:self.delegate];

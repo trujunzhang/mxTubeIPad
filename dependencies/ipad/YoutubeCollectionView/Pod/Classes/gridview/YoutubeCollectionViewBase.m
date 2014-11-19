@@ -39,6 +39,7 @@
    self.view.backgroundColor = [UIColor clearColor];
 
    NSAssert(self.baseCollectionView, @"not set UICollectionVier instance!");
+   self.baseCollectionView.showsVerticalScrollIndicator = NO;
 
    [self setupRefresh];
 }
