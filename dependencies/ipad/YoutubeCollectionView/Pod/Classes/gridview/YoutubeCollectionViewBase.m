@@ -19,6 +19,7 @@
 @interface YoutubeCollectionViewBase ()
 
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
+@property(strong, nonatomic) UICollectionView * baseCollectionView;
 @end
 
 
@@ -39,7 +40,14 @@
    // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor clearColor];
 
+   NSAssert(self.baseCollectionView, @"not set UICollectionVier instance!");
+
    [self setupRefresh];
+}
+
+
+- (void)setCollectionView:(UICollectionView *)collectionView {
+   self.baseCollectionView = collectionView;
 }
 
 
@@ -50,7 +58,7 @@
                            action:@selector(refreshControlAction)
                  forControlEvents:UIControlEventValueChanged];
 
-   [self.collectionView addSubview:self.refreshControl];
+   [self.baseCollectionView addSubview:self.refreshControl];
 }
 
 
@@ -94,7 +102,7 @@
 
        [[self getYoutubeRequestInfo] appendNextPageData:array];
 
-       [[self collectionView] reloadData];
+       [[self baseCollectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };
@@ -106,7 +114,7 @@
 
 - (void)cleanup {
    [[self getYoutubeRequestInfo] resetInfo];
-   [[self collectionView] reloadData];
+   [[self baseCollectionView] reloadData];
 }
 
 
@@ -133,7 +141,7 @@
 
        [[self getYoutubeRequestInfo] appendNextPageData:array];
 
-       [[self collectionView] reloadData];
+       [[self baseCollectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
@@ -167,7 +175,7 @@
 
        [[self getYoutubeRequestInfo] appendNextPageData:array];
 
-       [[self collectionView] reloadData];
+       [[self baseCollectionView] reloadData];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";

@@ -16,7 +16,7 @@
 
 
 @interface YoutubeGridLayoutViewController ()<ASCollectionViewDataSource, ASCollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
-
+@property(strong, nonatomic) ASCollectionView * collectionView;
 @end
 
 
