@@ -49,11 +49,6 @@
       self.layout.minimumColumnSpacing = 20;
       self.layout.minimumInteritemSpacing = 30;
 
-//      self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-//      self.layout.headerHeight = 15;
-//      self.layout.footerHeight = 10;
-//      self.layout.minimumColumnSpacing = 20;
-//      self.layout.minimumInteritemSpacing = 30;
 
       self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.layout];
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
