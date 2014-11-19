@@ -10,6 +10,7 @@
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
 #import "YTGridViewVideoCell.h"
+#import "YTGridVideoCellNode.h"
 
 
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
@@ -19,6 +20,7 @@
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
 @property(strong, nonatomic) ASCollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
+@property(nonatomic, strong) UIImage * placeHolderImage;
 @end
 
 
@@ -26,7 +28,9 @@
 
 - (void)viewDidLoad {
    [self.view addSubview:[self getCollectionView]];
+   self.placeHolderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
    [self setUICollectionView:self.collectionView];
+
    [super viewDidLoad];
 }
 
@@ -112,11 +116,31 @@
       YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
       YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
       [gridViewVideoCell bind:video
-             placeholderImage:[UIImage imageNamed:@"mt_cell_cover_placeholder"]
+             placeholderImage:self.placeHolderImage
                      delegate:self.delegate];
    }
 
    return viewCell;
+}
+
+
+- (ASCellNode *)getCellNodeAtIndexPath:(NSIndexPath *)indexPath {
+
+   ASCellNode * node;
+
+   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
+
+   if (itemType == YTSegmentItemVideo) {
+      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:[self cellSize]];
+      [videoCellNode bind:video
+         placeholderImage:self.placeHolderImage
+                 delegate:self.delegate];
+
+      node = videoCellNode;
+   }
+
+   return node;
 }
 
 
