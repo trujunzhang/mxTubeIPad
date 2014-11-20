@@ -12,7 +12,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6G-nQ-LwO">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6G-nQ-LwO">
                         <rect key="frame" x="0.0" y="142" width="250" height="76"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sony Vegas Pro 13 - Tutorial for Beginners [COMPLETE]Sony Vegas Pro 13 - Tutorial for Beginners [COMPLETE]" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="430" translatesAutoresizingMaskIntoConstraints="NO" id="UaT-FM-grl">
@@ -41,7 +41,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g95-9a-PlL">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g95-9a-PlL">
                         <rect key="frame" x="0.0" y="220" width="250" height="27"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header.png" translatesAutoresizingMaskIntoConstraints="NO" id="Huh-ei-kAq">
@@ -62,13 +62,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4sM-gq-2cT" userLabel="videoThumbnailsContainer">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sM-gq-2cT" userLabel="videoThumbnailsContainer">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="142"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="4sM-gq-2cT" secondAttribute="bottom" constant="108" id="8ZG-Fv-BDD"/>
+                <constraint firstItem="4sM-gq-2cT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="KZ5-NN-pVG"/>
+                <constraint firstItem="4sM-gq-2cT" firstAttribute="leading" secondItem="g95-9a-PlL" secondAttribute="leading" id="Pcf-tG-ltX"/>
+                <constraint firstAttribute="trailing" secondItem="4sM-gq-2cT" secondAttribute="trailing" id="UcH-Qq-Duw"/>
+                <constraint firstItem="4sM-gq-2cT" firstAttribute="trailing" secondItem="g95-9a-PlL" secondAttribute="trailing" id="VD7-CK-BvM"/>
+                <constraint firstAttribute="bottom" secondItem="g95-9a-PlL" secondAttribute="bottom" constant="3" id="Xy8-Xu-Ufu"/>
+                <constraint firstAttribute="bottom" secondItem="D6G-nQ-LwO" secondAttribute="bottom" constant="32" id="ZEt-am-9fE"/>
+                <constraint firstItem="D6G-nQ-LwO" firstAttribute="top" secondItem="4sM-gq-2cT" secondAttribute="bottom" id="dlb-uJ-NLE"/>
+                <constraint firstItem="4sM-gq-2cT" firstAttribute="leading" secondItem="D6G-nQ-LwO" secondAttribute="leading" id="eAp-ix-Kh3"/>
+                <constraint firstItem="4sM-gq-2cT" firstAttribute="trailing" secondItem="D6G-nQ-LwO" secondAttribute="trailing" id="f28-Lf-5bB"/>
+                <constraint firstItem="g95-9a-PlL" firstAttribute="top" secondItem="D6G-nQ-LwO" secondAttribute="bottom" constant="2" id="pbV-bE-7H2"/>
+                <constraint firstItem="4sM-gq-2cT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sFG-NT-GQ6"/>
+            </constraints>
             <connections>
                 <outlet property="videoChannelThumbnails" destination="Huh-ei-kAq" id="9bb-1X-Na8"/>
                 <outlet property="videoChannelTitleLabel" destination="T04-PU-1nz" id="Yua-hc-C6w"/>
