@@ -40,6 +40,8 @@
       }
 
       self = [arrayOfViews objectAtIndex:0];
+
+      [self setupStyle];
    }
 
    return self;
@@ -88,18 +90,22 @@
    NSUInteger text = video.contentDetails.duration;
    NSString * string = [YoutubeParser timeFormatConvertToSecondsWithInteger:video.contentDetails.duration];
 
+}
 
-   // 6
-//   self.videoInfoContainer.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-//   self.videoInfoContainer.layer.shadowOffset = CGSizeMake(1, 1);
-//   self.videoInfoContainer.layer.shadowOpacity = 0.8;
-//   self.videoInfoContainer.layer.shadowRadius = 1.0;
 
-   // 7
-//   self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-//   self.layer.shadowOffset = CGSizeMake(-2, -2);
-//   self.layer.shadowOpacity = 1;
-//   self.layer.shadowRadius = 1.0;
+- (void)setupStyle {
+   // 1
+   self.videoTitle.font = [UIFont systemFontOfSize:14.0];
+   self.videoTitle.textColor = [UIColor blackColor];
+
+   // 2
+   self.videoRatingLabel.font = [UIFont systemFontOfSize:12.0];
+   self.videoRatingLabel.textColor = [UIColor darkGrayColor];
+
+   self.videoViewCountLabel.font = [UIFont systemFontOfSize:12.0];
+   self.videoViewCountLabel.textColor = [UIColor darkGrayColor];
+
+
 }
 
 
