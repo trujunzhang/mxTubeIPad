@@ -53,12 +53,18 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mt_list_detail_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="gOY-Xa-Vbl">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JWh-hi-kkI">
                                 <rect key="frame" x="211" y="0.0" width="39" height="27"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="quick_cache_remove.png" translatesAutoresizingMaskIntoConstraints="NO" id="2vD-iP-jSL">
-                                <rect key="frame" x="224" y="7" width="18" height="13"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mt_list_detail_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="gOY-Xa-Vbl">
+                                        <rect key="frame" x="0.0" y="0.0" width="39" height="27"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="quick_cache_remove.png" translatesAutoresizingMaskIntoConstraints="NO" id="2vD-iP-jSL">
+                                        <rect key="frame" x="14" y="7" width="18" height="13"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
