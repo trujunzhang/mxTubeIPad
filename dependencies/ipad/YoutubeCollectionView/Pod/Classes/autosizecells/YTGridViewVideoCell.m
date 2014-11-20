@@ -62,6 +62,7 @@
    ASImageNode * imageNode = [[ASImageNode alloc] init];
    imageNode.backgroundColor = [UIColor lightGrayColor];
    imageNode.frame = self.videoThumbnailsContainer.bounds;
+   imageNode.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
    [self.videoThumbnailsContainer addSubview:imageNode.view];
 
    [ImageCacheImplement CacheWithImageView:imageNode
