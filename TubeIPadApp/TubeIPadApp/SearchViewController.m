@@ -151,28 +151,12 @@
    NSString * str = [[NSString alloc] initWithData:allVideosData encoding:NSUTF8StringEncoding];
    NSLog(@"%@", str); //Now you have NSString contain JSON.
 
-   NSString * json = nil;
-   NSScanner * scanner = [NSScanner scannerWithString:str];
-   [scanner scanUpToString:@"[[" intoString:NULL]; // Scan to where the JSON begins
-   [scanner scanUpToString:@"]]" intoString:&json];
-   //The idea is to identify where the "real" JSON begins and ends.
-   json = [NSString stringWithFormat:@"%@%@", json, @"]]"];
-   NSLog(@"json = %@", json);
+//   [self parseSearchSuggestionList:str];
 
-   NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] //Push all the JSON autocomplete detail in to jsonObject array.
-                                                          options:0 error:NULL];
-   self.ParsingArray = [[NSMutableArray alloc] init]; //array that contains the objects.
-   for (int i = 0; i != [jsonObject count]; i++) {
-      for (int j = 0; j != 1; j++) {
-         NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
-         [self.ParsingArray addObject:[[jsonObject objectAtIndex:i] objectAtIndex:j]];
-         //Parse the JSON here...
-         [self.searchAutoCompleteViewController resetTableSource:self.ParsingArray];
-      }
-   }
-
-
+   //   [self.searchAutoCompleteViewController resetTableSource:self.ParsingArray];
 }
+
+
 
 
 - (void)popAutoCompletDialog {

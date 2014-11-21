@@ -10,6 +10,93 @@
 #import "AFHTTPRequestOperation.h"
 #import "GYoutubeRequestInfo.h"
 #import "YoutubeResponseInfo.h"
+#import "YoutubeParser.h"
+
+
+@implementation MABYT3_AutoCompleteRequest
+
++ (MABYT3_AutoCompleteRequest *)sharedInstance {
+   static MABYT3_AutoCompleteRequest * _sharedClient = nil;
+   static dispatch_once_t onceToken;
+   dispatch_once(&onceToken, ^{
+       NSURL * baseURL = [NSURL URLWithString:@"http://suggestqueries.google.com/"];
+
+       NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
+       [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"APIs-Google" }];
+
+       NSURLCache * cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
+                                                          diskCapacity:50 * 1024 * 1024
+                                                              diskPath:nil];
+
+       [config setURLCache:cache];
+
+       _sharedClient = [[MABYT3_AutoCompleteRequest alloc] initWithBaseURL:baseURL
+                                                      sessionConfiguration:config];
+       _sharedClient.responseSerializer = [AFHTTPResponseSerializer serializer];
+   });
+
+   return _sharedClient;
+}
+
+
+- (NSURLSessionDataTask *)autoCompleteSuggestions:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
+   //@"http://suggestqueries.google.com
+   // /complete/search?client=youtube&ds=yt&alt=json&q=%@
+   NSURLSessionDataTask * task = [self GET:@"/complete/search"
+                                parameters:parameters
+                                   success:^(NSURLSessionDataTask * task, id responseObject) {
+                                       NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+
+                                       if (httpResponse.statusCode == 200) {
+                                          YoutubeResponseInfo * responseInfo = [self parseSearchSuggestionList:responseObject];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+//                                              completion(responseInfo, nil);
+                                          });
+                                       } else {
+                                          NSError * error = [YoutubeParser getError:responseObject
+                                                                           httpresp:httpResponse];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(nil, error);
+                                          });
+                                       }
+
+                                   } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(nil, error);
+        });
+    }];
+
+   return task;
+}
+
+
+- (NSMutableArray *)parseSearchSuggestionList:(NSData *)theData {
+   NSString * newStr = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSString * pageToken;
+
+   NSString * json = nil;
+   NSScanner * scanner = [NSScanner scannerWithString:newStr];
+   [scanner scanUpToString:@"[[" intoString:NULL]; // Scan to where the JSON begins
+   [scanner scanUpToString:@"]]" intoString:&json];
+   //The idea is to identify where the "real" JSON begins and ends.
+   json = [NSString stringWithFormat:@"%@%@", json, @"]]"];
+   NSLog(@"json = %@", json);
+
+   NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] //Push all the JSON autocomplete detail in to jsonObject array.
+                                                          options:0 error:NULL];
+   for (int i = 0; i != [jsonObject count]; i++) {
+      for (int j = 0; j != 1; j++) {
+         NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
+         [arr addObject:[[jsonObject objectAtIndex:i] objectAtIndex:j]];
+      }
+   }
+
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+}
+
+@end
 
 
 @implementation MABYT3_APIRequest
@@ -760,7 +847,8 @@
                                               completion(responseInfo, nil);
                                           });
                                        } else {
-                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          NSError * error = [YoutubeParser getError:responseObject
+                                                                           httpresp:httpResponse];
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               completion(nil, error);
                                           });
@@ -791,7 +879,8 @@
                                               completion(responseInfo, nil);
                                           });
                                        } else {
-                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          NSError * error = [YoutubeParser getError:responseObject
+                                                                           httpresp:httpResponse];
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               completion(nil, error);
                                           });
@@ -821,7 +910,8 @@
                                               completion(responseInfo, nil);
                                           });
                                        } else {
-                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          NSError * error = [YoutubeParser getError:responseObject
+                                                                           httpresp:httpResponse];
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               completion(nil, error);
                                           });
@@ -852,7 +942,8 @@
                                               completion(responseInfo, nil);
                                           });
                                        } else {
-                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          NSError * error = [YoutubeParser getError:responseObject
+                                                                           httpresp:httpResponse];
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               completion(nil, error);
                                           });
@@ -886,7 +977,7 @@
           responseInfo = [self parseSearchListWithData:operation.responseData];
        }
        else {
-          error = [self getError:operation.responseData httpresp:operation.response];
+          error = [YoutubeParser getError:operation.responseData httpresp:operation.response];
        }
        dispatch_async(dispatch_get_main_queue(), ^(void) {
            handler(responseInfo, error);
@@ -946,31 +1037,6 @@
       pageToken = [dict objectForKey:@"nextPageToken"];
    }
    return pageToken;
-}
-
-
-- (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp {
-   NSError * error;
-   NSError * e = nil;
-   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&e];
-   if ([dict objectForKey:@"error"]) {
-      NSDictionary * dict2 = [dict objectForKey:@"error"];
-      if ([dict2 objectForKey:@"errors"]) {
-         NSArray * items = [dict2 objectForKey:@"errors"];
-         if (items.count > 0) {
-            NSString * dom = @"YTAPI";
-            if ([items[0] objectForKey:@"domain"]) {
-               dom = [items[0] objectForKey:@"domain"];
-            }
-            error = [NSError errorWithDomain:dom
-                                        code:httpresp.statusCode
-                                    userInfo:items[0]];
-         }
-      }
-   }
-   return error;
 }
 
 

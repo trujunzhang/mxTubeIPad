@@ -27,6 +27,13 @@ typedef void (^MABYoutubeResponseBlock)(YoutubeResponseInfo * responseInfo, NSEr
 static NSString * kKeychainItemName = @"mxyoutube";
 static NSUInteger search_maxResults = 15;
 
+
+@interface MABYT3_AutoCompleteRequest : AFHTTPSessionManager
++ (MABYT3_AutoCompleteRequest *)sharedInstance;
+- (NSURLSessionDataTask *)autoCompleteSuggestions:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
+@end
+
+
 @interface MABYT3_APIRequest : AFHTTPSessionManager
 + (MABYT3_APIRequest *)sharedInstance;
 

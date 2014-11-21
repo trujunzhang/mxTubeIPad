@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import "MABYT3_APIRequest.h"
 #import "YoutubeParser.h"
 
 
@@ -123,4 +124,28 @@ NSMutableDictionary * channelIdThumbnailDictionary;
    return [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, seconds];
 }
 
+
++ (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp {
+   NSError * error;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"error"]) {
+      NSDictionary * dict2 = [dict objectForKey:@"error"];
+      if ([dict2 objectForKey:@"errors"]) {
+         NSArray * items = [dict2 objectForKey:@"errors"];
+         if (items.count > 0) {
+            NSString * dom = @"YTAPI";
+            if ([items[0] objectForKey:@"domain"]) {
+               dom = [items[0] objectForKey:@"domain"];
+            }
+            error = [NSError errorWithDomain:dom
+                                        code:httpresp.statusCode
+                                    userInfo:items[0]];
+         }
+      }
+   }
+   return error;
+}
 @end

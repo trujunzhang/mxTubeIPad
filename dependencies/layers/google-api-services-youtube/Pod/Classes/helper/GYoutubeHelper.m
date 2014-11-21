@@ -593,8 +593,23 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)autocompleteSegesstions:(NSString *)searchWish CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
-//   [[MABYT3_APIRequest sharedInstance] autocompleteSegesstions:urlStr andHandler:finishedHandler];
+   //client=youtube&ds=yt&alt=json&q=%@
+   NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
+   [parameters setObject:@"youtube" forKey:@"client"];
+   [parameters setObject:@"yt" forKey:@"ds"];
+   [parameters setObject:@"json" forKey:@"alt"];
+   [parameters setObject:searchWish forKey:@"q"];
 
+   NSURLSessionDataTask * task =
+    [[MABYT3_AutoCompleteRequest sharedInstance]
+     autoCompleteSuggestions:parameters
+                  completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                      if (responseInfo) {
+                         completion(responseInfo.array, nil);
+                      } else {
+                         NSLog(@"ERROR: %@", error);
+                      }
+                  }];
 }
 
 

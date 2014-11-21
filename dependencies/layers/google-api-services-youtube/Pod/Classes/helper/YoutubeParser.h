@@ -32,4 +32,5 @@
 + (void)AppendThumbnailWithChannelId:(NSString *)channelId withThumbnailUrl:(NSString *)thumbnailUrl;
 + (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs;
 + (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs;
++ (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp;
 @end
