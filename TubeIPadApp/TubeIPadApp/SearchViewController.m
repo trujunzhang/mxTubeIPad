@@ -97,7 +97,11 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
    [self segmentAction:nil];
-   [searchBar resignFirstResponder];
+   [self.searchBar resignFirstResponder];
+   if (self.popover != nil) {
+      [self.popover dismissPopoverAnimated:YES];
+      self.popover = nil;
+   }
 }
 
 
@@ -178,10 +182,7 @@
 
 - (void)didSelectRowWithValue:(NSString *)value {
    self.searchBar.text = value;
-   if (self.popover != nil) {
-      [self.popover dismissPopoverAnimated:YES];
-      self.popover = nil;
-   }
+   [self searchBarSearchButtonClicked:nil];
 }
 
 
