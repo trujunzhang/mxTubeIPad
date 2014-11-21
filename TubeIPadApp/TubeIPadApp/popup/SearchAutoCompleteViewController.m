@@ -32,6 +32,8 @@
    // Do any additional setup after loading the view.
    self.tableView.dataSource = self;
 
+   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"popcell"];
+
    NSAssert(self.selectedDelegate, @"not found UITableViewDelegate instance!");
 }
 
@@ -58,7 +60,11 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   return nil;
+   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"popcell" forIndexPath:indexPath];
+
+   cell.textLabel.text = self.ParsingArray[indexPath.row];
+
+   return cell;
 }
 
 

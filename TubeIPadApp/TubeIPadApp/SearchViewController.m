@@ -11,13 +11,13 @@
 #import "SearchViewController.h"
 
 #import "VideoDetailViewControlleriPad.h"
-#import "GYoutubeRequestInfo.h"
 #import "SearchAutoCompleteViewController.h"
 
 
-@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UITableViewDelegate>
+@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UITableViewDelegate, UIPopoverControllerDelegate>
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
+@property(nonatomic, strong) UIBarButtonItem * sarchBarItem;
 
 @property(strong, nonatomic) NSMutableArray * ParsingArray;
 @property(nonatomic, strong) SearchAutoCompleteViewController * searchAutoCompleteViewController;
@@ -45,19 +45,19 @@
 
 
 - (void)setupNavigationRightItem {
-   UISearchBar * searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 220, 19)];
-   searchBar.backgroundColor = [UIColor clearColor];
-   searchBar.showsCancelButton = YES;
-   searchBar.userInteractionEnabled = YES;
-   searchBar.placeholder = @"Search";
+   self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 220, 19)];
+   self.searchBar.backgroundColor = [UIColor clearColor];
+   self.searchBar.showsCancelButton = YES;
+   self.searchBar.userInteractionEnabled = YES;
+   self.searchBar.placeholder = @"Search";
 
    [self search:@"sketch 3" withItemType:YTSegmentItemVideo];// test
 //   [self searchByPageToken];// test
 
-   searchBar.delegate = self;
+   self.searchBar.delegate = self;
 
-   self.searchBar = searchBar;
-   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+   self.sarchBarItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+   self.navigationItem.rightBarButtonItem = self.sarchBarItem;
 }
 
 
@@ -138,7 +138,7 @@
 
 
 - (void)autocompleteSegesstions:(NSString *)searchWish {
-   searchWish = @"call";
+//   searchWish = @"call";
    //searchWish is the text from your search bar (self.searchBar.text)
    NSString * jsonString = [NSString stringWithFormat:@"http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&alt=json&q=%@",
                                                       searchWish];
@@ -176,12 +176,23 @@
 
 
 - (void)popAutoCompletDialog {
+   if (self.popover)
+      return;
+
    self.popover = [[UIPopoverController alloc] initWithContentViewController:self.searchAutoCompleteViewController];
    self.popover.delegate = self;
 
-   [self.popover presentPopoverFromBarButtonItem:self.searchBar
+   [self.popover presentPopoverFromBarButtonItem:self.sarchBarItem
                         permittedArrowDirections:UIPopoverArrowDirectionAny
                                         animated:YES];
+}
+
+
+#pragma mark - Popover Controller Delegate
+
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+   self.popover = nil;
 }
 
 

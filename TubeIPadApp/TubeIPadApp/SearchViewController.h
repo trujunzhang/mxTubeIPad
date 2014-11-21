@@ -13,7 +13,5 @@
 
 
 @interface SearchViewController : YTCollectionViewController
-
-
 @end
 
