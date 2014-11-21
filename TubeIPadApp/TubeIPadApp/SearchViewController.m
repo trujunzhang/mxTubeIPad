@@ -104,6 +104,11 @@
    if (!self.popover)
       [self popAutoCompletDialog];
 
+   if ([self.searchBar.text isEqualToString:@""]) {
+      [self.searchAutoCompleteViewController empty];
+      return;
+   }
+
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        [self.searchAutoCompleteViewController resetTableSource:array];
    };

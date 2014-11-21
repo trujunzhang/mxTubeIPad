@@ -15,4 +15,5 @@
 - (instancetype)initWithSelectedDelegate:(id<UITableViewDelegate>)selectedDelegate;
 
 - (void)resetTableSource:(NSMutableArray *)array;
+- (void)empty;
 @end

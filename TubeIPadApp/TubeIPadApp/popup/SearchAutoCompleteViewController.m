@@ -44,6 +44,11 @@
 }
 
 
+- (void)empty {
+   [self resetTableSource:[[NSMutableArray alloc] init]];
+}
+
+
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
@@ -75,5 +80,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 }
+
 
 @end

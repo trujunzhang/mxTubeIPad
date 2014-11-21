@@ -29,6 +29,7 @@ static NSUInteger search_maxResults = 15;
 
 
 @interface MABYT3_AutoCompleteRequest : AFHTTPSessionManager
+@property(nonatomic, strong) NSURLSessionDataTask * lastTask;
 + (MABYT3_AutoCompleteRequest *)sharedInstance;
 - (NSURLSessionDataTask *)autoCompleteSuggestions:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
 @end

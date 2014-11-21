@@ -50,7 +50,7 @@
                                        if (httpResponse.statusCode == 200) {
                                           YoutubeResponseInfo * responseInfo = [self parseSearchSuggestionList:responseObject];
                                           dispatch_async(dispatch_get_main_queue(), ^{
-//                                              completion(responseInfo, nil);
+                                              completion(responseInfo, nil);
                                           });
                                        } else {
                                           NSError * error = [YoutubeParser getError:responseObject
@@ -65,6 +65,11 @@
             completion(nil, error);
         });
     }];
+
+   if (self.lastTask) {
+      [self.lastTask cancel];
+   }
+   self.lastTask = task;
 
    return task;
 }
@@ -82,7 +87,7 @@
    [scanner scanUpToString:@"]]" intoString:&json];
    //The idea is to identify where the "real" JSON begins and ends.
    json = [NSString stringWithFormat:@"%@%@", json, @"]]"];
-   NSLog(@"json = %@", json);
+//   NSLog(@"json = %@", json);
 
    NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] //Push all the JSON autocomplete detail in to jsonObject array.
                                                           options:0 error:NULL];
