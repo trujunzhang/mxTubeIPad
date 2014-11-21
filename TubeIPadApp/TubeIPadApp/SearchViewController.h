@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 #import "CollectionConstant.h"
+@class SearchAutoCompleteViewController;
 
 
 @interface SearchViewController : YTCollectionViewController
+
 
 @end
 

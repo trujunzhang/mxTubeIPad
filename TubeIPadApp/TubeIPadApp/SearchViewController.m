@@ -12,13 +12,16 @@
 
 #import "VideoDetailViewControlleriPad.h"
 #import "GYoutubeRequestInfo.h"
+#import "SearchAutoCompleteViewController.h"
 
 
-@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate>
+@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UITableViewDelegate>
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
-@property(strong, nonatomic) NSMutableArray * ParsingArray;// Put that in .h file or after @interface in your .m file
 
+@property(strong, nonatomic) NSMutableArray * ParsingArray;
+@property(nonatomic, strong) SearchAutoCompleteViewController * searchAutoCompleteViewController;
+@property(nonatomic, strong) UIPopoverController * popover;
 @end
 
 
@@ -33,6 +36,8 @@
    self.delegate = self;
    self.nextPageDelegate = self;
    self.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
+
+   self.searchAutoCompleteViewController = [[SearchAutoCompleteViewController alloc] initWithSelectedDelegate:self];
 
    [self setupNavigationRightItem];
    [self setupNavigationTitle];
@@ -164,6 +169,25 @@
       }
    }
 
+
+}
+
+
+- (void)popAutoCompletDialog {
+   self.popover = [[UIPopoverController alloc] initWithContentViewController:self.searchAutoCompleteViewController];
+   self.popover.delegate = self;
+
+   [self.popover presentPopoverFromBarButtonItem:self.searchBar
+                        permittedArrowDirections:UIPopoverArrowDirectionAny
+                                        animated:YES];
+}
+
+
+#pragma mark - 
+#pragma mark UITableViewDelegate
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 }
 
