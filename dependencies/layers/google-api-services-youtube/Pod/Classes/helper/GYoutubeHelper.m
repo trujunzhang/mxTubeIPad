@@ -565,28 +565,43 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchActivityListWithRequestInfo:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
-   // 01: Search videoIds by queryTerm
-   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:info.channelId
-                                                                              withParameters:info.parameters
-                                                                              withMaxResults:search_maxResults];
+   NSMutableDictionary * parameters = [info.parameters mutableCopy];
+   [parameters setObject:@"id,snippet,contentDetails" forKey:@"part"];
+   [parameters setObject:info.channelId forKey:@"channelId"];
 
-   MABYoutubeResponseBlock finishedHandler = ^(YoutubeResponseInfo * responseInfo, NSError * error) {
-       if (!error) {
-          NSLog(@"nextPageToken = %@", responseInfo.pageToken);
-          [info putNextPageToken:responseInfo.pageToken];
+   NSURLSessionDataTask * task =
+    [[MABYT3_APIRequest sharedInstance]
+     LISTActivitiesForURL:parameters
+               completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                   if (responseInfo) {
+                      NSLog(@"nextPageToken = %@", responseInfo.pageToken);
+                      [info putNextPageToken:responseInfo.pageToken];
 
-          // 02 Search Videos by videoIds
-          [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsByActivityList:responseInfo.array]
-                        completionHandler:completion
-                             errorHandler:errorHandler];
-       }
-       else {
-          if (error) {
-             errorHandler(error);
-          }
-       }
-   };
-   [[MABYT3_APIRequest sharedInstance] LISTActivitiesForURL:urlStr andHandler:finishedHandler];
+                      // 02 Search Videos by videoIds
+                      [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsByActivityList:responseInfo.array]
+                                    completionHandler:completion
+                                         errorHandler:errorHandler];
+                   } else {
+                      NSLog(@"ERROR: %@", error);
+                   }
+               }];
+
+//   // 01: Search videoIds by queryTerm
+//   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ActivitiesURLforUserWithChannelId:info.channelId
+//                                                                              withParameters:info.parameters
+//                                                                              withMaxResults:search_maxResults];
+//
+//   MABYoutubeResponseBlock finishedHandler = ^(YoutubeResponseInfo * responseInfo, NSError * error) {
+//       if (!error) {
+//
+//       }
+//       else {
+//          if (error) {
+//             errorHandler(error);
+//          }
+//       }
+//   };
+//   [[MABYT3_APIRequest sharedInstance] LISTActivitiesForURL:urlStr andHandler:finishedHandler];
 }
 
 

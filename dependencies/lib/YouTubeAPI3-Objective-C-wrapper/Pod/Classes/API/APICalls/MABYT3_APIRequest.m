@@ -806,6 +806,37 @@
 }
 
 
+- (NSURLSessionDataTask *)LISTActivitiesForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
+   NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
+   NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
+
+   NSURLSessionDataTask * task = [self GET:@"/youtube/v3/activities"
+                                parameters:dictionary
+                                   success:^(NSURLSessionDataTask * task, id responseObject) {
+                                       NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+
+                                       if (httpResponse.statusCode == 200) {
+                                          YoutubeResponseInfo * responseInfo = [self parseActivitiesListWithData:responseObject];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(responseInfo, nil);
+                                          });
+                                       } else {
+                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(nil, error);
+                                          });
+                                       }
+
+                                   } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(nil, error);
+        });
+    }];
+
+   return task;
+}
+
+
 - (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
    NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
    NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
@@ -2030,5 +2061,25 @@
    return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
 }
 
+
+- (YoutubeResponseInfo *)parseActivitiesListWithData:(NSData *)data {
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSString * pageToken = nil;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_Activity * itm = [[MABYT3_Activity alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+
+   }
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+}
 
 @end
