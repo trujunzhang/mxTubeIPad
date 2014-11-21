@@ -17,9 +17,6 @@
 @class YoutubeAuthInfo;
 @class GYoutubeRequestInfo;
 
-//YoutubeResponseBlock completion = ^(NSArray * array) {
-//YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-
 typedef void (^YoutubeResponseBlock)(NSArray * array, NSObject * respObject);
 typedef void (^ErrorResponseBlock)(NSError * error);
 

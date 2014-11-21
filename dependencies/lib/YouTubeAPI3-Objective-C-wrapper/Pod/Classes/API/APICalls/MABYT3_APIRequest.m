@@ -314,7 +314,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nxtURLStr);
+//                                  handler(arr, error, nxtURLStr);
                               });
 
                           }];
@@ -373,7 +373,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nil);
+                                  handler(arr, error);
                               });
 
                           }];
@@ -432,7 +432,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nil);
+                                  handler(arr, error);
                               });
 
                           }];
@@ -490,7 +490,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nil);
+                                  handler(arr, error);
                               });
 
                           }];
@@ -548,7 +548,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nil);
+                                  handler(arr, error);
                               });
 
                           }];
@@ -612,7 +612,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nxtURLStr);
+//                                  handler(arr, error, nxtURLStr);
                               });
 
                           }];
@@ -676,7 +676,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nxtURLStr);
+//                                  handler(arr, error, nxtURLStr);
                               });
 
                           }];
@@ -734,7 +734,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nil);
+                                  handler(arr, error);
                               });
 
                           }];
@@ -792,12 +792,12 @@
           error = [self getError:operation.responseData httpresp:operation.response];
        }
        dispatch_async(dispatch_get_main_queue(), ^(void) {
-           handler(array, error, pageToken);
+//           handler(array, error, pageToken);
        });
    };
    void (^failBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation * operation, NSError * error) {
        dispatch_async(dispatch_get_main_queue(), ^(void) {
-           handler(nil, error, nil);
+//           handler(nil, error, nil);
        });
    };
 
@@ -958,7 +958,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nxtURLStr);
+//                                  handler(arr, error, nxtURLStr);
                               });
 
                           }];
@@ -1022,7 +1022,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nxtURLStr);
+//                                  handler(arr, error, nxtURLStr);
                               });
 
                           }];
@@ -1081,7 +1081,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nil);
+                                  handler(arr, error);
                               });
 
                           }];
@@ -1146,7 +1146,7 @@
                                  }
                               }
                               dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                  handler(arr, error, nxtURLStr);
+//                                  handler(arr, error, nxtURLStr);
                               });
 
                           }];
