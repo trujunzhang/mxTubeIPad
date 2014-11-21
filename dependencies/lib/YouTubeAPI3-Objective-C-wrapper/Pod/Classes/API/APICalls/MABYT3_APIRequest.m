@@ -747,10 +747,8 @@
 
 
 - (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
-
-   NSMutableDictionary * dictionary = [parameters mutableCopy];
-   [dictionary setObject:apiKey forKey:@"key"];
-   [dictionary setObject:search_maxResults forKey:@"maxResults"];
+   NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
+   NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
 
    NSURLSessionDataTask * task = [self GET:@"/youtube/v3/search"
                                 parameters:dictionary
@@ -1911,6 +1909,18 @@
          break;
    }
    return retVal;
+}
+
+
+#pragma mark -
+#pragma mark
+
+
+- (NSMutableDictionary *)commonDictionary:(NSMutableDictionary *)parameters maxResultsString:(NSString *)maxResultsString {
+   NSMutableDictionary * dictionary = [parameters mutableCopy];
+   [dictionary setObject:apiKey forKey:@"key"];
+   [dictionary setObject:maxResultsString forKey:@"maxResults"];
+   return dictionary;
 }
 
 
