@@ -19,10 +19,12 @@
 #import "MABYT3_SearchItem.h"
 #import "MABYT3_Video.h"
 
+#import "AFHTTPSessionManager.h"
+
 typedef void (^MABYoutubeResponseBlock)(NSMutableArray * array, NSError * error, NSObject * respObject);
 
 
-@interface MABYT3_APIRequest : NSObject
+@interface MABYT3_APIRequest : AFHTTPSessionManager
 + (MABYT3_APIRequest *)sharedInstance;
 
 - (NSString *)ActivitiesURLforUser:(MABYT3_Channel *)channel withMaxResults:(NSInteger)max;

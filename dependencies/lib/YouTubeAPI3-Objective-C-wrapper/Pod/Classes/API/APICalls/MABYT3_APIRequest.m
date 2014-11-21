@@ -12,15 +12,26 @@
 
 @implementation MABYT3_APIRequest
 
-static MABYT3_APIRequest * sharedlst = nil;
-
-
 + (MABYT3_APIRequest *)sharedInstance {
+   static MABYT3_APIRequest * _sharedClient = nil;
+   static dispatch_once_t onceToken;
+   dispatch_once(&onceToken, ^{
+       NSURL * baseURL = [NSURL URLWithString:@"https://www.googleapis.com/"];
 
-   if (!sharedlst) {
-      sharedlst = [[MABYT3_APIRequest alloc] init];
-   }
-   return sharedlst;
+       NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
+       [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"APIs-Google" }];
+
+       NSURLCache * cache = [[NSURLCache alloc] initWithMemoryCapacity:10 * 1024 * 1024
+                                                          diskCapacity:50 * 1024 * 1024
+                                                              diskPath:nil];
+
+       [config setURLCache:cache];
+
+       _sharedClient = [[MABYT3_APIRequest alloc] initWithBaseURL:baseURL
+                                             sessionConfiguration:config];
+   });
+
+   return _sharedClient;
 }
 
 
