@@ -102,6 +102,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
    [self autocompleteSegesstions:self.searchBar.text];
+   [self popAutoCompletDialog];
 }
 
 
@@ -166,6 +167,7 @@
          NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
          [self.ParsingArray addObject:[[jsonObject objectAtIndex:i] objectAtIndex:j]];
          //Parse the JSON here...
+         [self.searchAutoCompleteViewController resetTableSource:self.ParsingArray];
       }
    }
 
