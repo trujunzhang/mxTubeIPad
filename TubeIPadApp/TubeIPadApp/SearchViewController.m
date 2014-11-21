@@ -12,6 +12,7 @@
 
 #import "VideoDetailViewControlleriPad.h"
 #import "SearchAutoCompleteViewController.h"
+#import "GYoutubeHelper.h"
 
 
 @interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UITableViewDelegate, UIPopoverControllerDelegate>
@@ -19,7 +20,6 @@
 @property(nonatomic, strong) UISearchBar * searchBar;
 @property(nonatomic, strong) UIBarButtonItem * sarchBarItem;
 
-@property(strong, nonatomic) NSMutableArray * ParsingArray;
 @property(nonatomic, strong) SearchAutoCompleteViewController * searchAutoCompleteViewController;
 @property(nonatomic, strong) UIPopoverController * popover;
 @end
@@ -101,8 +101,18 @@
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-   [self autocompleteSegesstions:self.searchBar.text];
-   [self popAutoCompletDialog];
+   if (!self.popover)
+      [self popAutoCompletDialog];
+
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
+       [self.searchAutoCompleteViewController resetTableSource:array];
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[GYoutubeHelper getInstance] autocompleteSegesstions:self.searchBar.text
+                                       CompletionHandler:completion
+                                            errorHandler:error];
 }
 
 
@@ -137,32 +147,7 @@
 #pragma mark google autocomplete search suggest
 
 
-- (void)autocompleteSegesstions:(NSString *)searchWish {
-//   searchWish = @"call";
-   //searchWish is the text from your search bar (self.searchBar.text)
-   NSString * jsonString = [NSString stringWithFormat:@"http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&alt=json&q=%@",
-                                                      searchWish];
-   NSString * URLString = [jsonString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; // Encoding to identify where, for example, there are spaces in your query.
-
-   NSLog(@"%@", URLString);
-
-   NSData * allVideosData = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:URLString]];
-
-   NSString * str = [[NSString alloc] initWithData:allVideosData encoding:NSUTF8StringEncoding];
-   NSLog(@"%@", str); //Now you have NSString contain JSON.
-
-//   [self parseSearchSuggestionList:str];
-
-   //   [self.searchAutoCompleteViewController resetTableSource:self.ParsingArray];
-}
-
-
-
-
 - (void)popAutoCompletDialog {
-   if (self.popover)
-      return;
-
    self.popover = [[UIPopoverController alloc] initWithContentViewController:self.searchAutoCompleteViewController];
    self.popover.delegate = self;
 
