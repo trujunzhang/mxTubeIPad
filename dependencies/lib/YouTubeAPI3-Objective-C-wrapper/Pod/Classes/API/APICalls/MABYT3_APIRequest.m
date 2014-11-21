@@ -781,17 +781,18 @@
    void (^completionBlock)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation * operation, id o) {
        NSError * error = nil;
        NSMutableArray * array = [[NSMutableArray alloc] init];
-
+       YoutubeResponseInfo * responseInfo = nil;
        if (operation.response.statusCode == 200) {
 
 //          pageToken = [self parseSearchList:urlStr arr:array data:operation.responseData];
 
-          YoutubeResponseInfo * responseInfo = [self parseSearchListWithData:operation.responseData];
+          responseInfo = [self parseSearchListWithData:operation.responseData];
        }
        else {
           error = [self getError:operation.responseData httpresp:operation.response];
        }
        dispatch_async(dispatch_get_main_queue(), ^(void) {
+           handler(responseInfo, error);
 //           handler(array, error, pageToken);
        });
    };

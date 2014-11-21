@@ -119,39 +119,34 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)searchByQueryWithRequestInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
-   NSURLSessionDataTask * task = [[MABYT3_APIRequest sharedInstance] searchForParameters:info.parameters
-                                                                              completion:^(NSArray * results, NSError * error) {
-                                                                                  if (results) {
-                                                                                     //                                                                       self.results = results;
-                                                                                     //                                                                       [self.tableView reloadData];
-                                                                                  } else {
-                                                                                     NSLog(@"ERROR: %@", error);
-                                                                                  }
-                                                                              }];
+//   NSURLSessionDataTask * task = [[MABYT3_APIRequest sharedInstance] searchForParameters:info.parameters
+//                                                                              completion:^(NSArray * results, NSError * error) {
+//                                                                                  if (results) {
+//                                                                                     //                                                                       self.results = results;
+//                                                                                     //                                                                       [self.tableView reloadData];
+//                                                                                  } else {
+//                                                                                     NSLog(@"ERROR: %@", error);
+//                                                                                  }
+//                                                                              }];
 
 
    // 01: Search videoIds by queryTerm
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTermWithParameters:info.parameters
                                                                                 withMaxResults:search_maxResults];
 
-//   void (^finishedHandler)(NSMutableArray *, NSError *, NSObject *) = ^(NSMutableArray * array, NSError * error, NSObject * pageToken) {
-//       if (!error) {
-//          NSLog(@"nextPageToken = %@", pageToken);
-//          [info putNextPageToken:pageToken];
-//
-//          [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsBySearchResult:array]
-//                        completionHandler:responseHandler
-//                             errorHandler:errorHandler];
-//       }
-//       else {
-//          if (error) {
-//             errorHandler(error);
-//          }
-//       }
-//   };
 
    MABYoutubeResponseBlock finishedHandler = ^(YoutubeResponseInfo * responseInfo, NSError * error) {
+       if (!error) {
+          NSLog(@"nextPageToken = %@", responseInfo.pageToken);
+          [info putNextPageToken:responseInfo.pageToken];
 
+          [self fetchVideoListWithVideoId:[YoutubeParser getVideoIdsBySearchResult:responseInfo.array]
+                        completionHandler:responseHandler
+                             errorHandler:errorHandler];
+       }
+       else if (error) {
+          errorHandler(error);
+       }
    };
    [[MABYT3_APIRequest sharedInstance] fetchWithUrl:urlStr andHandler:finishedHandler];
 }
