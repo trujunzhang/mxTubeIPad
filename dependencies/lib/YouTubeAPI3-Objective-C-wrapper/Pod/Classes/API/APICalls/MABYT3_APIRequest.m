@@ -747,22 +747,26 @@
 
 
 - (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
-   [parameters setObject:apiKey forKey:@"key"];
+
+   NSMutableDictionary * dictionary = [parameters mutableCopy];
+   [dictionary setObject:apiKey forKey:@"key"];
+   [dictionary setObject:search_maxResults forKey:@"maxResults"];
+
    NSURLSessionDataTask * task = [self GET:@"/youtube/v3/search"
-                                parameters:parameters
+                                parameters:dictionary
                                    success:^(NSURLSessionDataTask * task, id responseObject) {
                                        NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
 
                                        if (httpResponse.statusCode == 200) {
+                                          YoutubeResponseInfo * responseInfo = [self parseSearchListWithData:responseObject];
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              completion(responseObject[@"results"], nil);
+                                              completion(responseInfo, nil);
                                           });
                                        } else {
+                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              completion(nil, nil);
+                                              completion(nil, error);
                                           });
-                                          NSLog(@"Received: %@", responseObject);
-                                          NSLog(@"Received HTTP %d", httpResponse.statusCode);
                                        }
 
                                    } failure:^(NSURLSessionDataTask * task, NSError * error) {
@@ -770,6 +774,7 @@
             completion(nil, error);
         });
     }];
+
    return task;
 }
 
