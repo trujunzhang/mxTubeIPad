@@ -8,6 +8,8 @@
 
 #import "MABYT3_APIRequest.h"
 #import "AFHTTPRequestOperation.h"
+#import "GYoutubeRequestInfo.h"
+#import "YoutubeResponseInfo.h"
 
 
 @implementation MABYT3_APIRequest
@@ -16,7 +18,7 @@
    static MABYT3_APIRequest * _sharedClient = nil;
    static dispatch_once_t onceToken;
    dispatch_once(&onceToken, ^{
-       NSURL * baseURL = [NSURL URLWithString:@"https://www.googleapis.com/"];
+       NSURL * baseURL = [NSURL URLWithString:@"https://www.googleapis.com/youtube/v3/"];
 
        NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
        [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"APIs-Google" }];
@@ -743,6 +745,32 @@
 #pragma mark fetch youtube search
 
 
+- (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(void (^)(NSArray * results, NSError * error))completion {
+   NSURLSessionDataTask * task = [self GET:@"/search"
+                                parameters:parameters
+                                   success:^(NSURLSessionDataTask * task, id responseObject) {
+                                       NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+                                       if (httpResponse.statusCode == 200) {
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(responseObject[@"results"], nil);
+                                          });
+                                       } else {
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(nil, nil);
+                                          });
+                                          NSLog(@"Received: %@", responseObject);
+                                          NSLog(@"Received HTTP %d", httpResponse.statusCode);
+                                       }
+
+                                   } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(nil, error);
+        });
+    }];
+   return task;
+}
+
+
 - (void)fetchWithUrl:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
    __block NSString * pageToken = nil;
 
@@ -755,7 +783,10 @@
        NSMutableArray * array = [[NSMutableArray alloc] init];
 
        if (operation.response.statusCode == 200) {
-          pageToken = [self parseSearchList:urlStr arr:array data:operation.responseData];
+
+//          pageToken = [self parseSearchList:urlStr arr:array data:operation.responseData];
+
+          YoutubeResponseInfo * responseInfo = [self parseSearchListWithData:operation.responseData];
        }
        else {
           error = [self getError:operation.responseData httpresp:operation.response];
@@ -772,6 +803,31 @@
 
    [operation setCompletionBlockWithSuccess:completionBlock failure:failBlock];
    [operation start];
+}
+
+
+- (YoutubeResponseInfo *)parseSearchListWithData:(NSData *)data {
+   NSMutableArray * array = [[NSMutableArray alloc] init];
+   NSString * pageToken;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
+            [array addObject:itm];
+         }
+      }
+   }
+
+   if ([dict objectForKey:@"nextPageToken"]) {
+      pageToken = [dict objectForKey:@"nextPageToken"];
+   }
+
+   return [YoutubeResponseInfo infoWithArray:array pageToken:pageToken];
 }
 
 

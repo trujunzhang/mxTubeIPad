@@ -118,6 +118,17 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)searchByQueryWithRequestInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
+   NSURLSessionDataTask * task = [[MABYT3_APIRequest sharedInstance] searchForParameters:info.parameters
+                                                                              completion:^(NSArray * results, NSError * error) {
+                                                                                  if (results) {
+                                                                                     //                                                                       self.results = results;
+                                                                                     //                                                                       [self.tableView reloadData];
+                                                                                  } else {
+                                                                                     NSLog(@"ERROR: %@", error);
+                                                                                  }
+                                                                              }];
+
+
    // 01: Search videoIds by queryTerm
    NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoSearchURLforTermWithParameters:info.parameters
                                                                                 withMaxResults:search_maxResults];
@@ -623,6 +634,8 @@ static GYoutubeHelper * instance = nil;
 
 #pragma mark -
 #pragma mark Search auto complete
+
+
 - (void)autocompleteSegesstions:(NSString *)searchWish CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
 //   [[MABYT3_APIRequest sharedInstance] autocompleteSegesstions:urlStr andHandler:finishedHandler];
 
