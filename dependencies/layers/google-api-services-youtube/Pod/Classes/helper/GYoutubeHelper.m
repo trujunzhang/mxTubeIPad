@@ -19,7 +19,6 @@
 #import "YoutubeResponseInfo.h"
 
 
-
 static GYoutubeHelper * instance = nil;
 
 
@@ -132,7 +131,6 @@ static GYoutubeHelper * instance = nil;
                      NSLog(@"ERROR: %@", error);
                   }
               }];
-
 }
 
 
@@ -172,19 +170,35 @@ static GYoutubeHelper * instance = nil;
 
 //"K2ZBubuxqVA,ISTE3VfPWHI,ij_0p_6qTss,KRbMlHjjvEY,FFDEsDClY08,uKFzQxl3iJk,8aShfolR6w8,0fLokHhfueM,mlk-8QOSztE,9skaRCdcphc"
 - (void)fetchVideoListWithVideoId:(NSString *)videoIds completionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideo:videoIds withMaxResults:5];
 
-   [[MABYT3_APIRequest sharedInstance]
-    LISTVideosForURL:urlStr
-          andHandler:^(YoutubeResponseInfo * responseInfo, NSError * error) {
-              if (!error) {
-                 completion(responseInfo.array, nil);
-              }
-              else {
-                 NSLog(@"%@", error.description);
-                 errorBlock(error);
-              }
-          }];
+   NSDictionary * parameters = @{
+    @"part" : @"id,snippet,contentDetails,statistics",
+    @"id" : videoIds
+   };
+   NSURLSessionDataTask * task =
+    [[MABYT3_APIRequest sharedInstance]
+     LISTVideosForURL:parameters
+           completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+               if (responseInfo) {
+                  completion(responseInfo.array, nil);
+               } else {
+                  NSLog(@"ERROR: %@", error);
+               }
+           }];
+
+//   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideo:videoIds withMaxResults:5];
+//
+//   [[MABYT3_APIRequest sharedInstance]
+//    LISTVideosForURL:urlStr
+//          andHandler:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+//              if (!error) {
+//
+//              }
+//              else {
+//                 NSLog(@"%@", error.description);
+//                 errorBlock(error);
+//              }
+//          }];
 }
 
 

@@ -746,6 +746,36 @@
 #pragma mark fetch youtube search
 
 
+- (NSURLSessionDataTask *)LISTVideosForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
+   NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:nil];
+
+   NSURLSessionDataTask * task = [self GET:@"/youtube/v3/videos"
+                                parameters:dictionary
+                                   success:^(NSURLSessionDataTask * task, id responseObject) {
+                                       NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+
+                                       if (httpResponse.statusCode == 200) {
+                                          YoutubeResponseInfo * responseInfo = [self parseVideoListWithData:responseObject];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(responseInfo, nil);
+                                          });
+                                       } else {
+                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(nil, error);
+                                          });
+                                       }
+
+                                   } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(nil, error);
+        });
+    }];
+
+   return task;
+}
+
+
 - (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
    NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
    NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
@@ -810,31 +840,6 @@
 
    [operation setCompletionBlockWithSuccess:completionBlock failure:failBlock];
    [operation start];
-}
-
-
-- (YoutubeResponseInfo *)parseSearchListWithData:(NSData *)data {
-   NSMutableArray * array = [[NSMutableArray alloc] init];
-   NSString * pageToken;
-   NSError * e = nil;
-   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&e];
-   if ([dict objectForKey:@"items"]) {
-      NSArray * items = [dict objectForKey:@"items"];
-      if (items.count > 0) {
-         for (int i = 0; i < items.count; i++) {
-            MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
-            [array addObject:itm];
-         }
-      }
-   }
-
-   if ([dict objectForKey:@"nextPageToken"]) {
-      pageToken = [dict objectForKey:@"nextPageToken"];
-   }
-
-   return [YoutubeResponseInfo infoWithArray:array pageToken:pageToken];
 }
 
 
@@ -1919,8 +1924,59 @@
 - (NSMutableDictionary *)commonDictionary:(NSMutableDictionary *)parameters maxResultsString:(NSString *)maxResultsString {
    NSMutableDictionary * dictionary = [parameters mutableCopy];
    [dictionary setObject:apiKey forKey:@"key"];
-   [dictionary setObject:maxResultsString forKey:@"maxResults"];
+   if (maxResultsString)
+      [dictionary setObject:maxResultsString forKey:@"maxResults"];
    return dictionary;
+}
+
+
+#pragma mark -
+#pragma mark parse msdata to model collect
+
+
+- (YoutubeResponseInfo *)parseVideoListWithData:(NSData *)data {
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_Video * itm = [[MABYT3_Video alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+   }
+
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:nil];
+}
+
+
+- (YoutubeResponseInfo *)parseSearchListWithData:(NSData *)data {
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSString * pageToken;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+   }
+
+   if ([dict objectForKey:@"nextPageToken"]) {
+      pageToken = [dict objectForKey:@"nextPageToken"];
+   }
+
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
 }
 
 
