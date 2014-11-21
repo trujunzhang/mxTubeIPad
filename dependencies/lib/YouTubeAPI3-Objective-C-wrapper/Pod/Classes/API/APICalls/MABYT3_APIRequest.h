@@ -61,7 +61,7 @@ typedef void (^MABYoutubeResponseBlock)(YoutubeResponseInfo * responseInfo, NSEr
 - (void)LISTGuideCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void)LISTLanguagesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void)LISTRegionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
-- (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(void (^)(NSArray * results, NSError * error))completion;
+- (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
 - (void)fetchWithUrl:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;

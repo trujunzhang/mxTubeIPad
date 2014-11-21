@@ -119,15 +119,17 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)searchByQueryWithRequestInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)responseHandler errorHandler:(ErrorResponseBlock)errorHandler {
-//   NSURLSessionDataTask * task = [[MABYT3_APIRequest sharedInstance] searchForParameters:info.parameters
-//                                                                              completion:^(NSArray * results, NSError * error) {
-//                                                                                  if (results) {
-//                                                                                     //                                                                       self.results = results;
-//                                                                                     //                                                                       [self.tableView reloadData];
-//                                                                                  } else {
-//                                                                                     NSLog(@"ERROR: %@", error);
-//                                                                                  }
-//                                                                              }];
+//   info.parameters
+   NSURLSessionDataTask * task = [[MABYT3_APIRequest sharedInstance]
+    searchForParameters:info.parameters
+             completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                 if (responseInfo) {
+                    //                                                                       self.results = results;
+                    //                                                                       [self.tableView reloadData];
+                 } else {
+                    NSLog(@"ERROR: %@", error);
+                 }
+             }];
 
 
    // 01: Search videoIds by queryTerm
@@ -148,7 +150,7 @@ static GYoutubeHelper * instance = nil;
           errorHandler(error);
        }
    };
-   [[MABYT3_APIRequest sharedInstance] fetchWithUrl:urlStr andHandler:finishedHandler];
+//   [[MABYT3_APIRequest sharedInstance] fetchWithUrl:urlStr andHandler:finishedHandler];
 }
 
 

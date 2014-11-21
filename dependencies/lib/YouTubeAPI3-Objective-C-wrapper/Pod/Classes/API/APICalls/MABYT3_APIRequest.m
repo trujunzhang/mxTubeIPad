@@ -18,7 +18,7 @@
    static MABYT3_APIRequest * _sharedClient = nil;
    static dispatch_once_t onceToken;
    dispatch_once(&onceToken, ^{
-       NSURL * baseURL = [NSURL URLWithString:@"https://www.googleapis.com/youtube/v3/"];
+       NSURL * baseURL = [NSURL URLWithString:@"https://www.googleapis.com/"];
 
        NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
        [config setHTTPAdditionalHeaders:@{ @"User-Agent" : @"APIs-Google" }];
@@ -31,6 +31,7 @@
 
        _sharedClient = [[MABYT3_APIRequest alloc] initWithBaseURL:baseURL
                                              sessionConfiguration:config];
+       _sharedClient.responseSerializer = [AFHTTPResponseSerializer serializer];
    });
 
    return _sharedClient;
@@ -745,11 +746,13 @@
 #pragma mark fetch youtube search
 
 
-- (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(void (^)(NSArray * results, NSError * error))completion {
-   NSURLSessionDataTask * task = [self GET:@"/search"
+- (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
+   [parameters setObject:apiKey forKey:@"key"];
+   NSURLSessionDataTask * task = [self GET:@"/youtube/v3/search"
                                 parameters:parameters
                                    success:^(NSURLSessionDataTask * task, id responseObject) {
                                        NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+
                                        if (httpResponse.statusCode == 200) {
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               completion(responseObject[@"results"], nil);
