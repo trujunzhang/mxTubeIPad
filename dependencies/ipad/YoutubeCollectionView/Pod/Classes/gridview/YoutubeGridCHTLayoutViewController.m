@@ -21,6 +21,7 @@
 @property(strong, nonatomic) UICollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
 @property(nonatomic, strong) UIImage * placeHolderImage;
+@property(nonatomic, strong) NSMutableDictionary * cellSizeDictionary;
 @end
 
 
@@ -30,6 +31,8 @@
    [self.view addSubview:[self getCollectionView]];
    self.placeHolderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
    [self setUICollectionView:self.collectionView];
+
+   self.cellSizeDictionary = [[NSMutableDictionary alloc] init];
 
    [super viewDidLoad];
 }
@@ -110,7 +113,7 @@
    YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
 
    UICollectionViewCell * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
-                                                                                forIndexPath:indexPath];
+                                                                                    forIndexPath:indexPath];
 
 
    if (itemType == YTSegmentItemVideo) {
@@ -122,41 +125,6 @@
    }
 
    return viewCell;
-}
-
-
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
-//   UICollectionViewCell * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
-//                                                                                    forIndexPath:indexPath];
-//   CGSize size = [self cellSize];
-//   viewCell.frame = CGRectMake(0, 0, size.width, size.height);
-//   ASCellNode * node = [self getCellNodeAtIndexPath:indexPath size:size];
-//   UIView * view = node.view;
-//   [viewCell addSubview:view];
-//
-//   return viewCell;
-//}
-
-
-- (ASCellNode *)getCellNodeAtIndexPath:(NSIndexPath *)indexPath size:(CGSize)size {
-
-   ASCellNode * node;
-
-   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
-
-   if (itemType == YTSegmentItemVideo) {
-      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-
-      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:size];
-      [videoCellNode bind:video
-         placeholderImage:self.placeHolderImage
-                 delegate:self.delegate];
-
-      node = videoCellNode;
-   }
-
-   return node;
 }
 
 
@@ -192,6 +160,29 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
    return [self cellSize];
 }
+
+
+//- (CGSize)cellSize {
+//   CGSize size;
+//
+//   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+//   NSString * key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
+//   NSString * keyWidth = [NSString stringWithFormat:@"%@_width", key];
+//   NSString * keyHeight = [NSString stringWithFormat:@"%@_height", key];
+//
+//   NSInteger valueWidth = [self.cellSizeDictionary objectForKey:key];
+//   NSInteger valueHeight = [self.cellSizeDictionary objectForKey:key];
+//   if (valueWidth && valueHeight) {
+//      size = CGSizeMake(valueWidth, valueHeight);
+//   } else {
+//      size = [self makeCellSize];
+//      [self.cellSizeDictionary setObject:size.width forKey:valueWidth];
+//      [self.cellSizeDictionary setObject:size.height forKey:valueHeight];
+//   }
+//
+//
+//   return size;
+//}
 
 
 - (CGSize)cellSize {
