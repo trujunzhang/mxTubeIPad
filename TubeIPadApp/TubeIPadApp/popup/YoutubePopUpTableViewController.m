@@ -9,7 +9,7 @@
 #import "YoutubePopUpTableViewController.h"
 
 
-@interface YoutubePopUpTableViewController ()<UITableViewDataSource>
+@interface YoutubePopUpTableViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(strong, nonatomic) NSMutableArray * ParsingArray;
 @end
 
@@ -68,7 +68,9 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+   NSString * value = self.ParsingArray[indexPath.row];
+   [self.popupDelegate didSelectRowWithValue:value];
+//
 }
 
 

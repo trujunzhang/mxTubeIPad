@@ -15,7 +15,7 @@
 #import "GYoutubeHelper.h"
 
 
-@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UIPopoverControllerDelegate>
+@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UIPopoverControllerDelegate, YoutubePopUpTableViewDelegate>
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
 @property(nonatomic, strong) UIBarButtonItem * sarchBarItem;
@@ -38,6 +38,7 @@
    self.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
    self.searchAutoCompleteViewController = [[YoutubePopUpTableViewController alloc] init];
+   self.searchAutoCompleteViewController.popupDelegate = self;
 
    [self setupNavigationRightItem];
    [self setupNavigationTitle];
@@ -160,6 +161,27 @@
    [self.popover presentPopoverFromBarButtonItem:self.sarchBarItem
                         permittedArrowDirections:UIPopoverArrowDirectionAny
                                         animated:YES];
+}
+
+
+#pragma mark - Popover Controller Delegate
+
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+   self.popover = nil;
+}
+
+
+#pragma mark -
+#pragma mark YoutubePopUpTableViewDelegate
+
+
+- (void)didSelectRowWithValue:(NSString *)value {
+   self.searchBar.text = value;
+   if (self.popover != nil) {
+      [self.popover dismissPopoverAnimated:YES];
+      self.popover = nil;
+   }
 }
 
 
