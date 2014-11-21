@@ -29,15 +29,6 @@ static MABYT3_APIRequest * sharedlst = nil;
 }
 
 
-- (NSString *)ChannelURLWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
-   NSString * paramS = [self getParameterString:params];
-   if (max != 5) {
-      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/channels?%@", paramS];
-}
-
-
 - (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
    NSString * paramS = [self getParameterString:params];
    if (max != 5) {
@@ -45,6 +36,15 @@ static MABYT3_APIRequest * sharedlst = nil;
    }
    return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@%@",
                                      channelId, paramS];
+}
+
+
+- (NSString *)ChannelURLWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
+   NSString * paramS = [self getParameterString:params];
+   if (max != 5) {
+      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
+   }
+   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/channels?%@", paramS];
 }
 
 

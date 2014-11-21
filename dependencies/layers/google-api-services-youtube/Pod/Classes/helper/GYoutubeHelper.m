@@ -621,4 +621,12 @@ static GYoutubeHelper * instance = nil;
 }
 
 
+#pragma mark -
+#pragma mark Search auto complete
+- (void)autocompleteSegesstions:(NSString *)searchWish CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
+//   [[MABYT3_APIRequest sharedInstance] autocompleteSegesstions:urlStr andHandler:finishedHandler];
+
+}
+
+
 @end
