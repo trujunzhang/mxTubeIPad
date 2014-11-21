@@ -590,9 +590,12 @@ static GYoutubeHelper * instance = nil;
 
 #pragma mark -
 #pragma mark Search auto complete
+-(void)cancelAutoCompleteSuggestionTask{
+   [[MABYT3_AutoCompleteRequest sharedInstance] cancelAllTask];
 
+}
 
-- (void)autocompleteSegesstions:(NSString *)searchWish CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
+- (void)autoCompleteSuggestions:(NSString *)searchWish CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
    //client=youtube&ds=yt&alt=json&q=%@
    NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
    [parameters setObject:@"youtube" forKey:@"client"];

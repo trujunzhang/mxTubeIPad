@@ -75,6 +75,13 @@
 }
 
 
+- (void)cancelAllTask {
+   if (self.lastTask) {
+      [self.lastTask cancel];
+   }
+}
+
+
 - (NSMutableArray *)parseSearchSuggestionList:(NSData *)theData {
    NSString * newStr = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
 
@@ -93,13 +100,14 @@
                                                           options:0 error:NULL];
    for (int i = 0; i != [jsonObject count]; i++) {
       for (int j = 0; j != 1; j++) {
-         NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
+//         NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
          [arr addObject:[[jsonObject objectAtIndex:i] objectAtIndex:j]];
       }
    }
 
    return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
 }
+
 
 @end
 

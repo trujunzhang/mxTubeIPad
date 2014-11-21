@@ -94,28 +94,25 @@
 #pragma mark - UISearchBarDelegate
 
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-   [self segmentAction:nil];
-   [searchBar resignFirstResponder];
-}
-
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
    if (!self.popover)
       [self popAutoCompletDialog];
 
    if ([self.searchBar.text isEqualToString:@""]) {
       [self.searchAutoCompleteViewController empty];
+      [[GYoutubeHelper getInstance] cancelAutoCompleteSuggestionTask];
+      NSLog(@"%s-empty", sel_getName(_cmd));
       return;
    }
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
+       NSLog(@"%s-respObject", sel_getName(_cmd));
        [self.searchAutoCompleteViewController resetTableSource:array];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] autocompleteSegesstions:self.searchBar.text
+   [[GYoutubeHelper getInstance] autoCompleteSuggestions:self.searchBar.text
                                        CompletionHandler:completion
                                             errorHandler:error];
 }

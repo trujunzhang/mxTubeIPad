@@ -32,6 +32,7 @@ static NSUInteger search_maxResults = 15;
 @property(nonatomic, strong) NSURLSessionDataTask * lastTask;
 + (MABYT3_AutoCompleteRequest *)sharedInstance;
 - (NSURLSessionDataTask *)autoCompleteSuggestions:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
+- (void)cancelAllTask;
 @end
 
 
