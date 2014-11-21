@@ -93,6 +93,11 @@
 #define YTYouTubeActivity  MABYT3_Activity
 
 
+#define hasShowLeftMenu NO
+//#define hasShowLeftMenu YES
+
+
+
 
 
 

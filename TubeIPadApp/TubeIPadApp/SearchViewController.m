@@ -17,6 +17,8 @@
 @interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate>
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
+@property(strong, nonatomic) NSMutableArray * ParsingArray;// Put that in .h file or after @interface in your .m file
+
 @end
 
 
@@ -94,7 +96,7 @@
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-
+   [self autocompleteSegesstions:self.searchBar.text];
 }
 
 
@@ -124,5 +126,45 @@
    [self searchByPageToken];
 }
 
+
+#pragma mark -
+#pragma mark google autocomplete search suggest
+
+
+- (void)autocompleteSegesstions:(NSString *)searchWish {
+   searchWish = @"call";
+   //searchWish is the text from your search bar (self.searchBar.text)
+   NSString * jsonString = [NSString stringWithFormat:@"http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&alt=json&q=%@",
+                                                      searchWish];
+   NSString * URLString = [jsonString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; // Encoding to identify where, for example, there are spaces in your query.
+
+   NSLog(@"%@", URLString);
+
+   NSData * allVideosData = [[NSData alloc] initWithContentsOfURL:[[NSURL alloc] initWithString:URLString]];
+
+   NSString * str = [[NSString alloc] initWithData:allVideosData encoding:NSUTF8StringEncoding];
+   NSLog(@"%@", str); //Now you have NSString contain JSON.
+
+   NSString * json = nil;
+   NSScanner * scanner = [NSScanner scannerWithString:str];
+   [scanner scanUpToString:@"[[" intoString:NULL]; // Scan to where the JSON begins
+   [scanner scanUpToString:@"]]" intoString:&json];
+   //The idea is to identify where the "real" JSON begins and ends.
+   json = [NSString stringWithFormat:@"%@%@", json, @"]]"];
+   NSLog(@"json = %@", json);
+
+   NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] //Push all the JSON autocomplete detail in to jsonObject array.
+                                                          options:0 error:NULL];
+   self.ParsingArray = [[NSMutableArray alloc] init]; //array that contains the objects.
+   for (int i = 0; i != [jsonObject count]; i++) {
+      for (int j = 0; j != 1; j++) {
+         NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
+         [self.ParsingArray addObject:[[jsonObject objectAtIndex:i] objectAtIndex:j]];
+         //Parse the JSON here...
+      }
+   }
+
+
+}
 
 @end

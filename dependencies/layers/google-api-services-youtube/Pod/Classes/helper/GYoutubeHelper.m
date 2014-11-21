@@ -248,7 +248,8 @@ static GYoutubeHelper * instance = nil;
 - (void)getAuthUserInfo {
    self.youtubeAuthUser = [[GYoutubeAuthUser alloc] init];
 
-//   [self getUserInfo];// used
+   if (hasShowLeftMenu)
+      [self getUserInfo];// used
 }
 
 

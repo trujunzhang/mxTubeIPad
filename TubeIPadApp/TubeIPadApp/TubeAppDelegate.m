@@ -9,7 +9,6 @@
 #import "TubeAppDelegate.h"
 
 #import <SWRevealViewController/SWRevealViewController.h>
-#import <youtube_slide_menu/LeftMenuItemTree.h>
 
 #import "LeftMenuViewController.h"
 #import "SubscriptionsViewController.h"
@@ -18,6 +17,7 @@
 #import "YoutubeAuthInfo.h"
 #import "LeftRevealHelper.h"
 #import "GYoutubeHelper.h"
+#import "YoutubeConstants.h"
 
 
 @interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate, LeftMenuViewBaseDelegate>
@@ -44,7 +44,9 @@
    self.tabBarController.delegate = self;
    self.tabBarController.tabBar.tintColor = [UIColor redColor];
 
-   self.tabBarController.selectedIndex = 1; //test
+   if (!hasShowLeftMenu) {
+      self.tabBarController.selectedIndex = 1; //test
+   }
 
    //2. the first right tab bar item
    self.subscriptionsViewController = self.tabBarController.viewControllers[0];

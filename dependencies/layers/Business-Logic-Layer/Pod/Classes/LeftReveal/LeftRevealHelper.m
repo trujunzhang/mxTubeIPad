@@ -8,6 +8,7 @@
 
 
 #import "LeftRevealHelper.h"
+#import "YoutubeConstants.h"
 
 #import <SWRevealViewController/SWRevealViewController.h>
 
@@ -33,8 +34,10 @@ LeftRevealHelper * instance;
    self.revealController = controller;
 
    // 2
-//   self.isRearOpen = YES; // used
-//   [self openLeftMenu];   // used
+   if (hasShowLeftMenu) {
+      self.isRearOpen = YES; // used
+      [self openLeftMenu];   // used
+   }
 }
 
 
