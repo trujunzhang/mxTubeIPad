@@ -776,6 +776,36 @@
 }
 
 
+- (NSURLSessionDataTask *)LISTChannelsThumbnailsForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
+   NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
+   NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
+
+   NSURLSessionDataTask * task = [self GET:@"/youtube/v3/channels"
+                                parameters:dictionary
+                                   success:^(NSURLSessionDataTask * task, id responseObject) {
+                                       NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+
+                                       if (httpResponse.statusCode == 200) {
+                                          YoutubeResponseInfo * responseInfo = [self parseChannelListWithData:responseObject];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(responseInfo, nil);
+                                          });
+                                       } else {
+                                          NSError * error = [self getError:responseObject httpresp:httpResponse];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(nil, error);
+                                          });
+                                       }
+                                   } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(nil, error);
+        });
+    }];
+
+   return task;
+}
+
+
 - (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
    NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
    NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
@@ -1936,6 +1966,7 @@
 
 - (YoutubeResponseInfo *)parseVideoListWithData:(NSData *)data {
    NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSString * pageToken = nil;
    NSError * e = nil;
    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
@@ -1951,7 +1982,7 @@
       }
    }
 
-   return [YoutubeResponseInfo infoWithArray:arr pageToken:nil];
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
 }
 
 
@@ -1976,6 +2007,26 @@
       pageToken = [dict objectForKey:@"nextPageToken"];
    }
 
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+}
+
+
+- (YoutubeResponseInfo *)parseChannelListWithData:(NSData *)data {
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSString * pageToken = nil;
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_Channel * itm = [[MABYT3_Channel alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+   }
    return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
 }
 

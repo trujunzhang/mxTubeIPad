@@ -185,20 +185,6 @@ static GYoutubeHelper * instance = nil;
                   NSLog(@"ERROR: %@", error);
                }
            }];
-
-//   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] VideoURLforVideo:videoIds withMaxResults:5];
-//
-//   [[MABYT3_APIRequest sharedInstance]
-//    LISTVideosForURL:urlStr
-//          andHandler:^(YoutubeResponseInfo * responseInfo, NSError * error) {
-//              if (!error) {
-//
-//              }
-//              else {
-//                 NSLog(@"%@", error.description);
-//                 errorBlock(error);
-//              }
-//          }];
 }
 
 
@@ -457,7 +443,6 @@ static GYoutubeHelper * instance = nil;
 - (NSString *)fetchChannelThumbnailsWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
    NSString * thumbnailUrl = [YoutubeParser checkAndAppendThumbnailWithChannelId:channelId];
    if (thumbnailUrl) {
-//      completion(nil, thumbnailUrl);
       return thumbnailUrl;
    }
    NSDictionary * parameters = @{
@@ -465,24 +450,20 @@ static GYoutubeHelper * instance = nil;
     @"id" : channelId,
     @"fields" : @"items/snippet(thumbnails)",
    };
-   NSString * urlStr = [[MABYT3_APIRequest sharedInstance] ChannelURLWithParameters:parameters
-                                                                     withMaxResults:search_maxResults];
-
-   MABYoutubeResponseBlock finishedHandler = ^(YoutubeResponseInfo * responseInfo, NSError * error) {
-       if (!error) {
-          NSMutableArray * array = responseInfo.array;
-          YTYouTubeMABChannel * mabyt3Channel = array[0];
-          NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
-          [YoutubeParser AppendThumbnailWithChannelId:channelId withThumbnailUrl:thumbnailUrl];
-          completion(nil, thumbnailUrl);
-       }
-       else {
-          if (error) {
-
-          }
-       }
-   };
-   [[MABYT3_APIRequest sharedInstance] LISTChannelsForURL:urlStr andHandler:finishedHandler];
+   NSURLSessionDataTask * task =
+    [[MABYT3_APIRequest sharedInstance]
+     LISTChannelsThumbnailsForURL:parameters
+                       completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                           if (responseInfo) {
+                              NSMutableArray * array = responseInfo.array;
+                              YTYouTubeMABChannel * mabyt3Channel = array[0];
+                              NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
+                              [YoutubeParser AppendThumbnailWithChannelId:channelId withThumbnailUrl:thumbnailUrl];
+                              completion(nil, thumbnailUrl);
+                           } else {
+                              NSLog(@"ERROR: %@", error);
+                           }
+                       }];
 
    return nil;
 }
