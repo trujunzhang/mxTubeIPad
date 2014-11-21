@@ -11,16 +11,16 @@
 #import "SearchViewController.h"
 
 #import "VideoDetailViewControlleriPad.h"
-#import "SearchAutoCompleteViewController.h"
+#import "YoutubePopUpTableViewController.h"
 #import "GYoutubeHelper.h"
 
 
-@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UITableViewDelegate, UIPopoverControllerDelegate>
+@interface SearchViewController ()<IpadGridViewCellDelegate, UISearchBarDelegate, YoutubeCollectionNextPageDelegate, UIPopoverControllerDelegate>
 @property(strong, nonatomic) UISegmentedControl * segment_title;
 @property(nonatomic, strong) UISearchBar * searchBar;
 @property(nonatomic, strong) UIBarButtonItem * sarchBarItem;
 
-@property(nonatomic, strong) SearchAutoCompleteViewController * searchAutoCompleteViewController;
+@property(nonatomic, strong) YoutubePopUpTableViewController * searchAutoCompleteViewController;
 @property(nonatomic, strong) UIPopoverController * popover;
 @end
 
@@ -37,7 +37,7 @@
    self.nextPageDelegate = self;
    self.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
 
-   self.searchAutoCompleteViewController = [[SearchAutoCompleteViewController alloc] initWithSelectedDelegate:self];
+   self.searchAutoCompleteViewController = [[YoutubePopUpTableViewController alloc] init];
 
    [self setupNavigationRightItem];
    [self setupNavigationTitle];
@@ -94,6 +94,12 @@
 #pragma mark - UISearchBarDelegate
 
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+   [self segmentAction:nil];
+   [searchBar resignFirstResponder];
+}
+
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
    if (!self.popover)
       [self popAutoCompletDialog];
@@ -101,12 +107,10 @@
    if ([self.searchBar.text isEqualToString:@""]) {
       [self.searchAutoCompleteViewController empty];
       [[GYoutubeHelper getInstance] cancelAutoCompleteSuggestionTask];
-      NSLog(@"%s-empty", sel_getName(_cmd));
       return;
    }
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-       NSLog(@"%s-respObject", sel_getName(_cmd));
        [self.searchAutoCompleteViewController resetTableSource:array];
    };
    ErrorResponseBlock error = ^(NSError * error) {
@@ -158,21 +162,5 @@
                                         animated:YES];
 }
 
-
-#pragma mark - Popover Controller Delegate
-
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-   self.popover = nil;
-}
-
-
-#pragma mark - 
-#pragma mark UITableViewDelegate
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
 
 @end

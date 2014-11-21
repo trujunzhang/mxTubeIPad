@@ -10,7 +10,7 @@
 		5D1231EDA4B596D1A4B52F39 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1CDEDF3CCCA685EE57E69B /* libPods.a */; };
 		5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */; };
 		5E08C3DE19F8B45600F58D3D /* YoutubeGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */; };
-		5E493C611A1F126D00DA134D /* SearchAutoCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E493C601A1F126D00DA134D /* SearchAutoCompleteViewController.m */; };
+		5E493C611A1F126D00DA134D /* YoutubePopUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E493C601A1F126D00DA134D /* YoutubePopUpTableViewController.m */; };
 		5ECE0F2B19F8AB500098CF65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2A19F8AB500098CF65 /* main.m */; };
 		5ECE0F2E19F8AB500098CF65 /* TubeAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F2D19F8AB500098CF65 /* TubeAppDelegate.m */; };
 		5ECE0F3119F8AB500098CF65 /* SubscriptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ECE0F3019F8AB500098CF65 /* SubscriptionsViewController.m */; };
@@ -38,8 +38,8 @@
 		5E08C3DA19F8B45600F58D3D /* YoutubeGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoutubeGridViewController.h; path = CollectionView/YoutubeGridViewController.h; sourceTree = "<group>"; };
 		5E08C3DB19F8B45600F58D3D /* YoutubeGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YoutubeGridViewController.m; path = CollectionView/YoutubeGridViewController.m; sourceTree = "<group>"; };
 		5E08C3DC19F8B45600F58D3D /* YoutubeGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YoutubeGridViewController.xib; path = CollectionView/YoutubeGridViewController.xib; sourceTree = "<group>"; };
-		5E493C5F1A1F126D00DA134D /* SearchAutoCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchAutoCompleteViewController.h; path = popup/SearchAutoCompleteViewController.h; sourceTree = "<group>"; };
-		5E493C601A1F126D00DA134D /* SearchAutoCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchAutoCompleteViewController.m; path = popup/SearchAutoCompleteViewController.m; sourceTree = "<group>"; };
+		5E493C5F1A1F126D00DA134D /* YoutubePopUpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoutubePopUpTableViewController.h; path = popup/YoutubePopUpTableViewController.h; sourceTree = "<group>"; };
+		5E493C601A1F126D00DA134D /* YoutubePopUpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YoutubePopUpTableViewController.m; path = popup/YoutubePopUpTableViewController.m; sourceTree = "<group>"; };
 		5ECE0F2519F8AB500098CF65 /* TubeIPadApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TubeIPadApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECE0F2919F8AB500098CF65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ECE0F2A19F8AB500098CF65 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 		5E493C5E1A1F123000DA134D /* popup */ = {
 			isa = PBXGroup;
 			children = (
-				5E493C5F1A1F126D00DA134D /* SearchAutoCompleteViewController.h */,
-				5E493C601A1F126D00DA134D /* SearchAutoCompleteViewController.m */,
+				5E493C5F1A1F126D00DA134D /* YoutubePopUpTableViewController.h */,
+				5E493C601A1F126D00DA134D /* YoutubePopUpTableViewController.m */,
 			);
 			name = popup;
 			sourceTree = "<group>";
@@ -320,7 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E493C611A1F126D00DA134D /* SearchAutoCompleteViewController.m in Sources */,
+				5E493C611A1F126D00DA134D /* YoutubePopUpTableViewController.m in Sources */,
 				5ECE0F3419F8AB500098CF65 /* SearchViewController.m in Sources */,
 				5E08C3DD19F8B45600F58D3D /* YoutubeGridViewController.m in Sources */,
 				5ECE0F2E19F8AB500098CF65 /* TubeAppDelegate.m in Sources */,

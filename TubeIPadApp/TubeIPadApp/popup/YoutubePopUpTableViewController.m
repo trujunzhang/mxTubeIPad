@@ -1,29 +1,20 @@
 //
-//  SearchAutoCompleteViewController.m
+//  YoutubePopUpTableViewController.m
 //  TubeIPadApp
 //
 //  Created by djzhang on 11/21/14.
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "SearchAutoCompleteViewController.h"
+#import "YoutubePopUpTableViewController.h"
 
 
-@interface SearchAutoCompleteViewController ()<UITableViewDataSource>
+@interface YoutubePopUpTableViewController ()<UITableViewDataSource>
 @property(strong, nonatomic) NSMutableArray * ParsingArray;
 @end
 
 
-@implementation SearchAutoCompleteViewController
-
-- (instancetype)initWithSelectedDelegate:(id<UITableViewDelegate>)selectedDelegate {
-   self = [super init];
-   if (self) {
-      self.selectedDelegate = selectedDelegate;
-   }
-
-   return self;
-}
+@implementation YoutubePopUpTableViewController
 
 
 - (void)viewDidLoad {
@@ -31,10 +22,9 @@
 
    // Do any additional setup after loading the view.
    self.tableView.dataSource = self;
+   self.tableView.delegate = self;
 
    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"popcell"];
-
-   NSAssert(self.selectedDelegate, @"not found UITableViewDelegate instance!");
 }
 
 

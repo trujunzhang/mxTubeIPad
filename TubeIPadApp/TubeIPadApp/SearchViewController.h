@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "CollectionConstant.h"
-@class SearchAutoCompleteViewController;
+@class YoutubePopUpTableViewController;
 
 
 @interface SearchViewController : YTCollectionViewController
