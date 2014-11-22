@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
+
 @protocol YoutubePopUpTableViewDelegate<NSObject>
 
 @required
@@ -17,7 +18,7 @@
 @end
 
 
-@interface YoutubePopUpTableViewController : UITableViewController
+@interface YoutubePopUpTableViewController : UIViewController
 @property(nonatomic, assign) id<YoutubePopUpTableViewDelegate> popupDelegate;
 - (void)resetTableSource:(NSMutableArray *)array;
 - (void)empty;

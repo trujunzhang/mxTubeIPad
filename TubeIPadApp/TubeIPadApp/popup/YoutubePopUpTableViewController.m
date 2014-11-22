@@ -7,9 +7,12 @@
 //
 
 #import "YoutubePopUpTableViewController.h"
+#import <AsyncDisplayKit/AsyncDisplayKit.h>
 
 
-@interface YoutubePopUpTableViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface YoutubePopUpTableViewController ()<ASTableViewDataSource, ASTableViewDelegate> {
+   ASTableView * _tableView;
+}
 @property(strong, nonatomic) NSMutableArray * ParsingArray;
 @end
 
@@ -21,16 +24,21 @@
    [super viewDidLoad];
 
    // Do any additional setup after loading the view.
-   self.tableView.dataSource = self;
-   self.tableView.delegate = self;
+   _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+   _tableView.asyncDataSource = self;
+   _tableView.asyncDelegate = self;
+   [self.view addSubview:_tableView];
+}
 
-   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"popcell"];
+
+- (void)viewWillLayoutSubviews {
+   _tableView.frame = self.view.bounds;
 }
 
 
 - (void)resetTableSource:(NSMutableArray *)array {
    self.ParsingArray = array;
-   [self.tableView reloadData];
+   [_tableView reloadData];
 }
 
 
@@ -54,13 +62,21 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"popcell" forIndexPath:indexPath];
+- (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
+   ASTextCellNode * node = [[ASTextCellNode alloc] init];
+   node.text = self.ParsingArray[indexPath.row];
+   node.backgroundColor = [UIColor whiteColor];
 
-   cell.textLabel.text = self.ParsingArray[indexPath.row];
-
-   return cell;
+   return node;
 }
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"popcell" forIndexPath:indexPath];
+//
+//   cell.textLabel.text = self.ParsingArray[indexPath.row];
+//
+//   return cell;
+//}
 
 
 #pragma mark -
@@ -70,7 +86,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    NSString * value = self.ParsingArray[indexPath.row];
    [self.popupDelegate didSelectRowWithValue:value];
-//
 }
 
 
