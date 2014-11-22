@@ -56,6 +56,8 @@
    NSString * videoTitleValue = video.snippet.title;
    NSString * channelTitleValue = video.snippet.channelTitle;
 
+   NSLog(@" %@", videoThumbnailsUrl);
+
    // Confirm that the result represents a video. Otherwise, the
    // item will not contain a video ID.
    // 1
