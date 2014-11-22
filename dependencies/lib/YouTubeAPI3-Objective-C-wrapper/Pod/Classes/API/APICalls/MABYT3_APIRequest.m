@@ -2061,6 +2061,15 @@
 #pragma mark
 
 
+- (NSString *)parsePageToken:(NSDictionary *)dict {
+   NSString * pageToken = nil;
+   if ([dict objectForKey:@"nextPageToken"]) {
+      pageToken = [dict objectForKey:@"nextPageToken"];
+   }
+   return pageToken;
+}
+
+
 - (NSMutableDictionary *)commonDictionary:(NSMutableDictionary *)parameters maxResultsString:(NSString *)maxResultsString {
    NSMutableDictionary * dictionary = [parameters mutableCopy];
    [dictionary setObject:apiKey forKey:@"key"];
@@ -2076,7 +2085,6 @@
 
 - (YoutubeResponseInfo *)parseVideoListWithData:(NSData *)data {
    NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSString * pageToken = nil;
    NSError * e = nil;
    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
@@ -2091,14 +2099,12 @@
          }
       }
    }
-
-   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:[self parsePageToken:dict]];
 }
 
 
 - (YoutubeResponseInfo *)parseSearchListWithData:(NSData *)data {
    NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSString * pageToken;
    NSError * e = nil;
    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
@@ -2113,17 +2119,12 @@
       }
    }
 
-   if ([dict objectForKey:@"nextPageToken"]) {
-      pageToken = [dict objectForKey:@"nextPageToken"];
-   }
-
-   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:[self parsePageToken:dict]];
 }
 
 
 - (YoutubeResponseInfo *)parseChannelListWithData:(NSData *)data {
    NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSString * pageToken = nil;
    NSError * e = nil;
    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
@@ -2137,13 +2138,13 @@
          }
       }
    }
-   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:[self parsePageToken:dict]];
 }
 
 
 - (YoutubeResponseInfo *)parseActivitiesListWithData:(NSData *)data {
    NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSString * pageToken = nil;
    NSError * e = nil;
    NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingMutableContainers
@@ -2156,9 +2157,9 @@
             [arr addObject:itm];
          }
       }
-
    }
-   return [YoutubeResponseInfo infoWithArray:arr pageToken:pageToken];
+
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:[self parsePageToken:dict]];
 }
 
 @end
