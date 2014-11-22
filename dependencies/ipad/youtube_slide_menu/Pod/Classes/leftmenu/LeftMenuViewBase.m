@@ -16,11 +16,13 @@
 #import "LeftMenuTableHeaderView.h"
 #import "YoutubeAuthDataStore.h"
 
-static const int TABLE_WIDTH = 256;
+static const int TABLE_WIDTH = 258;
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic, strong) UITableView * baseTableView;
+@property(nonatomic, strong) ASImageNode * imageNode;
+
 @end
 
 
@@ -35,8 +37,26 @@ static const int TABLE_WIDTH = 256;
 
    NSAssert(self.baseTableView, @"not found uitableview instance!");
 
+   [self.view addSubview:_imageNode.view];
    [self.view addSubview:self.baseTableView];
 }
+
+
+- (void)setupBackground {
+   _imageNode = [[ASImageNode alloc] init];
+   _imageNode.backgroundColor = [UIColor lightGrayColor];
+   _imageNode.image = [UIImage imageNamed:@"mt_side_menu_bg"];
+}
+
+
+//- (void)setupBackground {
+//   UIImageView * imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
+//   imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+//   imageView.contentMode = UIViewContentModeScaleAspectFit;
+//   imageView.image = [UIImage imageNamed:@"mt_side_menu_bg"];
+//
+//   [self.view addSubview:imageView];
+//}
 
 
 - (void)setCurrentTableView:(UITableView *)tableView {
@@ -54,6 +74,7 @@ static const int TABLE_WIDTH = 256;
    CGRect rect = self.view.bounds;
    rect.size.width = TABLE_WIDTH;
    self.baseTableView.frame = rect;
+   _imageNode.frame = rect;
 }
 
 
@@ -237,16 +258,6 @@ static const int TABLE_WIDTH = 256;
 
 #pragma mark -
 #pragma mark View methods
-
-
-- (void)setupBackground {
-   UIImageView * imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
-   imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-   imageView.contentMode = UIViewContentModeScaleAspectFit;
-   imageView.image = [UIImage imageNamed:@"mt_side_menu_bg"];
-
-   [self.view addSubview:imageView];
-}
 
 
 - (NSArray *)defaultCategories {
