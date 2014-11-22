@@ -152,6 +152,24 @@
 
 
 #pragma mark -
+#pragma mark  Fetch video list by channelID
+
+
+- (void)fetchVideoListFromChannelWithChannelId:(NSString *)channelId {
+//   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
+
+   [self cleanup];
+
+   [[self getYoutubeRequestInfo] resetRequestInfoForVideoListFromChannelWithChannelId:channelId];
+}
+
+
+- (void)fetchVideoListFromChannelByPageToken {
+   [self searchByPageToken];
+}
+
+
+#pragma mark -
 #pragma mark  Fetch Activity list by channelID
 
 
