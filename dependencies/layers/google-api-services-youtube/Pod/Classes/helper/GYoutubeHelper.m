@@ -566,7 +566,7 @@ static GYoutubeHelper * instance = nil;
 
 - (void)fetchActivityListWithRequestInfo:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
    NSMutableDictionary * parameters = [info.parameters mutableCopy];
-   [parameters setObject:@"id,snippet,contentDetails" forKey:@"part"];
+   [parameters setObject:@"id,contentDetails" forKey:@"part"];
    [parameters setObject:info.channelId forKey:@"channelId"];
 
    NSURLSessionDataTask * task =
@@ -590,10 +590,13 @@ static GYoutubeHelper * instance = nil;
 
 #pragma mark -
 #pragma mark Search auto complete
--(void)cancelAutoCompleteSuggestionTask{
+
+
+- (void)cancelAutoCompleteSuggestionTask {
    [[MABYT3_AutoCompleteRequest sharedInstance] cancelAllTask];
 
 }
+
 
 - (void)autoCompleteSuggestions:(NSString *)searchWish CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
    //client=youtube&ds=yt&alt=json&q=%@
