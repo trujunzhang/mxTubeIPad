@@ -21,58 +21,11 @@
 
 @property(nonatomic, strong) STCollapseTableView * tableView;
 
-@property(nonatomic, strong) NSMutableArray * headers;
 
 @end
 
 
 @implementation LeftMenuViewController
-
-- (void)setupViewController:(NSArray *)subscriptionsArray {
-   LeftMenuItemTree * defaultMenuItemTree =
-    [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
-                                   itemType:LMenuTreeCategories
-                                  rowsArray:[self defaultCategories]
-                                  hideTitle:NO
-                                remoteImage:NO
-                             cellIdentifier:@"CategoriesCellIdentifier"];
-
-
-   self.tableSectionArray = @[ defaultMenuItemTree ];
-   if ([[GYoutubeHelper getInstance] isSignedIn]) {
-      LeftMenuItemTree * signUserMenuItemTree =
-       [[LeftMenuItemTree alloc] initWithTitle:@"  "
-                                      itemType:LMenuTreeUser
-                                     rowsArray:[self signUserCategories]
-                                     hideTitle:YES
-                                   remoteImage:NO
-                                cellIdentifier:@"SignUserCellIdentifier"];
-      LeftMenuItemTree * subscriptionsMenuItemTree =
-       [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
-                                      itemType:LMenuTreeSubscriptions
-                                     rowsArray:subscriptionsArray
-                                     hideTitle:NO
-                                   remoteImage:YES
-                                cellIdentifier:@"SubscriptionsCellIdentifier"];
-      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
-//      self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
-   }
-
-
-   self.headers = [[NSMutableArray alloc] init];
-
-   for (int i = 0; i < [self.tableSectionArray count]; i++) {
-      LeftMenuItemTree * menuItemTree = self.tableSectionArray[i];
-
-      LeftMenuTableHeaderView * header = [[[NSBundle mainBundle] loadNibNamed:@"LeftMenuTableHeaderView"
-                                                                        owner:nil
-                                                                      options:nil] lastObject];
-      [header setupUI:menuItemTree.title];
-      [self.headers addObject:header];
-   }
-
-}
-
 
 - (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user {
    if (user == nil)
@@ -111,6 +64,10 @@
 
    [self setupTableViewExclusiveState];
 }
+
+
+#pragma mark -
+#pragma mark UITableViewDataSource
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -162,6 +119,10 @@
 }
 
 
+#pragma mark -
+#pragma mark UITableViewDelegate
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    NSInteger section = indexPath.section;
    NSInteger row = indexPath.row;
@@ -183,6 +144,10 @@
       }
    }
 }
+
+
+#pragma mark -
+#pragma mark Async refresh Table View
 
 
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {

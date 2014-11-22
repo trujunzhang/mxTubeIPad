@@ -27,6 +27,9 @@
 @property(nonatomic, strong) UIImage * placeholderImage;
 @property(nonatomic, strong) NSArray * tableSectionArray;
 
+@property(nonatomic, strong) NSMutableArray * headers;
+
+- (void)setupViewController:(NSArray *)subscriptionsArray;
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user;
 
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row;

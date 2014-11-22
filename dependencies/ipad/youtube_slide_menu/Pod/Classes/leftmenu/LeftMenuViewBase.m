@@ -13,6 +13,7 @@
 #import "UserInfoView.h"
 #import "LeftMenuItemTree.h"
 #import "ImageViewEffect.h"
+#import "LeftMenuTableHeaderView.h"
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
@@ -31,6 +32,56 @@
 
    // 2
    self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
+}
+
+
+#pragma mark -
+#pragma mark setup
+
+
+- (void)setupViewController:(NSArray *)subscriptionsArray {
+   LeftMenuItemTree * defaultMenuItemTree =
+    [[LeftMenuItemTree alloc] initWithTitle:@"  Categories"
+                                   itemType:LMenuTreeCategories
+                                  rowsArray:[self defaultCategories]
+                                  hideTitle:NO
+                                remoteImage:NO
+                             cellIdentifier:@"CategoriesCellIdentifier"];
+
+
+   self.tableSectionArray = @[ defaultMenuItemTree ];
+   if ([[GYoutubeHelper getInstance] isSignedIn]) {
+      LeftMenuItemTree * signUserMenuItemTree =
+       [[LeftMenuItemTree alloc] initWithTitle:@"  "
+                                      itemType:LMenuTreeUser
+                                     rowsArray:[self signUserCategories]
+                                     hideTitle:YES
+                                   remoteImage:NO
+                                cellIdentifier:@"SignUserCellIdentifier"];
+      LeftMenuItemTree * subscriptionsMenuItemTree =
+       [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
+                                      itemType:LMenuTreeSubscriptions
+                                     rowsArray:subscriptionsArray
+                                     hideTitle:NO
+                                   remoteImage:YES
+                                cellIdentifier:@"SubscriptionsCellIdentifier"];
+      self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
+//      self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
+   }
+
+
+   self.headers = [[NSMutableArray alloc] init];
+
+   for (int i = 0; i < [self.tableSectionArray count]; i++) {
+      LeftMenuItemTree * menuItemTree = self.tableSectionArray[i];
+
+      LeftMenuTableHeaderView * header = [[[NSBundle mainBundle] loadNibNamed:@"LeftMenuTableHeaderView"
+                                                                        owner:nil
+                                                                      options:nil] lastObject];
+      [header setupUI:menuItemTree.title];
+      [self.headers addObject:header];
+   }
+
 }
 
 
