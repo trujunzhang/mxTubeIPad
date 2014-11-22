@@ -30,7 +30,7 @@ static const int TABLE_WIDTH = 256;
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-//   [self setupBackground];
+   [self setupBackground];
    self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
 
    NSAssert(self.baseTableView, @"not found uitableview instance!");
@@ -47,7 +47,6 @@ static const int TABLE_WIDTH = 256;
    self.baseTableView.showsVerticalScrollIndicator = NO;
    self.baseTableView.autoresizesSubviews = YES;
    self.baseTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-
 }
 
 
@@ -62,7 +61,7 @@ static const int TABLE_WIDTH = 256;
 #pragma mark setup
 
 
-- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user withTableView:(UITableView *)tableView {
+- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user {
    if (user == nil)
       user = [[[YoutubeAuthDataStore alloc] init] readAuthUserInfo];
 

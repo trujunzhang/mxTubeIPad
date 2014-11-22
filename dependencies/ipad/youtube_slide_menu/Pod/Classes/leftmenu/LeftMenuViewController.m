@@ -43,7 +43,7 @@
 
    // 2
    [self setupViewController:[[NSArray alloc] init]];
-   [self setupSlideTableViewWithAuthInfo:nil withTableView:self.tableView];
+   [self setupSlideTableViewWithAuthInfo:nil];
 
    [self setupTableViewExclusiveState];
 
@@ -139,7 +139,7 @@
    self.authUser = user;
    // 1
    [self setupViewController:[user getTableRows]];
-   [self setupSlideTableViewWithAuthInfo:nil withTableView:nil];
+   [self setupSlideTableViewWithAuthInfo:nil];
 
    // 2
    [self.tableView reloadData];
@@ -150,6 +150,6 @@
 
 
 - (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
-   [self setupSlideTableViewWithAuthInfo:info withTableView:nil];
+   [self setupSlideTableViewWithAuthInfo:info];
 }
 @end

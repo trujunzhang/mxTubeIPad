@@ -30,7 +30,7 @@
 @property(nonatomic, strong) NSMutableArray * headers;
 
 - (void)setCurrentTableView:(UITableView *)tableView;
-- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user withTableView:(UITableView *)tableView;
+- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user;
 - (void)setupViewController:(NSArray *)subscriptionsArray;
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user;
 
