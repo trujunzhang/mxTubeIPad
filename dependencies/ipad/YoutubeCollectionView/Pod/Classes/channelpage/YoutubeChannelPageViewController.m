@@ -24,6 +24,7 @@
 
 @property(nonatomic, strong) NSMutableArray * defaultTableControllers;
 
+@property(nonatomic) YTSegmentItemType selectedSegmentItemType;
 @property(nonatomic, strong) YTCollectionViewController * selectedController;
 
 @property(nonatomic, strong) YTCollectionViewController * firstViewController;
@@ -114,7 +115,10 @@
 
 - (void)fetchListWithController:(YTCollectionViewController *)controller withType:(YTSegmentItemType)type {
    self.selectedController = controller;
-   [self.selectedController fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
+   self.selectedSegmentItemType = type;
+
+   [self executeRefreshTask];
+//   [self.selectedController fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }
 
 
@@ -123,7 +127,7 @@
 
 
 - (void)executeRefreshTask {
-   [self.selectedController fetchActivityListByType:YTSegmentItemVideo
+   [self.selectedController fetchActivityListByType:self.selectedSegmentItemType
                                       withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }
 
