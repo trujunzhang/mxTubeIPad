@@ -54,7 +54,8 @@
 #import "MABYT3_SearchItem.h"
 #include "MABYT3_Activity.h"
 #import "MABYT3_Channel.h"
-
+#import "MABYT3_ActivityContentDetails.h"
+#import "MABYT3_ResourceId.h"
 
 
 // common
@@ -91,6 +92,9 @@
 #define YTYouTubeSearchResult  MABYT3_SearchItem
 
 #define YTYouTubeActivity  MABYT3_Activity
+#define YTYouTubeActivityContentDetails  MABYT3_ActivityContentDetails
+#define YTYouTubeResourceId  MABYT3_ResourceId
+
 
 
 //#define hasShowLeftMenu NO

@@ -31,9 +31,26 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 + (NSString *)getVideoIdsByActivityList:searchResultList {
    NSMutableArray * videoIds = [[NSMutableArray alloc] init];
    for (YTYouTubeActivity * searchResult in searchResultList) {
-      [videoIds addObject:searchResult.contentDetails.upload.videoId];
+      MABYT3_ResourceId * resourceId = [self getResourceIDByActivity:searchResult.contentDetails];
+      if (resourceId)
+         [videoIds addObject:resourceId.videoId];
    }
    return [videoIds componentsJoinedByString:@","];
+}
+
+
++ (MABYT3_ResourceId *)getResourceIDByActivity:(YTYouTubeActivityContentDetails *)contentDetails {
+   NSArray * resourceArray = @[
+    contentDetails.upload,
+    contentDetails.like,
+   ];
+
+   for (YTYouTubeResourceId * resourceId in resourceArray) {
+      if (resourceId.videoId)
+         return resourceId.videoId;
+   }
+
+   return nil;
 }
 
 
