@@ -49,16 +49,6 @@ static const int TABLE_WIDTH = 258;
 }
 
 
-//- (void)setupBackground {
-//   UIImageView * imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
-//   imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-//   imageView.contentMode = UIViewContentModeScaleAspectFit;
-//   imageView.image = [UIImage imageNamed:@"mt_side_menu_bg"];
-//
-//   [self.view addSubview:imageView];
-//}
-
-
 - (void)setCurrentTableView:(UITableView *)tableView {
    self.baseTableView = tableView;
 
