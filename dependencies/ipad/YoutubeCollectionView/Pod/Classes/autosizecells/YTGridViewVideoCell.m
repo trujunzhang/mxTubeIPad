@@ -48,7 +48,7 @@
 }
 
 
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
+- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
    self.video = video;
    self.delegate = delegate;
 
@@ -56,22 +56,16 @@
    NSString * videoTitleValue = video.snippet.title;
    NSString * channelTitleValue = video.snippet.channelTitle;
 
-   NSLog(@" %@", videoThumbnailsUrl);
+//   NSLog(@" %@", videoThumbnailsUrl);
 
    // Confirm that the result represents a video. Otherwise, the
    // item will not contain a video ID.
    // 1
-   ASImageNode * imageNode = [[ASImageNode alloc] init];
-   imageNode.backgroundColor = [UIColor lightGrayColor];
-   imageNode.frame = self.videoThumbnailsContainer.bounds;
-   imageNode.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-   [self.videoThumbnailsContainer addSubview:imageNode.view];
-
-   [ImageCacheImplement CacheWithImageView:imageNode
-                                       key:video.identifier
-                                   withUrl:videoThumbnailsUrl
-                           withPlaceholder:image
-   ];
+   ASImageNode * imageNode = [self getThumbnailsImageNode:video
+                                         placeholderImage:placeholder
+                                       videoThumbnailsUrl:videoThumbnailsUrl];
+   imageNode.borderColor = [[UIColor whiteColor] CGColor];
+   imageNode.borderWidth = 2;
 
    // configure the button
    imageNode.userInteractionEnabled = YES; // opt into touch handling
@@ -79,6 +73,7 @@
                  action:@selector(tapDetected)
        forControlEvents:ASControlNodeEventTouchUpInside];
 
+   [self.videoThumbnailsContainer addSubview:imageNode.view];
 
    // 2
    [self.videoTitle setText:videoTitleValue];
@@ -93,6 +88,34 @@
    NSUInteger text = video.contentDetails.duration;
    NSString * string = [YoutubeParser timeFormatConvertToSecondsWithInteger:video.contentDetails.duration];
 
+}
+
+
+//- (ASImageNode *)getThumbnailsImageNode:(MABYT3_Video *)video placeholderImage:(UIImage *)image videoThumbnailsUrl:(NSString *)videoThumbnailsUrl {
+//   ASNetworkImageNode * _imageNode = [[ASNetworkImageNode alloc] initWithCache:nil
+//                                                                    downloader:[[ASBasicImageDownloader alloc] init]];
+//   _imageNode.backgroundColor = [UIColor purpleColor];
+//   _imageNode.URL = [NSURL URLWithString:videoThumbnailsUrl];
+//   _imageNode.borderColor = [[UIColor whiteColor] CGColor];
+//   _imageNode.borderWidth = 8;
+//
+//   return _imageNode;
+//}
+
+
+- (ASImageNode *)getThumbnailsImageNode:(MABYT3_Video *)video placeholderImage:(UIImage *)image videoThumbnailsUrl:(NSString *)videoThumbnailsUrl {
+   ASImageNode * imageNode = [[ASImageNode alloc] init];
+   imageNode.backgroundColor = [UIColor lightGrayColor];
+   imageNode.frame = self.videoThumbnailsContainer.bounds;
+   imageNode.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+
+   [ImageCacheImplement CacheWithImageView:imageNode
+                                       key:video.identifier
+                                   withUrl:videoThumbnailsUrl
+                           withPlaceholder:image
+   ];
+   return imageNode;
 }
 
 

@@ -23,5 +23,5 @@
 @property(strong, nonatomic) IBOutlet UIView * videoInfoContainer;
 
 
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
+- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end
