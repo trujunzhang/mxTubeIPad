@@ -30,20 +30,24 @@ static const int TABLE_WIDTH = 256;
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   [self setupBackground];
+//   [self setupBackground];
    self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
 
    NSAssert(self.baseTableView, @"not found uitableview instance!");
+
+   [self.view addSubview:self.baseTableView];
 }
 
 
 - (void)setCurrentTableView:(UITableView *)tableView {
    self.baseTableView = tableView;
+
    self.baseTableView.backgroundColor = [UIColor clearColor];
    self.baseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
    self.baseTableView.showsVerticalScrollIndicator = NO;
    self.baseTableView.autoresizesSubviews = YES;
    self.baseTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
 }
 
 
@@ -62,7 +66,7 @@ static const int TABLE_WIDTH = 256;
    if (user == nil)
       user = [[[YoutubeAuthDataStore alloc] init] readAuthUserInfo];
 
-   tableView.tableHeaderView = [self getUserHeaderView:user];
+   self.baseTableView.tableHeaderView = [self getUserHeaderView:user];
 }
 
 
