@@ -14,10 +14,13 @@
 #import "LeftMenuItemTree.h"
 #import "ImageViewEffect.h"
 #import "LeftMenuTableHeaderView.h"
+#import "YoutubeAuthDataStore.h"
+
+static const int TABLE_WIDTH = 256;
 
 
 @interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
-
+@property(nonatomic, strong) UITableView * baseTableView;
 @end
 
 
@@ -27,16 +30,40 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   // 1
    [self setupBackground];
-
-   // 2
    self.placeholderImage = [self imageWithColor:[UIColor clearColor]];
+
+   NSAssert(self.baseTableView, @"not found uitableview instance!");
+}
+
+
+- (void)setCurrentTableView:(UITableView *)tableView {
+   self.baseTableView = tableView;
+   self.baseTableView.backgroundColor = [UIColor clearColor];
+   self.baseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   self.baseTableView.showsVerticalScrollIndicator = NO;
+   self.baseTableView.autoresizesSubviews = YES;
+   self.baseTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+}
+
+
+- (void)viewWillLayoutSubviews {
+   CGRect rect = self.view.bounds;
+   rect.size.width = TABLE_WIDTH;
+   self.baseTableView.frame = rect;
 }
 
 
 #pragma mark -
 #pragma mark setup
+
+
+- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user withTableView:(UITableView *)tableView {
+   if (user == nil)
+      user = [[[YoutubeAuthDataStore alloc] init] readAuthUserInfo];
+
+   tableView.tableHeaderView = [self getUserHeaderView:user];
+}
 
 
 - (void)setupViewController:(NSArray *)subscriptionsArray {

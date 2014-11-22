@@ -6,33 +6,22 @@
 //  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
-#import <Business-Logic-Layer/YoutubeAuthInfo.h>
-#import <google-api-services-youtube/GYoutubeHelper.h>
+
 #import "LeftMenuViewController.h"
 
+#import "LeftMenuViewBase.h"
 #import "STCollapseTableView.h"
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
-#import "YoutubeAuthDataStore.h"
 #import "LeftMenuTableHeaderView.h"
 
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
-
 @property(nonatomic, strong) STCollapseTableView * tableView;
-
-
 @end
 
 
 @implementation LeftMenuViewController
-
-- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user {
-   if (user == nil)
-      user = [[[YoutubeAuthDataStore alloc] init] readAuthUserInfo];
-
-   self.tableView.tableHeaderView = [self getUserHeaderView:user];
-}
 
 
 - (void)setupTableViewExclusiveState {
@@ -44,25 +33,22 @@
 
 
 - (void)viewDidLoad {
-   [super viewDidLoad];
-
    // 1
-   CGRect rect = self.view.frame;
-   rect.size.width = 256;
-   self.tableView = [[STCollapseTableView alloc] initWithFrame:rect style:UITableViewStylePlain];
-   self.tableView.backgroundColor = [UIColor clearColor];
-   self.tableView.showsVerticalScrollIndicator = NO;
-   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   self.tableView = [[STCollapseTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+
    self.tableView.dataSource = self;
    self.tableView.delegate = self;
 
    [self.view addSubview:self.tableView];
+   [self setCurrentTableView:self.tableView];
 
    // 2
    [self setupViewController:[[NSArray alloc] init]];
-   [self setupSlideTableViewWithAuthInfo:nil];
+   [self setupSlideTableViewWithAuthInfo:nil withTableView:self.tableView];
 
    [self setupTableViewExclusiveState];
+
+   [super viewDidLoad];
 }
 
 
@@ -154,7 +140,7 @@
    self.authUser = user;
    // 1
    [self setupViewController:[user getTableRows]];
-   [self setupSlideTableViewWithAuthInfo:nil];
+   [self setupSlideTableViewWithAuthInfo:nil withTableView:nil];
 
    // 2
    [self.tableView reloadData];
@@ -165,6 +151,6 @@
 
 
 - (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
-   [self setupSlideTableViewWithAuthInfo:info];
+   [self setupSlideTableViewWithAuthInfo:info withTableView:nil];
 }
 @end

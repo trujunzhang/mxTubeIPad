@@ -29,6 +29,8 @@
 
 @property(nonatomic, strong) NSMutableArray * headers;
 
+- (void)setCurrentTableView:(UITableView *)tableView;
+- (void)setupSlideTableViewWithAuthInfo:(YoutubeAuthInfo *)user withTableView:(UITableView *)tableView;
 - (void)setupViewController:(NSArray *)subscriptionsArray;
 - (UIView *)getUserHeaderView:(YoutubeAuthInfo *)user;
 
@@ -38,5 +40,4 @@
 - (NSArray *)signUserCategories;
 
 @property(nonatomic, assign) id<LeftMenuViewBaseDelegate> delegate;
-
 @end
