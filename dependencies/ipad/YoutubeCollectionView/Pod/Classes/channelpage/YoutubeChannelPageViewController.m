@@ -110,6 +110,7 @@
 - (void)tabBarController:(WHTopTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
    NSUInteger integer = tabBarController.selectedIndex;
    NSString * debug = @"debug";
+   [self fetchListWithController:viewController withType:integer];
 }
 
 
@@ -118,7 +119,6 @@
    self.selectedSegmentItemType = type;
 
    [self executeRefreshTask];
-//   [self.selectedController fetchActivityListByType:type withChannelId:[YoutubeParser getChannelId:self.subscription]];
 }
 
 
@@ -127,14 +127,31 @@
 
 
 - (void)executeRefreshTask {
-   [self.selectedController fetchActivityListByType:self.selectedSegmentItemType
-                                      withChannelId:[YoutubeParser getChannelId:self.subscription]];
+   switch (self.selectedSegmentItemType) {
+      case YTSegmentItemVideo:
+         [self.selectedController fetchActivityListByType:self.selectedSegmentItemType
+                                            withChannelId:[YoutubeParser getChannelId:self.subscription]];
+         break;
+      case YTSegmentItemChannel:
+         [self.selectedController fetchVideoListFromChannelWithChannelId:[YoutubeParser getChannelId:self.subscription]];
+         break;
+      case YTSegmentItemPlaylist:
+         break;
+   }
 }
 
 
 - (void)executeNextPageTask {
-   [self.selectedController fetchActivityListByPageToken];
-
+   switch (self.selectedSegmentItemType) {
+      case YTSegmentItemVideo:
+         [self.selectedController fetchActivityListByPageToken];
+         break;
+      case YTSegmentItemChannel:
+         [self.selectedController fetchVideoListFromChannelByPageToken];
+         break;
+      case YTSegmentItemPlaylist:
+         break;
+   }
 }
 
 
