@@ -11,6 +11,15 @@
 
 @implementation VideoDetailPanel
 
+- (instancetype)initWithVideo:(YTYouTubeVideo *)video {
+   self = [super init];
+   if (self) {
+      self.video = video;
+   }
+
+   return self;
+}
+
 
 - (id)initWithFrame:(CGRect)frame {
    self = [super initWithFrame:frame];
@@ -31,8 +40,16 @@
       // 加载nib
 //      self = [arrayOfViews objectAtIndex:0];
       self = [arrayOfViews objectAtIndex:0];
+
+
+      [self bind];
    }
    return self;
+}
+
+
+- (void)bind {
+
 }
 
 

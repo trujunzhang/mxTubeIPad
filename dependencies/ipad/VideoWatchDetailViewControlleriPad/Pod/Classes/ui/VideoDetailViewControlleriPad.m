@@ -81,7 +81,7 @@
    self.videoDetailController = [[UIViewController alloc] init];
    self.videoDetailController.title = @"Info";
 
-   VideoDetailPanel * videoDetailPanel = [[VideoDetailPanel alloc] init];
+   VideoDetailPanel * videoDetailPanel = [[VideoDetailPanel alloc] initWithVideo:self.video];
 
    self.videoDetailController.view = videoDetailPanel;
 
