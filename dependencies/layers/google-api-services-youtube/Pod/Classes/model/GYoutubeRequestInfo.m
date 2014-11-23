@@ -104,15 +104,13 @@
 
 
 - (void)resetRequestInfoForPlayListFromChannelWithChannelId:(NSString *)channelId {
-   self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
+   self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemPlaylist];
    self.queryTeam = @"";
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
    self.nextPageToken = @"";
    self.hasLoadingMore = YES;
-
-//   GET https://www.googleapis.com/youtube/v3/playlists?part=id%2Csnippet&channelId=UCl78QGX_hfK6zT8Mc-2w8GA&key={YOUR_API_KEY}
 
    NSDictionary * parameters = @{
     @"channelId" : channelId,

@@ -2206,7 +2206,7 @@
       NSArray * items = [dict objectForKey:@"items"];
       if (items.count > 0) {
          for (int i = 0; i < items.count; i++) {
-            MABYT3_PlayListItem * itm = [[MABYT3_PlayListItem alloc] initFromDictionary:items[i]];
+            MABYT3_PlayList * itm = [[MABYT3_PlayList alloc] initFromDictionary:items[i]];
             [arr addObject:itm];
          }
       }

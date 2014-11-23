@@ -116,13 +116,25 @@
                                                                                     forIndexPath:indexPath];
 
 
-   if (itemType == YTSegmentItemVideo) {
-      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-      YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
-      [gridViewVideoCell bind:video
-             placeholderImage:self.placeHolderImage
-                     delegate:self.delegate];
+   switch (itemType) {
+      case YTSegmentItemVideo: {
+         YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+         YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
+         [gridViewVideoCell bind:video
+                placeholderImage:self.placeHolderImage
+                        delegate:self.delegate];
+      }
+         break;
+      case YTSegmentItemPlaylist: {
+         YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+         YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
+         [gridViewVideoCell bind:video
+                placeholderImage:self.placeHolderImage
+                        delegate:self.delegate];
+      }
+         break;
    }
+
 
    return viewCell;
 }
