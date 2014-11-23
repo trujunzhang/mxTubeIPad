@@ -206,43 +206,6 @@
 }
 
 
-- (NSString *)VideoURLforVideoWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
-   NSString * paramS = @"";
-   for (NSString * key in [params allKeys]) {
-      paramS = [NSString stringWithFormat:@"%@&%@=%@", paramS, key, [params objectForKey:key]];
-   }
-   if (max != 5) {
-      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/videos?%@",
-                                     paramS];
-}
-
-
-- (NSString *)VideoURLforVideo:(NSString *)videoId withMaxResults:(NSInteger)max {
-
-   if (max == 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/videos?part=id,snippet,contentDetails,statistics&id=%@",
-                                        videoId];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/videos?part=id,snippet,contentDetails,statistics&id=%@&maxResults=%@",
-                                     videoId,
-                                     [@(max) stringValue]];
-}
-
-
-- (NSString *)ChannelURLforId:(NSString *)channelId withMaxResults:(NSInteger)max {
-
-   if (max == 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/channels?part=id,snippet,contentDetails&id=%@",
-                                        channelId];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/channels?part=id,snippet,contentDetails&id=%@&maxResults=%@",
-                                     channelId,
-                                     [@(max) stringValue]];
-}
-
-
 - (void)LISTActivitiesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
 
    __block NSString * nxtURLStr = @"";

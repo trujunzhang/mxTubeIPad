@@ -45,11 +45,6 @@ static NSUInteger search_maxResults = 15;
 - (NSString *)RegionsURLforLanguae:(NSString *)lang;
 
 
-- (NSString *)VideoURLforVideoWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
-- (NSString *)VideoURLforVideo:(NSString *)videoId withMaxResults:(NSInteger)max;
-- (NSString *)ChannelURLforId:(NSString *)channelId withMaxResults:(NSInteger)max;
-
-
 - (void)LISTActivitiesForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTChannelSectionsForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
 - (void)LISTChannelsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
