@@ -39,27 +39,11 @@ static NSUInteger search_maxResults = 15;
 @interface MABYT3_APIRequest : AFHTTPSessionManager
 + (MABYT3_APIRequest *)sharedInstance;
 
-- (NSString *)ActivitiesURLforUser:(MABYT3_Channel *)channel withMaxResults:(NSInteger)max;
-- (NSString *)ChannelURLWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
-- (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
-- (NSString *)ActivitiesURLforHomeWithMaxResults:(NSInteger)max;
-- (NSString *)ActivitiesURLforMeWithMaxResults:(NSInteger)max;
 
 - (NSString *)GuidedCategoriesURLforRegion:(NSString *)reg andLanguage:(NSString *)lang;
 - (NSString *)LanguagesURLforLanguae:(NSString *)lang;
 - (NSString *)RegionsURLforLanguae:(NSString *)lang;
 
-
-- (NSString *)PlayListItemsURLforPlayList:(NSString *)playlistId withMaxResults:(NSInteger)max;
-- (NSString *)PlayListsURLforMewithMaxResults:(NSInteger)max;
-- (NSString *)PlayListsURLforChannel:(NSString *)channelId withMaxResults:(NSInteger)max;
-- (NSString *)PlayListsURLforPlayList:(NSString *)playlistId withMaxResults:(NSInteger)max;
-
-
-- (NSString *)VideoSearchURLforTermWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
-- (NSString *)VideoSearchURLforTerm:(NSString *)term queryType:(NSString *)queryType withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max;
-- (NSString *)ChannelSearchURLforTerm:(NSString *)term withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max;
-- (NSString *)PlayListSearchURLforTerm:(NSString *)term withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max;
 
 - (NSString *)VideoURLforVideoWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max;
 - (NSString *)VideoURLforVideo:(NSString *)videoId withMaxResults:(NSInteger)max;

@@ -94,13 +94,11 @@
    [scanner scanUpToString:@"]]" intoString:&json];
    //The idea is to identify where the "real" JSON begins and ends.
    json = [NSString stringWithFormat:@"%@%@", json, @"]]"];
-//   NSLog(@"json = %@", json);
 
    NSArray * jsonObject = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] //Push all the JSON autocomplete detail in to jsonObject array.
                                                           options:0 error:NULL];
    for (int i = 0; i != [jsonObject count]; i++) {
       for (int j = 0; j != 1; j++) {
-//         NSLog(@"%@", [[jsonObject objectAtIndex:i] objectAtIndex:j]);
          [arr addObject:[[jsonObject objectAtIndex:i] objectAtIndex:j]];
       }
    }
@@ -138,50 +136,6 @@
 }
 
 
-- (NSString *)ActivitiesURLforUser:(MABYT3_Channel *)channel withMaxResults:(NSInteger)max {
-   return [self ActivitiesURLforUserWithChannelId:channel.identifier withParameters:nil withMaxResults:max];
-}
-
-
-- (NSString *)ActivitiesURLforUserWithChannelId:(NSString *)channelId withParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
-   NSString * paramS = [self getParameterString:params];
-   if (max != 5) {
-      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&channelId=%@%@",
-                                     channelId, paramS];
-}
-
-
-- (NSString *)ChannelURLWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
-   NSString * paramS = [self getParameterString:params];
-   if (max != 5) {
-      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/channels?%@", paramS];
-}
-
-
-- (NSString *)ActivitiesURLforMeWithMaxResults:(NSInteger)max {
-
-   if (max != 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&mine=true&maxResults=%@",
-                                        [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&mine=true"];
-}
-
-
-- (NSString *)ActivitiesURLforHomeWithMaxResults:(NSInteger)max {
-
-   if (max != 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&home=true&maxResults=%@",
-                                        [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/activities?part=id,snippet,contentDetails&home=true"];
-}
-
-
 - (NSString *)GuidedCategoriesURLforRegion:(NSString *)reg andLanguage:(NSString *)lang {
 
    if ([lang isEqualToString:@""]) {
@@ -210,74 +164,6 @@
       return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/i18nRegions?part=id,snippet"];
    }
    return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/i18nRegions?part=id,snippet&hl=%@", lang];
-}
-
-
-- (NSString *)PlayListItemsURLforPlayList:(NSString *)playlistId withMaxResults:(NSInteger)max {
-
-   if (max == 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=%@",
-                                        playlistId];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&maxResults=%@&playlistId=%@",
-                                     [@(max) stringValue],
-                                     playlistId];
-}
-
-
-- (NSString *)PlayListsURLforMewithMaxResults:(NSInteger)max {
-
-   if (max == 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&mine=true"];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&maxResults=%@&mine=true",
-                                     [@(max) stringValue]];
-}
-
-
-- (NSString *)PlayListsURLforChannel:(NSString *)channelId withMaxResults:(NSInteger)max {
-
-   if (max == 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&channelId=%@",
-                                        channelId];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&maxResults=%@&channelId=%@",
-                                     [@(max) stringValue],
-                                     channelId];
-}
-
-
-- (NSString *)PlayListsURLforPlayList:(NSString *)playlistId withMaxResults:(NSInteger)max {
-
-   if (max == 5) {
-      return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&id=%@",
-                                        playlistId];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/playlists?part=id,snippet,contentDetails&maxResults=%@&id=%@",
-                                     [@(max) stringValue],
-                                     playlistId];
-}
-
-
-- (NSString *)VideoSearchURLforTermWithParameters:(NSDictionary *)params withMaxResults:(NSInteger)max {
-   NSString * paramS = [self getParameterString:params];
-   if (max != 5) {
-      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?%@", paramS];
-}
-
-
-- (NSString *)VideoSearchURLforTerm:(NSString *)term queryType:(NSString *)queryType withParameters:(NSDictionary *)params andMaxResults:(NSInteger)max {
-
-   NSString * paramS = [self getParameterString:params];
-   if (max != 5) {
-      paramS = [NSString stringWithFormat:@"%@&maxResults=%@", paramS, [@(max) stringValue]];
-   }
-   return [NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=id,snippet&q=%@&type=%@%@",
-                                     term,
-                                     queryType,
-                                     paramS];
 }
 
 
