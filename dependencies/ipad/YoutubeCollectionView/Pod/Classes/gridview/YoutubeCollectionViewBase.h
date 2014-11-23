@@ -36,6 +36,8 @@
 - (void)fetchActivityListByPageToken;
 - (void)fetchVideoListFromChannelWithChannelId:(NSString *)channelId;
 - (void)fetchVideoListFromChannelByPageToken;
+- (void)fetchPlayListFromChannelWithChannelId:(NSString *)channelId;
+- (void)fetchPlayListFromChannelByPageToken;
 - (void)fetchPlayListByType:(YTPlaylistItemsType)playlistItemsType;
 - (void)fetchPlayListByPageToken;
 - (void)fetchSuggestionListByVideoId:(NSString *)videoId;

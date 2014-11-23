@@ -170,13 +170,49 @@
 
 
 #pragma mark -
+#pragma mark  Fetch playLists by channelID
+
+
+- (void)fetchPlayListFromChannelWithChannelId:(NSString *)channelId {
+//   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
+
+   [self cleanup];
+
+   [[self getYoutubeRequestInfo] resetRequestInfoForPlayListFromChannelWithChannelId:channelId];
+}
+
+
+- (void)fetchPlayListFromChannelByPageToken {
+   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
+      return;
+
+//   NSLog(@" *** fetchPlayListFromChannelByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
+
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
+       [self.refreshControl endRefreshing];
+
+       [[self getYoutubeRequestInfo] appendNextPageData:array];
+
+       [[self baseCollectionView] reloadData];
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[GYoutubeHelper getInstance] fetchPlaylistItemsListWithRequestInfo:[self getYoutubeRequestInfo]
+                                                            completion:completion
+                                                          errorHandler:error
+   ];
+}
+
+
+#pragma mark -
 #pragma mark  Fetch Activity list by channelID
 
 
 - (void)fetchPlayListByType:(YTPlaylistItemsType)playlistItemsType {
    [self cleanup];
 
-   NSLog(@" *** fetchPlayListByType = %d", [[self getYoutubeRequestInfo] hasNextPage]);
+//   NSLog(@" *** fetchPlayListByType = %d", [[self getYoutubeRequestInfo] hasNextPage]);
    [[self getYoutubeRequestInfo] resetRequestInfoForPlayList:playlistItemsType];
 }
 
@@ -185,7 +221,7 @@
    if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
       return;
 
-   NSLog(@" *** fetchPlayListByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
+//   NSLog(@" *** fetchPlayListByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        [self.refreshControl endRefreshing];
