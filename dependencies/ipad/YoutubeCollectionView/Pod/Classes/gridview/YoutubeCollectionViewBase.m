@@ -126,8 +126,7 @@
 
    [self cleanup];
 
-   [[self getYoutubeRequestInfo] resetRequestInfo];
-   [self getYoutubeRequestInfo].channelId = channelId;
+   [[self getYoutubeRequestInfo] resetRequestInfoForActivityListFromChannelWithChannelId:channelId];
 }
 
 

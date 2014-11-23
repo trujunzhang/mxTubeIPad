@@ -39,8 +39,6 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 @property(nonatomic) YTSegmentItemType itemType;
 @property(nonatomic, copy) NSString * itemIdentify;
 
-@property(nonatomic, copy) NSString * channelId;
-
 @property(nonatomic, assign) YTPlaylistItemsType playlistItemsType;
 
 @property(nonatomic, copy) NSString * nextPageToken;
@@ -48,6 +46,7 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfoForPlayList:(YTPlaylistItemsType)playlistItemsType;
 - (void)resetRequestInfo;
+- (void)resetRequestInfoForActivityListFromChannelWithChannelId:(NSString *)channelId;
 - (void)resetRequestInfoForVideoListFromChannelWithChannelId:(NSString *)channelId;
 - (void)resetRequestInfoForPlayListFromChannelWithChannelId:(NSString *)channelId;
 - (void)resetRequestInfoForSearchWithItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam;

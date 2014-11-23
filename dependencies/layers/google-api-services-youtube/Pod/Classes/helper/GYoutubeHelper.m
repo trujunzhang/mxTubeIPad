@@ -522,16 +522,16 @@ static GYoutubeHelper * instance = nil;
    NSURLSessionDataTask * task =
     [[MABYT3_APIRequest sharedInstance]
      LISTPlayListForURL:info.parameters
-              completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
-                  if (responseInfo) {
-                     NSLog(@"nextPageToken = %@", responseInfo.pageToken);
-                     [info putNextPageToken:responseInfo.pageToken];
+             completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                 if (responseInfo) {
+                    NSLog(@"nextPageToken = %@", responseInfo.pageToken);
+                    [info putNextPageToken:responseInfo.pageToken];
 
-                     completeBlock(responseInfo.array, nil);
-                  } else {
-                     NSLog(@"ERROR: %@", error);
-                  }
-              }];
+                    completeBlock(responseInfo.array, nil);
+                 } else {
+                    NSLog(@"ERROR: %@", error);
+                 }
+             }];
 }
 
 
@@ -573,13 +573,9 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)fetchActivityListWithRequestInfo:(GYoutubeRequestInfo *)info CompletionHandler:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorHandler {
-   NSMutableDictionary * parameters = [info.parameters mutableCopy];
-   [parameters setObject:@"id,contentDetails" forKey:@"part"];
-   [parameters setObject:info.channelId forKey:@"channelId"];
-
    NSURLSessionDataTask * task =
     [[MABYT3_APIRequest sharedInstance]
-     LISTActivitiesForURL:parameters
+     LISTActivitiesForURL:info.parameters
                completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
                    if (responseInfo) {
                       NSLog(@"nextPageToken = %@", responseInfo.pageToken);

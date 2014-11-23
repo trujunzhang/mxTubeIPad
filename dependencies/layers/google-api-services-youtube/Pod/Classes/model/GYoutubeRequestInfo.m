@@ -83,6 +83,23 @@
 }
 
 
+- (void)resetRequestInfoForActivityListFromChannelWithChannelId:(NSString *)channelId {
+   self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
+
+   self.itemType = [self getItemType];
+   self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
+
+   self.nextPageToken = @"";
+   self.hasLoadingMore = YES;
+
+   NSDictionary * parameters = @{
+    @"channelId" : channelId,
+    @"part" : @"id,contentDetails",
+   };
+   self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+}
+
+
 - (void)resetRequestInfoForVideoListFromChannelWithChannelId:(NSString *)channelId {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
 
