@@ -9,13 +9,7 @@
 #import "GYoutubeRequestInfo.h"
 
 
-@interface GYoutubeRequestInfo ()
-
-@end
-
-
 @implementation GYoutubeRequestInfo
-
 
 #pragma mark - for search
 
@@ -37,8 +31,6 @@
    self.itemType = YTSegmentItemVideo;
 
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
-
-
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
    self.nextPageToken = @"";
@@ -66,20 +58,6 @@
    self.hasLoadingMore = YES;
 
    self.playlistItemsType = playlistItemsType;
-}
-
-
-- (void)resetRequestInfo {
-   self.queryType = @"";
-
-
-   self.itemType = [self getItemType];
-   self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
-
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
-
-   self.parameters = [[NSMutableDictionary alloc] init];
 }
 
 
@@ -138,6 +116,7 @@
 
 - (void)resetRequestInfoForSearchWithItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
+
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 

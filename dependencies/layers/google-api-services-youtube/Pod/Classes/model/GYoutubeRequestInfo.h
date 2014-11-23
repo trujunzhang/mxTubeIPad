@@ -45,7 +45,6 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfoForPlayList:(YTPlaylistItemsType)playlistItemsType;
-- (void)resetRequestInfo;
 - (void)resetRequestInfoForActivityListFromChannelWithChannelId:(NSString *)channelId;
 - (void)resetRequestInfoForVideoListFromChannelWithChannelId:(NSString *)channelId;
 - (void)resetRequestInfoForPlayListFromChannelWithChannelId:(NSString *)channelId;
