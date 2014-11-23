@@ -37,8 +37,6 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 @property(nonatomic, strong) NSMutableDictionary * parameters;
 
 @property(nonatomic) YTSegmentItemType itemType;
-@property(nonatomic, copy) NSString * queryTeam;
-
 @property(nonatomic, copy) NSString * itemIdentify;
 
 @property(nonatomic, copy) NSString * channelId;

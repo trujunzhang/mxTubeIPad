@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <google-api-services-youtube/YoutubeConstants.h>
 #import "GYoutubeRequestInfo.h"
 
 
@@ -38,7 +37,7 @@
    self.itemType = YTSegmentItemVideo;
 
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
-   self.queryTeam = @"";
+
 
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
@@ -59,7 +58,7 @@
    self.itemType = YTSegmentItemVideo;
 
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
-   self.queryTeam = @"";
+
 
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
@@ -72,7 +71,7 @@
 
 - (void)resetRequestInfo {
    self.queryType = @"";
-   self.queryTeam = @"";
+
 
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
@@ -86,7 +85,7 @@
 
 - (void)resetRequestInfoForVideoListFromChannelWithChannelId:(NSString *)channelId {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
-   self.queryTeam = @"";
+
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
@@ -105,7 +104,7 @@
 
 - (void)resetRequestInfoForPlayListFromChannelWithChannelId:(NSString *)channelId {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemPlaylist];
-   self.queryTeam = @"";
+
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
@@ -122,7 +121,6 @@
 
 - (void)resetRequestInfoForSearchWithItemType:(YTSegmentItemType)itemType withQueryTeam:(NSString *)queryTeam {
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][itemType];
-   self.queryTeam = queryTeam;
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
@@ -130,7 +128,7 @@
    self.hasLoadingMore = YES;
 
    NSDictionary * parameters = @{
-    @"q" : self.queryTeam,
+    @"q" : queryTeam,
     @"type" : self.queryType,
     @"part" : @"id,snippet",
     @"fields" : @"items(id/videoId),nextPageToken",
