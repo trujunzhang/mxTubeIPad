@@ -11,6 +11,7 @@
 #import "YoutubeFooterView.h"
 #import "YTGridViewVideoCell.h"
 #import "YTGridVideoCellNode.h"
+#import "YTGridViewPlaylistCell.h"
 
 
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
@@ -126,8 +127,8 @@
       }
          break;
       case YTSegmentItemPlaylist: {
-         YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-         YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
+         YTYouTubePlayList * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+         YTGridViewPlaylistCell * gridViewVideoCell = (YTGridViewPlaylistCell *) viewCell;
          [gridViewVideoCell bind:video
                 placeholderImage:self.placeHolderImage
                         delegate:self.delegate];

@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <YouTubeAPI3-Objective-C-wrapper/MABYT3_PlayList.h>
+#import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YTGridViewPlaylistCell.h"
 
 @implementation YTGridViewPlaylistCell
@@ -14,4 +16,8 @@
     // Initialization code
 }
 
+
+- (void)bind:(YTYouTubePlayList *)list placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
+
+}
 @end

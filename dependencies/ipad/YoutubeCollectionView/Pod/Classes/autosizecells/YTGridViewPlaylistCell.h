@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface YTGridViewPlaylistCell : UICollectionViewCell
 
+- (void)bind:(YTYouTubePlayList *)list placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end

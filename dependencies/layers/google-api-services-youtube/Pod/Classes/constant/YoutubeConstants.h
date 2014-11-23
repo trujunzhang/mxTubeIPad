@@ -56,7 +56,8 @@
 #import "MABYT3_Channel.h"
 #import "MABYT3_ActivityContentDetails.h"
 #import "MABYT3_ResourceId.h"
-
+#import "MABYT3_PlayList.h"
+#import "MABYT3_PlayListItem.h"
 
 
 // common
@@ -70,9 +71,11 @@
 //#define YTYouTubeVideo  GTLYouTubeVideo
 #define YTYouTubeVideo  MABYT3_Video
 
+#define YTYouTubePlayList  MABYT3_PlayList
+#define YTYouTubePlaylistItem  GTLYouTubePlaylistItem
+
 #define YTYouTubeChannel  GTLYouTubeChannel
 #define YTYouTubeSubscription  GTLYouTubeSubscription
-#define YTYouTubePlaylistItem  GTLYouTubePlaylistItem
 #define YTYouTubeMABThumbmail  MABYT3_Thumbnail
 #define YTYouTubeMABChannel  MABYT3_Channel
 
