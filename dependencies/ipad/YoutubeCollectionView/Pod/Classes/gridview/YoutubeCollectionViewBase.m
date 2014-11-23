@@ -198,9 +198,9 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchPlaylistItemsListWithRequestInfo:[self getYoutubeRequestInfo]
-                                                            completion:completion
-                                                          errorHandler:error
+   [[GYoutubeHelper getInstance] fetchPlayListFromChannelWithRequestInfo:[self getYoutubeRequestInfo]
+                                                       completionHandler:completion
+                                                            errorHandler:error
    ];
 }
 

@@ -518,12 +518,20 @@ static GYoutubeHelper * instance = nil;
 }
 
 
-- (void)fetchPlaylistItemsListWithTagType:(YTPlaylistItemsType)tagType completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
-//   [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists
-//                                 requestInfo:tagType
-//                           CompletionHandler:completion
-//                                errorHandler:errorBlock
-//   ];
+- (void)fetchPlayListFromChannelWithRequestInfo:(GYoutubeRequestInfo *)info completionHandler:(YoutubeResponseBlock)completeBlock errorHandler:(ErrorResponseBlock)errorHandler {
+   NSURLSessionDataTask * task =
+    [[MABYT3_APIRequest sharedInstance]
+     LISTPlayListForURL:info.parameters
+              completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                  if (responseInfo) {
+                     NSLog(@"nextPageToken = %@", responseInfo.pageToken);
+                     [info putNextPageToken:responseInfo.pageToken];
+
+                     completeBlock(responseInfo.array, nil);
+                  } else {
+                     NSLog(@"ERROR: %@", error);
+                  }
+              }];
 }
 
 

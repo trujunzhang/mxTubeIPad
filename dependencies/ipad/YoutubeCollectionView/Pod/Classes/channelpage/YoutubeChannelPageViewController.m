@@ -136,7 +136,7 @@
          [self.selectedController fetchVideoListFromChannelWithChannelId:[YoutubeParser getChannelId:self.subscription]];
          break;
       case YTSegmentItemPlaylist:
-
+         [self.selectedController fetchPlayListFromChannelWithChannelId:[YoutubeParser getChannelId:self.subscription]];
          break;
    }
 }
@@ -151,6 +151,7 @@
          [self.selectedController fetchVideoListFromChannelByPageToken];
          break;
       case YTSegmentItemPlaylist:
+         [self.selectedController fetchPlayListFromChannelByPageToken];
          break;
    }
 }
