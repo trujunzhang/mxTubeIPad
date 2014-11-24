@@ -203,18 +203,17 @@
    CGFloat usableSpace = [self usableSpace];
    CGFloat cellLength = usableSpace / self.layout.columnCount;
 
-   CGSize size = CGSizeMake(cellLength, cellLength + 12);
-   return size;
+   return CGSizeMake(cellLength, cellLength + 12);
 }
 
 
-- (CGSize)cellSize123 {
-   CGFloat usableSpace = [self usableSpace];
-   CGFloat cellLength = usableSpace / self.layout.columnCount;
-
-   CGSize size = CGSizeMake(cellLength, cellLength + 12);
-   return size;
-}
+//- (CGSize)cellSize123 {
+//   CGFloat usableSpace = [self usableSpace];
+//   CGFloat cellLength = usableSpace / self.layout.columnCount;
+//
+//   CGSize size = CGSizeMake(cellLength, cellLength + 12);
+//   return size;
+//}
 
 
 - (CGFloat)usableSpace {
