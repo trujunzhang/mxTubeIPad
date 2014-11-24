@@ -66,6 +66,7 @@
                                        videoThumbnailsUrl:videoThumbnailsUrl];
    imageNode.borderColor = [[UIColor whiteColor] CGColor];
    imageNode.borderWidth = 2;
+//   imageNode.layerBacked = YES;
 
    // configure the button
    imageNode.userInteractionEnabled = YES; // opt into touch handling

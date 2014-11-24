@@ -175,30 +175,40 @@
 }
 
 
-//- (CGSize)cellSize {
-//   CGSize size;
-//
-//   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//   NSString * key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
-//   NSString * keyWidth = [NSString stringWithFormat:@"%@_width", key];
-//   NSString * keyHeight = [NSString stringWithFormat:@"%@_height", key];
-//
-//   NSInteger valueWidth = [self.cellSizeDictionary objectForKey:key];
-//   NSInteger valueHeight = [self.cellSizeDictionary objectForKey:key];
-//   if (valueWidth && valueHeight) {
-//      size = CGSizeMake(valueWidth, valueHeight);
-//   } else {
-//      size = [self makeCellSize];
-//      [self.cellSizeDictionary setObject:size.width forKey:valueWidth];
-//      [self.cellSizeDictionary setObject:size.height forKey:valueHeight];
-//   }
-//
-//
-//   return size;
-//}
-
-
 - (CGSize)cellSize {
+   CGSize size;
+
+   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+   NSString * key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
+   NSString * keyWidth = [NSString stringWithFormat:@"%@_width", key];
+   NSString * keyHeight = [NSString stringWithFormat:@"%@_height", key];
+
+   NSNumber * valueWidth = [self.cellSizeDictionary objectForKey:keyWidth];
+   NSNumber * valueHeight = [self.cellSizeDictionary objectForKey:keyHeight];
+   if (valueWidth && valueHeight) {
+      size = CGSizeMake([valueWidth floatValue], [valueHeight floatValue]);
+   } else {
+      size = [self makeCellSize];
+      NSNumber * aWidth = [NSNumber numberWithFloat:size.width];
+      NSNumber * aHeight = [NSNumber numberWithFloat:size.height];
+      [self.cellSizeDictionary setObject:aWidth forKey:keyWidth];
+      [self.cellSizeDictionary setObject:aHeight forKey:keyHeight];
+   }
+
+   return size;
+}
+
+
+- (CGSize)makeCellSize {
+   CGFloat usableSpace = [self usableSpace];
+   CGFloat cellLength = usableSpace / self.layout.columnCount;
+
+   CGSize size = CGSizeMake(cellLength, cellLength + 12);
+   return size;
+}
+
+
+- (CGSize)cellSize123 {
    CGFloat usableSpace = [self usableSpace];
    CGFloat cellLength = usableSpace / self.layout.columnCount;
 

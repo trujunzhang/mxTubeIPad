@@ -42,7 +42,7 @@
       self = [arrayOfViews objectAtIndex:0];
 
 
-      [self bind];
+//      [self bind];
    }
    return self;
 }
