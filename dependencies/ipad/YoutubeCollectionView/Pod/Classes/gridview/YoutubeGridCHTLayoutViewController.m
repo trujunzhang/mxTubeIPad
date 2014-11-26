@@ -50,14 +50,14 @@
       self.layout.sectionInset = uiEdgeInsets;
       self.layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
       self.layout.minimumColumnSpacing = LAYOUT_MINIMUMCOLUMNSPACING;
-      self.layout.minimumInteritemSpacing = 20;
+      self.layout.minimumInteritemSpacing = 10;
 
 
       self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
       self.collectionView.dataSource = self;
       self.collectionView.delegate = self;
-      self.collectionView.backgroundColor = [UIColor whiteColor];
+      self.collectionView.backgroundColor = [UIColor lightGrayColor];
 
       [self.collectionView registerClass:[CollectionVideoReuseCell class]
               forCellWithReuseIdentifier:[GYoutubeRequestInfo getIdentifyByItemType:YTSegmentItemVideo]];
