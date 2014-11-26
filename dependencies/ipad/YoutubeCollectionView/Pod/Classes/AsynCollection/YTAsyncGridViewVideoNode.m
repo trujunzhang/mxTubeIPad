@@ -14,6 +14,7 @@
 #import "Foundation.h"
 #import "HexColor.h"
 #import "UIColor+iOS8Colors.h"
+#import "YoutubeParser.h"
 
 
 @implementation YTAsyncGridViewVideoNode
@@ -99,7 +100,9 @@
 
 
 - (void)setupContainerNode {
-   NSString * videoThumbnailsUrl = self.cardInfo.snippet.thumbnails.medium.url;
+
+   NSString * videoThumbnailsUrl = [YoutubeParser getVideoSnippetThumbnails:self.cardInfo];
+//    self.cardInfo.snippet.thumbnails.medium.url;
    NSString * videoTitleValue = self.cardInfo.snippet.title;
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
 
