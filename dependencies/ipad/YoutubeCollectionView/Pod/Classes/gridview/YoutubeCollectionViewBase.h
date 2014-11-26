@@ -13,6 +13,9 @@
 @class GYoutubeRequestInfo;
 
 
+#define LAYOUT_MINIMUMCOLUMNSPACING 20;
+
+
 @protocol YoutubeCollectionNextPageDelegate<NSObject>
 
 @optional
@@ -46,6 +49,7 @@
 
 - (int)getCurrentColumnCount:(UIInterfaceOrientation)orientation;
 - (CGSize)cellSize;
+- (UIEdgeInsets)getUIEdgeInsetsForLayout;
 @property(nonatomic, strong) NSOperationQueue * nodeConstructionQueue;
 
 @end

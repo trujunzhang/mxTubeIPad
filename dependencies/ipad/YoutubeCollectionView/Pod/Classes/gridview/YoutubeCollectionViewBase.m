@@ -304,16 +304,25 @@
 
 - (CGSize)makeCellSize:(UIInterfaceOrientation)orientation {
    int columnCount = [self getCurrentColumnCount:orientation];
-   UICollectionViewFlowLayout * layout = self.baseCollectionView.collectionViewLayout;
+   UICollectionViewLayout * layout = self.baseCollectionView.collectionViewLayout;
 
-   CGFloat usableSpace = (layout.collectionViewContentSize.width
-    - layout.sectionInset.left - layout.sectionInset.right
-    - ((columnCount - 1)));
-//    - ((columnCount - 1) * layout.minimumColumnSpacing));
+   UIEdgeInsets uiEdgeInsets = [self getUIEdgeInsetsForLayout];
+
+   CGFloat mini_num_column_space = LAYOUT_MINIMUMCOLUMNSPACING;
+   CGFloat usableSpace =
+    (layout.collectionViewContentSize.width
+     - uiEdgeInsets.left - uiEdgeInsets.right
+     - ((columnCount - 1) * mini_num_column_space)
+    );
 
    CGFloat cellLength = usableSpace / columnCount;
 
    return CGSizeMake(cellLength, cellLength + 12);
+}
+
+
+- (UIEdgeInsets)getUIEdgeInsetsForLayout {
+   return UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 

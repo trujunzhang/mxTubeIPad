@@ -66,7 +66,7 @@
 
 
 - (void)bind:(YTYouTubeVideoCache *)videoInfo placeholderImage:(UIImage *)placeholder cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate nodeConstructionQueue:(NSOperationQueue *)nodeConstructionQueue {
-   self.featureImageSizeOptional=cellSize;
+   self.featureImageSizeOptional = cellSize;
    NSOperation * oldNodeConstructionOperation = _nodeConstructionOperation;
    if (oldNodeConstructionOperation)
       [oldNodeConstructionOperation cancel];

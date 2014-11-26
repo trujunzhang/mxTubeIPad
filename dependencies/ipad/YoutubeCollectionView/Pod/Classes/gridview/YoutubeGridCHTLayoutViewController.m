@@ -46,9 +46,10 @@
    if (!self.collectionView) {
       self.layout = [[CHTCollectionViewWaterfallLayout alloc] init];
 
-      self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+      UIEdgeInsets uiEdgeInsets = [self getUIEdgeInsetsForLayout];
+      self.layout.sectionInset = uiEdgeInsets;
       self.layout.footerHeight = DEFAULT_LOADING_MORE_HEIGHT;
-      self.layout.minimumColumnSpacing = 20;
+      self.layout.minimumColumnSpacing = LAYOUT_MINIMUMCOLUMNSPACING;
       self.layout.minimumInteritemSpacing = 20;
 
 
