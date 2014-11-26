@@ -117,7 +117,7 @@ CGFloat thumbnailHeight = 142;
 
    // 2.1
    CGFloat titleLeftX = 28;
-   _channelImageNode.frame = CGRectMake(0, 5, titleLeftX - 8, titleLeftX - 4);
+   _channelImageNode.frame = CGRectMake(0, 3, titleLeftX - 8, titleLeftX - 4);
    CGFloat titleWidth = _kittenSize.width - titleLeftX;
    _videoTitleNode.frame = CGRectMake(titleLeftX, 0, titleWidth, 36);
    _channelTitleNode.frame = CGRectMake(titleLeftX, 36, titleWidth, 32);
@@ -133,12 +133,23 @@ CGFloat thumbnailHeight = 142;
    NSString * videoTitleValue = video.snippet.title;
    NSString * channelTitleValue = video.snippet.channelTitle;
 
-   [ImageCacheImplement CacheWithImageView:_imageNode
-                                       key:video.identifier
-                                   withUrl:videoThumbnailsUrl
-                           withPlaceholder:placeholder
-                                      size:CGSizeMake(_kittenSize.width, thumbnailHeight)
-   ];
+   if (video.hasImage) {
+      _imageNode.image = video.image;
+   } else {
+      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
+          video.hasImage = YES;
+          video.image = image;
+          _imageNode.image = video.image;
+      };
+      [ImageCacheImplement CacheWithImageView:_imageNode
+                                          key:video.identifier
+                                      withUrl:videoThumbnailsUrl
+                              withPlaceholder:placeholder
+//                                         size:CGSizeMake(_kittenSize.width, thumbnailHeight)
+                                   completion:downloadCompletion
+      ];
+   }
+
 
    // configure the button
    _imageNode.userInteractionEnabled = YES; // opt into touch handling
