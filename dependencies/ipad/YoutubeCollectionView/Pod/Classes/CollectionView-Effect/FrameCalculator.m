@@ -6,6 +6,9 @@
 #import "FrameCalculator.h"
 
 #define textAreaHeight 300.0
+
+#define textAreaPaddingX 4.0
+
 //#define cardWidth 320.0
 
 
@@ -34,9 +37,8 @@
 
 
 + (CGRect)frameForTitleText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame {
-   CGRect frameForTitCGFloatext = CGRectMake(0, CGRectGetMaxY(featureImageFrame) - 70.0, containerBounds.size.width, 80);
-   CGRectInset(frameForTitCGFloatext, 20, 20);
-   return frameForTitCGFloatext;
+   CGFloat tY = featureImageFrame.origin.y + featureImageFrame.size.height;
+   return CGRectMake(textAreaPaddingX, tY, containerBounds.size.width - textAreaPaddingX * 2, 48);
 }
 
 
