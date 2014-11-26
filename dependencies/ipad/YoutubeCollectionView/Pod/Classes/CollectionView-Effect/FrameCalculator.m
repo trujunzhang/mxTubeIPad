@@ -45,9 +45,14 @@
 }
 
 
-+ (CGRect)frameForFeatureImage:(CGSize)featureImageSize containerFrameWidth:(CGFloat)containerFrameWidth {
-   CGSize imageFrameSize = [FrameCalculator aspectSizeForWidth:containerFrameWidth originalSize:featureImageSize];
++ (CGRect)frameForFeatureImage:(CGSize)cellSize containerFrameWidth:(CGFloat)containerFrameWidth {
+   CGSize imageFrameSize = [FrameCalculator aspectSizeForWidth:containerFrameWidth originalSize:cellSize];
    return CGRectMake(0, 0, imageFrameSize.width, imageFrameSize.height);
+}
+
+
++ (CGRect)frameForChannelThumbnails:(CGSize)cellSize nodeFrameHeight:(CGFloat)nodeFrameHeight {
+   return CGRectMake(0, 0, cellSize.width, nodeFrameHeight);
 }
 
 
@@ -56,11 +61,11 @@
 }
 
 
-+ (CGRect)frameForContainer:(CGSize)featureImageSize {
++ (CGRect)frameForContainer:(CGSize)cellSize {
 //   CGFloat containerWidth = [FrameCalculator cardWidth];
 //   CGSize size = [FrameCalculator sizeThatFits:CGSizeMake(containerWidth, CGFLOAT_MAX)
-//                                 withImageSize:featureImageSize];
-   return CGRectMake(0, 0, featureImageSize.width, featureImageSize.height);
+//                                 withImageSize:cellSize];
+   return CGRectMake(0, 0, cellSize.width, cellSize.height);
 }
 
 

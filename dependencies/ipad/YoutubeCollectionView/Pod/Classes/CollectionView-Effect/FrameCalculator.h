@@ -16,6 +16,7 @@
 
 + (CGRect)frameForFeatureImage:(CGSize)featureImageSize containerFrameWidth:(CGFloat)containerFrameWidth;
 
++ (CGRect)frameForChannelThumbnails:(CGSize)featureImageSize nodeFrameHeight:(CGFloat)nodeFrameHeight;
 + (CGRect)frameForBackgroundImage:(CGRect)containerBounds;
 + (CGRect)frameForContainer:(CGSize)featureImageSize;
 + (CGSize)sizeThatFits:(CGSize)size withImageSize:(CGSize)imageSize;

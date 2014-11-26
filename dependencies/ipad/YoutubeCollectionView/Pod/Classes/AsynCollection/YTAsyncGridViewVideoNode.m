@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 Razeware LLC. All rights reserved.
 //
 
+#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import "YTAsyncGridViewVideoNode.h"
 #import "FrameCalculator.h"
 #import "AnimatedContentsDisplayLayer.h"
 #import "GradientNode.h"
 #import "Foundation.h"
 #import "HexColor.h"
+#import "UIColor+iOS8Colors.h"
 
 
 @implementation YTAsyncGridViewVideoNode
@@ -22,10 +24,11 @@
       self.nodeCellSize = cellSize;
       self.cardInfo = cardInfo;
 
-      [self initContentNode];
       [self setupContainerNode];
       [self addAllSubNodes];
       [self layoutNode];
+
+      [self initContentNode];
    }
 
    return self;
@@ -38,6 +41,7 @@
 
 
 - (void)initContentNode {
+   // 1
    self.layerBacked = true;
    self.shouldRasterizeDescendants = true;
 
@@ -49,6 +53,23 @@
    self.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
    self.shadowOffset = CGSizeMake(1, 3);
    self.shadowRadius = 2.0;
+
+   // 2
+   self.videoChannelThumbnailsNode.layerBacked = true;
+   self.videoChannelThumbnailsNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
+
+   self.videoChannelThumbnailsNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
+
+   self.videoChannelThumbnailsNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
+   self.videoChannelThumbnailsNode.borderWidth = 1;
+
+   self.videoChannelThumbnailsNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+   self.videoChannelThumbnailsNode.shadowOffset = CGSizeMake(1, 3);
+   self.videoChannelThumbnailsNode.shadowRadius = 2.0;
+
+   // 3
+   self.titleTextNode.layerBacked = true;
+   self.titleTextNode.backgroundColor = [UIColor clearColor];
 }
 
 
@@ -61,30 +82,43 @@
    //MARK: Node Layout Section
    self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
 
-   self.featureImageNode.frame = [FrameCalculator frameForFeatureImage:self.nodeCellSize
-                                                   containerFrameWidth:self.frame.size.width];
-   self.titleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
-                                               featureImageFrame:self.featureImageNode.frame];
+   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
+                                                                      nodeFrameHeight:142.0f];
 
-   self.descriptionTextNode.frame = [FrameCalculator frameForDescriptionText:self.bounds
-                                                           featureImageFrame:self.featureImageNode.frame];
-   self.gradientNode.frame = [FrameCalculator frameForGradient:self.featureImageNode.frame];
+   self.titleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
+                                               featureImageFrame:self.videoChannelThumbnailsNode.frame];
+
+//   self.descriptionTextNode.frame = [FrameCalculator frameForDescriptionText:self.bounds
+//                                                           featureImageFrame:self.featureImageNode.frame];
+//   self.gradientNode.frame = [FrameCalculator frameForGradient:self.featureImageNode.frame];
 }
 
 
-- (ASDisplayNode *)setupContainerNode {
+- (void)setupContainerNode {
    NSString * videoThumbnailsUrl = self.cardInfo.snippet.thumbnails.medium.url;
    NSString * videoTitleValue = self.cardInfo.snippet.title;
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
+   YTYouTubeVideoCache * video = self.cardInfo;
 
-   ASImageNode * featureImageNode = [[ASImageNode alloc] init];
-   featureImageNode.layerBacked = true;
-   featureImageNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
-//   featureImageNode.image = self.image;
+   ASImageNode * videoChannelThumbnailsNode = [[ASImageNode alloc] init];
+   if (video.hasImage) {
+      videoChannelThumbnailsNode.image = video.image;
+   } else {
+      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
+          video.hasImage = YES;
+          video.image = image;
+          videoChannelThumbnailsNode.image = video.image;
+      };
+      [ImageCacheImplement CacheWithImageView:videoChannelThumbnailsNode
+                                          key:video.identifier
+                                      withUrl:videoThumbnailsUrl
+                              withPlaceholder:nil
+                                   completion:downloadCompletion
+      ];
+   }
+
 
    ASTextNode * titleTextNode = [[ASTextNode alloc] init];
-   titleTextNode.layerBacked = true;
-   titleTextNode.backgroundColor = [UIColor clearColor];
    titleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:videoTitleValue];
 
 
@@ -99,20 +133,16 @@
    gradientNode.layerBacked = true;
 
    //MARK: Container Node Creation Section
-   self.gradientNode = gradientNode;
-   self.featureImageNode = featureImageNode;
+   self.videoChannelThumbnailsNode = videoChannelThumbnailsNode;
    self.titleTextNode = titleTextNode;
-   self.descriptionTextNode = descriptionTextNode;
-
-   return self;
+//   self.descriptionTextNode = descriptionTextNode;
 }
 
 
 //MARK: Node Hierarchy Section
 - (void)addAllSubNodes {
-//   [self addSubnode:self.featureImageNode];
-//   [self addSubnode:self.gradientNode];
-//   [self addSubnode:self.titleTextNode];
+   [self addSubnode:self.videoChannelThumbnailsNode];
+   [self addSubnode:self.titleTextNode];
 //   [self addSubnode:self.descriptionTextNode];
 }
 

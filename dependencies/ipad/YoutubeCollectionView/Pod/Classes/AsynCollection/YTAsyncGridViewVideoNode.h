@@ -18,9 +18,8 @@
 
 @property(nonatomic) CGSize const nodeCellSize;
 
-@property(nonatomic, strong) ASNetworkImageNode * videoChannelThumbnailsNode;
+@property(nonatomic, strong) ASImageNode * videoChannelThumbnailsNode;
 
-@property(nonatomic, strong) ASImageNode * featureImageNode;
 @property(nonatomic, strong) ASTextNode * titleTextNode;
 @property(nonatomic, strong) ASTextNode * descriptionTextNode;
 

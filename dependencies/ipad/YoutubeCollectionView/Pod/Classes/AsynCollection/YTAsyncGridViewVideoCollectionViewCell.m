@@ -19,7 +19,7 @@
    [super awakeFromNib];
 
    CALayer * placeholderLayer = [[CALayer alloc] init];
-   placeholderLayer.contents = [UIImage imageNamed:@"cardPlaceholder"];
+//   placeholderLayer.contents = [UIImage imageNamed:@"cardPlaceholder"];
    placeholderLayer.contentsGravity = kCAGravityCenter;
    placeholderLayer.contentsScale = [UIScreen mainScreen].scale;
    placeholderLayer.backgroundColor = [UIColor colorWithHue:0
