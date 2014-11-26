@@ -43,6 +43,8 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 
 @property(nonatomic, copy) NSString * nextPageToken;
 
+@property(nonatomic) BOOL isLoading;
+
 - (void)resetRequestInfoForSuggestionList:(NSString *)id1;
 - (void)resetRequestInfoForPlayList:(YTPlaylistItemsType)playlistItemsType;
 - (void)resetRequestInfoForActivityListFromChannelWithChannelId:(NSString *)channelId;

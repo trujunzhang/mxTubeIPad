@@ -24,7 +24,15 @@
 }
 
 
-#pragma mark - search
+#pragma mark - 
+#pragma mark 
+
+
+- (void)baseReset {
+   self.nextPageToken = @"";
+   self.hasLoadingMore = YES;
+   self.isLoading = YES;
+}
 
 
 - (void)resetRequestInfoForSuggestionList:(NSString *)videoId {
@@ -33,8 +41,7 @@
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
+   [self baseReset];
 
    NSDictionary * parameters = @{
     @"part" : @"id,snippet",
@@ -48,14 +55,10 @@
 
 - (void)resetRequestInfoForPlayList:(YTPlaylistItemsType)playlistItemsType {
    self.itemType = YTSegmentItemVideo;
-
    self.queryType = [GYoutubeRequestInfo getQueryTypeArray][YTSegmentItemVideo];
-
-
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
+   [self baseReset];
 
    self.playlistItemsType = playlistItemsType;
 }
@@ -67,8 +70,7 @@
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
+   [self baseReset];
 
    NSDictionary * parameters = @{
     @"channelId" : channelId,
@@ -84,8 +86,7 @@
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
+   [self baseReset];
 
    NSDictionary * parameters = @{
     @"channelId" : channelId,
@@ -103,8 +104,7 @@
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
+   [self baseReset];
 
    NSDictionary * parameters = @{
     @"channelId" : channelId,
@@ -120,8 +120,7 @@
    self.itemType = [self getItemType];
    self.itemIdentify = [GYoutubeRequestInfo getIdentifyByItemType:self.itemType];
 
-   self.nextPageToken = @"";
-   self.hasLoadingMore = YES;
+   [self baseReset];
 
    NSDictionary * parameters = @{
     @"q" : queryTeam,
@@ -131,6 +130,10 @@
    };
    self.parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];
 }
+
+
+#pragma mark - 
+#pragma mark 
 
 
 - (void)putNextPageToken:(NSString *)pageToken {

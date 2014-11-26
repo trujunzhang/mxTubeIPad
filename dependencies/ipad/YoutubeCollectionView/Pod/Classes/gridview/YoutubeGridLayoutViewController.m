@@ -33,7 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated {
    [super viewDidAppear:animated];
 
-//   [self.nextPageDelegate executeNextPageTask]; // test
+   [self.nextPageDelegate executeNextPageTask]; // test
 }
 
 

@@ -105,16 +105,12 @@
 
 
 - (void)searchByPageToken {
-   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
+   if ([self checkRequest])
       return;
 
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-       [self.refreshControl endRefreshing];
-
-       [[self getYoutubeRequestInfo] appendNextPageData:array];
-
-       [[self baseCollectionView] reloadData];
+       [self updateAfterResponse:array];
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };
@@ -144,15 +140,11 @@
 
 
 - (void)fetchActivityListByPageToken {
-   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
+   if ([self checkRequest])
       return;
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-       [self.refreshControl endRefreshing];
-
-       [[self getYoutubeRequestInfo] appendNextPageData:array];
-
-       [[self baseCollectionView] reloadData];
+       [self updateAfterResponse:array];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
@@ -160,6 +152,16 @@
    [[GYoutubeHelper getInstance] fetchActivityListWithRequestInfo:[self getYoutubeRequestInfo]
                                                 CompletionHandler:completion
                                                      errorHandler:error];
+}
+
+
+- (void)updateAfterResponse:(NSArray *)array {
+   [self.refreshControl endRefreshing];
+   [self getYoutubeRequestInfo].isLoading = NO;
+   [[self getYoutubeRequestInfo] appendNextPageData:array];
+
+//   [self.baseCollectionView.collectionViewLayout invalidateLayout];
+   [[self baseCollectionView] reloadData];
 }
 
 
@@ -195,17 +197,13 @@
 
 
 - (void)fetchPlayListFromChannelByPageToken {
-   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
+   if ([self checkRequest])
       return;
 
 //   NSLog(@" *** fetchPlayListFromChannelByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-       [self.refreshControl endRefreshing];
-
-       [[self getYoutubeRequestInfo] appendNextPageData:array];
-
-       [[self baseCollectionView] reloadData];
+       [self updateAfterResponse:array];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
@@ -214,6 +212,15 @@
                                                        completionHandler:completion
                                                             errorHandler:error
    ];
+}
+
+
+- (BOOL)checkRequest {
+   if ([[self getYoutubeRequestInfo] isLoading]) {
+      return NO;
+   }
+
+   return [[self getYoutubeRequestInfo] hasNextPage] == NO;
 }
 
 
@@ -230,17 +237,13 @@
 
 
 - (void)fetchPlayListByPageToken {
-   if ([[self getYoutubeRequestInfo] hasNextPage] == NO)
+   if ([self checkRequest])
       return;
 
 //   NSLog(@" *** fetchPlayListByPageToken = %d", [[self getYoutubeRequestInfo] hasNextPage]);
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-       [self.refreshControl endRefreshing];
-
-       [[self getYoutubeRequestInfo] appendNextPageData:array];
-
-       [[self baseCollectionView] reloadData];
+       [self updateAfterResponse:array];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
