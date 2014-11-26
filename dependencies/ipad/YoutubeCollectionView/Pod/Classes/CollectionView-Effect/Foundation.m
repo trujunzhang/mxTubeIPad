@@ -13,6 +13,33 @@
 
 + (NSAttributedString *)attributedStringForTitleText:(NSString *)text {
 
+//   UIFont * font = [UIFont fontWithName:@"AvenirNext-Heavy" size:12];
+//   font = [UIFont fontWithName:@"American Typewriter" size:12];
+   UIFont * font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+
+   NSDictionary * titleAttributes =
+    @{ NSFontAttributeName : font,
+     NSForegroundColorAttributeName : [UIColor blackColor],
+//     NSShadowAttributeName : [NSShadow titleTextShadow],
+     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyle]
+    };
+
+   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+}
+
+
+- (NSDictionary *)createAttributesForFontStyle:(NSString *)style
+                                     withTrait:(uint32_t)trait {
+   UIFontDescriptor * fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
+   UIFontDescriptor * descriptorWithTrait = [fontDescriptor fontDescriptorWithSymbolicTraits:trait];
+   UIFont * font = [UIFont fontWithDescriptor:descriptorWithTrait size:0.0];
+
+   return @{ NSFontAttributeName : font };
+}
+
+
++ (NSAttributedString *)attributedStringForTitleText123:(NSString *)text {
+
    NSDictionary * titleAttributes =
     @{ NSFontAttributeName : [UIFont fontWithName:@"AvenirNext-Heavy" size:30],
      NSForegroundColorAttributeName : [UIColor whiteColor],
@@ -27,7 +54,7 @@
 + (NSAttributedString *)attributedStringForDescriptionText:(NSString *)text {
 
    NSDictionary * titleAttributes =
-    @{ NSFontAttributeName : [UIFont fontWithName:@"AvenirNext-Medium" size:16],
+    @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
      NSForegroundColorAttributeName : [UIColor whiteColor],
      NSBackgroundColorAttributeName : [UIColor clearColor],
      NSShadowAttributeName : [NSShadow descriptionTextShadow],
@@ -43,7 +70,8 @@
 @implementation NSParagraphStyle (custom)
 + (NSParagraphStyle *)justifiedParagraphStyle {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-   [style setAlignment:NSTextAlignmentJustified];
+//   [style setAlignment:NSTextAlignmentJustified];
+//   style.lineBreakMode = NSLineBreakByTruncatingTail;
 
    return style;
 }

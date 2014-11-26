@@ -37,7 +37,7 @@
 
 
 + (CGRect)frameForTitleText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame {
-   CGFloat tY = featureImageFrame.origin.y + featureImageFrame.size.height;
+   CGFloat tY = featureImageFrame.origin.y + featureImageFrame.size.height + 6;
    return CGRectMake(textAreaPaddingX, tY, containerBounds.size.width - textAreaPaddingX * 2, 48);
 }
 

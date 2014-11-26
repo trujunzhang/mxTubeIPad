@@ -98,6 +98,7 @@
    NSString * videoThumbnailsUrl = self.cardInfo.snippet.thumbnails.medium.url;
    NSString * videoTitleValue = self.cardInfo.snippet.title;
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
+
    YTYouTubeVideoCache * video = self.cardInfo;
 
    ASImageNode * videoChannelThumbnailsNode = [[ASImageNode alloc] init];
