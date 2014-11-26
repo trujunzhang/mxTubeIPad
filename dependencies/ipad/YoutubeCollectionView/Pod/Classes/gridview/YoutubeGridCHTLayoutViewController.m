@@ -26,10 +26,11 @@
 @property(strong, nonatomic) UICollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
 @property(nonatomic, strong) UIImage * placeHolderImage;
-@property(nonatomic, strong) NSMutableDictionary * cellSizeDictionary;
+
 @end
 
 
+//YoutubeGridFlowLayoutViewController
 @implementation YoutubeGridCHTLayoutViewController
 
 - (void)viewDidLoad {
@@ -37,18 +38,7 @@
    self.placeHolderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
    [self setUICollectionView:self.collectionView];
 
-   self.cellSizeDictionary = [[NSMutableDictionary alloc] init];
-
    [super viewDidLoad];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-   [super viewDidAppear:animated];
-
-   NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
-   NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
-
 }
 
 
@@ -96,7 +86,7 @@
 
 
 - (void)updateLayout:(UIInterfaceOrientation)orientation {
-   self.layout.columnCount = [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
+   self.layout.columnCount = [self getCurrentColumnCount:orientation];
 }
 
 
@@ -179,46 +169,6 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
    return [self cellSize];
-}
-
-
-- (CGSize)cellSize {
-   CGSize size;
-
-   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-   NSString * key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
-   NSString * keyWidth = [NSString stringWithFormat:@"%@_width", key];
-   NSString * keyHeight = [NSString stringWithFormat:@"%@_height", key];
-
-   NSNumber * valueWidth = [self.cellSizeDictionary objectForKey:keyWidth];
-   NSNumber * valueHeight = [self.cellSizeDictionary objectForKey:keyHeight];
-   if (valueWidth && valueHeight) {
-      size = CGSizeMake([valueWidth floatValue], [valueHeight floatValue]);
-   } else {
-      size = [self makeCellSize];
-      NSNumber * aWidth = [NSNumber numberWithFloat:size.width];
-      NSNumber * aHeight = [NSNumber numberWithFloat:size.height];
-      [self.cellSizeDictionary setObject:aWidth forKey:keyWidth];
-      [self.cellSizeDictionary setObject:aHeight forKey:keyHeight];
-   }
-
-   return size;
-}
-
-
-- (CGSize)makeCellSize {
-   CGFloat usableSpace = [self usableSpace];
-   CGFloat cellLength = usableSpace / self.layout.columnCount;
-
-   return CGSizeMake(cellLength, cellLength + 12);
-}
-
-
-- (CGFloat)usableSpace {
-   return (self.layout.collectionViewContentSize.width
-    - self.layout.sectionInset.left
-    - self.layout.sectionInset.right
-    - ((self.layout.columnCount - 1) * self.layout.minimumColumnSpacing));
 }
 
 

@@ -18,6 +18,9 @@
 
 @property(nonatomic, strong) UIRefreshControl * refreshControl;
 @property(strong, nonatomic) UICollectionView * baseCollectionView;
+
+@property(nonatomic, strong) NSMutableDictionary * cellSizeDictionary;
+
 @end
 
 
@@ -38,10 +41,20 @@
    // Do any additional setup after loading the view.
    self.view.backgroundColor = [UIColor clearColor];
 
+   self.cellSizeDictionary = [[NSMutableDictionary alloc] init];
+
    NSAssert(self.baseCollectionView, @"not set UICollectionVier instance!");
    self.baseCollectionView.showsVerticalScrollIndicator = NO;
 
    [self setupRefresh];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+   [super viewDidAppear:animated];
+
+   NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
+   NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
 }
 
 
@@ -254,6 +267,55 @@
 - (void)fetchSuggestionListByPageToken {
    [self searchByPageToken];
 }
+
+
+#pragma mark - 
+#pragma mark 
+
+
+- (int)getCurrentColumnCount:(UIInterfaceOrientation)orientation {
+   return [(self.numbersPerLineArray[UIInterfaceOrientationIsPortrait(orientation) ? 0 : 1]) intValue];
+}
+
+
+- (CGSize)cellSize {
+   CGSize size;
+
+   UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+   NSString * key = UIInterfaceOrientationIsPortrait(orientation) ? @"vertical" : @"horizontal";
+   NSString * keyWidth = [NSString stringWithFormat:@"%@_width", key];
+   NSString * keyHeight = [NSString stringWithFormat:@"%@_height", key];
+
+   NSNumber * valueWidth = [self.cellSizeDictionary objectForKey:keyWidth];
+   NSNumber * valueHeight = [self.cellSizeDictionary objectForKey:keyHeight];
+   if (valueWidth && valueHeight) {
+      size = CGSizeMake([valueWidth floatValue], [valueHeight floatValue]);
+   } else {
+      size = [self makeCellSize:orientation];
+      NSNumber * aWidth = [NSNumber numberWithFloat:size.width];
+      NSNumber * aHeight = [NSNumber numberWithFloat:size.height];
+      [self.cellSizeDictionary setObject:aWidth forKey:keyWidth];
+      [self.cellSizeDictionary setObject:aHeight forKey:keyHeight];
+   }
+
+   return size;
+}
+
+
+- (CGSize)makeCellSize:(UIInterfaceOrientation)orientation {
+   int columnCount = [self getCurrentColumnCount:orientation];
+   UICollectionViewFlowLayout * layout = self.baseCollectionView.collectionViewLayout;
+
+   CGFloat usableSpace = (layout.collectionViewContentSize.width
+    - layout.sectionInset.left - layout.sectionInset.right
+    - ((columnCount - 1)));
+//    - ((columnCount - 1) * layout.minimumColumnSpacing));
+
+   CGFloat cellLength = usableSpace / columnCount;
+
+   return CGSizeMake(cellLength, cellLength + 12);
+}
+
 
 @end
 
