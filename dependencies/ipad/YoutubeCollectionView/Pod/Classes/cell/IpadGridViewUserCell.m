@@ -12,7 +12,7 @@
 @implementation IpadGridViewUserCell
 
 
-- (void)bind:(YTYouTubeVideo *)video {
+- (void)bind:(YTYouTubeVideoCache *)video {
    // 4
    [self.userNameLabel setText:video.snippet.channelTitle];
 }

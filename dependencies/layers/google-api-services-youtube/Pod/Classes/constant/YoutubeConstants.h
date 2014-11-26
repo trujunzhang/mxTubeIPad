@@ -63,13 +63,18 @@
 // common
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
 
+// other
+#import "YoutubeVideoCache.h"
+
 #endif
 
 
 // module
 
 //#define YTYouTubeVideo  GTLYouTubeVideo
-#define YTYouTubeVideo  MABYT3_Video
+//#define YTYouTubeVideo  MABYT3_Video
+
+#define YTYouTubeVideoCache  YoutubeVideoCache
 
 #define YTYouTubePlayList  MABYT3_PlayList
 #define YTYouTubePlaylistItem  GTLYouTubePlaylistItem
@@ -101,8 +106,8 @@
 
 
 
-//#define hasShowLeftMenu NO
-#define hasShowLeftMenu YES
+#define hasShowLeftMenu NO
+//#define hasShowLeftMenu YES
 
 
 

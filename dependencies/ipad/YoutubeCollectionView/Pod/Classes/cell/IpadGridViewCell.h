@@ -18,7 +18,7 @@
 
 @optional
 
-- (void)gridViewCellTap:(YTYouTubeVideo *)video sender:(id)sender;
+- (void)gridViewCellTap:(YTYouTubeVideoCache *)video sender:(id)sender;
 
 @end
 
@@ -33,8 +33,8 @@
 @property(unsafe_unretained, nonatomic) IBOutlet UIView * userView;
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
-@property(nonatomic, strong) YTYouTubeVideo * video;
+@property(nonatomic, strong) YTYouTubeVideoCache * video;
 
 
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
+- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end

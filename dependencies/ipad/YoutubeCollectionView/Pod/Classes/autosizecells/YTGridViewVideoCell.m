@@ -17,7 +17,7 @@
 
 
 @interface YTGridViewVideoCell ()
-@property(nonatomic, strong) YTYouTubeVideo * video;
+@property(nonatomic, strong) YTYouTubeVideoCache * video;
 @property(nonatomic, strong) id<IpadGridViewCellDelegate> delegate;
 @end
 
@@ -48,7 +48,7 @@
 }
 
 
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
+- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
    self.video = video;
    self.delegate = delegate;
 
@@ -66,7 +66,6 @@
                                        videoThumbnailsUrl:videoThumbnailsUrl];
    imageNode.borderColor = [[UIColor whiteColor] CGColor];
    imageNode.borderWidth = 2;
-//   imageNode.layerBacked = YES;
 
    // configure the button
    imageNode.userInteractionEnabled = YES; // opt into touch handling
@@ -104,18 +103,28 @@
 //}
 
 
-- (ASImageNode *)getThumbnailsImageNode:(MABYT3_Video *)video placeholderImage:(UIImage *)image videoThumbnailsUrl:(NSString *)videoThumbnailsUrl {
+- (ASImageNode *)getThumbnailsImageNode:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)image videoThumbnailsUrl:(NSString *)videoThumbnailsUrl {
    ASImageNode * imageNode = [[ASImageNode alloc] init];
    imageNode.backgroundColor = [UIColor lightGrayColor];
    imageNode.frame = self.videoThumbnailsContainer.bounds;
    imageNode.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
+   if (video.hasImage) {
+      imageNode.image = video.image;
+   } else {
+      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
+          video.hasImage = YES;
+          video.image = image;
+          imageNode.image = video.image;
+      };
+      [ImageCacheImplement CacheWithImageView:imageNode
+                                          key:video.identifier
+                                      withUrl:videoThumbnailsUrl
+                              withPlaceholder:image
+                                   completion:downloadCompletion
+      ];
+   }
 
-   [ImageCacheImplement CacheWithImageView:imageNode
-                                       key:video.identifier
-                                   withUrl:videoThumbnailsUrl
-                           withPlaceholder:image
-   ];
    return imageNode;
 }
 

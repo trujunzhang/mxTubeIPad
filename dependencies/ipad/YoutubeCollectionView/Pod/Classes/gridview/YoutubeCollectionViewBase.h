@@ -42,4 +42,7 @@
 - (void)fetchPlayListByPageToken;
 - (void)fetchSuggestionListByVideoId:(NSString *)videoId;
 - (void)fetchSuggestionListByPageToken;
+
+@property(nonatomic, strong) NSOperationQueue * nodeConstructionQueue;
+
 @end

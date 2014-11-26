@@ -12,10 +12,14 @@
 #import "YTGridViewVideoCell.h"
 #import "YTGridVideoCellNode.h"
 #import "YTGridViewPlaylistCell.h"
+#import "YTAsyncGridViewVideoCollectionViewCell.h"
 
 
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
 #define DEFAULT_LOADING_MORE_HEIGHT 140;
+
+#define  CollectionVideoReuseCell YTAsyncGridViewVideoCollectionViewCell
+//#define  CollectionVideoReuseCell YTGridViewVideoCell
 
 
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
@@ -64,7 +68,7 @@
       self.collectionView.delegate = self;
       self.collectionView.backgroundColor = [UIColor whiteColor];
 
-      [self.collectionView registerClass:[YTGridViewVideoCell class]
+      [self.collectionView registerClass:[CollectionVideoReuseCell class]
               forCellWithReuseIdentifier:[GYoutubeRequestInfo getIdentifyByItemType:YTSegmentItemVideo]];
 
       [self.collectionView registerClass:[YoutubeFooterView class]
@@ -119,11 +123,14 @@
 
    switch (itemType) {
       case YTSegmentItemVideo: {
-         YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-         YTGridViewVideoCell * gridViewVideoCell = (YTGridViewVideoCell *) viewCell;
+         YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+         CollectionVideoReuseCell * gridViewVideoCell = (CollectionVideoReuseCell *) viewCell;
          [gridViewVideoCell bind:video
                 placeholderImage:self.placeHolderImage
-                        delegate:self.delegate];
+                        cellSize:[self cellSize]
+                        delegate:self.delegate
+           nodeConstructionQueue:self.nodeConstructionQueue
+         ];
       }
          break;
       case YTSegmentItemPlaylist: {
@@ -205,15 +212,6 @@
 
    return CGSizeMake(cellLength, cellLength + 12);
 }
-
-
-//- (CGSize)cellSize123 {
-//   CGFloat usableSpace = [self usableSpace];
-//   CGFloat cellLength = usableSpace / self.layout.columnCount;
-//
-//   CGSize size = CGSizeMake(cellLength, cellLength + 12);
-//   return size;
-//}
 
 
 - (CGFloat)usableSpace {

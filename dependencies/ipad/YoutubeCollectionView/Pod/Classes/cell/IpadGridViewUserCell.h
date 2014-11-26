@@ -17,5 +17,5 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *subscribeBgImage;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *subscribeImage;
 
-- (void)bind:(YTYouTubeVideo *)video;
+- (void)bind:(YTYouTubeVideoCache *)video;
 @end

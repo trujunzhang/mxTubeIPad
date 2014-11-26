@@ -12,8 +12,8 @@
 
 @interface VideoDetailPanel : UIView
 
-@property(nonatomic, strong) YTYouTubeVideo * video;
-- (instancetype)initWithVideo:(YTYouTubeVideo *)video;
+@property(nonatomic, strong) YTYouTubeVideoCache * video;
+- (instancetype)initWithVideo:(YTYouTubeVideoCache *)video;
 
 
 @end

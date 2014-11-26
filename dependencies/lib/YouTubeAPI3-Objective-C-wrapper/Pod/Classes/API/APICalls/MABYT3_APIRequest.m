@@ -1121,71 +1121,6 @@
 }
 
 
-- (void)LISTVideosForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler {
-
-   __block NSString * nxtURLStr = @"";
-   NSMutableArray * arr = [[NSMutableArray alloc] init];
-   NSMutableURLRequest * request = [[NSMutableURLRequest alloc] init];
-   [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@&key=%@", urlStr, apiKey]]];
-
-   [request setHTTPMethod:@"GET"];
-
-   [self appendAuthInfo:request];
-
-   NSOperationQueue * queue = [[NSOperationQueue alloc] init];
-   [NSURLConnection sendAsynchronousRequest:request
-                                      queue:queue
-                          completionHandler:^(NSURLResponse * response, NSData * data, NSError * error) {
-
-                              NSHTTPURLResponse * httpresp = (NSHTTPURLResponse *) response;
-                              if (httpresp.statusCode == 200) {
-                                 NSError * e = nil;
-                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
-                                                                                       options:NSJSONReadingMutableContainers
-                                                                                         error:&e];
-                                 if ([dict objectForKey:@"items"]) {
-                                    NSArray * items = [dict objectForKey:@"items"];
-                                    if (items.count > 0) {
-                                       for (int i = 0; i < items.count; i++) {
-                                          MABYT3_Video * itm = [[MABYT3_Video alloc] initFromDictionary:items[i]];
-                                          [arr addObject:itm];
-                                       }
-                                    }
-                                 }
-                                 if ([dict objectForKey:@"nextPageToken"]) {
-                                    NSString * pagetoken = [dict objectForKey:@"nextPageToken"];
-                                    nxtURLStr = pagetoken;
-                                 }
-                              }
-                              else {
-                                 NSError * e = nil;
-                                 NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
-                                                                                       options:NSJSONReadingMutableContainers
-                                                                                         error:&e];
-                                 if ([dict objectForKey:@"error"]) {
-                                    NSDictionary * dict2 = [dict objectForKey:@"error"];
-                                    if ([dict2 objectForKey:@"errors"]) {
-                                       NSArray * items = [dict2 objectForKey:@"errors"];
-                                       if (items.count > 0) {
-                                          NSString * dom = @"YTAPI";
-                                          if ([items[0] objectForKey:@"domain"]) {
-                                             dom = [items[0] objectForKey:@"domain"];
-                                          }
-                                          error = [NSError errorWithDomain:dom
-                                                                      code:httpresp.statusCode
-                                                                  userInfo:items[0]];
-                                       }
-                                    }
-                                 }
-                              }
-                              dispatch_async(dispatch_get_main_queue(), ^(void) {
-//                                  handler(arr, error, nxtURLStr);
-                              });
-
-                          }];
-}
-
-
 - (void)appendAuthInfo:(NSMutableURLRequest *)request {
    if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
 //      [request setValue:[NSString stringWithFormat:@"Bearer %@",
@@ -1975,7 +1910,7 @@
       NSArray * items = [dict objectForKey:@"items"];
       if (items.count > 0) {
          for (int i = 0; i < items.count; i++) {
-            MABYT3_Video * itm = [[MABYT3_Video alloc] initFromDictionary:items[i]];
+            YTYouTubeVideoCache * itm = [[YTYouTubeVideoCache alloc] initFromDictionary:items[i]];
             [arr addObject:itm];
          }
       }

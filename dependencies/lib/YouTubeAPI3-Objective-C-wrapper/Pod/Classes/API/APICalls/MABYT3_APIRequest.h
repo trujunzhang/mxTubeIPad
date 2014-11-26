@@ -20,12 +20,14 @@
 #import "MABYT3_Video.h"
 
 #import "AFHTTPSessionManager.h"
+
 @class YoutubeResponseInfo;
 
 typedef void (^MABYoutubeResponseBlock)(YoutubeResponseInfo * responseInfo, NSError * error);
 
 static NSString * kKeychainItemName = @"mxyoutube";
-static NSUInteger search_maxResults = 15;
+static NSUInteger search_maxResults = 35;
+
 
 
 @interface MABYT3_AutoCompleteRequest : AFHTTPSessionManager
@@ -60,7 +62,6 @@ static NSUInteger search_maxResults = 15;
 - (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
-- (void)LISTVideosForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 - (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 

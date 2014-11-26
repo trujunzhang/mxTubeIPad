@@ -96,7 +96,7 @@
 #pragma mark  IpadGridViewCellDelegate
 
 
-- (void)gridViewCellTap:(YTYouTubeVideo *)video sender:(id)sender {
+- (void)gridViewCellTap:(YTYouTubeVideoCache *)video sender:(id)sender {
    [[LeftRevealHelper sharedLeftRevealHelper] closeLeftMenuAndNoRearOpen];
 
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self

@@ -44,7 +44,13 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/JMWhenTapped/*.{h,m}'
   end
 
+  s.subspec 'UIView-UIImageEffects' do |sub|
+    sub.source_files = 'Pod/Classes/UIView-UIImageEffects/*.{h,m}'
+  end
 
+  s.subspec 'UIColor-Colors' do |sub|
+    sub.source_files = 'Pod/Classes/UIColor-Colors/*.{h,m}'
+  end
 
   s.dependency 'JMImageCache'
   s.dependency 'ASImageResize'

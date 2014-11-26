@@ -71,7 +71,7 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)getWatchVideoId:(YTYouTubeVideo *)video {
++ (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video {
    return video.identifier;
 }
 
@@ -91,7 +91,7 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideo *)video {
++ (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video {
    return video.snippet.thumbnails.medium.url;
 }
 

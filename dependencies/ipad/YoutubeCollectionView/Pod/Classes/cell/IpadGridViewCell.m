@@ -73,7 +73,7 @@
 }
 
 
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
+- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)image delegate:(id<IpadGridViewCellDelegate>)delegate {
    self.video = video;
    self.delegate = delegate;
 

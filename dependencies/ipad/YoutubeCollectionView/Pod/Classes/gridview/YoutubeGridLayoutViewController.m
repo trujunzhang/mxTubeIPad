@@ -115,7 +115,7 @@
    YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
 
    if (itemType == YTSegmentItemVideo) {
-      YTYouTubeVideo * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+      YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
       YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:[self.layout cellSize]];
       [videoCellNode bind:video
          placeholderImage:self.placeHolderImage

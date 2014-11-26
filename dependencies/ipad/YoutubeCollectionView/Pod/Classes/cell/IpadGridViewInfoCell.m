@@ -13,7 +13,7 @@
 @implementation IpadGridViewInfoCell
 
 
-- (void)bind:(YTYouTubeVideo *)video {
+- (void)bind:(YTYouTubeVideoCache *)video {
    // 2
    [self.titleLaebl setText:video.snippet.title];
    // 3

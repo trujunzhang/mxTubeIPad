@@ -124,7 +124,7 @@ CGFloat thumbnailHeight = 142;
 }
 
 
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
+- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
    self.video = video;
    self.delegate = delegate;
 

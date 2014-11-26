@@ -15,7 +15,7 @@
 
 - (instancetype)initWithCellNodeOfSize:(CGSize)size;
 
-@property(nonatomic, strong) YTYouTubeVideo * video;
+@property(nonatomic, strong) YTYouTubeVideoCache * video;
 @property(nonatomic, strong) id<IpadGridViewCellDelegate> delegate;
-- (void)bind:(YTYouTubeVideo *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate;
+- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate;
 @end

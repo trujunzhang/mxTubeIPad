@@ -21,7 +21,7 @@
 @interface VideoDetailViewControlleriPad : UIViewController
 
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
-@property(nonatomic, strong) YTYouTubeVideo * video;
+@property(nonatomic, strong) YTYouTubeVideoCache * video;
 
 @property(nonatomic, strong) UIViewController * videoDetailController;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
@@ -33,7 +33,7 @@
 @property(nonatomic, strong) NSArray * defaultTableControllers;
 
 @property(nonatomic, strong) id youTubeVideo;
-- (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(YTYouTubeVideo *)video;
+- (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(YTYouTubeVideoCache *)video;
 
 @end
 

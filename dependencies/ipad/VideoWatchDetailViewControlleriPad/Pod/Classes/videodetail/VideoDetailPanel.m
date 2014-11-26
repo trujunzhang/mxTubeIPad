@@ -11,7 +11,7 @@
 
 @implementation VideoDetailPanel
 
-- (instancetype)initWithVideo:(YTYouTubeVideo *)video {
+- (instancetype)initWithVideo:(YTYouTubeVideoCache *)video {
    self = [super init];
    if (self) {
       self.video = video;

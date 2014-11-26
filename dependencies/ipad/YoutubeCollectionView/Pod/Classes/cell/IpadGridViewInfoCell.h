@@ -16,5 +16,5 @@
 @property(unsafe_unretained, nonatomic) IBOutlet UILabel * ratingLabel;
 @property(unsafe_unretained, nonatomic) IBOutlet UILabel * viewCountLabel;
 
-- (void)bind:(YTYouTubeVideo *)video;
+- (void)bind:(YTYouTubeVideoCache *)video;
 @end
