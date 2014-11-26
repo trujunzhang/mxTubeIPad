@@ -45,21 +45,25 @@
    self.layerBacked = true;
    self.shouldRasterizeDescendants = true;
 
+   // 1.1
    self.backgroundColor = [UIColor whiteColor];
 
-   self.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-   self.borderWidth = 1;
-
-   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-   self.shadowOffset = CGSizeMake(1, 3);
-   self.shadowRadius = 2.0;
+   // 1.2
+//   self.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
+//   self.borderWidth = 1;
+//
+//   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+//   self.shadowOffset = CGSizeMake(1, 3);
+//   self.shadowRadius = 2.0;
 
    // 2
    self.videoChannelThumbnailsNode.layerBacked = true;
    self.videoChannelThumbnailsNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
 
+   // 2.1
    self.videoChannelThumbnailsNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
 
+   // 2.2
    self.videoChannelThumbnailsNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
    self.videoChannelThumbnailsNode.borderWidth = 1;
 
