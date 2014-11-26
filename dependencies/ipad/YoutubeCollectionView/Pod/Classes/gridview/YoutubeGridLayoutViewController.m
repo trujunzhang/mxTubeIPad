@@ -9,9 +9,6 @@
 #import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YoutubeGridLayoutViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
-#import "YoutubeFooterView.h"
-#import "GYoutubeRequestInfo.h"
-#import "YTGridViewVideoCell.h"
 #import "KRLCollectionViewGridLayout.h"
 #import "YTGridVideoCellNode.h"
 
@@ -36,10 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated {
    [super viewDidAppear:animated];
 
-   NSAssert(self.nextPageDelegate, @"not found YoutubeCollectionNextPageDelegate!");
-   NSAssert(self.numbersPerLineArray, @"not found numbersPerLineArray!");
-
-   [self.nextPageDelegate executeNextPageTask]; // test
+//   [self.nextPageDelegate executeNextPageTask]; // test
 }
 
 
@@ -90,19 +84,62 @@
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return [self getYoutubeRequestInfo].videoList.count;
+   if (section == 0) {
+      return [self getYoutubeRequestInfo].videoList.count;
+   } else {
+      return 1;
+   }
 }
 
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-   return 1;
+   return 2;
 }
 
 
 - (ASCellNode *)collectionView:(ASCollectionView *)collectionView nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
    ASCellNode * node;
 
-   node = [self getCellNodeAtIndexPath:indexPath];
+   switch (indexPath.section) {
+      case 0:
+         node = [self getCellNodeAtIndexPath:indexPath];
+         break;
+      case 1:
+         node = [self getLoadMoreNode];
+         break;
+   }
+
+
+   return node;
+}
+
+
+- (ASCellNode *)getLoadMoreNode {
+   ASCellNode * node = [[ASCellNode alloc] init];
+
+   // attribute a string
+   NSDictionary * attrs = @{
+    NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
+    NSForegroundColorAttributeName : [UIColor redColor],
+   };
+   NSAttributedString * string = [[NSAttributedString alloc] initWithString:@"shuffle"
+                                                                 attributes:attrs];
+
+   // create the node
+   ASTextNode * _shuffleNode = [[ASTextNode alloc] init];
+   _shuffleNode.attributedString = string;
+
+   // configure the button
+   _shuffleNode.userInteractionEnabled = YES; // opt into touch handling
+
+   // size all the things
+   CGSize size = [_shuffleNode measure:CGSizeMake(self.view.bounds.size.width, 140)];
+   CGPoint origin = CGPointMake(0, 0);
+   _shuffleNode.frame = (CGRect) { origin, size };
+
+   [node addSubnode:_shuffleNode];
+
+   [self.nextPageDelegate executeNextPageTask];
 
    return node;
 }
@@ -116,7 +153,7 @@
 
    if (itemType == YTSegmentItemVideo) {
       YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:[self.layout cellSize]];
+      YTGridVideoCellNode * videoCellNode = [[YTGridVideoCellNode alloc] initWithCellNodeOfSize:[self cellSize]];
       [videoCellNode bind:video
          placeholderImage:self.placeHolderImage
                  delegate:self.delegate];

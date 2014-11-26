@@ -14,7 +14,8 @@
 
 
 #define LAYOUT_MINIMUMCOLUMNSPACING 20;
-
+#define DEFAULT_LOADING_MORE_HEIGHT 140;
+#define FOOTER_IDENTIFIER @"WaterfallFooter"
 
 @protocol YoutubeCollectionNextPageDelegate<NSObject>
 
