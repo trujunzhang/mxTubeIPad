@@ -43,7 +43,7 @@
       self.layout.aspectRatio = 1;
       self.layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
       self.layout.interitemSpacing = 30;
-      self.layout.lineSpacing = 10;
+      self.layout.lineSpacing = 20;
       self.layout.aspectRatio = 1.1;
       self.layout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
