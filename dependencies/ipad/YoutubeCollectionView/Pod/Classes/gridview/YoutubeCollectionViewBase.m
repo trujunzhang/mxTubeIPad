@@ -160,7 +160,6 @@
    [self getYoutubeRequestInfo].isLoading = NO;
    [[self getYoutubeRequestInfo] appendNextPageData:array];
 
-//   [self.baseCollectionView.collectionViewLayout invalidateLayout];
    [[self baseCollectionView] reloadData];
 }
 
