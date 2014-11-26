@@ -13,7 +13,7 @@
 #import "YTGridVideoCellNode.h"
 
 
-@interface YoutubeGridLayoutViewController ()<ASCollectionViewDataSource, ASCollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
+@interface YoutubeGridLayoutViewController ()<ASCollectionViewDataSource, ASCollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, UICollectionViewDelegate>
 @property(strong, nonatomic) ASCollectionView * collectionView;
 @property(nonatomic, strong) UIImage * placeHolderImage;
 @end
@@ -33,7 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated {
    [super viewDidAppear:animated];
 
-//   [self.nextPageDelegate executeNextPageTask]; // test
+   [self.nextPageDelegate executeNextPageTask]; // test
 }
 
 
@@ -106,11 +106,20 @@
          break;
       case 1:
          node = [self getLoadMoreNode];
+         [self checkVisible];
          break;
    }
 
 
    return node;
+}
+
+
+- (void)checkVisible {
+   NSArray * array = [self.collectionView indexPathsForVisibleItems];
+
+   NSString * debug = @"debug";
+
 }
 
 
@@ -139,7 +148,7 @@
 
    [node addSubnode:_shuffleNode];
 
-   [self.nextPageDelegate executeNextPageTask];
+//   [self.nextPageDelegate executeNextPageTask];
 
    return node;
 }
@@ -164,6 +173,18 @@
    }
 
    return node;
+}
+
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+   for (UICollectionViewCell * cell in [self.collectionView visibleCells]) {
+      NSIndexPath * indexPath = [self.collectionView indexPathForCell:cell];
+//      NSLog(@"%@", indexPath);
+      if (indexPath.section == 1) {
+         [self.nextPageDelegate executeNextPageTask];
+         return;
+      }
+   }
 }
 
 

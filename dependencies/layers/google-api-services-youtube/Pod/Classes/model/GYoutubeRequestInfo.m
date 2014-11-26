@@ -31,7 +31,7 @@
 - (void)baseReset {
    self.nextPageToken = @"";
    self.hasLoadingMore = YES;
-   self.isLoading = YES;
+   self.isLoading = NO;
 }
 
 

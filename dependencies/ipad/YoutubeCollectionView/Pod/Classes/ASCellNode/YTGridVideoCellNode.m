@@ -116,8 +116,8 @@ CGFloat thumbnailHeight = 142;
    _infoContainerNode.frame = CGRectMake(0, thumbnailHeight + 8, _kittenSize.width, infoContainerHeight - 4);
 
    // 2.1
-   CGFloat titleLeftX = 58;
-   _channelImageNode.frame = CGRectMake(0, 0, titleLeftX - 8, titleLeftX - 4);
+   CGFloat titleLeftX = 28;
+   _channelImageNode.frame = CGRectMake(0, 5, titleLeftX - 8, titleLeftX - 4);
    CGFloat titleWidth = _kittenSize.width - titleLeftX;
    _videoTitleNode.frame = CGRectMake(titleLeftX, 0, titleWidth, 36);
    _channelTitleNode.frame = CGRectMake(titleLeftX, 36, titleWidth, 32);
@@ -179,20 +179,20 @@ CGFloat thumbnailHeight = 142;
       ];
    }
 
-   _channelImageNode.imageModificationBlock = ^UIImage *(UIImage * image) {
-       UIImage * modifiedImage = nil;
-       CGRect rect = (CGRect) { CGPointZero, image.size };
-
-       UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
-
-       [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:14.0] addClip];
-       [image drawInRect:rect];
-       modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
-
-       UIGraphicsEndImageContext();
-
-       return modifiedImage;
-   };
+//   _channelImageNode.imageModificationBlock = ^UIImage *(UIImage * image) {
+//       UIImage * modifiedImage = nil;
+//       CGRect rect = (CGRect) { CGPointZero, image.size };
+//
+//       UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
+//
+//       [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:4.0] addClip];
+//       [image drawInRect:rect];
+//       modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
+//
+//       UIGraphicsEndImageContext();
+//
+//       return modifiedImage;
+//   };
 }
 
 

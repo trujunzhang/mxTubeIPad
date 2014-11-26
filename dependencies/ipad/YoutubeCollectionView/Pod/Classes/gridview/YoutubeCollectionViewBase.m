@@ -217,7 +217,14 @@
 
 - (BOOL)checkRequest {
    if ([[self getYoutubeRequestInfo] isLoading]) {
-      return NO;
+      return YES;
+   }
+
+   if ([[self getYoutubeRequestInfo] hasNextPage]) {
+      if ([[self getYoutubeRequestInfo] isLoading] == NO) {
+         [self getYoutubeRequestInfo].isLoading = YES;
+         return NO;
+      }
    }
 
    return [[self getYoutubeRequestInfo] hasNextPage] == NO;
