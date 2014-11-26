@@ -6,6 +6,6 @@
 #endif
 
 
-//#define YTCollectionViewController YoutubeGridLayoutViewController
-#define YTCollectionViewController YoutubeGridCHTLayoutViewController
+#define YTCollectionViewController YoutubeGridLayoutViewController
+//#define YTCollectionViewController YoutubeGridCHTLayoutViewController
 

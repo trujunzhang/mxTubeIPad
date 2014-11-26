@@ -36,9 +36,9 @@
 }
 
 
-- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-   return CGSizeZero;
-}
+//- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
+//   return CGSizeZero;
+//}
 
 
 - (void)initContentNode {
