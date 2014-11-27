@@ -50,7 +50,7 @@
 //   self.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
 //   self.borderWidth = 1;
 
-   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5" alpha:0.6].CGColor;
    self.shadowOffset = CGSizeMake(1, 3);
    self.shadowRadius = 2.0;
 

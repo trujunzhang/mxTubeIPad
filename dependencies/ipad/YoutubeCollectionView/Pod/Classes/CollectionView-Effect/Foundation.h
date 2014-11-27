@@ -21,6 +21,7 @@
 @interface NSParagraphStyle (custom)
 
 + (NSParagraphStyle *)justifiedParagraphStyle;
++ (id)justifiedParagraphStyleForTitleText:(UIFont *)font;
 @end
 
 
