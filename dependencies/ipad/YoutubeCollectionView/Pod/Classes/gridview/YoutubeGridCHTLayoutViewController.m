@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YoutubeGridCHTLayoutViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
@@ -162,6 +163,16 @@
    }
 
    return reusableView;
+}
+
+
+#pragma mark -
+#pragma mark  UICollectionViewDelegate
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+   YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+   [self.delegate gridViewCellTap:video sender:self.delegate];
 }
 
 
