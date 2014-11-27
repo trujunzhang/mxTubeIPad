@@ -41,7 +41,6 @@
 - (void)initContentNode {
    // 1
    self.layerBacked = true;
-   self.shouldRasterizeDescendants = true;
 
    // 1.1
    self.backgroundColor = [UIColor whiteColor];

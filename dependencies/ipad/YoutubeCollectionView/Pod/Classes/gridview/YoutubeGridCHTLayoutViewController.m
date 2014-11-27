@@ -14,6 +14,7 @@
 #import "YTGridVideoCellNode.h"
 #import "YTGridViewPlaylistCell.h"
 #import "YTAsyncGridViewVideoCollectionViewCell.h"
+#import "HexColor.h"
 
 
 #define FOOTER_IDENTIFIER @"WaterfallFooter"
@@ -58,7 +59,7 @@
       self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
       self.collectionView.dataSource = self;
       self.collectionView.delegate = self;
-      self.collectionView.backgroundColor = [UIColor lightGrayColor];
+      self.collectionView.backgroundColor = [UIColor colorWithHexString:@"ebebeb"];
 
       [self.collectionView registerClass:[CollectionVideoReuseCell class]
               forCellWithReuseIdentifier:[GYoutubeRequestInfo getIdentifyByItemType:YTSegmentItemVideo]];
