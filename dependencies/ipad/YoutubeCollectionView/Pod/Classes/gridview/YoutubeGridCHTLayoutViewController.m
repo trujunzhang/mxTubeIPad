@@ -14,7 +14,7 @@
 #import "HexColor.h"
 
 
-@interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
+@interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 @property(strong, nonatomic) UICollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
 @property(nonatomic, strong) UIImage * placeHolderImage;
