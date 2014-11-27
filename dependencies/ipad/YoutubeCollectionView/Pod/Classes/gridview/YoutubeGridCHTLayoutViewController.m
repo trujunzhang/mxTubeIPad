@@ -172,7 +172,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
    YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-   [self.delegate gridViewCellTap:video sender:self.delegate];
+   [self.delegate gridViewCellTap:video];
 }
 
 

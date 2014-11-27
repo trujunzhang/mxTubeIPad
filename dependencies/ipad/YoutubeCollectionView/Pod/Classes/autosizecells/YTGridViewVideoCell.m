@@ -149,7 +149,7 @@
    NSLog(@"single Tap on imageview");
 
    if (self.delegate) {
-      [self.delegate gridViewCellTap:self.video sender:self.delegate];
+      [self.delegate gridViewCellTap:self.video];
    }
 }
 

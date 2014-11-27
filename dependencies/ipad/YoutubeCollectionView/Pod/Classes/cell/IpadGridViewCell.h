@@ -18,7 +18,7 @@
 
 @optional
 
-- (void)gridViewCellTap:(YTYouTubeVideoCache *)video sender:(id)sender;
+- (void)gridViewCellTap:(YTYouTubeVideoCache *)video;
 
 @end
 

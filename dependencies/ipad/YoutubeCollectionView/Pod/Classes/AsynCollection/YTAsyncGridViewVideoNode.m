@@ -159,7 +159,7 @@
 
 
 - (void)channelThumbnailsTapped:(id)buttonTapped {
-   [self.delegate gridViewCellTap:self.cardInfo sender:self.delegate];
+   [self.delegate gridViewCellTap:self.cardInfo];
 }
 
 

@@ -209,7 +209,7 @@ CGFloat thumbnailHeight = 142;
 
 - (void)buttonTapped:(id)buttonTapped {
    if (self.delegate)
-      [self.delegate gridViewCellTap:self.video sender:self.delegate];
+      [self.delegate gridViewCellTap:self.video];
 }
 
 @end

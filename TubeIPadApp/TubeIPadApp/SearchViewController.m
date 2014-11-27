@@ -83,7 +83,7 @@
 #pragma mark - IpadGridViewCellDelegate
 
 
-- (void)gridViewCellTap:(YTYouTubeVideoCache *)video sender:(id)sender {
+- (void)gridViewCellTap:(YTYouTubeVideoCache *)video {
    VideoDetailViewControlleriPad * controller = [[VideoDetailViewControlleriPad alloc] initWithDelegate:self
                                                                                                   video:video];
 
