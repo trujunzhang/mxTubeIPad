@@ -17,10 +17,10 @@
 //   UIFont * font = [UIFont fontWithName:@"AvenirNext-Heavy" size:12];
 //   font = [UIFont fontWithName:@"American Typewriter" size:12];
 //   UIFont * font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-   NSString * fontName = @"HelveticaNeue";
+//   NSString * fontName = @"HelveticaNeue";
 //   fontName = @"ChalkboardSE-Regular";
-   UIFont * font = [UIFont fontWithName:fontName size:14.0f];
-
+//   UIFont * font = [UIFont fontWithName:fontName size:14.0f];
+   UIFont * font = [UIFont systemFontOfSize:14];
 
    NSDictionary * titleAttributes =
     @{ NSFontAttributeName : font,

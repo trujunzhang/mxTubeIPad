@@ -105,6 +105,7 @@
 
    YTYouTubeVideoCache * video = self.cardInfo;
 
+   // 1
    ASImageNode * videoChannelThumbnailsNode = [[ASImageNode alloc] init];
    if (video.hasImage) {
       videoChannelThumbnailsNode.image = video.image;
@@ -128,7 +129,7 @@
                                   action:@selector(channelThumbnailsTapped:)
                         forControlEvents:ASControlNodeEventTouchUpInside];
 
-
+   // 2
    ASTextNode * titleTextNode = [[ASTextNode alloc] init];
    titleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:videoTitleValue];
 
