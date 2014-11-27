@@ -27,6 +27,8 @@
 @property(nonatomic, strong) YTYouTubeVideoCache * cardInfo;
 
 @property(nonatomic, strong) GradientNode * gradientNode;
-- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize;
+@property(nonatomic, strong) id<IpadGridViewCellDelegate> delegate;
+
+- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate;
 
 @end

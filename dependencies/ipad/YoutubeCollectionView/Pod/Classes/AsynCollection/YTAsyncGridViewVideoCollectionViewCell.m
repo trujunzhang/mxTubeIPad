@@ -19,7 +19,6 @@
    [super awakeFromNib];
 
    CALayer * placeholderLayer = [[CALayer alloc] init];
-//   placeholderLayer.contents = [UIImage imageNamed:@"cardPlaceholder"];
    placeholderLayer.contentsGravity = kCAGravityCenter;
    placeholderLayer.contentsScale = [UIScreen mainScreen].scale;
    placeholderLayer.backgroundColor = [UIColor colorWithHue:0
@@ -73,14 +72,14 @@
 
 
    NSOperation * newNodeConstructionOperation = [self nodeConstructionOperationWithCardInfo:videoInfo
-                                                                                      image:placeholder];
+                                                                                   delegate:delegate];
 
    _nodeConstructionOperation = newNodeConstructionOperation;
    [nodeConstructionQueue addOperation:newNodeConstructionOperation];
 }
 
 
-- (NSOperation *)nodeConstructionOperationWithCardInfo:(YTYouTubeVideoCache *)cardInfo image:(UIImage *)image {
+- (NSOperation *)nodeConstructionOperationWithCardInfo:(YTYouTubeVideoCache *)cardInfo delegate:(id<IpadGridViewCellDelegate>)delegate {
    NSBlockOperation * nodeConstructionOperation = [[NSBlockOperation alloc] init];
 
    void (^cellExecutionBlock)() = ^{
@@ -88,7 +87,9 @@
           return;
 
        YTAsyncGridViewVideoNode * containerNode = [[YTAsyncGridViewVideoNode alloc] initWithCardInfo:cardInfo
-                                                                                            cellSize:self.featureImageSizeOptional];
+                                                                                            cellSize:self.featureImageSizeOptional
+                                                                                            delegate:delegate
+       ];
 
        if (nodeConstructionOperation.cancelled)
           return;

@@ -7,6 +7,7 @@
 //
 
 #import <IOS_Collection_Code/ImageCacheImplement.h>
+#import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YTAsyncGridViewVideoNode.h"
 #import "FrameCalculator.h"
 #import "AnimatedContentsDisplayLayer.h"
@@ -19,11 +20,12 @@
 
 @implementation YTAsyncGridViewVideoNode
 
-- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize {
+- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate {
    self = [super initWithLayerClass:[AnimatedContentsDisplayLayer class]];
    if (self) {
       self.nodeCellSize = cellSize;
       self.cardInfo = cardInfo;
+      self.delegate = delegate;
 
       [self setupContainerNode];
       [self addAllSubNodes];
@@ -34,11 +36,6 @@
 
    return self;
 }
-
-
-//- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {
-//   return CGSizeZero;
-//}
 
 
 - (void)initContentNode {
@@ -52,10 +49,10 @@
    // 1.2
 //   self.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
 //   self.borderWidth = 1;
-//
-//   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-//   self.shadowOffset = CGSizeMake(1, 3);
-//   self.shadowRadius = 2.0;
+
+   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+   self.shadowOffset = CGSizeMake(1, 3);
+   self.shadowRadius = 2.0;
 
    // 2
    self.videoChannelThumbnailsNode.layerBacked = true;
@@ -125,6 +122,12 @@
       ];
    }
 
+   // configure the button
+   videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
+   [videoChannelThumbnailsNode addTarget:self
+                                  action:@selector(channelThumbnailsTapped:)
+                        forControlEvents:ASControlNodeEventTouchUpInside];
+
 
    ASTextNode * titleTextNode = [[ASTextNode alloc] init];
    titleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:videoTitleValue];
@@ -152,6 +155,11 @@
    [self addSubnode:self.videoChannelThumbnailsNode];
    [self addSubnode:self.titleTextNode];
 //   [self addSubnode:self.descriptionTextNode];
+}
+
+
+- (void)channelThumbnailsTapped:(id)buttonTapped {
+   [self.delegate gridViewCellTap:self.cardInfo sender:self.delegate];
 }
 
 

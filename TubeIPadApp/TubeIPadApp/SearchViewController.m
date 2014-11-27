@@ -52,7 +52,7 @@
    self.searchBar.userInteractionEnabled = YES;
    self.searchBar.placeholder = @"Search";
 
-   [self search:@"sketch 3" withItemType:YTSegmentItemVideo];// test
+   [self search:@"lightroom" withItemType:YTSegmentItemVideo];// test
 //   [self searchByPageToken];// test
 
    self.searchBar.delegate = self;
