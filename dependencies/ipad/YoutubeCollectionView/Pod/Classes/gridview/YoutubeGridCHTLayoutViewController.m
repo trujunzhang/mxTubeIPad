@@ -17,12 +17,6 @@
 #import "HexColor.h"
 
 
-#define FOOTER_IDENTIFIER @"WaterfallFooter"
-#define DEFAULT_LOADING_MORE_HEIGHT 140;
-
-#define  CollectionVideoReuseCell YTAsyncGridViewVideoCollectionViewCell
-//#define  CollectionVideoReuseCell YTGridViewVideoCell
-
 
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
 @property(strong, nonatomic) UICollectionView * collectionView;
@@ -139,6 +133,7 @@
 
    return viewCell;
 }
+
 
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

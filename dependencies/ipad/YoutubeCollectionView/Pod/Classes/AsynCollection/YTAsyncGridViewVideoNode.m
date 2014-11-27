@@ -16,6 +16,7 @@
 #import "HexColor.h"
 #import "UIColor+iOS8Colors.h"
 #import "YoutubeParser.h"
+#import "ASDisplayNode+Subclasses.h"
 
 
 @implementation YTAsyncGridViewVideoNode
@@ -46,11 +47,12 @@
    self.backgroundColor = [UIColor whiteColor];
 
    // 1.2
-//   self.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-//   self.borderWidth = 1;
 
-   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5" alpha:0.6].CGColor;
+
+   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5" alpha:0.8].CGColor;
+//   self.shadowColor = [UIColor redColor].CGColor;
    self.shadowOffset = CGSizeMake(1, 3);
+   self.shadowOpacity = 1.0;
    self.shadowRadius = 2.0;
 
    // 2
@@ -71,11 +73,6 @@
    // 3
    self.titleTextNode.layerBacked = true;
    self.titleTextNode.backgroundColor = [UIColor clearColor];
-}
-
-
-- (void)layout {
-
 }
 
 

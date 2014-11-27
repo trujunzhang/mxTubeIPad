@@ -7,7 +7,7 @@
 
 #define textAreaHeight 300.0
 
-#define textAreaPaddingX 4.0
+#define textAreaPaddingX 8.0
 
 //#define cardWidth 320.0
 
