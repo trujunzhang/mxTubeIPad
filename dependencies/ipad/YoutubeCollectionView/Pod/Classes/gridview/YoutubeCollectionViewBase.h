@@ -11,6 +11,7 @@
 
 
 @class GYoutubeRequestInfo;
+@protocol IpadGridViewCellDelegate;
 
 
 #define LAYOUT_MINIMUMCOLUMNSPACING 10;
@@ -31,6 +32,8 @@
 
 
 @interface YoutubeCollectionViewBase : UIViewController
+@property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
+
 @property(nonatomic, strong) GYoutubeRequestInfo * youtubeRequestInfo;
 
 @property(nonatomic, strong) NSArray * numbersPerLineArray;
@@ -39,6 +42,7 @@
 
 - (GYoutubeRequestInfo *)getYoutubeRequestInfo;
 - (void)setUICollectionView:(UICollectionView *)collectionView;
+- (UICollectionViewCell *)collectionCellAtIndexPath:(NSIndexPath *)indexPath;
 - (void)search:(NSString *)text withItemType:(YTSegmentItemType)itemType;
 - (void)searchByPageToken;
 - (void)cleanup;

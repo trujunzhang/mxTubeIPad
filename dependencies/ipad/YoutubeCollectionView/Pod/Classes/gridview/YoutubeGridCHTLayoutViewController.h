@@ -14,6 +14,6 @@
 
 @interface YoutubeGridCHTLayoutViewController : YoutubeCollectionViewBase
 
-@property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
+
 
 @end

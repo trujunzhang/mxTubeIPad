@@ -10,12 +10,8 @@
 #import "YoutubeGridCHTLayoutViewController.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
-#import "YTGridViewVideoCell.h"
-#import "YTGridVideoCellNode.h"
-#import "YTGridViewPlaylistCell.h"
 #import "YTAsyncGridViewVideoCollectionViewCell.h"
 #import "HexColor.h"
-
 
 
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout, CHTCollectionViewDelegateWaterfallLayout>
@@ -101,39 +97,8 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
-   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
-
-   UICollectionViewCell * viewCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
-                                                                                    forIndexPath:indexPath];
-
-
-   switch (itemType) {
-      case YTSegmentItemVideo: {
-         YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-         CollectionVideoReuseCell * gridViewVideoCell = (CollectionVideoReuseCell *) viewCell;
-         [gridViewVideoCell bind:video
-                placeholderImage:self.placeHolderImage
-                        cellSize:[self cellSize]
-                        delegate:self.delegate
-           nodeConstructionQueue:self.nodeConstructionQueue
-         ];
-      }
-         break;
-      case YTSegmentItemPlaylist: {
-         YTYouTubePlayList * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
-         YTGridViewPlaylistCell * gridViewVideoCell = (YTGridViewPlaylistCell *) viewCell;
-         [gridViewVideoCell bind:video
-                placeholderImage:self.placeHolderImage
-                        delegate:self.delegate];
-      }
-         break;
-   }
-
-
-   return viewCell;
+   return [self collectionCellAtIndexPath:indexPath];
 }
-
 
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

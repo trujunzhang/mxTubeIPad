@@ -9,9 +9,12 @@
 
 
 
+#import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YoutubeCollectionViewBase.h"
 #import "GYoutubeRequestInfo.h"
 #import "GYoutubeHelper.h"
+#import "YTAsyncGridViewVideoCollectionViewCell.h"
+#import "YTGridViewPlaylistCell.h"
 
 
 @interface YoutubeCollectionViewBase ()
@@ -90,6 +93,41 @@
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
+}
+
+
+- (UICollectionViewCell *)collectionCellAtIndexPath:(NSIndexPath *)indexPath {
+   NSString * cell_identifier = [self getYoutubeRequestInfo].itemIdentify;
+   YTSegmentItemType itemType = [self getYoutubeRequestInfo].itemType;
+
+   UICollectionViewCell * viewCell = [self.baseCollectionView dequeueReusableCellWithReuseIdentifier:cell_identifier
+                                                                                        forIndexPath:indexPath];
+
+
+   switch (itemType) {
+      case YTSegmentItemVideo: {
+         YTYouTubeVideoCache * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+         CollectionVideoReuseCell * gridViewVideoCell = (CollectionVideoReuseCell *) viewCell;
+         [gridViewVideoCell bind:video
+                placeholderImage:nil
+                        cellSize:[self cellSize]
+                        delegate:self.delegate
+           nodeConstructionQueue:self.nodeConstructionQueue
+         ];
+      }
+         break;
+      case YTSegmentItemPlaylist: {
+         YTYouTubePlayList * video = [[self getYoutubeRequestInfo].videoList objectAtIndex:indexPath.row];
+         YTGridViewPlaylistCell * gridViewVideoCell = (YTGridViewPlaylistCell *) viewCell;
+         [gridViewVideoCell bind:video
+                placeholderImage:nil
+                        delegate:self.delegate];
+      }
+         break;
+   }
+
+
+   return viewCell;
 }
 
 
