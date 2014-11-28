@@ -168,9 +168,22 @@
              callbackQueue:(dispatch_queue_t)callbackQueue
      downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
                 completion:(void (^)(CGImageRef image, NSError * error))completion {
+   // if no callback queue is supplied, run on the main thread
+   if (callbackQueue == nil) {
+      callbackQueue = dispatch_get_main_queue();
+   }
 
    CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
-       completion([downloadedImage CGImage], nil);
+       // ASMultiplexImageNode callbacks
+       dispatch_async(callbackQueue, ^{
+           if (downloadProgressBlock) {
+              downloadProgressBlock(1.0f);
+           }
+
+           if (completion) {
+              completion([downloadedImage CGImage], nil);
+           }
+       });
    };
    [ImageCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
 
