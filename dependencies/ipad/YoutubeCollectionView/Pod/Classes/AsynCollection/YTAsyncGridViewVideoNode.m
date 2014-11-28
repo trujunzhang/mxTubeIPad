@@ -59,19 +59,19 @@
    self.shadowRadius = 2.0;
 
    // 2
-   self.videoChannelThumbnailsNode.layerBacked = true;
-   self.videoChannelThumbnailsNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
+   self.videoCoverThumbnailsNode.layerBacked = true;
+   self.videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
 
    // 2.1
-   self.videoChannelThumbnailsNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
+   self.videoCoverThumbnailsNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
 
    // 2.2
-   self.videoChannelThumbnailsNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-   self.videoChannelThumbnailsNode.borderWidth = 1;
+   self.videoCoverThumbnailsNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
+   self.videoCoverThumbnailsNode.borderWidth = 1;
 
-   self.videoChannelThumbnailsNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-   self.videoChannelThumbnailsNode.shadowOffset = CGSizeMake(1, 3);
-   self.videoChannelThumbnailsNode.shadowRadius = 2.0;
+   self.videoCoverThumbnailsNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+   self.videoCoverThumbnailsNode.shadowOffset = CGSizeMake(1, 3);
+   self.videoCoverThumbnailsNode.shadowRadius = 2.0;
 
    // 3
    self.titleTextNode.layerBacked = true;
@@ -83,11 +83,11 @@
    //MARK: Node Layout Section
    self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
 
-   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
+   self.videoCoverThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
                                                                       nodeFrameHeight:142.0f];
 
    self.titleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
-                                               featureImageFrame:self.videoChannelThumbnailsNode.frame];
+                                               featureImageFrame:self.videoCoverThumbnailsNode.frame];
 
 //   self.descriptionTextNode.frame = [FrameCalculator frameForDescriptionText:self.bounds
 //                                                           featureImageFrame:self.featureImageNode.frame];
@@ -129,7 +129,7 @@
    gradientNode.layerBacked = true;
 
    //MARK: Container Node Creation Section
-   self.videoChannelThumbnailsNode = videoChannelThumbnailsNode;
+   self.videoCoverThumbnailsNode = videoChannelThumbnailsNode;
    self.titleTextNode = titleTextNode;
 //   self.descriptionTextNode = descriptionTextNode;
 }
@@ -137,7 +137,7 @@
 
 //MARK: Node Hierarchy Section
 - (void)addAllSubNodes {
-   [self addSubnode:self.videoChannelThumbnailsNode];
+   [self addSubnode:self.videoCoverThumbnailsNode];
    [self addSubnode:self.titleTextNode];
 //   [self addSubnode:self.descriptionTextNode];
 }

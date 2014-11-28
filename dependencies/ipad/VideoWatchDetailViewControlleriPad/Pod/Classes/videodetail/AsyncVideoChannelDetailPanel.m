@@ -79,8 +79,8 @@ static CGFloat kTextPadding = 10.0f;
    ASCacheNetworkImageNode * videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
 
    // configure the button
-//   videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
-//   [videoChannelThumbnailsNode addTarget:self
+//   videoCoverThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
+//   [videoCoverThumbnailsNode addTarget:self
 //                                  action:@selector(channelThumbnailsTapped:)
 //                        forControlEvents:ASControlNodeEventTouchUpInside];
 
@@ -94,14 +94,14 @@ static CGFloat kTextPadding = 10.0f;
 - (void)showChannelThumbnail:(NSString *)channelId {
    if (self.cardInfo.channelThumbnailUrl) {
       [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
-//      self.videoChannelThumbnailsNode.URL = [NSURL URLWithString:self.cardInfo.channelThumbnailUrl];
+//      self.videoCoverThumbnailsNode.URL = [NSURL URLWithString:self.cardInfo.channelThumbnailUrl];
       return;
    }
 
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
        self.cardInfo.channelThumbnailUrl = respObject;
        [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
-//       self.videoChannelThumbnailsNode.URL = [NSURL URLWithString:respObject];
+//       self.videoCoverThumbnailsNode.URL = [NSURL URLWithString:respObject];
    };
    [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
                                                           completion:completionBlock

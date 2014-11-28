@@ -18,8 +18,8 @@
 
 @property(nonatomic) CGSize const nodeCellSize;
 
+@property(nonatomic, strong) ASNetworkImageNode * videoCoverThumbnailsNode;
 @property(nonatomic, strong) ASNetworkImageNode * videoChannelThumbnailsNode;
-
 @property(nonatomic, strong) ASTextNode * titleTextNode;
 @property(nonatomic, strong) ASTextNode * descriptionTextNode;
 
@@ -27,6 +27,7 @@
 @property(nonatomic, strong) YTYouTubeVideoCache * cardInfo;
 
 @property(nonatomic, strong) GradientNode * gradientNode;
+
 @property(nonatomic, strong) id<IpadGridViewCellDelegate> delegate;
 
 - (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate;
