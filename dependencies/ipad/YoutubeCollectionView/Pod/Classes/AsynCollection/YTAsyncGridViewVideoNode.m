@@ -16,9 +16,10 @@
 #import "HexColor.h"
 #import "UIColor+iOS8Colors.h"
 #import "YoutubeParser.h"
+#import "ASCacheNetworkImageNode.h"
 
 
-@interface YTAsyncGridViewVideoNode ()<ASImageCacheProtocol, ASImageDownloaderProtocol> {
+@interface YTAsyncGridViewVideoNode () {
 
 }
 @end
@@ -103,8 +104,8 @@
    YTYouTubeVideoCache * video = self.cardInfo;
 
    // 1
-   ASNetworkImageNode * videoChannelThumbnailsNode = [[ASNetworkImageNode alloc] initWithCache:self downloader:self];
-   videoChannelThumbnailsNode.URL = [NSURL URLWithString:videoThumbnailsUrl];
+   ASCacheNetworkImageNode * videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
+   [videoChannelThumbnailsNode startFetchImageWithString:videoThumbnailsUrl];
 
    // configure the button
    videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
@@ -144,54 +145,6 @@
 
 - (void)channelThumbnailsTapped:(id)buttonTapped {
    [self.delegate gridViewCellTap:self.cardInfo];
-}
-
-
-#pragma mark -
-#pragma mark ASImageCacheProtocol
-
-
-- (void)fetchCachedImageWithURL:(NSURL *)URL
-                  callbackQueue:(dispatch_queue_t)callbackQueue
-                     completion:(void (^)(CGImageRef imageFromCache))completion {
-   UIImage * cacheImage = [ImageCacheImplement getCacheImageWithURL:URL];
-   completion([cacheImage CGImage]);
-}
-
-
-#pragma mark -
-#pragma mark ASImageDownloaderProtocol
-
-
-- (id)downloadImageWithURL:(NSURL *)URL
-             callbackQueue:(dispatch_queue_t)callbackQueue
-     downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
-                completion:(void (^)(CGImageRef image, NSError * error))completion {
-   // if no callback queue is supplied, run on the main thread
-   if (callbackQueue == nil) {
-      callbackQueue = dispatch_get_main_queue();
-   }
-
-   CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
-       // ASMultiplexImageNode callbacks
-       dispatch_async(callbackQueue, ^{
-           if (downloadProgressBlock) {
-              downloadProgressBlock(1.0f);
-           }
-
-           if (completion) {
-              completion([downloadedImage CGImage], nil);
-           }
-       });
-   };
-   [ImageCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
-
-   return nil;
-}
-
-
-- (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
-
 }
 
 
