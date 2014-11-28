@@ -11,14 +11,16 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import <MediaPlayer/MediaPlayer.h>
-#import <google-api-services-youtube/YoutubeConstants.h>
+#import "YoutubeConstants.h"
 #import "CollectionConstant.h"
 
 @class WHTopTabBarController;
-@class AsyncVideoDetailPanel;
-@protocol IpadGridViewCellDelegate;
 @class VideoDetailPanel;
+@class AsyncVideoDetailPanel;
+
 @class YKYouTubeVideo;
+
+@protocol IpadGridViewCellDelegate;
 
 
 #define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel

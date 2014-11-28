@@ -83,11 +83,10 @@
    self.videoDetailController = [[UIViewController alloc] init];
    self.videoDetailController.title = @"Info";
 
-   self.videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] init];
+   self.videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] initWithVideo:self.video];
    [self.videoDetailController.view addSubview:self.videoDetailPanel];
 //   self.videoDetailController.view = videoDetailPanel.view;
 
-//   [self.videoDetailPanel bind:self.video];
    self.videoDetailPanel.frame = self.videoDetailController.view.frame;
    self.videoDetailPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 

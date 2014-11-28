@@ -9,7 +9,18 @@
 #import "VideoDetailPanel.h"
 
 
+
+
 @implementation VideoDetailPanel
+
+- (instancetype)initWithVideo:(YTYouTubeVideoCache *)video {
+   self = [super init];
+   if (self) {
+      self.videoCache = video;
+   }
+
+   return self;
+}
 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -32,17 +43,16 @@
 //      self = [arrayOfViews objectAtIndex:0];
       self = [arrayOfViews objectAtIndex:0];
 
-
-//      [self bind];
+//      if (self)
+//         [self bind:self.videoCache];
    }
    return self;
 }
 
 
-- (UIView *)bind:(YTYouTubeVideoCache *)cache {
+- (void)bind:(YTYouTubeVideoCache *)videoCache {
 
 
-   return self;
 }
 
 

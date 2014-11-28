@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <google-api-services-youtube/YoutubeConstants.h>
+
+#import "YoutubeConstants.h"
+
+@class YTYouTubeVideoCache;
 
 
 @interface VideoDetailPanel : UIView
 
-@property(nonatomic, strong) YTYouTubeVideoCache * video;
+@property(nonatomic, strong) YTYouTubeVideoCache * videoCache;
 
-- (UIView *)bind:(YTYouTubeVideoCache *)cache;
+- (instancetype)initWithVideo:(YTYouTubeVideoCache *)videoCache;
+
+- (void)bind:(YTYouTubeVideoCache *)videoCache;
 
 @end
