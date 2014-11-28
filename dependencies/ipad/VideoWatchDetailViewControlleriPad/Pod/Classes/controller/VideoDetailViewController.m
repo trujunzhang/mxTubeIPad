@@ -8,7 +8,6 @@
 
 #import "VideoDetailViewController.h"
 
-#import "VideoDetailPanel.h"
 #import "AsyncVideoDetailPanel.h"
 
 static const NSInteger kLitterSize = 1;

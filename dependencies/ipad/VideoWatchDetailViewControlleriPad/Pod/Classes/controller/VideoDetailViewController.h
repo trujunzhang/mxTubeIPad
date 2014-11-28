@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "YoutubeConstants.h"
 
-@class VideoDetailPanel;
 @class AsyncVideoDetailPanel;
-
-
-//#define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel
-#define CURRENT_VIDEODETAIL_PANEL AsyncVideoDetailPanel
 
 
 @interface VideoDetailViewController : UIViewController
