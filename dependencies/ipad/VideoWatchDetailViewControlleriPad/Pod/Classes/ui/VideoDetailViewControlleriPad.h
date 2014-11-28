@@ -23,8 +23,8 @@
 @protocol IpadGridViewCellDelegate;
 
 
-#define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel
-//#define CURRENT_VIDEODETAIL_PANEL AsyncVideoDetailPanel
+//#define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel
+#define CURRENT_VIDEODETAIL_PANEL AsyncVideoDetailPanel
 
 
 @interface VideoDetailViewControlleriPad : UIViewController

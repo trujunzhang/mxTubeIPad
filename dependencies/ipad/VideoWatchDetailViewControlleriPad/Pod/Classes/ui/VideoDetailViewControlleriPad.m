@@ -84,11 +84,15 @@
    self.videoDetailController.title = @"Info";
 
    self.videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] initWithVideo:self.video];
-   [self.videoDetailController.view addSubview:self.videoDetailPanel];
-//   self.videoDetailController.view = videoDetailPanel.view;
+//   [self.videoDetailController.view addSubview:self.videoDetailPanel.view];
+//   UIScrollView * videoDetailScrollView = [[UIScrollView alloc] init];
+//   [videoDetailScrollView addSubview:self.videoDetailPanel.view];
 
-   self.videoDetailPanel.frame = self.videoDetailController.view.frame;
-   self.videoDetailPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+   self.videoDetailController.view = self.videoDetailPanel.view;
+//   self.videoDetailController.view = videoDetailScrollView;
+
+//   self.videoDetailPanel.view.frame = self.videoDetailController.view.frame;
+//   self.videoDetailPanel.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 3
    self.videoTabBarController = [[WHTopTabBarController alloc] init];
@@ -177,6 +181,10 @@
 
    [self.youTubeVideo setVideoLayout:self.videoPlayView];
    self.videoTabBarController.view.frame = self.tabbarView.bounds;
+
+//   self.videoDetailPanel.view.frame = self.videoDetailController.view.frame;
+//   self.videoDetailPanel.frame = self.videoDetailController.view.frame;
+   [self.videoDetailPanel setCurrentFrame:self.videoDetailController.view.frame];
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "AsyncVideoDetailPanel.h"
+#import "YoutubeVideoCache.h"
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
 #import <AsyncDisplayKit/ASHighlightOverlayLayer.h>
 
@@ -25,9 +26,11 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 @implementation AsyncVideoDetailPanel
 
 
-- (instancetype)init {
+- (instancetype)initWithVideo:(YoutubeVideoCache *)videoCache {
    if (!(self = [super init]))
       return nil;
+
+   self.backgroundColor = [UIColor whiteColor];
 
    // create a text node
    _textNode = [[ASTextNode alloc] init];
@@ -38,7 +41,8 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
    _textNode.linkAttributeNames = @[ kLinkAttributeName ];
 
    // generate an attributed string using the custom link attribute specified above
-   NSString * blurb = @"kittens courtesy placekitten.com kittens courtesy placekitten.com kittens courtesy placekitten.com \U0001F638";
+//   NSString * blurb = @"kittens courtesy placekitten.com kittens courtesy placekitten.com kittens courtesy placekitten.com \U0001F638";
+   NSString * blurb = videoCache.snippet.descriptionString;
    NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:blurb];
    [string addAttribute:NSFontAttributeName
                   value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f]
@@ -75,11 +79,13 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 
 
 - (void)layout {
+   self.frame = self.detailViewPanelFrame;
+
+   [_textNode measure:CGSizeMake(self.detailViewPanelFrame.size.width, self.detailViewPanelFrame.size.height)];
+
    // called on the main thread.  we'll use the stashed size from above, instead of blocking on text sizing
    CGSize textNodeSize = _textNode.calculatedSize;
-   _textNode.frame = CGRectMake(roundf((self.calculatedSize.width - textNodeSize.width) / 2.0f),
-    kTextPadding,
-    textNodeSize.width, textNodeSize.height);
+   _textNode.frame = CGRectMake(kTextPadding, kTextPadding, self.detailViewPanelFrame.size.width - kTextPadding * 2, textNodeSize.height);
 }
 
 
@@ -94,4 +100,8 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
    [[UIApplication sharedApplication] openURL:URL];
 }
 
+
+- (void)setCurrentFrame:(CGRect)rect {
+   self.detailViewPanelFrame = rect;
+}
 @end

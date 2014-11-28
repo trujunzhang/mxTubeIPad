@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AsyncDisplayKit.h"
+@class YoutubeVideoCache;
 
 
 @interface AsyncVideoDetailPanel : ASDisplayNode
 
+@property(nonatomic) CGRect detailViewPanelFrame;
+
+- (instancetype)initWithVideo:(YoutubeVideoCache *)videoCache;
+- (void)setCurrentFrame:(CGRect)rect;
 @end
