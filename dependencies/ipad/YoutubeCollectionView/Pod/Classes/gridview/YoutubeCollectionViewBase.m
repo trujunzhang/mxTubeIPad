@@ -16,6 +16,7 @@
 #import "YTAsyncGridViewVideoCollectionViewCell.h"
 #import "YTGridViewPlaylistCell.h"
 #import "YTGridViewVideoCell.h"
+#import "VideoDetailViewControlleriPad.h"
 
 
 @interface YoutubeCollectionViewBase ()
@@ -150,6 +151,12 @@
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        [self updateAfterResponse:array];
+
+       // test
+       [self.navigationController pushViewController:[[VideoDetailViewControlleriPad alloc] initWithDelegate:self
+                                                                                                       video:array[0]]
+                                            animated:YES];
+
    };
    ErrorResponseBlock error = ^(NSError * error) {
    };

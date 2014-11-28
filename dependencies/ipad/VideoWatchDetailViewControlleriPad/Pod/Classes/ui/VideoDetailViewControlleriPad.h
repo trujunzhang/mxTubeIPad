@@ -15,16 +15,12 @@
 #import "CollectionConstant.h"
 
 @class WHTopTabBarController;
-@class VideoDetailPanel;
-@class AsyncVideoDetailPanel;
 
 @class YKYouTubeVideo;
 
 @protocol IpadGridViewCellDelegate;
+@class VideoDetailViewController;
 
-
-//#define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel
-#define CURRENT_VIDEODETAIL_PANEL AsyncVideoDetailPanel
 
 
 @interface VideoDetailViewControlleriPad : UIViewController
@@ -32,7 +28,7 @@
 @property(nonatomic, assign) id<IpadGridViewCellDelegate> delegate;
 @property(nonatomic, strong) YTYouTubeVideoCache * video;
 
-@property(nonatomic, strong) UIViewController * videoDetailController;
+@property(nonatomic, strong) VideoDetailViewController * videoDetailController;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
 
 @property(nonatomic, strong) UIViewController * firstViewController;

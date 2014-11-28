@@ -1,13 +1,12 @@
 #import "VideoDetailViewControlleriPad.h"
 
-#import "VideoDetailPanel.h"
-#import "AsyncVideoDetailPanel.h"
 
 #import "WHTopTabBarController.h"
 
 #import "IpadGridViewCell.h"
 #import "YKYouTubeVideo.h"
 #include "YoutubeParser.h"
+#import "VideoDetailViewController.h"
 
 
 @interface VideoDetailViewControlleriPad ()<YoutubeCollectionNextPageDelegate>
@@ -16,7 +15,6 @@
 @property(strong, nonatomic) IBOutlet UIView * detailView;
 @property(strong, nonatomic) IBOutlet UIView * tabbarView;
 
-@property(nonatomic, strong) CURRENT_VIDEODETAIL_PANEL * videoDetailPanel;
 @end
 
 
@@ -80,19 +78,9 @@
    self.thirdViewController.nextPageDelegate = self;
 
    // 2
-   self.videoDetailController = [[UIViewController alloc] init];
+   self.videoDetailController = [[VideoDetailViewController alloc] init];
    self.videoDetailController.title = @"Info";
 
-   self.videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] initWithVideo:self.video];
-//   [self.videoDetailController.view addSubview:self.videoDetailPanel.view];
-//   UIScrollView * videoDetailScrollView = [[UIScrollView alloc] init];
-//   [videoDetailScrollView addSubview:self.videoDetailPanel.view];
-
-   self.videoDetailController.view = self.videoDetailPanel.view;
-//   self.videoDetailController.view = videoDetailScrollView;
-
-//   self.videoDetailPanel.view.frame = self.videoDetailController.view.frame;
-//   self.videoDetailPanel.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 3
    self.videoTabBarController = [[WHTopTabBarController alloc] init];
@@ -184,7 +172,7 @@
 
 //   self.videoDetailPanel.view.frame = self.videoDetailController.view.frame;
 //   self.videoDetailPanel.frame = self.videoDetailController.view.frame;
-   [self.videoDetailPanel setCurrentFrame:self.videoDetailController.view.frame];
+//   [self.videoDetailPanel setCurrentFrame:self.videoDetailController.view.frame];
 }
 
 

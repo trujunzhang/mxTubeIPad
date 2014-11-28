@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class VideoDetailPanel;
+@class AsyncVideoDetailPanel;
+
+
+//#define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel
+#define CURRENT_VIDEODETAIL_PANEL AsyncVideoDetailPanel
+
+
 @interface VideoDetailViewController : UIViewController
 
+@property(nonatomic, strong) UIScrollView * videoDetailScrollView;
 @end
