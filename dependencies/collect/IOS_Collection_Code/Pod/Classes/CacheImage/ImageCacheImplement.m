@@ -52,9 +52,9 @@
 }
 
 
-+ (void)CacheWithImageView:(UIImageView *)view key:(id)key withUrl:(id)url withPlaceholder:(UIImage *)placeholder resize:(CGSize)resize {
++ (void)CacheWithImageView:(UIImageView *)view key:(NSString *)key withUrl:(id)url withPlaceholder:(UIImage *)placeholder resize:(CGSize)resize {
    NSString * imageKey = key;
-   UIImage * cacheImage = [[JMImageCache sharedCache] cachedImageForKey:imageKey];
+   UIImage * cacheImage = [self getImageWithKey:imageKey];
    if (cacheImage) {
       view.image = [cacheImage resizedImageToSize:resize];
       return;
@@ -68,6 +68,20 @@
                                 completion:^(UIImage * downloadedImage) {
                                     view.image = [downloadedImage resizedImageToSize:resize];
                                 }];
+}
+
+
++ (UIImage *)getImageWithKey:(NSString *)imageKey {
+   UIImage * cacheImage = [[JMImageCache sharedCache] cachedImageForKey:imageKey];
+   return cacheImage;
+}
+
+
++ (void)CacheWithUrl:(NSString *)url key:(NSString *)key withCompletionBlock:(CacheCompletionBlock)completionBlock {
+   [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
+                           completionBlock:^(UIImage * downloadedImage) {
+                               completionBlock(downloadedImage);
+                           }];
 }
 
 

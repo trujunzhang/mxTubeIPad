@@ -19,6 +19,12 @@
 #import "ASDisplayNode+Subclasses.h"
 
 
+@interface YTAsyncGridViewVideoNode ()<ASImageCacheProtocol, ASImageDownloaderProtocol> {
+
+}
+@end
+
+
 @implementation YTAsyncGridViewVideoNode
 
 - (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate {
@@ -47,10 +53,7 @@
    self.backgroundColor = [UIColor whiteColor];
 
    // 1.2
-
-
    self.shadowColor = [UIColor colorWithHexString:@"B5B5B5" alpha:0.8].CGColor;
-//   self.shadowColor = [UIColor redColor].CGColor;
    self.shadowOffset = CGSizeMake(1, 3);
    self.shadowOpacity = 1.0;
    self.shadowRadius = 2.0;
@@ -102,22 +105,24 @@
    YTYouTubeVideoCache * video = self.cardInfo;
 
    // 1
-   ASImageNode * videoChannelThumbnailsNode = [[ASImageNode alloc] init];
-   if (video.hasImage) {
-      videoChannelThumbnailsNode.image = video.image;
-   } else {
-      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
-          video.hasImage = YES;
-          video.image = image;
-          videoChannelThumbnailsNode.image = video.image;
-      };
-      [ImageCacheImplement CacheWithImageView:videoChannelThumbnailsNode
-                                          key:video.identifier
-                                      withUrl:videoThumbnailsUrl
-                              withPlaceholder:nil
-                                   completion:downloadCompletion
-      ];
-   }
+   ASNetworkImageNode * videoChannelThumbnailsNode = [[ASNetworkImageNode alloc] initWithCache:nil downloader:self];
+   videoChannelThumbnailsNode.URL = [NSURL URLWithString:videoThumbnailsUrl];
+
+//   if (video.hasImage) {
+//      videoChannelThumbnailsNode.image = video.image;
+//   } else {
+//      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
+//          video.hasImage = YES;
+//          video.image = image;
+//          videoChannelThumbnailsNode.image = video.image;
+//      };
+//      [ImageCacheImplement CacheWithImageView:videoChannelThumbnailsNode
+//                                          key:video.identifier
+//                                      withUrl:videoThumbnailsUrl
+//                              withPlaceholder:nil
+//                                   completion:downloadCompletion
+//      ];
+//   }
 
    // configure the button
    videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
@@ -157,6 +162,43 @@
 
 - (void)channelThumbnailsTapped:(id)buttonTapped {
    [self.delegate gridViewCellTap:self.cardInfo];
+}
+
+
+#pragma mark -
+#pragma mark ASImageCacheProtocol
+
+
+- (void)fetchCachedImageWithURL:(NSURL *)URL
+                  callbackQueue:(dispatch_queue_t)callbackQueue
+                     completion:(void (^)(CGImageRef imageFromCache))completion {
+   UIImage * cacheImage = [ImageCacheImplement getImageWithKey:self.cardInfo.identifier];
+   completion([cacheImage CGImage]);
+}
+
+
+#pragma mark -
+#pragma mark ASImageDownloaderProtocol
+
+
+- (id)downloadImageWithURL:(NSURL *)URL
+             callbackQueue:(dispatch_queue_t)callbackQueue
+     downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
+                completion:(void (^)(CGImageRef image, NSError * error))completion {
+
+   CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
+       completion([downloadedImage CGImage], nil);
+   };
+   [ImageCacheImplement CacheWithUrl:[YoutubeParser getVideoSnippetThumbnails:self.cardInfo]
+                                 key:self.cardInfo.identifier
+                 withCompletionBlock:downloadCompletion];
+
+   return nil;
+}
+
+
+- (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
+
 }
 
 

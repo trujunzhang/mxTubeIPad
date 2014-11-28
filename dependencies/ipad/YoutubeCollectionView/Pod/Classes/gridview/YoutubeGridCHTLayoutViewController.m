@@ -17,8 +17,6 @@
 @interface YoutubeGridCHTLayoutViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
 @property(strong, nonatomic) UICollectionView * collectionView;
 @property(nonatomic, strong) CHTCollectionViewWaterfallLayout * layout;
-@property(nonatomic, strong) UIImage * placeHolderImage;
-
 @end
 
 
@@ -27,7 +25,6 @@
 
 - (void)viewDidLoad {
    [self.view addSubview:[self getCollectionView]];
-   self.placeHolderImage = [UIImage imageNamed:@"mt_cell_cover_placeholder"];
    [self setUICollectionView:self.collectionView];
 
    [super viewDidLoad];
