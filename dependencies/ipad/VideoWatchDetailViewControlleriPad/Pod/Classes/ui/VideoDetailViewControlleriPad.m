@@ -1,6 +1,7 @@
 #import "VideoDetailViewControlleriPad.h"
 
 #import "VideoDetailPanel.h"
+#import "AsyncVideoDetailPanel.h"
 
 #import "WHTopTabBarController.h"
 
@@ -81,18 +82,14 @@
    self.videoDetailController = [[UIViewController alloc] init];
    self.videoDetailController.title = @"Info";
 
-//   VideoDetailPanel * videoDetailPanel = [[VideoDetailPanel alloc] initWithVideo:self.video];
-   VideoDetailPanel * videoDetailPanel = [[VideoDetailPanel alloc] init];
-
-   self.videoDetailController.view = videoDetailPanel;
+   CURRENT_VIDEODETAIL_PANEL * videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] init];
+   self.videoDetailController.view = videoDetailPanel.view;
+   self.videoDetailController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 3
    self.videoTabBarController = [[WHTopTabBarController alloc] init];
    self.videoTabBarController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
    [self.tabbarView addSubview:self.videoTabBarController.view];
-
-   // 4
-   self.videoDetailController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 5
    self.defaultTableControllers = [NSArray arrayWithObjects:

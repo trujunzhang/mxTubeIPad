@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AsyncDisplayKit.h"
 
-@interface AsyncVideoDetailPanel : UIView
+
+@interface AsyncVideoDetailPanel : ASDisplayNode
 
 @end
