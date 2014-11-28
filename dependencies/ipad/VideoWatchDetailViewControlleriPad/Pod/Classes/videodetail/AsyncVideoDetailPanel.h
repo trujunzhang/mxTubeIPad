@@ -1,5 +1,5 @@
 //
-//  YoutubeCollectionView.h
+//  AsyncVideoDetailPanel.h
 //  YoutubePlayApp
 //
 //  Created by djzhang on 10/14/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YoutubeCollectionView : UIView
+@interface AsyncVideoDetailPanel : UIView
 
 @end

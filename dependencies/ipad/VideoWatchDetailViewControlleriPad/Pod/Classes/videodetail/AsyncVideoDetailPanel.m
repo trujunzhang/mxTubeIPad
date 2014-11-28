@@ -1,14 +1,14 @@
 //
-//  YoutubeCollectionView.m
+//  AsyncVideoDetailPanel.m
 //  YoutubePlayApp
 //
 //  Created by djzhang on 10/14/14.
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import "YoutubeCollectionView.h"
+#import "AsyncVideoDetailPanel.h"
 
-@implementation YoutubeCollectionView
+@implementation AsyncVideoDetailPanel
 
 /*
 // Only override drawRect: if you perform custom drawing.
