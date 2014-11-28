@@ -130,13 +130,13 @@
    switch (self.selectedSegmentItemType) {
       case YTSegmentItemVideo:
          [self.selectedController fetchActivityListByType:self.selectedSegmentItemType
-                                            withChannelId:[YoutubeParser getChannelId:self.subscription]];
+                                            withChannelId:[YoutubeParser getChannelIdBySubscription:self.subscription]];
          break;
       case YTSegmentItemChannel:
-         [self.selectedController fetchVideoListFromChannelWithChannelId:[YoutubeParser getChannelId:self.subscription]];
+         [self.selectedController fetchVideoListFromChannelWithChannelId:[YoutubeParser getChannelIdBySubscription:self.subscription]];
          break;
       case YTSegmentItemPlaylist:
-         [self.selectedController fetchPlayListFromChannelWithChannelId:[YoutubeParser getChannelId:self.subscription]];
+         [self.selectedController fetchPlayListFromChannelWithChannelId:[YoutubeParser getChannelIdBySubscription:self.subscription]];
          break;
    }
 }

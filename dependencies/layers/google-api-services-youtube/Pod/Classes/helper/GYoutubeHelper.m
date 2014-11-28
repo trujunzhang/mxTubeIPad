@@ -139,7 +139,7 @@ static GYoutubeHelper * instance = nil;
    if (subscriptionList) {
       // Merge video IDs
       for (YTYouTubeSubscription * subscription in subscriptionList) {
-         [channelds addObject:[YoutubeParser getChannelId:subscription]];
+         [channelds addObject:[YoutubeParser getChannelIdBySubscription:subscription]];
       }
 //      [self fetchChannelListWithIdentifier:[channelds componentsJoinedByString:@","]
 //                                completion:responseHandler

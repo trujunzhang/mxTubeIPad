@@ -66,13 +66,18 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)getChannelId:(YTYouTubeSubscription *)subscription {
++ (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription {
    return subscription.snippet.resourceId.JSON[@"channelId"];
 }
 
 
 + (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video {
    return video.identifier;
+}
+
+
++ (NSString *)getChannelIdByVideo:(YTYouTubeVideoCache *)video {
+   return video.snippet.channelId;
 }
 
 

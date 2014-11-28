@@ -17,11 +17,12 @@
 
 + (NSString *)getVideoIdsBySearchResult:(NSMutableArray *)searchResultList;
 
-+ (NSString *)getChannelId:(YTYouTubeSubscription *)subscription;
++ (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription;
 
 + (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video;
 + (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video;
 
++ (NSString *)getChannelIdByVideo:(YTYouTubeVideoCache *)video;
 + (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video;
 + (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel;
 + (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;

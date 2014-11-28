@@ -59,7 +59,7 @@
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-   [[GYoutubeHelper getInstance] fetchChannelListWithIdentifier:[YoutubeParser getChannelId:subscription]
+   [[GYoutubeHelper getInstance] fetchChannelListWithIdentifier:[YoutubeParser getChannelIdBySubscription:subscription]
                                                      completion:completion
                                                    errorHandler:error];
 

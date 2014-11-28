@@ -14,4 +14,5 @@
 @property(nonatomic) BOOL hasImage;
 @property(nonatomic, strong) UIImageView * image;
 
+@property(nonatomic, copy) NSString * channelThumbnailUrl;
 @end

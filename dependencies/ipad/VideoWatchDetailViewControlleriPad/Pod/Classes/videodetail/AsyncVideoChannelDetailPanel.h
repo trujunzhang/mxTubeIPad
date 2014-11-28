@@ -13,6 +13,7 @@
 
 @interface AsyncVideoChannelDetailPanel : ASCellNode
 
+@property(nonatomic, strong) YoutubeVideoCache * cardInfo;
 - (instancetype)initWithVideo:(YoutubeVideoCache *)videoCache;
 
 @end
