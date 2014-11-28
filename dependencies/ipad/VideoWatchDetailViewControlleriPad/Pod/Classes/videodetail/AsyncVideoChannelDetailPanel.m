@@ -9,6 +9,7 @@
 #import "AsyncVideoChannelDetailPanel.h"
 #import "YoutubeVideoCache.h"
 #import "YoutubeParser.h"
+#import "ASCacheNetworkImageNode.h"
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
 #import <AsyncDisplayKit/ASHighlightOverlayLayer.h>
 #import <IOS_Collection_Code/ImageCacheImplement.h>
@@ -18,12 +19,12 @@
 static CGFloat kTextPadding = 10.0f;
 
 
-@interface AsyncVideoChannelDetailPanel ()<ASImageCacheProtocol, ASImageDownloaderProtocol> {
+@interface AsyncVideoChannelDetailPanel () {
    ASTextNode * _textNode;
    ASDisplayNode * _divider;
 }
 
-@property(nonatomic, strong) ASNetworkImageNode * videoChannelThumbnailsNode;
+@property(nonatomic, strong) ASCacheNetworkImageNode * videoChannelThumbnailsNode;
 @end
 
 
@@ -75,13 +76,13 @@ static CGFloat kTextPadding = 10.0f;
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
    NSString * channelId = [YoutubeParser getChannelIdByVideo:self.cardInfo];
    // 1
-   ASNetworkImageNode * videoChannelThumbnailsNode = [[ASNetworkImageNode alloc] initWithCache:self downloader:self];
+   ASCacheNetworkImageNode * videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
 
    // configure the button
-   videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
-   [videoChannelThumbnailsNode addTarget:self
-                                  action:@selector(channelThumbnailsTapped:)
-                        forControlEvents:ASControlNodeEventTouchUpInside];
+//   videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
+//   [videoChannelThumbnailsNode addTarget:self
+//                                  action:@selector(channelThumbnailsTapped:)
+//                        forControlEvents:ASControlNodeEventTouchUpInside];
 
 
    [self showChannelThumbnail:channelId];
@@ -92,13 +93,15 @@ static CGFloat kTextPadding = 10.0f;
 
 - (void)showChannelThumbnail:(NSString *)channelId {
    if (self.cardInfo.channelThumbnailUrl) {
-      self.videoChannelThumbnailsNode.URL = [NSURL URLWithString:self.cardInfo.channelThumbnailUrl];
+      [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
+//      self.videoChannelThumbnailsNode.URL = [NSURL URLWithString:self.cardInfo.channelThumbnailUrl];
       return;
    }
 
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
        self.cardInfo.channelThumbnailUrl = respObject;
-       self.videoChannelThumbnailsNode.URL = [NSURL URLWithString:respObject];
+       [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
+//       self.videoChannelThumbnailsNode.URL = [NSURL URLWithString:respObject];
    };
    [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
                                                           completion:completionBlock
@@ -132,54 +135,6 @@ static CGFloat kTextPadding = 10.0f;
 
    CGFloat pixelHeight = 1.0f / [[UIScreen mainScreen] scale];
    _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
-}
-
-
-#pragma mark -
-#pragma mark ASImageCacheProtocol
-
-
-- (void)fetchCachedImageWithURL:(NSURL *)URL
-                  callbackQueue:(dispatch_queue_t)callbackQueue
-                     completion:(void (^)(CGImageRef imageFromCache))completion {
-   UIImage * cacheImage = [ImageCacheImplement getCacheImageWithURL:URL];
-   completion([cacheImage CGImage]);
-}
-
-
-#pragma mark -
-#pragma mark ASImageDownloaderProtocol
-
-
-- (id)downloadImageWithURL:(NSURL *)URL
-             callbackQueue:(dispatch_queue_t)callbackQueue
-     downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
-                completion:(void (^)(CGImageRef image, NSError * error))completion {
-   // if no callback queue is supplied, run on the main thread
-   if (callbackQueue == nil) {
-      callbackQueue = dispatch_get_main_queue();
-   }
-
-   CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
-       // ASMultiplexImageNode callbacks
-       dispatch_async(callbackQueue, ^{
-           if (downloadProgressBlock) {
-              downloadProgressBlock(1.0f);
-           }
-
-           if (completion) {
-              completion([downloadedImage CGImage], nil);
-           }
-       });
-   };
-   [ImageCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
-
-   return nil;
-}
-
-
-- (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
-
 }
 
 

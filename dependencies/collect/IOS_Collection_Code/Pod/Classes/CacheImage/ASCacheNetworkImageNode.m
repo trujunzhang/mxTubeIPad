@@ -19,7 +19,7 @@
 
 @implementation ASCacheNetworkImageNode
 
-- (instancetype)init {
+- (instancetype)initForImageCache {
    self = [super initWithCache:self downloader:self];
    if (self) {
 
