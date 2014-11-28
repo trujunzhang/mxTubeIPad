@@ -82,37 +82,41 @@
 - (NSOperation *)nodeConstructionOperationWithCardInfo:(YTYouTubeVideoCache *)cardInfo delegate:(id<IpadGridViewCellDelegate>)delegate {
    NSBlockOperation * nodeConstructionOperation = [[NSBlockOperation alloc] init];
 
+   __weak __typeof__(self) weakSelf = self;
    void (^cellExecutionBlock)() = ^{
        if (nodeConstructionOperation.cancelled)
           return;
 
-       YTAsyncGridViewVideoNode * containerNode = [[YTAsyncGridViewVideoNode alloc] initWithCardInfo:cardInfo
-                                                                                            cellSize:self.featureImageSizeOptional
-                                                                                            delegate:delegate
-       ];
-
-       if (nodeConstructionOperation.cancelled)
+       __typeof__(self) strongSelf = weakSelf;
+       if (strongSelf == nil) {
           return;
+       }
+       {
+          YTAsyncGridViewVideoNode * containerNode = [[YTAsyncGridViewVideoNode alloc] initWithCardInfo:cardInfo
+                                                                                               cellSize:self.featureImageSizeOptional
+                                                                                               delegate:delegate
+          ];
+          if (nodeConstructionOperation.cancelled)
+             return;
 
-       __weak typeof(self) weakSelf = self;
-       dispatch_async(dispatch_get_main_queue(), ^{
-           __strong typeof(weakSelf) strongSelf = weakSelf;
-           NSBlockOperation * strongNodeConstructionOperation = strongSelf.nodeConstructionOperation;
-           if (strongNodeConstructionOperation.cancelled)
-              return;
+          dispatch_async(dispatch_get_main_queue(), ^{
+              NSBlockOperation * strongNodeConstructionOperation = strongSelf.nodeConstructionOperation;
+              if (strongNodeConstructionOperation.cancelled)
+                 return;
 
-           if (self.nodeConstructionOperation != strongNodeConstructionOperation)
-              return;
+              if (strongSelf.nodeConstructionOperation != strongNodeConstructionOperation)
+                 return;
 
-           if (containerNode.preventOrCancelDisplay)
-              return;
+              if (containerNode.preventOrCancelDisplay)
+                 return;
 
-           //MARK: Node Layer and Wrap Up Section
-           [self.contentView.layer addSublayer:containerNode.layer];
-           [containerNode setNeedsDisplay];
-           self.contentLayer = containerNode.layer;
-           self.containerNode = containerNode;
-       });
+              //MARK: Node Layer and Wrap Up Section
+              [strongSelf.contentView.layer addSublayer:containerNode.layer];
+              [containerNode setNeedsDisplay];
+              strongSelf.contentLayer = containerNode.layer;
+              strongSelf.containerNode = containerNode;
+          });
+       }
    };
 
    [nodeConstructionOperation addExecutionBlock:cellExecutionBlock];
