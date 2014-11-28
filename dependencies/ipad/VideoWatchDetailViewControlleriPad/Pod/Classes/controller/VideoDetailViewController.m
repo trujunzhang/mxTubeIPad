@@ -9,8 +9,9 @@
 #import "VideoDetailViewController.h"
 
 #import "AsyncVideoDetailPanel.h"
+#import "AsyncVideoChannelDetailPanel.h"
 
-static const NSInteger kLitterSize = 1;
+static const NSInteger kLitterSize = 2;
 
 
 @interface VideoDetailViewController ()<ASTableViewDataSource, ASTableViewDelegate> {
@@ -62,9 +63,9 @@ static const NSInteger kLitterSize = 1;
    ASCellNode * node;
    // special-case the first row
    if (indexPath.row == 0) {
-      node = [[AsyncVideoDetailPanel alloc] initWithVideo:self.video];
+      node = [[AsyncVideoChannelDetailPanel alloc] initWithVideo:self.video];
    } else if (indexPath.row == 1) {
-//      node = [[BlurbNode alloc] init];
+      node = [[AsyncVideoDetailPanel alloc] initWithVideo:self.video];
    }
 
    return node;
