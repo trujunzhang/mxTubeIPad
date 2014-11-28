@@ -46,7 +46,7 @@ static CGFloat kTextPadding = 10.0f;
 
    // generate an attributed string using the custom link attribute specified above
 //   NSString * blurb = @"kittens courtesy placekitten.com kittens courtesy placekitten.com kittens courtesy placekitten.com \U0001F638";
-   NSString * blurb = videoCache.snippet.title;
+   NSString * blurb = videoCache.snippet.channelTitle;
    NSMutableAttributedString * string = [[NSMutableAttributedString alloc] initWithString:blurb];
    [string addAttribute:NSFontAttributeName
                   value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f]
