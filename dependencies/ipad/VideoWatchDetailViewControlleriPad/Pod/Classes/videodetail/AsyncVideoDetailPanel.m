@@ -103,5 +103,6 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 
 - (void)setCurrentFrame:(CGRect)rect {
    self.detailViewPanelFrame = rect;
+   [self layout];
 }
 @end

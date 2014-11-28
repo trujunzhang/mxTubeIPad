@@ -78,7 +78,7 @@
    self.thirdViewController.nextPageDelegate = self;
 
    // 2
-   self.videoDetailController = [[VideoDetailViewController alloc] init];
+   self.videoDetailController = [[VideoDetailViewController alloc] initWithVideo:self.video];
    self.videoDetailController.title = @"Info";
 
 

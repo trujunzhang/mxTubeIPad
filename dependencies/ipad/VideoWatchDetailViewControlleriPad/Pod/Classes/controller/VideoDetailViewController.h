@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YoutubeConstants.h"
 
 @class VideoDetailPanel;
 @class AsyncVideoDetailPanel;
@@ -17,6 +18,10 @@
 
 
 @interface VideoDetailViewController : UIViewController
-
+@property(nonatomic, strong) YTYouTubeVideoCache * video;
 @property(nonatomic, strong) UIScrollView * videoDetailScrollView;
+
+- (instancetype)initWithVideo:(YTYouTubeVideoCache *)video;
+
+
 @end
