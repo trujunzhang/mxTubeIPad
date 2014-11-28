@@ -16,8 +16,9 @@ typedef void (^CacheCompletionBlock)(UIImage * downloadedImage);
 
 + (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder;
 + (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder completion:(void (^)(UIImage *))completion;
-+ (UIImage *)getImageWithKey:(NSString *)imageKey;
-+ (void)CacheWithUrl:(NSString *)url key:(NSString *)key withCompletionBlock:(CacheCompletionBlock)completionBlock;
++ (UIImage *)getCacheImageWithKey:(NSString *)imageKey;
++ (UIImage *)getCacheImageWithURL:(NSURL *)url;
++ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(CacheCompletionBlock)completionBlock;
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder withCompletionBlock:(CacheCompletionBlock)completionBlock;
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder;
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)size;

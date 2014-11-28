@@ -98,31 +98,14 @@
 - (void)setupContainerNode {
 
    NSString * videoThumbnailsUrl = [YoutubeParser getVideoSnippetThumbnails:self.cardInfo];
-//    self.cardInfo.snippet.thumbnails.medium.url;
    NSString * videoTitleValue = self.cardInfo.snippet.title;
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
 
    YTYouTubeVideoCache * video = self.cardInfo;
 
    // 1
-   ASNetworkImageNode * videoChannelThumbnailsNode = [[ASNetworkImageNode alloc] initWithCache:nil downloader:self];
+   ASNetworkImageNode * videoChannelThumbnailsNode = [[ASNetworkImageNode alloc] initWithCache:self downloader:self];
    videoChannelThumbnailsNode.URL = [NSURL URLWithString:videoThumbnailsUrl];
-
-//   if (video.hasImage) {
-//      videoChannelThumbnailsNode.image = video.image;
-//   } else {
-//      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
-//          video.hasImage = YES;
-//          video.image = image;
-//          videoChannelThumbnailsNode.image = video.image;
-//      };
-//      [ImageCacheImplement CacheWithImageView:videoChannelThumbnailsNode
-//                                          key:video.identifier
-//                                      withUrl:videoThumbnailsUrl
-//                              withPlaceholder:nil
-//                                   completion:downloadCompletion
-//      ];
-//   }
 
    // configure the button
    videoChannelThumbnailsNode.userInteractionEnabled = YES; // opt into touch handling
@@ -172,7 +155,7 @@
 - (void)fetchCachedImageWithURL:(NSURL *)URL
                   callbackQueue:(dispatch_queue_t)callbackQueue
                      completion:(void (^)(CGImageRef imageFromCache))completion {
-   UIImage * cacheImage = [ImageCacheImplement getImageWithKey:self.cardInfo.identifier];
+   UIImage * cacheImage = [ImageCacheImplement getCacheImageWithURL:URL];
    completion([cacheImage CGImage]);
 }
 
@@ -189,9 +172,7 @@
    CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
        completion([downloadedImage CGImage], nil);
    };
-   [ImageCacheImplement CacheWithUrl:[YoutubeParser getVideoSnippetThumbnails:self.cardInfo]
-                                 key:self.cardInfo.identifier
-                 withCompletionBlock:downloadCompletion];
+   [ImageCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
 
    return nil;
 }

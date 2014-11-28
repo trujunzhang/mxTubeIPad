@@ -54,7 +54,7 @@
 
 + (void)CacheWithImageView:(UIImageView *)view key:(NSString *)key withUrl:(id)url withPlaceholder:(UIImage *)placeholder resize:(CGSize)resize {
    NSString * imageKey = key;
-   UIImage * cacheImage = [self getImageWithKey:imageKey];
+   UIImage * cacheImage = [self getCacheImageWithKey:imageKey];
    if (cacheImage) {
       view.image = [cacheImage resizedImageToSize:resize];
       return;
@@ -71,14 +71,18 @@
 }
 
 
-+ (UIImage *)getImageWithKey:(NSString *)imageKey {
-   UIImage * cacheImage = [[JMImageCache sharedCache] cachedImageForKey:imageKey];
-   return cacheImage;
++ (UIImage *)getCacheImageWithKey:(NSString *)imageKey {
+   return [[JMImageCache sharedCache] cachedImageForKey:imageKey];
 }
 
 
-+ (void)CacheWithUrl:(NSString *)url key:(NSString *)key withCompletionBlock:(CacheCompletionBlock)completionBlock {
-   [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
++ (UIImage *)getCacheImageWithURL:(NSURL *)url {
+   return [[JMImageCache sharedCache] cachedImageForURL:url];
+}
+
+
++ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(CacheCompletionBlock)completionBlock {
+   [[JMImageCache sharedCache] imageForURL:url
                            completionBlock:^(UIImage * downloadedImage) {
                                completionBlock(downloadedImage);
                            }];
