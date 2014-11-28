@@ -11,10 +11,8 @@
 @class YoutubeVideoCache;
 
 
-@interface AsyncVideoDetailPanel : ASDisplayNode
-
-@property(nonatomic) CGRect detailViewPanelFrame;
+@interface AsyncVideoDetailPanel : ASCellNode
 
 - (instancetype)initWithVideo:(YoutubeVideoCache *)videoCache;
-- (void)setCurrentFrame:(CGRect)rect;
+
 @end

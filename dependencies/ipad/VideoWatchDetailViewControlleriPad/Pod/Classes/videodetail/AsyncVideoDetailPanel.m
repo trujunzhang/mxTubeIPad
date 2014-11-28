@@ -79,13 +79,12 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 
 
 - (void)layout {
-   self.frame = self.detailViewPanelFrame;
-
-   [_textNode measure:CGSizeMake(self.detailViewPanelFrame.size.width, self.detailViewPanelFrame.size.height)];
-
    // called on the main thread.  we'll use the stashed size from above, instead of blocking on text sizing
    CGSize textNodeSize = _textNode.calculatedSize;
-   _textNode.frame = CGRectMake(kTextPadding, kTextPadding, self.detailViewPanelFrame.size.width - kTextPadding * 2, textNodeSize.height);
+   _textNode.frame = CGRectMake(roundf((self.calculatedSize.width - textNodeSize.width) / 2.0f),
+    kTextPadding,
+    textNodeSize.width,
+    textNodeSize.height);
 }
 
 
@@ -101,8 +100,4 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
 }
 
 
-- (void)setCurrentFrame:(CGRect)rect {
-   self.detailViewPanelFrame = rect;
-   [self layout];
-}
 @end

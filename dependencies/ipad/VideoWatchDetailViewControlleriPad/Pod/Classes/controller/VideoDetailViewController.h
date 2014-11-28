@@ -19,7 +19,6 @@
 
 @interface VideoDetailViewController : UIViewController
 @property(nonatomic, strong) YTYouTubeVideoCache * video;
-@property(nonatomic, strong) UIScrollView * videoDetailScrollView;
 
 - (instancetype)initWithVideo:(YTYouTubeVideoCache *)video;
 

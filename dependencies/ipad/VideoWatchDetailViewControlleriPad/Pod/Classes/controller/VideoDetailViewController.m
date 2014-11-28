@@ -11,21 +11,33 @@
 #import "VideoDetailPanel.h"
 #import "AsyncVideoDetailPanel.h"
 
+static const NSInteger kLitterSize = 1;
+
 
 @interface VideoDetailViewController ()<ASTableViewDataSource, ASTableViewDelegate> {
    ASTableView * _tableView;
 }
-//@property(nonatomic, strong) CURRENT_VIDEODETAIL_PANEL * videoDetailPanel;
+
 @end
 
 
 @implementation VideoDetailViewController
 
+
+#pragma mark -
+#pragma mark UIViewController.
+
+
 - (instancetype)initWithVideo:(YTYouTubeVideoCache *)video {
-   self = [super init];
-   if (self) {
-      self.video = video;
-   }
+   if (!(self = [super init]))
+      return nil;
+   self.video = video;
+
+   _tableView = [[ASTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+   _tableView.separatorStyle = UITableViewCellSeparatorStyleNone; // KittenNode has its own separator
+   _tableView.showsVerticalScrollIndicator = NO;
+   _tableView.asyncDataSource = self;
+   _tableView.asyncDelegate = self;
 
    return self;
 }
@@ -34,62 +46,40 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
 
-   // Do any additional setup after loading the view.
-
-   // 1
-   self.videoDetailScrollView = [[UIScrollView alloc] init];
-   self.videoDetailScrollView.directionalLockEnabled = YES;
-   self.videoDetailScrollView.pagingEnabled = NO;
-
-
-   self.videoDetailScrollView.backgroundColor = [UIColor greenColor];
-   [self.view addSubview:self.videoDetailScrollView];
-
-   // 2
-   self.videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] initWithVideo:self.video];
-   [self.videoDetailScrollView addSubview:self.videoDetailPanel.view];
-
-//   [videoDetailScrollView addSubview:self.videoDetailPanel.view];
-
-//   self.view = self.videoDetailPanel.view;
-//   self.videoDetailController.view = videoDetailScrollView;
-
-//   self.videoDetailPanel.view.frame = self.videoDetailController.view.frame;
-//   self.videoDetailPanel.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+   [self.view addSubview:_tableView];
 }
 
 
-- (void)didReceiveMemoryWarning {
-   [super didReceiveMemoryWarning];
-   // Dispose of any resources that can be recreated.
+- (void)viewWillLayoutSubviews {
+   _tableView.frame = self.view.bounds;
 }
 
 
 #pragma mark -
-#pragma mark Rotation stuff
+#pragma mark Kittens.
 
 
-- (void)viewDidLayoutSubviews {
-   [super viewDidLayoutSubviews];
+- (ASCellNode *)tableView:(ASTableView *)tableView nodeForRowAtIndexPath:(NSIndexPath *)indexPath {
+   ASCellNode * node;
+   // special-case the first row
+   if (indexPath.row == 0) {
+      node = [[AsyncVideoDetailPanel alloc] initWithVideo:self.video];
+   } else if (indexPath.row == 1) {
+//      node = [[BlurbNode alloc] init];
+   }
 
-   [self updateLayout:[UIApplication sharedApplication].statusBarOrientation];
+   return node;
 }
 
 
-- (void)updateLayout:(UIInterfaceOrientation)toInterfaceOrientation {
-   BOOL isPortrait = (toInterfaceOrientation == UIInterfaceOrientationPortrait) || (toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
-
-   // 2
-   [self.videoDetailPanel setCurrentFrame:self.view.bounds];
-
-   // 1
-   self.videoDetailScrollView.frame = self.view.bounds;
-   [self.videoDetailScrollView setContentSize:self.view.frame.size];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+   return kLitterSize;
+}
 
 
-//   self.videoDetailPanel.view.frame = self.videoDetailController.view.frame;
-//   self.videoDetailPanel.frame = self.videoDetailController.view.frame;
-//   [self.videoDetailPanel setCurrentFrame:self.videoDetailController.view.frame];
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+   // disable row selection
+   return NO;
 }
 
 
