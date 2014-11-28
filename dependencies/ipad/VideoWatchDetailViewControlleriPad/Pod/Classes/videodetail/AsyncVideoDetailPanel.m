@@ -94,5 +94,4 @@ static NSString * kLinkAttributeName = @"PlaceKittenNodeLinkAttributeName";
    [[UIApplication sharedApplication] openURL:URL];
 }
 
-
 @end

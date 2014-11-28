@@ -83,8 +83,10 @@
    self.videoDetailController.title = @"Info";
 
    CURRENT_VIDEODETAIL_PANEL * videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] init];
-   self.videoDetailController.view = videoDetailPanel.view;
-   self.videoDetailController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+   self.videoDetailController.view = videoDetailPanel;
+//   self.videoDetailController.view = videoDetailPanel.view;
+
+   videoDetailPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 3
    self.videoTabBarController = [[WHTopTabBarController alloc] init];

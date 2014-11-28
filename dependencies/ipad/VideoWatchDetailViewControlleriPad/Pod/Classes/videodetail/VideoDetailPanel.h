@@ -15,5 +15,4 @@
 @property(nonatomic, strong) YTYouTubeVideoCache * video;
 - (instancetype)initWithVideo:(YTYouTubeVideoCache *)video;
 
-
 @end
