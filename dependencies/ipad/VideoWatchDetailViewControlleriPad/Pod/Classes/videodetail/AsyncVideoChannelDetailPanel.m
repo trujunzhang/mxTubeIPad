@@ -20,6 +20,7 @@ static CGFloat kTextPadding = 10.0f;
 
 @interface AsyncVideoChannelDetailPanel ()<ASImageCacheProtocol, ASImageDownloaderProtocol> {
    ASTextNode * _textNode;
+   ASDisplayNode * _divider;
 }
 
 @property(nonatomic, strong) ASNetworkImageNode * videoChannelThumbnailsNode;
@@ -59,6 +60,11 @@ static CGFloat kTextPadding = 10.0f;
 
    // add it as a subnode, and we're done
    [self addSubnode:_textNode];
+
+   // hairline cell separator
+   _divider = [[ASDisplayNode alloc] init];
+   _divider.backgroundColor = [UIColor lightGrayColor];
+   [self addSubnode:_divider];
 
    return self;
 }
@@ -123,6 +129,9 @@ static CGFloat kTextPadding = 10.0f;
    CGSize textNodeSize = _textNode.calculatedSize;
    _textNode.frame = CGRectMake(
     50, kTextPadding, textNodeSize.width, textNodeSize.height);
+
+   CGFloat pixelHeight = 1.0f / [[UIScreen mainScreen] scale];
+   _divider.frame = CGRectMake(0.0f, 0.0f, self.calculatedSize.width, pixelHeight);
 }
 
 
