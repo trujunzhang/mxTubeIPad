@@ -22,6 +22,7 @@
 + (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video;
 + (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video;
 
++ (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video;
 + (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel;
 + (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;
 + (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel;

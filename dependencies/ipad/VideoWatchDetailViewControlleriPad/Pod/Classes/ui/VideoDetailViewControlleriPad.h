@@ -17,6 +17,8 @@
 @class WHTopTabBarController;
 @class AsyncVideoDetailPanel;
 @protocol IpadGridViewCellDelegate;
+@class VideoDetailPanel;
+@class YKYouTubeVideo;
 
 
 #define CURRENT_VIDEODETAIL_PANEL VideoDetailPanel
@@ -37,7 +39,7 @@
 
 @property(nonatomic, strong) NSArray * defaultTableControllers;
 
-@property(nonatomic, strong) id youTubeVideo;
+@property(nonatomic, strong) YKYouTubeVideo * youTubeVideo;
 - (instancetype)initWithDelegate:(id<IpadGridViewCellDelegate>)delegate video:(YTYouTubeVideoCache *)video;
 
 @end

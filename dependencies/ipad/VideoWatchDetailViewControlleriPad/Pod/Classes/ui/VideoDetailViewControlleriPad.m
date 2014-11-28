@@ -14,8 +14,9 @@
 
 @property(strong, nonatomic) IBOutlet UIView * videoPlayView;
 @property(strong, nonatomic) IBOutlet UIView * detailView;
-
 @property(strong, nonatomic) IBOutlet UIView * tabbarView;
+
+@property(nonatomic, strong) CURRENT_VIDEODETAIL_PANEL * videoDetailPanel;
 @end
 
 
@@ -45,7 +46,7 @@
    [self initViewControllers];
    [self setupPlayer:self.videoPlayView];
 
-   self.title = self.video.snippet.title;
+   self.title = [YoutubeParser getVideoSnippetTitle:self.video];
 
 //   [self executeRefreshTask];// test
 }
@@ -82,11 +83,13 @@
    self.videoDetailController = [[UIViewController alloc] init];
    self.videoDetailController.title = @"Info";
 
-   CURRENT_VIDEODETAIL_PANEL * videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] init];
-   self.videoDetailController.view = videoDetailPanel;
+   self.videoDetailPanel = [[CURRENT_VIDEODETAIL_PANEL alloc] init];
+   [self.videoDetailController.view addSubview:self.videoDetailPanel];
 //   self.videoDetailController.view = videoDetailPanel.view;
 
-   videoDetailPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//   [self.videoDetailPanel bind:self.video];
+   self.videoDetailPanel.frame = self.videoDetailController.view.frame;
+   self.videoDetailPanel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    // 3
    self.videoTabBarController = [[WHTopTabBarController alloc] init];

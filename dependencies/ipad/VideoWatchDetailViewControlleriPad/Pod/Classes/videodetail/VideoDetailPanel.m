@@ -11,15 +11,6 @@
 
 @implementation VideoDetailPanel
 
-- (instancetype)initWithVideo:(YTYouTubeVideoCache *)video {
-   self = [super init];
-   if (self) {
-      self.video = video;
-   }
-
-   return self;
-}
-
 
 - (id)initWithFrame:(CGRect)frame {
    self = [super initWithFrame:frame];
@@ -48,9 +39,10 @@
 }
 
 
-- (void)bind {
+- (UIView *)bind:(YTYouTubeVideoCache *)cache {
 
 
+   return self;
 }
 
 
