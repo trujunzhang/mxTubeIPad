@@ -12,7 +12,7 @@
 
 @class GYoutubeRequestInfo;
 @protocol IpadGridViewCellDelegate;
-
+@class YTGridViewVideoCell;
 
 #define LAYOUT_MINIMUMCOLUMNSPACING 10;
 #define DEFAULT_LOADING_MORE_HEIGHT 140;

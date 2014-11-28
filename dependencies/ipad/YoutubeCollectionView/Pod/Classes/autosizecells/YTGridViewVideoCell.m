@@ -48,7 +48,7 @@
 }
 
 
-- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)placeholder delegate:(id<IpadGridViewCellDelegate>)delegate {
+- (void)bind:(YTYouTubeVideoCache *)video placeholderImage:(UIImage *)placeholder cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate nodeConstructionQueue:(NSOperationQueue *)nodeConstructionQueue {
    self.video = video;
    self.delegate = delegate;
 

@@ -11,6 +11,7 @@
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "YoutubeFooterView.h"
 #import "YTAsyncGridViewVideoCollectionViewCell.h"
+#import "YTGridViewVideoCell.h"
 #import "HexColor.h"
 
 

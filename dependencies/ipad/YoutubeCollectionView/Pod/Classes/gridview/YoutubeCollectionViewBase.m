@@ -15,6 +15,7 @@
 #import "GYoutubeHelper.h"
 #import "YTAsyncGridViewVideoCollectionViewCell.h"
 #import "YTGridViewPlaylistCell.h"
+#import "YTGridViewVideoCell.h"
 
 
 @interface YoutubeCollectionViewBase ()
