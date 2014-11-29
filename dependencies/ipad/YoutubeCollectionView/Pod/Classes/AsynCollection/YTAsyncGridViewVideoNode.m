@@ -19,6 +19,10 @@
 #import "GYoutubeHelper.h"
 
 
+static const int FIRST_ROW_HEIGHT = 142;
+static const int THIRD_ROW_HEIGHT = 28;
+
+
 @interface YTAsyncGridViewVideoNode () {
 
 }
@@ -31,6 +35,10 @@
 
 @property(nonatomic, strong) ASCacheNetworkImageNode * videoChannelThumbnailsNode;
 @property(nonatomic, strong) ASTextNode * channelTitleTextNode;
+
+
+@property(nonatomic, strong) ASDisplayNode * divider;
+
 
 @end
 
@@ -92,10 +100,6 @@
    [self layoutFirstForChannelClover];
    [self layoutSecondForChannelTitle];
    [self layoutThirdForChannelInfo];
-
-//   self.descriptionTextNode.frame = [FrameCalculator frameForDescriptionText:self.bounds
-//                                                           featureImageFrame:self.featureImageNode.frame];
-//   self.gradientNode.frame = [FrameCalculator frameForGradient:self.featureImageNode.frame];
 }
 
 
@@ -186,12 +190,19 @@
    //MARK: Container Node Creation Section
    self.videoTitleTextNode = titleTextNode;
    [self addSubnode:self.videoTitleTextNode];
+
+   // hairline cell separator
+   self.divider = [[ASDisplayNode alloc] init];
+   self.divider.backgroundColor = [UIColor colorWithHexString:@"EAEAEA" alpha:1.0];
+   [self addSubnode:self.divider];
 }
 
 
 - (void)layoutSecondForChannelTitle {
    self.videoTitleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
                                                     featureImageFrame:self.videoCoverThumbnailsNode.frame];
+   self.divider.frame = [FrameCalculator frameForDivider:self.bounds
+                                          thirdRowHeight:THIRD_ROW_HEIGHT];
 }
 
 
@@ -199,6 +210,9 @@
    // 3
    self.videoTitleTextNode.layerBacked = true;
    self.videoTitleTextNode.backgroundColor = [UIColor clearColor];
+
+   // 4
+   self.divider.layerBacked = true;
 }
 
 
@@ -213,7 +227,7 @@
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
    // 2
    ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
-   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:channelTitleValue];
+   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForChannelTitleText:channelTitleValue];
 
    //MARK: Container Node Creation Section
    self.channelTitleTextNode = channelTitleTextNode;
@@ -242,21 +256,22 @@
 
 
 - (void)layoutThirdForChannelInfo {
-   self.channelTitleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
-                                                      featureImageFrame:self.videoCoverThumbnailsNode.frame];
+   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnail:self.bounds
+                                                                      thirdRowHeight:THIRD_ROW_HEIGHT];
 
-   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.bounds
-                                                                    featureImageFrame:self.videoCoverThumbnailsNode.frame];
+   self.channelTitleTextNode.frame = [FrameCalculator frameForChannelTitleText:self.bounds
+                                                                thirdRowHeight:THIRD_ROW_HEIGHT
+                                                                 leftNodeFrame:self.videoChannelThumbnailsNode.frame];
 }
 
 
 - (void)effectThirdForChannelInfo {
+   // 4
+   self.videoChannelThumbnailsNode.layerBacked = true;
+
    // 3
    self.channelTitleTextNode.layerBacked = true;
    self.channelTitleTextNode.backgroundColor = [UIColor clearColor];
-
-   // 4
-   self.videoChannelThumbnailsNode.layerBacked = true;
 }
 
 

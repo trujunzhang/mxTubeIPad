@@ -13,8 +13,9 @@
 @interface NSAttributedString (custom)
 
 + (NSAttributedString *)attributedStringForTitleText:(NSString *)text;
-
 + (NSAttributedString *)attributedStringForDurationText:(NSString *)text;
++ (NSAttributedString *)attributedStringForChannelTitleText:(NSString *)text;
+
 @end
 
 
@@ -23,6 +24,8 @@
 + (NSParagraphStyle *)justifiedParagraphStyle;
 + (NSParagraphStyle *)justifiedParagraphStyleForDuration;
 + (id)justifiedParagraphStyleForTitleText:(UIFont *)font;
++ (NSParagraphStyle *)justifiedParagraphStyleForChannelTitle;
+
 @end
 
 

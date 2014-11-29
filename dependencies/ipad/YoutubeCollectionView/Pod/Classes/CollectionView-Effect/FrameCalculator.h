@@ -11,7 +11,9 @@
 
 + (CGFloat)cardWidth;
 + (CGRect)frameForDescriptionText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
-+ (CGRect)frameForChannelThumbnails:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
++ (CGRect)frameForDivider:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
++ (CGRect)frameForChannelThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
++ (CGRect)frameForChannelTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame;
 + (CGRect)frameForTitleText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
 + (CGRect)frameForGradient:(CGRect)featureImageFrame;
 

@@ -37,9 +37,27 @@
 }
 
 
-+ (CGRect)frameForChannelThumbnails:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame {
-   CGFloat tY = featureImageFrame.origin.y + featureImageFrame.size.height + 6;
-   return CGRectMake(textAreaPaddingX, tY, containerBounds.size.width - textAreaPaddingX * 2, 48);
++ (CGRect)frameForDivider:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight {
+   CGFloat divY = containerBounds.size.height - thirdRowHeight - 1;
+   return CGRectMake(0.0f, divY, containerBounds.size.width, 1);
+}
+
+
++ (CGRect)frameForChannelThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight {
+   CGFloat titlePaddingTop = 2;
+
+   CGFloat divX = 4;
+   CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
+   return CGRectMake(divX, divY, 20, thirdRowHeight - titlePaddingTop * 2);
+}
+
+
++ (CGRect)frameForChannelTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame {
+   CGFloat titlePaddingTop = 3;
+
+   CGFloat divX = leftNodeFrame.origin.x + leftNodeFrame.size.width + 3;
+   CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
+   return CGRectMake(divX, divY, 100.0f, thirdRowHeight - titlePaddingTop * 2);
 }
 
 

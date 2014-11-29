@@ -26,6 +26,19 @@
 }
 
 
++ (NSAttributedString *)attributedStringForChannelTitleText:(NSString *)text {
+   UIFont * font = [UIFont systemFontOfSize:12];
+
+   NSDictionary * titleAttributes =
+    @{ NSFontAttributeName : font,
+     NSForegroundColorAttributeName : [UIColor redColor],
+     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDuration]
+    };
+
+   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+}
+
+
 - (NSDictionary *)createAttributesForFontStyle:(NSString *)style
                                      withTrait:(uint32_t)trait {
    UIFontDescriptor * fontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
@@ -76,6 +89,15 @@
 
 
 + (NSParagraphStyle *)justifiedParagraphStyleForDuration {
+   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+   style.alignment = NSTextAlignmentLeft;
+
+
+   return style;
+}
+
+
++ (NSParagraphStyle *)justifiedParagraphStyleForChannelTitle {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   [style setAlignment:NSTextAlignmentJustified];
 //   style.lineBreakMode = NSLineBreakByTruncatingTail;
