@@ -32,7 +32,7 @@
    NSDictionary * titleAttributes =
     @{ NSFontAttributeName : font,
      NSForegroundColorAttributeName : [UIColor redColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDuration]
+     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
     };
 
    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
@@ -99,9 +99,8 @@
 
 + (NSParagraphStyle *)justifiedParagraphStyleForChannelTitle {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-//   [style setAlignment:NSTextAlignmentJustified];
-//   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.alignment = NSTextAlignmentRight;
+   style.lineBreakMode = NSLineBreakByTruncatingTail;
+   style.alignment = NSTextAlignmentLeft;
 
 
    return style;

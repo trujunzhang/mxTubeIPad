@@ -48,16 +48,16 @@
 
    CGFloat divX = 4;
    CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
-   return CGRectMake(divX, divY, 20, thirdRowHeight - titlePaddingTop * 2);
+   return CGRectMake(divX, divY, 20, 20);
 }
 
 
 + (CGRect)frameForChannelTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame {
-   CGFloat titlePaddingTop = 3;
+   CGFloat titlePaddingTop = 7;
 
    CGFloat divX = leftNodeFrame.origin.x + leftNodeFrame.size.width + 3;
    CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
-   return CGRectMake(divX, divY, 100.0f, thirdRowHeight - titlePaddingTop * 2);
+   return CGRectMake(divX, divY, 180.0f, thirdRowHeight);
 }
 
 
