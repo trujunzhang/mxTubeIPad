@@ -153,9 +153,9 @@
        [self updateAfterResponse:array];
 
        // test
-       [self.navigationController pushViewController:[[VideoDetailViewControlleriPad alloc] initWithDelegate:self
-                                                                                                       video:array[0]]
-                                            animated:YES];
+//       [self.navigationController pushViewController:[[VideoDetailViewControlleriPad alloc] initWithDelegate:self
+//                                                                                                       video:array[0]]
+//                                            animated:YES];
 
    };
    ErrorResponseBlock error = ^(NSError * error) {
