@@ -19,10 +19,6 @@
 
 @property(nonatomic, strong) YTCollectionViewController * youtubeGridLayoutViewController;
 
-@property(nonatomic, strong) YoutubeChannelPageViewController * youtubeChannelPageViewController;
-
-@property(nonatomic, strong) UIViewController * rootViewController;
-
 @property(nonatomic, assign) YTPlaylistItemsType playlistItemsType;
 @end
 
@@ -35,49 +31,7 @@
    // Do any additional setup after loading the view, typically from a nib.
    self.tabBarItem.title = @"Subscriptions";
    self.view.backgroundColor = [UIColor clearColor];
-
-//   [self setupRootController]; // test
-
-//   [self changeRootView];// test
 }
-
-
-//- (void)setupRootController {
-//   self.rootViewController = [[UIViewController alloc] init];
-//   self.rootViewController.view.frame = self.view.bounds;
-//   self.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//
-//   [self pushViewController:self.rootViewController animated:NO];
-//}
-
-
-//- (void)setupRootController123 {
-//// 2
-//   self.youtubeChannelPageViewController = [[YoutubeChannelPageViewController alloc] init];
-//   self.youtubeChannelPageViewController.title = @"Subscriptions";
-////   self.youtubeChannelPageViewController.delegate = self;
-////   self.youtubeChannelPageViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
-//
-//   // 2.1
-//   self.youtubeChannelPageViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
-//
-//   //3
-//   [self pushViewController:self.youtubeChannelPageViewController animated:YES];
-//}
-
-//- (void)setupRootController {
-//// 2
-//   self.youtubeGridLayoutViewController = [[YTCollectionViewController alloc] init];
-//   self.youtubeGridLayoutViewController.title = @"Subscriptions";
-//   self.youtubeGridLayoutViewController.delegate = self;
-//   self.youtubeGridLayoutViewController.numbersPerLineArray = [NSArray arrayWithObjects:@"3", @"4", nil];
-//
-//   // 2.1
-//   self.youtubeGridLayoutViewController.navigationItem.leftBarButtonItem = self.revealButtonItem;
-//
-//   //3
-//   [self pushViewController:self.youtubeGridLayoutViewController animated:YES];
-//}
 
 
 - (void)didReceiveMemoryWarning {
