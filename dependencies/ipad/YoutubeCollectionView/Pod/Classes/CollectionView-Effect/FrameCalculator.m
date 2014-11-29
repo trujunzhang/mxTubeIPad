@@ -44,11 +44,12 @@
 
 
 + (CGRect)frameForChannelThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight {
-   CGFloat titlePaddingTop = 2;
+   CGFloat thumbnailPaddingTop = 3;
 
    CGFloat divX = 4;
-   CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
-   return CGRectMake(divX, divY, 20, 20);
+   CGFloat divY = containerBounds.size.height - thirdRowHeight + thumbnailPaddingTop;
+   CGFloat thumbnailHeight = thirdRowHeight - thumbnailPaddingTop * 2;
+   return CGRectMake(divX, divY, thumbnailHeight, thumbnailHeight);
 }
 
 
@@ -57,7 +58,7 @@
 
    CGFloat divX = leftNodeFrame.origin.x + leftNodeFrame.size.width + 3;
    CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
-   return CGRectMake(divX, divY, 180.0f, thirdRowHeight);
+   return CGRectMake(divX, divY, 180.0f, thirdRowHeight - titlePaddingTop);
 }
 
 
