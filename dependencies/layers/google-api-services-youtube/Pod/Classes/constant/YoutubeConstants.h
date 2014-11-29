@@ -106,8 +106,8 @@
 
 
 
-//#define hasShowLeftMenu NO
-#define hasShowLeftMenu YES
+#define hasShowLeftMenu NO
+//#define hasShowLeftMenu YES
 
 
 
