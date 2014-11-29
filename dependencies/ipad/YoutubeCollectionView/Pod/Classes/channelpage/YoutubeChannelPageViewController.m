@@ -108,9 +108,10 @@
 
 
 - (void)tabBarController:(WHTopTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-   NSUInteger integer = tabBarController.selectedIndex;
-   NSString * debug = @"debug";
-   [self fetchListWithController:viewController withType:integer];
+   if (self.selectedController == viewController)
+      return;
+
+   [self fetchListWithController:viewController withType:tabBarController.selectedIndex];
 }
 
 

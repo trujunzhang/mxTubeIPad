@@ -178,7 +178,6 @@
 
 - (void)fetchActivityListByType:(YTSegmentItemType)itemType withChannelId:(NSString *)channelId {
 //   channelId = @"UCl78QGX_hfK6zT8Mc-2w8GA";
-
    [self cleanup];
 
    [[self getYoutubeRequestInfo] resetRequestInfoForActivityListFromChannelWithChannelId:channelId];
