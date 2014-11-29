@@ -4,6 +4,7 @@
 //
 
 #import "FrameCalculator.h"
+#import "YoutubeParser.h"
 
 #define textAreaHeight 300.0
 
@@ -55,6 +56,25 @@
 
 + (CGRect)frameForChannelThumbnails:(CGSize)cellSize nodeFrameHeight:(CGFloat)nodeFrameHeight {
    return CGRectMake(0, 0, cellSize.width, nodeFrameHeight);
+}
+
+
++ (CGFloat)calculateWidthForDurationLabel:(NSString *)labelText {
+   float widthIs =
+    [labelText
+     boundingRectWithSize:CGSizeZero
+                  options:NSStringDrawingUsesLineFragmentOrigin
+               attributes:@{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12] }
+                  context:nil].size.width;
+
+   return widthIs;
+}
+
+
++ (CGRect)frameForDurationWithCloverSize:(CGSize)cloverSize withDurationWidth:(CGFloat)durationWidthIs {
+   CGFloat durationWidth = durationWidthIs;
+   CGFloat durationHeight = 20;
+   return CGRectMake(cloverSize.width - durationWidthIs, cloverSize.height - durationHeight, durationWidthIs, durationHeight);
 }
 
 

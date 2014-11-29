@@ -56,15 +56,15 @@
 }
 
 
-+ (NSAttributedString *)attributedStringForDescriptionText:(NSString *)text {
-
++ (NSAttributedString *)attributedStringForDurationText:(NSString *)text {
    NSDictionary * titleAttributes =
     @{ NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
      NSForegroundColorAttributeName : [UIColor whiteColor],
      NSBackgroundColorAttributeName : [UIColor clearColor],
      NSShadowAttributeName : [NSShadow descriptionTextShadow],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyle]
+     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForDuration]
     };
+
 
    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
@@ -77,6 +77,16 @@
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   [style setAlignment:NSTextAlignmentJustified];
 //   style.lineBreakMode = NSLineBreakByTruncatingTail;
+
+   return style;
+}
+
+
++ (NSParagraphStyle *)justifiedParagraphStyleForDuration {
+   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+//   [style setAlignment:NSTextAlignmentJustified];
+//   style.lineBreakMode = NSLineBreakByTruncatingTail;
+   style.alignment = NSTextAlignmentRight;
 
    return style;
 }

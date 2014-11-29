@@ -35,4 +35,5 @@
 + (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs;
 + (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs;
 + (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp;
++ (NSString *)getVideoDurationForVideoInfo:(YTYouTubeVideoCache *)video;
 @end

@@ -17,6 +17,8 @@
 + (CGRect)frameForFeatureImage:(CGSize)featureImageSize containerFrameWidth:(CGFloat)containerFrameWidth;
 
 + (CGRect)frameForChannelThumbnails:(CGSize)featureImageSize nodeFrameHeight:(CGFloat)nodeFrameHeight;
++ (CGFloat)calculateWidthForDurationLabel:(NSString *)labelText;
++ (CGRect)frameForDurationWithCloverSize:(CGSize)cloverSize withDurationWidth:(CGFloat)durationWidthIs;
 + (CGRect)frameForBackgroundImage:(CGRect)containerBounds;
 + (CGRect)frameForContainer:(CGSize)featureImageSize;
 + (CGSize)sizeThatFits:(CGSize)size withImageSize:(CGSize)imageSize;

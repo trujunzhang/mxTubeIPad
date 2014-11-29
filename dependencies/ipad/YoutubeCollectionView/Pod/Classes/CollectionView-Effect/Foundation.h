@@ -14,13 +14,14 @@
 
 + (NSAttributedString *)attributedStringForTitleText:(NSString *)text;
 
-+ (NSAttributedString *)attributedStringForDescriptionText:(NSString *)text;
++ (NSAttributedString *)attributedStringForDurationText:(NSString *)text;
 @end
 
 
 @interface NSParagraphStyle (custom)
 
 + (NSParagraphStyle *)justifiedParagraphStyle;
++ (NSParagraphStyle *)justifiedParagraphStyleForDuration;
 + (id)justifiedParagraphStyleForTitleText:(UIFont *)font;
 @end
 

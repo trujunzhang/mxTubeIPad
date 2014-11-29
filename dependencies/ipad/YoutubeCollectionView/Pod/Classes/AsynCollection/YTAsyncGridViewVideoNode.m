@@ -22,6 +22,17 @@
 @interface YTAsyncGridViewVideoNode () {
 
 }
+
+
+@property(nonatomic, strong) ASNetworkImageNode * videoCoverThumbnailsNode;
+@property(nonatomic, strong) ASNetworkImageNode * videoChannelThumbnailsNode;
+@property(nonatomic, strong) ASTextNode * titleTextNode;
+@property(nonatomic, strong) ASTextNode * descriptionTextNode;
+
+@property(nonatomic, strong) ASTextNode * durationTextNode;
+
+@property(nonatomic) CGFloat durationLabelWidth;
+
 @end
 
 
@@ -44,7 +55,18 @@
 }
 
 
+#pragma mark -
+#pragma mark Setup sub nodes.
+
+
+- (void)setupContainerNode {
+   [self rowFirstForChannelClover];
+   [self rowSecondForChannelTitle];
+}
+
+
 - (void)setupAllNodesEffect {
+
    // 1
    self.layerBacked = true;
 
@@ -57,24 +79,8 @@
    self.shadowOpacity = 1.0;
    self.shadowRadius = 2.0;
 
-   // 2
-   self.videoCoverThumbnailsNode.layerBacked = true;
-   self.videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
-
-   // 2.1
-   self.videoCoverThumbnailsNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
-
-   // 2.2
-   self.videoCoverThumbnailsNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-   self.videoCoverThumbnailsNode.borderWidth = 1;
-
-   self.videoCoverThumbnailsNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-   self.videoCoverThumbnailsNode.shadowOffset = CGSizeMake(1, 3);
-   self.videoCoverThumbnailsNode.shadowRadius = 2.0;
-
-   // 3
-   self.titleTextNode.layerBacked = true;
-   self.titleTextNode.backgroundColor = [UIColor clearColor];
+   [self effectFirstForChannelClover];
+   [self effectSecondForChannelTitle];
 }
 
 
@@ -91,14 +97,8 @@
 }
 
 
-- (void)setupContainerNode {
-   [self rowFirstForChannelClover];
-   [self rowSecondForChannelTitle];
-}
-
-
 #pragma mark -
-#pragma mark first row for channel clover
+#pragma mark first row for channel clover.(Row N01)
 
 
 - (void)rowFirstForChannelClover {
@@ -116,17 +116,62 @@
 
    self.videoCoverThumbnailsNode = videoChannelThumbnailsNode;
    [self addSubnode:self.videoCoverThumbnailsNode];
+
+   // 2
+   NSString * durationString = [YoutubeParser getVideoDurationForVideoInfo:self.cardInfo];
+   ASTextNode * durationTextNode = [[ASTextNode alloc] init];
+   durationTextNode.backgroundColor = [UIColor colorWithHexString:@"1F1F21" alpha:0.6];
+   durationTextNode.attributedString = [NSAttributedString attributedStringForDurationText:durationString];
+   self.durationLabelWidth = [FrameCalculator calculateWidthForDurationLabel:durationString];
+
+   self.durationTextNode = durationTextNode;
+   [self addSubnode:self.durationTextNode];
 }
 
 
 - (void)layoutFirstForChannelClover {
    self.videoCoverThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
                                                                     nodeFrameHeight:142.0f];
+
+   self.durationTextNode.frame = [FrameCalculator frameForDurationWithCloverSize:self.videoCoverThumbnailsNode.frame.size
+                                                               withDurationWidth:self.durationLabelWidth];
+}
+
+
+- (void)effectFirstForChannelClover {
+   // 2
+   self.videoCoverThumbnailsNode.layerBacked = true;
+   self.videoCoverThumbnailsNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
+
+   // 2.1
+   self.videoCoverThumbnailsNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
+
+   // 2.2
+   self.videoCoverThumbnailsNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
+   self.videoCoverThumbnailsNode.borderWidth = 1;
+
+   self.videoCoverThumbnailsNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+   self.videoCoverThumbnailsNode.shadowOffset = CGSizeMake(1, 3);
+   self.videoCoverThumbnailsNode.shadowRadius = 2.0;
+
+
+   // 3
+   self.durationTextNode.layerBacked = true;
+}
+
+
+- (void)mainThreadLayout {
+
+}
+
+
+- (void)channelThumbnailsTapped:(id)buttonTapped {
+   [self.delegate gridViewCellTap:self.cardInfo];
 }
 
 
 #pragma mark -
-#pragma mark second row for channel title
+#pragma mark second row for channel title.(Row N02)
 
 
 - (void)rowSecondForChannelTitle {
@@ -141,7 +186,7 @@
    descriptionTextNode.layerBacked = true;
    descriptionTextNode.backgroundColor = [UIColor clearColor];
    descriptionTextNode.attributedString =
-    [NSAttributedString attributedStringForDescriptionText:channelTitleValue];
+    [NSAttributedString attributedStringForDurationText:channelTitleValue];
 
    //MARK: Container Node Creation Section
    self.titleTextNode = titleTextNode;
@@ -155,8 +200,10 @@
 }
 
 
-- (void)channelThumbnailsTapped:(id)buttonTapped {
-   [self.delegate gridViewCellTap:self.cardInfo];
+- (void)effectSecondForChannelTitle {
+   // 3
+   self.titleTextNode.layerBacked = true;
+   self.titleTextNode.backgroundColor = [UIColor clearColor];
 }
 
 

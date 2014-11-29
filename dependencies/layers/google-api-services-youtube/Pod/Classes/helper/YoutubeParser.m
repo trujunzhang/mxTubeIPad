@@ -91,6 +91,12 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
++ (NSString *)getVideoDurationForVideoInfo:(YTYouTubeVideoCache *)video {
+   NSUInteger durationValue = video.contentDetails.duration;
+   return [NSString stringWithFormat:@"%d", durationValue];
+}
+
+
 + (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel {
    return channel.brandingSettings.image.bannerMobileHdImageUrl;;
 }
@@ -178,4 +184,6 @@ NSMutableDictionary * channelIdThumbnailDictionary;
    }
    return error;
 }
+
+
 @end
