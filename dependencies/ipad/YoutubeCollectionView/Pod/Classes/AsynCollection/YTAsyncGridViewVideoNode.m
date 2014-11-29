@@ -35,17 +35,16 @@
       self.delegate = delegate;
 
       [self setupContainerNode];
-      [self addAllSubNodes];
-      [self layoutNode];
+      [self layoutSubNodes];
 
-      [self initContentNode];
+      [self setupAllNodesEffect];
    }
 
    return self;
 }
 
 
-- (void)initContentNode {
+- (void)setupAllNodesEffect {
    // 1
    self.layerBacked = true;
 
@@ -79,15 +78,12 @@
 }
 
 
-- (void)layoutNode {
+- (void)layoutSubNodes {
    //MARK: Node Layout Section
    self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
 
-   self.videoCoverThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
-                                                                      nodeFrameHeight:142.0f];
-
-   self.titleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
-                                               featureImageFrame:self.videoCoverThumbnailsNode.frame];
+   [self layoutFirstForChannelClover];
+   [self layoutSecondForChannelTitle];
 
 //   self.descriptionTextNode.frame = [FrameCalculator frameForDescriptionText:self.bounds
 //                                                           featureImageFrame:self.featureImageNode.frame];
@@ -96,12 +92,17 @@
 
 
 - (void)setupContainerNode {
+   [self rowFirstForChannelClover];
+   [self rowSecondForChannelTitle];
+}
 
+
+#pragma mark -
+#pragma mark first row for channel clover
+
+
+- (void)rowFirstForChannelClover {
    NSString * videoThumbnailsUrl = [YoutubeParser getVideoSnippetThumbnails:self.cardInfo];
-   NSString * videoTitleValue = self.cardInfo.snippet.title;
-   NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
-
-   YTYouTubeVideoCache * video = self.cardInfo;
 
    // 1
    ASCacheNetworkImageNode * videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
@@ -113,6 +114,24 @@
                                   action:@selector(channelThumbnailsTapped:)
                         forControlEvents:ASControlNodeEventTouchUpInside];
 
+   self.videoCoverThumbnailsNode = videoChannelThumbnailsNode;
+   [self addSubnode:self.videoCoverThumbnailsNode];
+}
+
+
+- (void)layoutFirstForChannelClover {
+   self.videoCoverThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
+                                                                    nodeFrameHeight:142.0f];
+}
+
+
+#pragma mark -
+#pragma mark second row for channel title
+
+
+- (void)rowSecondForChannelTitle {
+   NSString * videoTitleValue = self.cardInfo.snippet.title;
+   NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
    // 2
    ASTextNode * titleTextNode = [[ASTextNode alloc] init];
    titleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:videoTitleValue];
@@ -124,22 +143,15 @@
    descriptionTextNode.attributedString =
     [NSAttributedString attributedStringForDescriptionText:channelTitleValue];
 
-   GradientNode * gradientNode = [[GradientNode alloc] init];
-   gradientNode.opaque = false;
-   gradientNode.layerBacked = true;
-
    //MARK: Container Node Creation Section
-   self.videoCoverThumbnailsNode = videoChannelThumbnailsNode;
    self.titleTextNode = titleTextNode;
-//   self.descriptionTextNode = descriptionTextNode;
+   [self addSubnode:self.titleTextNode];
 }
 
 
-//MARK: Node Hierarchy Section
-- (void)addAllSubNodes {
-   [self addSubnode:self.videoCoverThumbnailsNode];
-   [self addSubnode:self.titleTextNode];
-//   [self addSubnode:self.descriptionTextNode];
+- (void)layoutSecondForChannelTitle {
+   self.titleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
+                                               featureImageFrame:self.videoCoverThumbnailsNode.frame];
 }
 
 
