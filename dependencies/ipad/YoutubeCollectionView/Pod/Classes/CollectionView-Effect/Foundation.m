@@ -13,13 +13,6 @@
 @implementation NSAttributedString (custom)
 
 + (NSAttributedString *)attributedStringForTitleText:(NSString *)text {
-
-//   UIFont * font = [UIFont fontWithName:@"AvenirNext-Heavy" size:12];
-//   font = [UIFont fontWithName:@"American Typewriter" size:12];
-//   UIFont * font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-//   NSString * fontName = @"HelveticaNeue";
-//   fontName = @"ChalkboardSE-Regular";
-//   UIFont * font = [UIFont fontWithName:fontName size:14.0f];
    UIFont * font = [UIFont systemFontOfSize:14];
 
    NSDictionary * titleAttributes =
@@ -88,16 +81,26 @@
 //   style.lineBreakMode = NSLineBreakByTruncatingTail;
    style.alignment = NSTextAlignmentRight;
 
+
    return style;
 }
 
 
 + (id)justifiedParagraphStyleForTitleText:(UIFont *)font {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-//   [style setAlignment:NSTextAlignmentJustified];
-//   style.lineBreakMode = NSLineBreakByTruncatingTail;
-   style.paragraphSpacing = 0.5 * font.lineHeight;
+//   style.paragraphSpacing = 0.5 * font.lineHeight;
    style.hyphenationFactor = 1.0;
+//   style.lineBreakMode = NSLineBreakByTruncatingTail;
+//   style.alignment = kCTTextAlignmentCenter;
+
+
+   style.minimumLineHeight = 0.f;
+   style.maximumLineHeight = 88.0f;
+   style.firstLineHeadIndent = 0.0f;
+   style.paragraphSpacing = 0.0;
+   style.lineSpacing = 5.0;
+   style.headIndent = 0.0f;
+   style.tailIndent = 0.0f;
 
    return style;
 }

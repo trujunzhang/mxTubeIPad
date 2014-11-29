@@ -119,10 +119,11 @@
 
    // 2
    NSString * durationString = [YoutubeParser getVideoDurationForVideoInfo:self.cardInfo];
+   self.durationLabelWidth = [FrameCalculator calculateWidthForDurationLabel:durationString];
+
    ASTextNode * durationTextNode = [[ASTextNode alloc] init];
    durationTextNode.backgroundColor = [UIColor colorWithHexString:@"1F1F21" alpha:0.6];
    durationTextNode.attributedString = [NSAttributedString attributedStringForDurationText:durationString];
-   self.durationLabelWidth = [FrameCalculator calculateWidthForDurationLabel:durationString];
 
    self.durationTextNode = durationTextNode;
    [self addSubnode:self.durationTextNode];
