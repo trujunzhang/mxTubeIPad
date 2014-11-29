@@ -18,10 +18,7 @@
 
 @property(nonatomic) CGSize const nodeCellSize;
 
-
 @property(nonatomic, strong) YTYouTubeVideoCache * cardInfo;
-
-@property(nonatomic, strong) GradientNode * gradientNode;
 
 @property(nonatomic, strong) id<IpadGridViewCellDelegate> delegate;
 

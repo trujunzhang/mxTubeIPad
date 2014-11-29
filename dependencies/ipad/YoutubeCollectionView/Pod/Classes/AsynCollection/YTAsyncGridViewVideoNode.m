@@ -11,27 +11,26 @@
 #import "YTAsyncGridViewVideoNode.h"
 #import "FrameCalculator.h"
 #import "AnimatedContentsDisplayLayer.h"
-#import "GradientNode.h"
 #import "Foundation.h"
 #import "HexColor.h"
 #import "UIColor+iOS8Colors.h"
 #import "YoutubeParser.h"
 #import "ASCacheNetworkImageNode.h"
+#import "GYoutubeHelper.h"
 
 
 @interface YTAsyncGridViewVideoNode () {
 
 }
-
+@property(nonatomic) CGFloat durationLabelWidth;
 
 @property(nonatomic, strong) ASNetworkImageNode * videoCoverThumbnailsNode;
-@property(nonatomic, strong) ASNetworkImageNode * videoChannelThumbnailsNode;
-@property(nonatomic, strong) ASTextNode * titleTextNode;
-@property(nonatomic, strong) ASTextNode * descriptionTextNode;
-
 @property(nonatomic, strong) ASTextNode * durationTextNode;
 
-@property(nonatomic) CGFloat durationLabelWidth;
+@property(nonatomic, strong) ASTextNode * videoTitleTextNode;
+
+@property(nonatomic, strong) ASCacheNetworkImageNode * videoChannelThumbnailsNode;
+@property(nonatomic, strong) ASTextNode * channelTitleTextNode;
 
 @end
 
@@ -62,6 +61,7 @@
 - (void)setupContainerNode {
    [self rowFirstForChannelClover];
    [self rowSecondForChannelTitle];
+   [self rowThirdForChannelInfo];
 }
 
 
@@ -81,6 +81,7 @@
 
    [self effectFirstForChannelClover];
    [self effectSecondForChannelTitle];
+   [self effectThirdForChannelInfo];
 }
 
 
@@ -90,6 +91,7 @@
 
    [self layoutFirstForChannelClover];
    [self layoutSecondForChannelTitle];
+   [self layoutThirdForChannelInfo];
 
 //   self.descriptionTextNode.frame = [FrameCalculator frameForDescriptionText:self.bounds
 //                                                           featureImageFrame:self.featureImageNode.frame];
@@ -177,34 +179,84 @@
 
 - (void)rowSecondForChannelTitle {
    NSString * videoTitleValue = self.cardInfo.snippet.title;
-   NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
    // 2
    ASTextNode * titleTextNode = [[ASTextNode alloc] init];
    titleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:videoTitleValue];
 
-
-   ASTextNode * descriptionTextNode = [[ASTextNode alloc] init];
-   descriptionTextNode.layerBacked = true;
-   descriptionTextNode.backgroundColor = [UIColor clearColor];
-   descriptionTextNode.attributedString =
-    [NSAttributedString attributedStringForDurationText:channelTitleValue];
-
    //MARK: Container Node Creation Section
-   self.titleTextNode = titleTextNode;
-   [self addSubnode:self.titleTextNode];
+   self.videoTitleTextNode = titleTextNode;
+   [self addSubnode:self.videoTitleTextNode];
 }
 
 
 - (void)layoutSecondForChannelTitle {
-   self.titleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
-                                               featureImageFrame:self.videoCoverThumbnailsNode.frame];
+   self.videoTitleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
+                                                    featureImageFrame:self.videoCoverThumbnailsNode.frame];
 }
 
 
 - (void)effectSecondForChannelTitle {
    // 3
-   self.titleTextNode.layerBacked = true;
-   self.titleTextNode.backgroundColor = [UIColor clearColor];
+   self.videoTitleTextNode.layerBacked = true;
+   self.videoTitleTextNode.backgroundColor = [UIColor clearColor];
+}
+
+
+#pragma mark -
+#pragma mark second row for channel title.(Row N02)
+
+
+- (void)rowThirdForChannelInfo {
+   // 1
+   [self showChannelThumbnail:[YoutubeParser getChannelIdByVideo:self.cardInfo]];
+
+   NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
+   // 2
+   ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
+   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForTitleText:channelTitleValue];
+
+   //MARK: Container Node Creation Section
+   self.channelTitleTextNode = channelTitleTextNode;
+   [self addSubnode:self.channelTitleTextNode];
+}
+
+
+- (void)showChannelThumbnail:(NSString *)channelId {
+   // 1
+   self.videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
+   if (self.cardInfo.channelThumbnailUrl) {
+      [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
+      return;
+   }
+
+   YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
+       self.cardInfo.channelThumbnailUrl = respObject;
+       [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
+   };
+   [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
+                                                          completion:completionBlock
+                                                        errorHandler:nil];
+
+   [self addSubnode:self.videoChannelThumbnailsNode];
+}
+
+
+- (void)layoutThirdForChannelInfo {
+   self.channelTitleTextNode.frame = [FrameCalculator frameForTitleText:self.bounds
+                                                      featureImageFrame:self.videoCoverThumbnailsNode.frame];
+
+   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnails:self.bounds
+                                                                    featureImageFrame:self.videoCoverThumbnailsNode.frame];
+}
+
+
+- (void)effectThirdForChannelInfo {
+   // 3
+   self.channelTitleTextNode.layerBacked = true;
+   self.channelTitleTextNode.backgroundColor = [UIColor clearColor];
+
+   // 4
+   self.videoChannelThumbnailsNode.layerBacked = true;
 }
 
 

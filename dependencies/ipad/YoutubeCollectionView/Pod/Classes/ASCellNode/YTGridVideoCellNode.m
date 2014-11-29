@@ -158,9 +158,7 @@ CGFloat thumbnailHeight = 142;
         forControlEvents:ASControlNodeEventTouchUpInside];
 
    // 2.1
-   NSString * channelId = video.snippet.channelId;
-
-   [self showChannelThumbnail:channelId];
+   [self showChannelThumbnail:[YoutubeParser getChannelIdByVideo:video]];
 
    // 2.2
    _videoTitleNode.attributedString = [[NSAttributedString alloc] initWithString:videoTitleValue

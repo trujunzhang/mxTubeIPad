@@ -74,7 +74,6 @@ static CGFloat kTextPadding = 10.0f;
 - (void)setupContainerNode {
    NSString * videoTitleValue = self.cardInfo.snippet.title;
    NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
-   NSString * channelId = [YoutubeParser getChannelIdByVideo:self.cardInfo];
    // 1
    ASCacheNetworkImageNode * videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
 
@@ -85,7 +84,7 @@ static CGFloat kTextPadding = 10.0f;
 //                        forControlEvents:ASControlNodeEventTouchUpInside];
 
 
-   [self showChannelThumbnail:channelId];
+   [self showChannelThumbnail:[YoutubeParser getChannelIdByVideo:self.cardInfo]];
 
    self.videoChannelThumbnailsNode = videoChannelThumbnailsNode;
 }

@@ -11,6 +11,7 @@
 
 + (CGFloat)cardWidth;
 + (CGRect)frameForDescriptionText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
++ (CGRect)frameForChannelThumbnails:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
 + (CGRect)frameForTitleText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
 + (CGRect)frameForGradient:(CGRect)featureImageFrame;
 
