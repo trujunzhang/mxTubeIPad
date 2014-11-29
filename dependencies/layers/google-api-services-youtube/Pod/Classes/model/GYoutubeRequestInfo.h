@@ -32,6 +32,8 @@ typedef NS_ENUM (NSUInteger, YTPlaylistItemsType) {
 @property(nonatomic, strong) NSMutableArray * videoList;
 
 @property(nonatomic) BOOL hasLoadingMore;
+@property(nonatomic) BOOL hasFirstFetch;
+
 @property(nonatomic, copy) NSString * queryType;
 
 @property(nonatomic, strong) NSMutableDictionary * parameters;

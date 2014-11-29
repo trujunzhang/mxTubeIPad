@@ -18,6 +18,7 @@
    self = [super init];
    if (self) {
       self.hasLoadingMore = NO;
+      self.hasFirstFetch = NO;
    }
 
    return self;
@@ -32,6 +33,7 @@
    self.nextPageToken = @"";
    self.hasLoadingMore = YES;
    self.isLoading = NO;
+   self.hasFirstFetch = YES;
 }
 
 

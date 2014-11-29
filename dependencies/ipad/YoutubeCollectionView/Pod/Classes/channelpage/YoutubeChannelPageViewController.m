@@ -26,11 +26,6 @@
 
 @property(nonatomic) YTSegmentItemType selectedSegmentItemType;
 @property(nonatomic, strong) YTCollectionViewController * selectedController;
-
-@property(nonatomic, strong) YTCollectionViewController * firstViewController;
-@property(nonatomic, strong) YTCollectionViewController * secondViewController;
-@property(nonatomic, strong) YTCollectionViewController * thirdViewController;
-
 @end
 
 
@@ -128,6 +123,9 @@
 
 
 - (void)executeRefreshTask {
+   if ([self.selectedController getYoutubeRequestInfo].hasFirstFetch)
+      return;
+
    switch (self.selectedSegmentItemType) {
       case YTSegmentItemVideo:
          [self.selectedController fetchActivityListByType:self.selectedSegmentItemType
