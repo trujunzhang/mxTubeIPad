@@ -9,54 +9,51 @@
 #import <ASImageResize/UIImage+Resize.h>
 #import "SDWebImageCacheImplement.h"
 #import "SDImageCache.h"
+#import "SDWebImageManager.h"
+#import "JMImageCache.h"
 
 
 @implementation SDWebImageCacheImplement
 
++ (UIImage *)getCacheImageWithURL:(NSURL *)url {
+   NSString * cacheKeyForURL = [[SDWebImageManager sharedManager] cacheKeyForURL:url];
+
+   UIImage * uiImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:cacheKeyForURL];
+   return uiImage;
+}
 
 
-//
-//
-//+ (UIImage *)getCacheImageWithKey:(NSString *)imageKey {
-//   return [[JMImageCache sharedCache] cachedImageForKey:imageKey];
-//}
-//
-//
-//+ (UIImage *)getCacheImageWithURL:(NSURL *)url {
-//   return [[JMImageCache sharedCache] cachedImageForURL:url];
-//}
-//
-//
-//+ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
-//   [[JMImageCache sharedCache] imageForURL:url
-//                           completionBlock:^(UIImage * downloadedImage) {
-//                               completionBlock(downloadedImage);
-//                           }];
-//}
-//
-//
-//+ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder withCompletionBlock:(void (^)(UIImage *))completionBlock {
-//   view.image = placeholder;
-//   [ImageCacheInterface CacheWithUrl:[NSURL URLWithString:url] withCompletionBlock:completionBlock];
-//}
-//
-//
-//+ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder {
-//   [self CacheWithImageView:view
-//                    withUrl:url
-//            withPlaceholder:placeHolder
-//        withCompletionBlock:^(UIImage * downloadedImage) {
-//            view.image = downloadedImage;
-//        }
-//   ];
-//}
++ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
+   SDWebImageManager * manager = [SDWebImageManager sharedManager];
+   SDWebImageCompletionWithFinishedBlock cacheCompletedBlock = ^(UIImage * image, NSError * error, SDImageCacheType cacheType, BOOL finished, NSURL * imageURL) {
+       if (image) {
+          completionBlock(image);
+       }
+   };
+   [manager downloadImageWithURL:url
+                         options:0
+                        progress:nil
+                       completed:cacheCompletedBlock];
+}
+
+
++ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder {
+   [SDWebImageCacheImplement CacheWithImageView:view
+                                        withUrl:url
+                                withPlaceholder:placeHolder
+                                           size:CGSizeZero];
+}
 
 
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)size {
    view.image = placeHolder;
 
-   [ImageCacheInterface CacheWithUrl:[NSURL URLWithString:url] withCompletionBlock:^(UIImage * downloadedImage) {
-       view.image = [downloadedImage resizedImageToSize:size];
+   [SDWebImageCacheImplement CacheWithUrl:[NSURL URLWithString:url] withCompletionBlock:^(UIImage * downloadedImage) {
+       if (CGSizeEqualToSize(size, CGSizeZero)) {
+          view.image = downloadedImage;
+       } else {
+          view.image = [downloadedImage resizedImageToSize:size];
+       }
    }];
 }
 

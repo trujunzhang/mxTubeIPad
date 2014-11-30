@@ -50,7 +50,7 @@
 #pragma mark ASImageDownloaderProtocol
 
 
-- (id)downloadImageWithURL:(NSURL *)URL
+- (id)downloadImageWithURL123:(NSURL *)URL
              callbackQueue:(dispatch_queue_t)callbackQueue
      downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
                 completion:(void (^)(CGImageRef image, NSError * error))completion {
@@ -87,7 +87,8 @@
 }
 
 
-- (id)downloadImageWithURL_error:(NSURL *)URL
+//- (id)downloadImageWithURL_error:(NSURL *)URL
+- (id)downloadImageWithURL:(NSURL *)URL
                    callbackQueue:(dispatch_queue_t)callbackQueue
            downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
                       completion:(void (^)(CGImageRef image, NSError * error))completion {

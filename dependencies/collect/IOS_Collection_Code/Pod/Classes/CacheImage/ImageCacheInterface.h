@@ -13,8 +13,6 @@
 
 @interface ImageCacheInterface : NSObject
 
-
-+ (UIImage *)getCacheImageWithKey:(NSString *)imageKey;
 + (UIImage *)getCacheImageWithURL:(NSURL *)url;
 + (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock;
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder;

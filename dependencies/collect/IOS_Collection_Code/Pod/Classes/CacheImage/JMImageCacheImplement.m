@@ -16,11 +16,6 @@
 @implementation JMImageCacheImplement
 
 
-+ (UIImage *)getCacheImageWithKey:(NSString *)imageKey {
-   return [[JMImageCache sharedCache] cachedImageForKey:imageKey];
-}
-
-
 + (UIImage *)getCacheImageWithURL:(NSURL *)url {
    return [[JMImageCache sharedCache] cachedImageForURL:url];
 }
