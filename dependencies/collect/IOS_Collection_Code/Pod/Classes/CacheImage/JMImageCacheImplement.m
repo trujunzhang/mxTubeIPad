@@ -32,10 +32,10 @@
 
 
 + (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder {
-   view.image = placeHolder;
-   [JMImageCacheImplement CacheWithUrl:[NSURL URLWithString:url] withCompletionBlock:^(UIImage * downloadedImage) {
-       view.image = downloadedImage;
-   }];
+   [JMImageCacheImplement CacheWithImageView:view
+                                     withUrl:url
+                             withPlaceholder:placeHolder
+                                        size:CGSizeZero];
 }
 
 
@@ -43,7 +43,11 @@
    view.image = placeHolder;
 
    [JMImageCacheImplement CacheWithUrl:[NSURL URLWithString:url] withCompletionBlock:^(UIImage * downloadedImage) {
-       view.image = [downloadedImage resizedImageToSize:size];
+       if (CGSizeEqualToSize(size, CGSizeZero)) {
+          view.image = downloadedImage;
+       } else {
+          view.image = [downloadedImage resizedImageToSize:size];
+       }
    }];
 }
 
