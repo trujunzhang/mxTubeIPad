@@ -12,7 +12,7 @@
 #import "IpadGridViewInfoCell.h"
 #import "IpadGridViewUserCell.h"
 
-#import "ImageCacheImplement.h"
+#import "CacheImageConstant.h"
 
 
 @interface IpadGridViewCell ()

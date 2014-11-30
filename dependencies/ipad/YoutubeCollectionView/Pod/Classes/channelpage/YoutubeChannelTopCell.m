@@ -6,12 +6,11 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
+
 #import <google-api-services-youtube/GYoutubeHelper.h>
 #import "YoutubeChannelTopCell.h"
-#import "GTLYouTubeChannelBrandingSettings.h"
-#import "GTLYouTubeImageSettings.h"
 #import "YoutubeParser.h"
+#import "CacheImageConstant.h"
 
 
 @implementation YoutubeChannelTopCell
@@ -40,7 +39,7 @@
 //   UILabel * channelSubscriberCount;
 //   UIButton * channelSubscribedState;
 
-   [ImageCacheImplement CacheWithImageView:self.channelPhoto
+   [YTCacheImplement CacheWithImageView:self.channelPhoto
                                    withUrl:[YoutubeParser getSubscriptionSnippetThumbnailUrl:subscription]
                            withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
    ];
@@ -49,7 +48,7 @@
        self.currentChannel = array[0];
 
        NSString * url = [YoutubeParser getBannerImageUrl:self.currentChannel];
-       [ImageCacheImplement CacheWithImageView:self.youtubeCover
+       [YTCacheImplement CacheWithImageView:self.youtubeCover
                                        withUrl:url
                                withPlaceholder:[UIImage imageNamed:@"channel_default_banner.jpg"]
 //                                          size:CGSizeMake(32, 32)];
@@ -63,7 +62,7 @@
                                                      completion:completion
                                                    errorHandler:error];
 
-//   [ImageCacheImplement CacheWithImageView:self.channelPhoto
+//   [YTCacheImplement CacheWithImageView:self.channelPhoto
 //                                   withUrl:subscription.snippet.thumbnails.high.url
 //                           withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]
 //   ];
