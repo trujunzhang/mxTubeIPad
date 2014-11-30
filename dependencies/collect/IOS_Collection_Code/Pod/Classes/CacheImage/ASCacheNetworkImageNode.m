@@ -41,8 +41,19 @@
 - (void)fetchCachedImageWithURL:(NSURL *)URL
                   callbackQueue:(dispatch_queue_t)callbackQueue
                      completion:(void (^)(CGImageRef imageFromCache))completion {
-   UIImage * cacheImage = [YTCacheImplement getCacheImageWithURL:URL];
-   completion([cacheImage CGImage]);
+   // if no callback queue is supplied, run on the main thread
+   if (callbackQueue == nil) {
+      callbackQueue = dispatch_get_main_queue();
+   }
+
+   // ASMultiplexImageNode callbacks
+   dispatch_async(callbackQueue, ^{
+       if (completion) {
+          UIImage * cacheImage = [YTCacheImplement getCacheImageWithURL:URL];
+          completion([cacheImage CGImage]);
+       }
+   });
+
 }
 
 
@@ -51,9 +62,9 @@
 
 
 - (id)downloadImageWithURL123:(NSURL *)URL
-             callbackQueue:(dispatch_queue_t)callbackQueue
-     downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
-                completion:(void (^)(CGImageRef image, NSError * error))completion {
+                callbackQueue:(dispatch_queue_t)callbackQueue
+        downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
+                   completion:(void (^)(CGImageRef image, NSError * error))completion {
    // if no callback queue is supplied, run on the main thread
    if (callbackQueue == nil) {
       callbackQueue = dispatch_get_main_queue();
@@ -89,9 +100,9 @@
 
 //- (id)downloadImageWithURL_error:(NSURL *)URL
 - (id)downloadImageWithURL:(NSURL *)URL
-                   callbackQueue:(dispatch_queue_t)callbackQueue
-           downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
-                      completion:(void (^)(CGImageRef image, NSError * error))completion {
+             callbackQueue:(dispatch_queue_t)callbackQueue
+     downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
+                completion:(void (^)(CGImageRef image, NSError * error))completion {
    // if no callback queue is supplied, run on the main thread
    if (callbackQueue == nil) {
       callbackQueue = dispatch_get_main_queue();
