@@ -15,6 +15,8 @@
 #import "LeftMenuItemTree.h"
 #import "LeftMenuTableHeaderView.h"
 
+static NSString * const leftmenuIdentifier = @"LeftMenuViewIdentifier";
+
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic, strong) STCollapseTableView * tableView;
@@ -40,9 +42,7 @@
    self.tableView.delegate = self;
 
 
-   for (NSString * identifier in  [LeftMenuItemTree cellIdentifierArray]) {
-      //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
-   }
+   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:leftmenuIdentifier];
 
    [self setCurrentTableView:self.tableView];
 
@@ -66,13 +66,9 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section];
-
-   NSString * CellIdentifier = menuItemTree.cellIdentifier;
-
-   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:leftmenuIdentifier];
    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:leftmenuIdentifier];
    }
 
    [self bind:cell atSection:indexPath.section atRow:indexPath.row];
