@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
-
-typedef void (^CacheCompletionBlock)(UIImage * downloadedImage);
+#import "CacheImageConstant.h"
 
 
 @interface ImageCacheImplement : NSObject
