@@ -12,6 +12,11 @@
 
 @implementation NSAttributedString (custom)
 
+
+#pragma mark -
+#pragma mark UICollection Cell
+
+
 + (NSAttributedString *)attributedStringForTitleText:(NSString *)text {
    UIFont * font = [UIFont systemFontOfSize:14];
 
@@ -74,6 +79,24 @@
 
    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
+
+
+#pragma mark -
+#pragma mark Left menu table cell
+
+
++ (NSAttributedString *)attributedStringForLeftMenuSubscriptionTitleText:(NSString *)text {
+   UIFont * font = [UIFont systemFontOfSize:12];
+
+   NSDictionary * titleAttributes =
+    @{ NSFontAttributeName : font,
+     NSForegroundColorAttributeName : [UIColor redColor],
+     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
+    };
+
+   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+}
+
 
 @end
 

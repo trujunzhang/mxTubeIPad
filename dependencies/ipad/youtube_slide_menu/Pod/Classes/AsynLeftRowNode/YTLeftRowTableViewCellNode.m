@@ -85,7 +85,7 @@ static const int THIRD_ROW_HEIGHT = 28;
    [self showSubscriptionThumbnail];
    // 2
    ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
-   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForChannelTitleText:self.lineTitle];
+   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForLeftMenuSubscriptionTitleText:self.lineTitle];
 
    //MARK: Container Node Creation Section
    self.channelTitleTextNode = channelTitleTextNode;
