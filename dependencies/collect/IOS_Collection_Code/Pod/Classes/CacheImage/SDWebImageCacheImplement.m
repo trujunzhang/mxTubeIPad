@@ -19,6 +19,9 @@
    NSString * cacheKeyForURL = [[SDWebImageManager sharedManager] cacheKeyForURL:url];
 
    UIImage * uiImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:cacheKeyForURL];
+//   if (uiImage) {
+//      NSLog(@"url = %@", url);
+//   }
    return uiImage;
 }
 
