@@ -59,6 +59,43 @@
       callbackQueue = dispatch_get_main_queue();
    }
 
+   // call completion blocks
+   void (^handler)(NSURLResponse *, NSData *, NSError *) = ^(NSURLResponse * response, NSData * data, NSError * connectionError) {
+       // add an artificial delay
+       usleep(1.0 * USEC_PER_SEC);
+
+       // ASMultiplexImageNode callbacks
+       dispatch_async(callbackQueue, ^{
+           if (downloadProgressBlock) {
+              downloadProgressBlock(1.0f);
+           }
+
+           if (completion) {
+              completion([[UIImage imageWithData:data] CGImage], connectionError);
+           }
+       });
+   };
+
+   // let NSURLConnection do the heavy lifting
+   NSURLRequest * request = [NSURLRequest requestWithURL:URL];
+   [NSURLConnection sendAsynchronousRequest:request
+                                      queue:[[NSOperationQueue alloc] init]
+                          completionHandler:handler];
+
+   // return nil, don't support cancellation
+   return nil;
+}
+
+
+- (id)downloadImageWithURL_error:(NSURL *)URL
+                   callbackQueue:(dispatch_queue_t)callbackQueue
+           downloadProgressBlock:(void (^)(CGFloat progress))downloadProgressBlock
+                      completion:(void (^)(CGImageRef image, NSError * error))completion {
+   // if no callback queue is supplied, run on the main thread
+   if (callbackQueue == nil) {
+      callbackQueue = dispatch_get_main_queue();
+   }
+
    CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
        // ASMultiplexImageNode callbacks
        dispatch_async(callbackQueue, ^{
