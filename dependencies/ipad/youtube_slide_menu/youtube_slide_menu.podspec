@@ -24,8 +24,8 @@ Pod::Spec.new do |s|
     sub.source_files = 'Pod/Classes/leftviews/*.{h,m}'
   end
 
-  s.subspec 'main' do |sub|
-    sub.source_files = 'Pod/Classes/main/*.{h,m}'
+  s.subspec 'AsynLeftRowNode' do |sub|
+    sub.source_files = 'Pod/Classes/AsynLeftRowNode/*.{h,m}'
   end
 
 
