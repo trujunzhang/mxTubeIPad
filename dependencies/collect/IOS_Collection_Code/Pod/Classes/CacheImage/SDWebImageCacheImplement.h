@@ -1,5 +1,5 @@
 //
-//  ImageCacheImplement.h
+//  SDWebImageCacheImplement.h
 //  IOSTemplate
 //
 //  Created by djzhang on 10/24/14.
@@ -10,6 +10,7 @@
 #import "ImageCacheInterface.h"
 
 
-@interface ImageCacheImplement : ImageCacheInterface
+@interface SDWebImageCacheImplement : ImageCacheInterface
+
 
 @end

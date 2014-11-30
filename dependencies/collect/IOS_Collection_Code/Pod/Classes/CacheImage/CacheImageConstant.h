@@ -1,11 +1,12 @@
 #ifdef __OBJC__
 
-#import "ImageCacheImplement.h"
-
+#import "JMImageCacheImplement.h"
+#import "SDWebImageCacheImplement.h"
 
 #endif
 
 
-#define YTCacheImplement ImageCacheImplement
+#define YTCacheImplement JMImageCacheImplement
+//#define YTCacheImplement SDWebImageCacheImplement
 
 

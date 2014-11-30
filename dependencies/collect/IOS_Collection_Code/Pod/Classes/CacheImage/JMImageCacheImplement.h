@@ -1,5 +1,5 @@
 //
-//  JMImageCacheHelper.h
+//  JMImageCacheImplement.h
 //  IOSTemplate
 //
 //  Created by djzhang on 10/24/14.
@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ImageCacheInterface.h"
 
 
-@interface JMImageCacheHelper : NSObject
-
+@interface JMImageCacheImplement : ImageCacheInterface
 
 @end

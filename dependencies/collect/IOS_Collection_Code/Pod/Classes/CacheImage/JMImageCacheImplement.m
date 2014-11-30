@@ -1,5 +1,5 @@
 //
-//  ImageCacheImplement.m
+//  JMImageCacheImplement.m
 //  IOSTemplate
 //
 //  Created by djzhang on 10/24/14.
@@ -7,14 +7,14 @@
 //
 
 
-#import "ImageCacheImplement.h"
+#import "JMImageCacheImplement.h"
 
 #import <AsyncDisplayKit/ASImageNode.h>
 #import "JMImageCache.h"
 #import "UIImage+Resize.h"
 
 
-@implementation ImageCacheImplement
+@implementation JMImageCacheImplement
 
 + (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)resize {
    [ImageCacheInterface CacheWithImageView:node
