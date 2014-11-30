@@ -25,8 +25,10 @@
 
 + (NSParagraphStyle *)justifiedParagraphStyle;
 + (NSParagraphStyle *)justifiedParagraphStyleForDuration;
-+ (id)justifiedParagraphStyleForTitleText:(UIFont *)font;
++ (NSMutableParagraphStyle *)justifiedParagraphStyleForTitleText:(UIFont *)font;
 + (NSParagraphStyle *)justifiedParagraphStyleForChannelTitle;
+
++ (NSParagraphStyle *)justifiedParagraphStyleForLeftMenuSubscriptionTitle;
 
 @end
 

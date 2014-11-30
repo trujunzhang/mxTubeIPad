@@ -86,12 +86,12 @@
 
 
 + (NSAttributedString *)attributedStringForLeftMenuSubscriptionTitleText:(NSString *)text {
-   UIFont * font = [UIFont systemFontOfSize:12];
+   UIFont * font = [UIFont systemFontOfSize:14];
 
    NSDictionary * titleAttributes =
     @{ NSFontAttributeName : font,
-     NSForegroundColorAttributeName : [UIColor redColor],
-     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
+     NSForegroundColorAttributeName : [UIColor whiteColor],
+     NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForLeftMenuSubscriptionTitle]
     };
 
    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
@@ -102,6 +102,11 @@
 
 
 @implementation NSParagraphStyle (custom)
+
+#pragma mark -
+#pragma mark UICollection Cell
+
+
 + (NSParagraphStyle *)justifiedParagraphStyle {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   [style setAlignment:NSTextAlignmentJustified];
@@ -130,7 +135,7 @@
 }
 
 
-+ (id)justifiedParagraphStyleForTitleText:(UIFont *)font {
++ (NSMutableParagraphStyle*)justifiedParagraphStyleForTitleText:(UIFont *)font {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   style.paragraphSpacing = 0.5 * font.lineHeight;
    style.hyphenationFactor = 1.0;
@@ -148,6 +153,21 @@
 
    return style;
 }
+
+
+#pragma mark -
+#pragma mark Left menu table cell
+
+
++ (NSParagraphStyle *)justifiedParagraphStyleForLeftMenuSubscriptionTitle {
+   NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+   style.lineBreakMode = NSLineBreakByTruncatingTail;
+   style.alignment = NSTextAlignmentLeft;
+
+
+   return style;
+}
+
 
 @end
 
@@ -175,6 +195,8 @@
 
    return shadow;
 }
+
+
 
 @end
 
