@@ -62,15 +62,7 @@ static const int THIRD_ROW_HEIGHT = 28;
 
    // 1
    self.layerBacked = true;
-
-   // 1.1
-   self.backgroundColor = [UIColor whiteColor];
-
-   // 1.2
-   self.shadowColor = [UIColor colorWithHexString:@"B5B5B5" alpha:0.8].CGColor;
-   self.shadowOffset = CGSizeMake(1, 3);
-   self.shadowOpacity = 1.0;
-   self.shadowRadius = 2.0;
+   self.backgroundColor = [UIColor clearColor];
 
    [self effectThirdForChannelInfo];
 }
@@ -112,7 +104,7 @@ static const int THIRD_ROW_HEIGHT = 28;
       self.videoChannelThumbnailsNode.image = [UIImage imageNamed:_lineIconUrl];
    }
 
-   [self addSubnode:self.videoChannelThumbnailsNode];
+//   [self addSubnode:self.videoChannelThumbnailsNode];
 }
 
 

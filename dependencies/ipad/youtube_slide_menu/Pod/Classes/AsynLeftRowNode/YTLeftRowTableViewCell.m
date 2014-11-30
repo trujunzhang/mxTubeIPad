@@ -17,13 +17,23 @@
 
 - (void)awakeFromNib {
    // Initialization code
+
+   self.backgroundColor = [UIColor clearColor];
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-   [super setSelected:selected animated:animated];
+//MARK: Cell Reuse
+- (void)prepareForReuse {
+   [super prepareForReuse];
 
-   // Configure the view for the selected state
+   NSOperation * operation = _nodeConstructionOperation;
+   if (operation)
+      [operation cancel];
+
+   [_containerNode recursiveSetPreventOrCancelDisplay:YES];
+   [_contentLayer removeFromSuperlayer];
+   _contentLayer = nil;
+   _containerNode = nil;
 }
 
 
