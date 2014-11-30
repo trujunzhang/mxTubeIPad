@@ -81,7 +81,7 @@ withLineIconUrl:line[1]
              cellSize:CGSizeMake(250, 30)
 nodeConstructionQueue:self.nodeConstructionQueue];
 
-//   [self bind:cell atSection:indexPath.section atRow:indexPath.row];
+   cell.backgroundColor = [UIColor clearColor];
 
    return cell;
 }
