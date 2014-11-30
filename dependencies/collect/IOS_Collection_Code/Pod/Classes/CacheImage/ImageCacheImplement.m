@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <AsyncDisplayKit/ASImageNode.h>
+
 #import "ImageCacheImplement.h"
+
+#import <AsyncDisplayKit/ASImageNode.h>
 #import "JMImageCache.h"
 #import "UIImage+Resize.h"
 
@@ -15,7 +17,7 @@
 @implementation ImageCacheImplement
 
 + (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeHolder size:(CGSize)resize {
-   [ImageCacheImplement CacheWithImageView:node
+   [ImageCacheInterface CacheWithImageView:node
                                        key:key
                                    withUrl:url
                            withPlaceholder:placeHolder
@@ -27,7 +29,7 @@
 
 
 + (void)CacheWithImageView:(ASImageNode *)node key:(NSString *)key withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder {
-   [ImageCacheImplement CacheWithImageView:node
+   [ImageCacheInterface CacheWithImageView:node
                                        key:key
                                    withUrl:url
                            withPlaceholder:placeholder
@@ -61,7 +63,7 @@
    }
 
    view.image = placeholder;
-   [ImageCacheImplement CacheWithImageView:view
+   [ImageCacheInterface CacheWithImageView:view
                                        key:key
                                    withUrl:url
                            withPlaceholder:placeholder
