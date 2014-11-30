@@ -6,7 +6,7 @@
 #endif
 
 
-#define YTCacheImplement JMImageCacheImplement
-//#define YTCacheImplement SDWebImageCacheImplement
+//#define YTCacheImplement JMImageCacheImplement
+#define YTCacheImplement SDWebImageCacheImplement
 
 
