@@ -39,6 +39,11 @@
    self.tableView.dataSource = self;
    self.tableView.delegate = self;
 
+
+   for (NSString * identifier in  [LeftMenuItemTree cellIdentifierArray]) {
+      //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:identifier];
+   }
+
    [self setCurrentTableView:self.tableView];
 
    // 2

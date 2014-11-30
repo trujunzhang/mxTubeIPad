@@ -17,7 +17,7 @@
 @implementation LeftMenuItemTree
 
 
-- (instancetype)initWithTitle:(NSString *)title itemType:(LeftMenuItemTreeType)type rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage cellIdentifier:(NSString *)cellIdentifier {
+- (instancetype)initWithTitle:(NSString *)title itemType:(LeftMenuItemTreeType)type rowsArray:(NSArray *)rowsArray hideTitle:(BOOL)hideTitle remoteImage:(BOOL)remoteImage {
    self = [super init];
    if (self) {
       self.title = title;
@@ -25,10 +25,19 @@
       self.rowsArray = rowsArray;
       self.hideTitle = hideTitle;
       self.remoteImage = remoteImage;
-      self.cellIdentifier = cellIdentifier;
+      self.cellIdentifier = [LeftMenuItemTree cellIdentifierArray][type];
    }
 
    return self;
+}
+
+
++ (NSArray *)cellIdentifierArray {
+   return @[
+    @"CategoriesCellIdentifier",
+    @"SignUserCellIdentifier",
+    @"SubscriptionsCellIdentifier",
+   ];
 }
 
 

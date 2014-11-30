@@ -26,5 +26,6 @@ typedef NS_ENUM (NSUInteger, LeftMenuItemTreeType) {
 @property(nonatomic, copy) NSString * cellIdentifier;
 
 
-- (id)initWithTitle:(NSString *)string itemType:(LeftMenuItemTreeType)type rowsArray:(NSArray *)array hideTitle:(BOOL)title remoteImage:(BOOL)image cellIdentifier:(NSString *)identifier;
+- (instancetype)initWithTitle:(NSString *)string itemType:(LeftMenuItemTreeType)type rowsArray:(NSArray *)array hideTitle:(BOOL)title remoteImage:(BOOL)image;
++ (NSArray *)cellIdentifierArray;
 @end

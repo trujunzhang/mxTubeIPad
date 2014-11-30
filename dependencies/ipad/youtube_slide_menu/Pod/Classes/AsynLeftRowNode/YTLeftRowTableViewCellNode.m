@@ -37,7 +37,7 @@ static const int THIRD_ROW_HEIGHT = 28;
 
 @implementation YTLeftRowTableViewCellNode
 
-- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate {
+- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize {
    self = [super initWithLayerClass:[AnimatedContentsDisplayLayer class]];
    if (self) {
       self.nodeCellSize = cellSize;

@@ -86,8 +86,7 @@ static const int TABLE_WIDTH = 258;
                                    itemType:LMenuTreeCategories
                                   rowsArray:[self defaultCategories]
                                   hideTitle:NO
-                                remoteImage:NO
-                             cellIdentifier:@"CategoriesCellIdentifier"];
+                                remoteImage:NO];
 
 
    self.tableSectionArray = @[ defaultMenuItemTree ];
@@ -97,15 +96,13 @@ static const int TABLE_WIDTH = 258;
                                       itemType:LMenuTreeUser
                                      rowsArray:[self signUserCategories]
                                      hideTitle:YES
-                                   remoteImage:NO
-                                cellIdentifier:@"SignUserCellIdentifier"];
+                                   remoteImage:NO];
       LeftMenuItemTree * subscriptionsMenuItemTree =
        [[LeftMenuItemTree alloc] initWithTitle:@"  Subscriptions"
                                       itemType:LMenuTreeSubscriptions
                                      rowsArray:subscriptionsArray
                                      hideTitle:NO
-                                   remoteImage:YES
-                                cellIdentifier:@"SubscriptionsCellIdentifier"];
+                                   remoteImage:YES];
       self.tableSectionArray = @[ signUserMenuItemTree, subscriptionsMenuItemTree, defaultMenuItemTree ];
 //      self.tableSectionArray = @[ subscriptionsMenuItemTree, defaultMenuItemTree ];
    }
@@ -201,7 +198,6 @@ static const int TABLE_WIDTH = 258;
 #pragma mark cell
 
 
-//"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
 - (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row {
    LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
    NSArray * line = menuItemTree.rowsArray[row];
