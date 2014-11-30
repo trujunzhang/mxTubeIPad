@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AsyncDisplayKit.h"
+#import "ASControlNode+Subclasses.h"
+#import "ASDisplayNode+Subclasses.h"
+
 
 @interface YTLeftRowTableViewCell : UITableViewCell
+@property(nonatomic) CGSize const featureImageSizeOptional;
+@property(nonatomic, strong) NSOperation * nodeConstructionOperation;
+@property(nonatomic, strong) CALayer * contentLayer;
+@property(nonatomic, strong) ASDisplayNode * containerNode;
 
-- (void)bind:(UIColor *)color indexPath:(NSInteger)path;
+- (void)bind:(NSString *)lineTitle withLineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage cellSize:(CGSize)cellSize nodeConstructionQueue:(NSOperationQueue *)nodeConstructionQueue;
 @end

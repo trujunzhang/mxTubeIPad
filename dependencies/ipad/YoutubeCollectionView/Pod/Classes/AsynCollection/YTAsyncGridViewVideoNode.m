@@ -167,10 +167,6 @@ static const int THIRD_ROW_HEIGHT = 28;
 }
 
 
-- (void)mainThreadLayout {
-
-}
-
 
 - (void)channelThumbnailsTapped:(id)buttonTapped {
    [self.delegate gridViewCellTap:self.cardInfo];

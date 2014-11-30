@@ -10,6 +10,7 @@
 #import "AsyncDisplayKit.h"
 #import "ASControlNode+Subclasses.h"
 #import "ASDisplayNode+Subclasses.h"
+#import "YTLeftRowTableViewCellNode.h"
 
 
 @implementation YTLeftRowTableViewCell
@@ -26,46 +27,68 @@
 }
 
 
-- (void)bind:(UIColor *)color indexPath:(NSInteger)path {
-   // Create a new private queue
-   dispatch_queue_t _backgroundQueue;
-   _backgroundQueue = dispatch_queue_create("com.company.subsystem.task", NULL);
-
-   dispatch_async(_backgroundQueue, ^{
-//       FiveStepsViewController * controller = [[FiveStepsViewController alloc] initWithRowCount:path];
-//       controller.view.bounds = self.bounds;
-//
+- (void)bind:(NSString *)lineTitle withLineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage cellSize:(CGSize)cellSize nodeConstructionQueue:(NSOperationQueue *)nodeConstructionQueue {
+   self.featureImageSizeOptional = cellSize;
+   NSOperation * oldNodeConstructionOperation = _nodeConstructionOperation;
+   if (oldNodeConstructionOperation)
+      [oldNodeConstructionOperation cancel];
 
 
-       // self.view isn't a node, so we can only use it on the main thread
-       dispatch_sync(dispatch_get_main_queue(), ^{
-//           [self addSubview:controller.view];
-       });
-   });
+   NSOperation * newNodeConstructionOperation = [self nodeConstructionOperation:lineTitle
+                                                                withLineIconUrl:lineIconUrl
+                                                                  isRemoteImage:isRemoteImage];
 
+
+   _nodeConstructionOperation = newNodeConstructionOperation;
+   [nodeConstructionQueue addOperation:newNodeConstructionOperation];
 }
 
 
-- (void)bind123:(UIColor *)color {
-   // Create a new private queue
-   dispatch_queue_t _backgroundQueue;
-   _backgroundQueue = dispatch_queue_create("com.company.subsystem.task", NULL);
+- (NSOperation *)nodeConstructionOperation:(NSString *)lineTitle withLineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage {
+   NSBlockOperation * nodeConstructionOperation = [[NSBlockOperation alloc] init];
 
-   dispatch_async(_backgroundQueue, ^{
-       ASImageNode * node = [[ASImageNode alloc] init];
+   __weak __typeof__(self) weakSelf = self;
+   void (^cellExecutionBlock)() = ^{
+       if (nodeConstructionOperation.cancelled)
+          return;
 
-       CGRect rect = self.bounds;
-//       node.frame = rect;
-//       node.frame = CGRectMake(rect.origin.x + 20, rect.origin.y + 10, rect.size.width - 30, rect.size.height - 30);
-//       UIColor * color = [UIColor redColor];
-       node.backgroundColor = color;
+       __typeof__(self) strongSelf = weakSelf;
+       if (strongSelf == nil) {
+          return;
+       }
+       {
+          YTLeftRowTableViewCellNode * containerNode = [[YTLeftRowTableViewCellNode alloc] initWithNodeCellSize:self.featureImageSizeOptional
+                                                                                                      lineTitle:lineTitle
+                                                                                                    lineIconUrl:lineIconUrl
+                                                                                                  isRemoteImage:isRemoteImage];
+          if (nodeConstructionOperation.cancelled)
+             return;
 
+          dispatch_async(dispatch_get_main_queue(), ^{
+              NSBlockOperation * strongNodeConstructionOperation = strongSelf.nodeConstructionOperation;
+              if (strongNodeConstructionOperation.cancelled)
+                 return;
 
-       // self.view isn't a node, so we can only use it on the main thread
-       dispatch_sync(dispatch_get_main_queue(), ^{
-           [self addSubview:node.view];
-       });
-   });
+              if (strongSelf.nodeConstructionOperation != strongNodeConstructionOperation)
+                 return;
 
+              if (containerNode.preventOrCancelDisplay)
+                 return;
+
+              //MARK: Node Layer and Wrap Up Section
+              [strongSelf.contentView.layer addSublayer:containerNode.layer];
+              [containerNode setNeedsDisplay];
+              strongSelf.contentLayer = containerNode.layer;
+              strongSelf.containerNode = containerNode;
+          });
+       }
+   };
+
+   [nodeConstructionOperation addExecutionBlock:cellExecutionBlock];
+   [nodeConstructionOperation start];
+
+   return nodeConstructionOperation;
 }
+
+
 @end

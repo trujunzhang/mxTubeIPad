@@ -209,7 +209,7 @@ static const int TABLE_WIDTH = 258;
    cell.textLabel.textColor = [UIColor whiteColor];
 
    // 2
-   if (menuItemTree.remoteImage) {
+   if (menuItemTree.isRemoteImage) {
       [ImageViewEffect setEffectImage:cell.imageView withCornerRadius:3.0f];
       [ImageCacheImplement CacheWithImageView:cell.imageView
                                           key:line[2]

@@ -24,7 +24,7 @@
       self.itemType = type;
       self.rowsArray = rowsArray;
       self.hideTitle = hideTitle;
-      self.remoteImage = remoteImage;
+      self.isRemoteImage = remoteImage;
       self.cellIdentifier = [LeftMenuItemTree cellIdentifierArray][type];
    }
 

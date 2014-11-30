@@ -19,7 +19,6 @@
 #import "GYoutubeHelper.h"
 
 
-static const int FIRST_ROW_HEIGHT = 142;
 static const int THIRD_ROW_HEIGHT = 28;
 
 
@@ -37,15 +36,17 @@ static const int THIRD_ROW_HEIGHT = 28;
 
 @implementation YTLeftRowTableViewCellNode
 
-- (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize {
-   self = [super initWithLayerClass:[AnimatedContentsDisplayLayer class]];
+- (instancetype)initWithNodeCellSize:(struct CGSize const)nodeCellSize lineTitle:(NSString *)lineTitle lineIconUrl:(NSString *)lineIconUrl isRemoteImage:(BOOL)isRemoteImage {
+   self = [super init];
    if (self) {
-      self.nodeCellSize = cellSize;
-      self.cardInfo = cardInfo;
+      self.nodeCellSize = nodeCellSize;
+      self.lineTitle = lineTitle;
+      self.lineIconUrl = lineIconUrl;
+      self.isRemoteImage = isRemoteImage;
+
 
       [self rowThirdForChannelInfo];
       [self layoutSubNodes];
-
       [self setupAllNodesEffect];
    }
 
@@ -89,12 +90,10 @@ static const int THIRD_ROW_HEIGHT = 28;
 
 - (void)rowThirdForChannelInfo {
    // 1
-   [self showChannelThumbnail:[YoutubeParser getChannelIdByVideo:self.cardInfo]];
-
-   NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
+   [self showSubscriptionThumbnail];
    // 2
    ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
-   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForChannelTitleText:channelTitleValue];
+   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForChannelTitleText:self.lineTitle];
 
    //MARK: Container Node Creation Section
    self.channelTitleTextNode = channelTitleTextNode;
@@ -102,21 +101,16 @@ static const int THIRD_ROW_HEIGHT = 28;
 }
 
 
-- (void)showChannelThumbnail:(NSString *)channelId {
+- (void)showSubscriptionThumbnail {
    // 1
    self.videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
-   if (self.cardInfo.channelThumbnailUrl) {
-      [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
-      return;
-   }
 
-   YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
-       self.cardInfo.channelThumbnailUrl = respObject;
-       [self.videoChannelThumbnailsNode startFetchImageWithString:self.cardInfo.channelThumbnailUrl];
-   };
-   [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
-                                                          completion:completionBlock
-                                                        errorHandler:nil];
+   // 2
+   if (self.isRemoteImage) {
+      [self.videoChannelThumbnailsNode startFetchImageWithString:self.lineIconUrl];
+   } else {
+      self.videoChannelThumbnailsNode.image = [UIImage imageNamed:_lineIconUrl];
+   }
 
    [self addSubnode:self.videoChannelThumbnailsNode];
 }

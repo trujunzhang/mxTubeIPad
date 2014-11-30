@@ -111,7 +111,6 @@
                  return;
 
               //MARK: Node Layer and Wrap Up Section
-              [containerNode mainThreadLayout];
               [strongSelf.contentView.layer addSublayer:containerNode.layer];
               [containerNode setNeedsDisplay];
               strongSelf.contentLayer = containerNode.layer;

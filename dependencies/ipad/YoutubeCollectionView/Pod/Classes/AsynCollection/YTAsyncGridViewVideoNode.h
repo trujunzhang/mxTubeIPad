@@ -14,9 +14,6 @@
 @class GradientNode;
 
 
-
-
-
 @interface YTAsyncGridViewVideoNode : ASDisplayNode
 
 @property(nonatomic) CGSize const nodeCellSize;
@@ -26,6 +23,4 @@
 @property(nonatomic, strong) id<IpadGridViewCellDelegate> delegate;
 
 - (instancetype)initWithCardInfo:(YTYouTubeVideoCache *)cardInfo cellSize:(CGSize)cellSize delegate:(id<IpadGridViewCellDelegate>)delegate;
-
-- (void)mainThreadLayout;
 @end

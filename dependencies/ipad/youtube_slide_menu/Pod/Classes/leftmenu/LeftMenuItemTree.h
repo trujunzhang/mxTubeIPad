@@ -22,7 +22,7 @@ typedef NS_ENUM (NSUInteger, LeftMenuItemTreeType) {
 @property(nonatomic, assign) LeftMenuItemTreeType itemType;
 @property(nonatomic, strong) NSArray * rowsArray;
 @property(nonatomic) BOOL hideTitle;
-@property(nonatomic) BOOL remoteImage;
+@property(nonatomic) BOOL isRemoteImage;
 @property(nonatomic, copy) NSString * cellIdentifier;
 
 

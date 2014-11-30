@@ -14,6 +14,7 @@
 #import "GYoutubeAuthUser.h"
 #import "LeftMenuItemTree.h"
 #import "LeftMenuTableHeaderView.h"
+#import "YTLeftRowTableViewCell.h"
 
 static NSString * const leftmenuIdentifier = @"LeftMenuViewIdentifier";
 
@@ -42,7 +43,7 @@ static NSString * const leftmenuIdentifier = @"LeftMenuViewIdentifier";
    self.tableView.delegate = self;
 
 
-   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:leftmenuIdentifier];
+   [self.tableView registerClass:[YTLeftRowTableViewCell class] forCellReuseIdentifier:leftmenuIdentifier];
 
    [self setCurrentTableView:self.tableView];
 
@@ -66,12 +67,21 @@ static NSString * const leftmenuIdentifier = @"LeftMenuViewIdentifier";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:leftmenuIdentifier];
+   YTLeftRowTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:leftmenuIdentifier];
    if (cell == nil) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:leftmenuIdentifier];
    }
 
-   [self bind:cell atSection:indexPath.section atRow:indexPath.row];
+   LeftMenuItemTree * menuItemTree = self.tableSectionArray[indexPath.section];
+   NSArray * line = menuItemTree.rowsArray[indexPath.row];
+
+   [cell   bind:line[0]
+withLineIconUrl:line[1]
+  isRemoteImage:menuItemTree.isRemoteImage
+             cellSize:CGSizeMake(250, 30)
+nodeConstructionQueue:self.nodeConstructionQueue];
+
+//   [self bind:cell atSection:indexPath.section atRow:indexPath.row];
 
    return cell;
 }
