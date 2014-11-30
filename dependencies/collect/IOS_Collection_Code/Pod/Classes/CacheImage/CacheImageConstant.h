@@ -2,10 +2,8 @@
 
 #import "ImageCacheImplement.h"
 
+
 #endif
-
-
-typedef void (^CacheCompletionBlock)(UIImage * downloadedImage);
 
 
 #define YTCacheImplement ImageCacheImplement

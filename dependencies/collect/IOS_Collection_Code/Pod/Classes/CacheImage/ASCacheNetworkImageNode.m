@@ -96,7 +96,7 @@
       callbackQueue = dispatch_get_main_queue();
    }
 
-   CacheCompletionBlock downloadCompletion = ^(UIImage * downloadedImage) {
+   void (^downloadCompletion)(UIImage *) = ^(UIImage * downloadedImage) {
        // ASMultiplexImageNode callbacks
        dispatch_async(callbackQueue, ^{
            if (downloadProgressBlock) {

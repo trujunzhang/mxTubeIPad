@@ -81,7 +81,7 @@
 }
 
 
-+ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(CacheCompletionBlock)completionBlock {
++ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
    [[JMImageCache sharedCache] imageForURL:url
                            completionBlock:^(UIImage * downloadedImage) {
                                completionBlock(downloadedImage);
@@ -89,7 +89,7 @@
 }
 
 
-+ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder withCompletionBlock:(CacheCompletionBlock)completionBlock {
++ (void)CacheWithImageView:(UIImageView *)view withUrl:(NSString *)url withPlaceholder:(UIImage *)placeholder withCompletionBlock:(void (^)(UIImage *))completionBlock {
    view.image = placeholder;
 
    [[JMImageCache sharedCache] imageForURL:[NSURL URLWithString:url]
