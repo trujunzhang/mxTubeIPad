@@ -1,4 +1,4 @@
-// AFSerialization.h
+// AFURLRequestSerialization.m
 //
 // Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
@@ -380,10 +380,7 @@ forHTTPHeaderField:(NSString *)field
                              writingStreamContentsToFile:(NSURL *)fileURL
                                        completionHandler:(void (^)(NSError *error))handler
 {
-    if (!request.HTTPBodyStream) {
-        return [request mutableCopy];
-    }
-
+    NSParameterAssert(request.HTTPBodyStream);
     NSParameterAssert([fileURL isFileURL]);
 
     NSInputStream *inputStream = request.HTTPBodyStream;
@@ -1131,7 +1128,9 @@ typedef enum {
 
 - (BOOL)transitionToNextPhase {
     if (![[NSThread currentThread] isMainThread]) {
-        [self performSelectorOnMainThread:@selector(transitionToNextPhase) withObject:nil waitUntilDone:YES];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self transitionToNextPhase];
+        });
         return YES;
     }
 

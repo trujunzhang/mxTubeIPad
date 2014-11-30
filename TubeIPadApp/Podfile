@@ -15,6 +15,7 @@ target 'TubeIPadApp', :exclusive => true do
   pod "AFNetworking", :path => "../dependencies/lib/AFNetworking"
   pod "KRLCollectionViewGridLayout", :path => "../dependencies/lib/KRLCollectionViewGridLayout"
   pod "AsyncDisplayKit", :path => "../dependencies/lib/AsyncDisplayKit"
+  pod "SDWebImage", :path => "../dependencies/lib/SDWebImage"
 
 
   # ________________collect common library___________________

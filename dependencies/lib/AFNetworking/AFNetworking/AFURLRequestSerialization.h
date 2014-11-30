@@ -1,4 +1,4 @@
-// AFSerialization.h
+// AFURLRequestSerialization.h
 //
 // Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
@@ -247,7 +247,7 @@ forHTTPHeaderField:(NSString *)field;
 /**
  Creates an `NSMutableURLRequest` by removing the `HTTPBodyStream` from a request, and asynchronously writing its contents into the specified file, invoking the completion handler when finished.
  
- @param request The multipart form request.
+ @param request The multipart form request. The `HTTPBodyStream` property of `request` must not be `nil`.
  @param fileURL The file URL to write multipart form contents to.
  @param handler A handler block to execute.
  
@@ -437,7 +437,7 @@ extern NSString * const AFURLRequestSerializationErrorDomain;
 
  These keys may exist in the user info dictionary, in addition to those defined for NSError.
 
- - `NSString * const AFNetworkingOperationFailingURLResponseErrorKey`
+ - `NSString * const AFNetworkingOperationFailingURLRequestErrorKey`
 
  ### Constants
 

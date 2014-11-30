@@ -107,21 +107,21 @@
    imageNode.frame = self.videoThumbnailsContainer.bounds;
    imageNode.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-   if (video.hasImage) {
-      imageNode.image = video.image;
-   } else {
-      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
-          video.hasImage = YES;
-          video.image = image;
-          imageNode.image = video.image;
-      };
-      [YTCacheImplement CacheWithImageView:imageNode
-                                          key:video.identifier
-                                      withUrl:videoThumbnailsUrl
-                              withPlaceholder:image
-                                   completion:downloadCompletion
-      ];
-   }
+//   if (video.hasImage) {
+//      imageNode.image = video.image;
+//   } else {
+//      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
+//          video.hasImage = YES;
+//          video.image = image;
+//          imageNode.image = video.image;
+//      };
+//      [YTCacheImplement CacheWithImageView:imageNode
+//                                          key:video.identifier
+//                                      withUrl:videoThumbnailsUrl
+//                              withPlaceholder:image
+//                                   completion:downloadCompletion
+//      ];
+//   }
 
    return imageNode;
 }

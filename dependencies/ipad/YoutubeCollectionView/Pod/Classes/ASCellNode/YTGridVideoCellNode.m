@@ -132,22 +132,21 @@ CGFloat thumbnailHeight = 142;
    NSString * videoTitleValue = video.snippet.title;
    NSString * channelTitleValue = video.snippet.channelTitle;
 
-   if (video.hasImage) {
-      _imageNode.image = video.image;
-   } else {
-      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
-          video.hasImage = YES;
-          video.image = image;
-          _imageNode.image = video.image;
-      };
-      [YTCacheImplement CacheWithImageView:_imageNode
-                                          key:video.identifier
-                                      withUrl:videoThumbnailsUrl
-                              withPlaceholder:placeholder
-//                                         size:CGSizeMake(_kittenSize.width, thumbnailHeight)
-                                   completion:downloadCompletion
-      ];
-   }
+//   if (video.hasImage) {
+//      _imageNode.image = video.image;
+//   } else {
+//      void (^downloadCompletion)(UIImage *) = ^(UIImage * image) {
+//          video.hasImage = YES;
+//          video.image = image;
+//          _imageNode.image = video.image;
+//      };
+//      [YTCacheImplement CacheWithImageView:_imageNode
+//                                       key:video.identifier
+//                                   withUrl:videoThumbnailsUrl
+//                           withPlaceholder:placeholder
+//                                completion:downloadCompletion
+//      ];
+//   }
 
 
    // configure the button
@@ -171,9 +170,8 @@ CGFloat thumbnailHeight = 142;
 - (void)showChannelThumbnail:(NSString *)channelId {
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
        [YTCacheImplement CacheWithImageView:_channelImageNode
-                                           key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
-                                       withUrl:respObject
-                               withPlaceholder:nil
+                                    withUrl:respObject
+                            withPlaceholder:nil
        ];
    };
    NSString * responseUrl = [[GYoutubeHelper getInstance] fetchChannelThumbnailsWithChannelId:channelId
@@ -181,9 +179,8 @@ CGFloat thumbnailHeight = 142;
                                                                                  errorHandler:nil];
    if (responseUrl) {
       [YTCacheImplement CacheWithImageView:_channelImageNode
-                                          key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
-                                      withUrl:responseUrl
-                              withPlaceholder:nil
+                                   withUrl:responseUrl
+                           withPlaceholder:nil
       ];
    }
 
