@@ -84,26 +84,23 @@ static const int THIRD_ROW_HEIGHT = 28;
    // 1
    [self showSubscriptionThumbnail];
    // 2
-   ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
-   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForLeftMenuSubscriptionTitleText:self.lineTitle];
+   self.channelTitleTextNode = [[ASTextNode alloc] init];
+   self.channelTitleTextNode.attributedString = [NSAttributedString attributedStringForLeftMenuSubscriptionTitleText:self.lineTitle];
 
-   //MARK: Container Node Creation Section
-   self.channelTitleTextNode = channelTitleTextNode;
    [self addSubnode:self.channelTitleTextNode];
 }
 
 
+//      NSURL * url = [[NSBundle mainBundle] URLForResource:self.lineIconUrl withExtension:@"png"];
 - (void)showSubscriptionThumbnail {
    if (self.isRemoteImage) {
       ASCacheNetworkImageNode * cacheNetworkImageNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
-      [self.videoChannelThumbnailsNode startFetchImageWithString:self.lineIconUrl];
+      [cacheNetworkImageNode startFetchImageWithString:self.lineIconUrl];
 
       self.videoChannelThumbnailsNode = cacheNetworkImageNode;
    } else {
       ASImageNode * localImageNode = [[ASImageNode alloc] init];
-      NSString * iconUrl = self.lineIconUrl;
-      UIImage * image = [UIImage imageNamed:iconUrl];
-      self.videoChannelThumbnailsNode.image = image;
+      localImageNode.image = [UIImage imageNamed:self.lineIconUrl];
 
       self.videoChannelThumbnailsNode = localImageNode;
    }
