@@ -8,8 +8,8 @@
 
 
 #import "UserInfoView.h"
-#import "ImageCacheImplement.h"
 #import <Business-Logic-Layer/YoutubeAuthInfo.h>
+#import "CacheImageConstant.h"
 
 
 @implementation UserInfoView
@@ -20,8 +20,8 @@
    NSString * thumbnailUrl = authInfo.thumbnailUrl;
 
    // 1
-   [ImageCacheImplement CacheWithImageView:self.userHeader withUrl:thumbnailUrl
-                           withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]];
+   [YTCacheImplement CacheWithImageView:self.userHeader withUrl:thumbnailUrl
+                        withPlaceholder:[UIImage imageNamed:@"account_default_thumbnail.png"]];
 
    self.userTitle.text = title;
    self.userEmail.text = email;

@@ -12,7 +12,6 @@
 #import "ASCacheNetworkImageNode.h"
 #import <AsyncDisplayKit/ASDisplayNode+Subclasses.h>
 #import <AsyncDisplayKit/ASHighlightOverlayLayer.h>
-#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import <google-api-services-youtube/GYoutubeHelper.h>
 
 

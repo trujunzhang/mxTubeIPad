@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Razeware LLC. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YTAsyncGridViewVideoNode.h"
 #import "FrameCalculator.h"

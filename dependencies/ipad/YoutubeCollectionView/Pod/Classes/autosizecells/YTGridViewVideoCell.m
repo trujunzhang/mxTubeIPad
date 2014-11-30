@@ -8,12 +8,10 @@
 
 #import <google-api-services-youtube/YoutubeConstants.h>
 #import <YoutubeCollectionView/IpadGridViewCell.h>
-#import <IOS_Collection_Code/ImageCacheImplement.h>
-#import <AsyncDisplayKit/AsyncDisplayKit.h>
 #import "YTGridViewVideoCell.h"
-#import "ImageViewEffect.h"
 #import "UIView+WhenTappedBlocks.h"
 #import "YoutubeParser.h"
+#import "CacheImageConstant.h"
 
 
 @interface YTGridViewVideoCell ()
@@ -117,7 +115,7 @@
           video.image = image;
           imageNode.image = video.image;
       };
-      [ImageCacheImplement CacheWithImageView:imageNode
+      [YTCacheImplement CacheWithImageView:imageNode
                                           key:video.identifier
                                       withUrl:videoThumbnailsUrl
                               withPlaceholder:image

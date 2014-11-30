@@ -84,7 +84,7 @@
    // item will not contain a video ID.
 
    // 1
-   [ImageCacheImplement CacheWithImageView:self.thumbnails
+   [YTCacheImplement CacheWithImageView:self.thumbnails
                                    withUrl:video.snippet.thumbnails.medium.url
                            withPlaceholder:image];
 //   NSLog(@"url= %@", video.snippet.thumbnails.standard.url);

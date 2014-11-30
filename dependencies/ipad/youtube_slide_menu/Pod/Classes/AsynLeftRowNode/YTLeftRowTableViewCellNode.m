@@ -6,17 +6,10 @@
 //  Copyright (c) 2014 Razeware LLC. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
-#import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YTLeftRowTableViewCellNode.h"
 #import "FrameCalculator.h"
-#import "AnimatedContentsDisplayLayer.h"
 #import "Foundation.h"
-#import "HexColor.h"
-#import "UIColor+iOS8Colors.h"
-#import "YoutubeParser.h"
 #import "ASCacheNetworkImageNode.h"
-#import "GYoutubeHelper.h"
 
 
 static const int THIRD_ROW_HEIGHT = 28;

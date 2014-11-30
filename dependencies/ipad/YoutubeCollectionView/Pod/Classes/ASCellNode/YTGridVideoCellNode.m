@@ -9,9 +9,8 @@
 #import <YoutubeCollectionView/IpadGridViewCell.h>
 #import "YTGridVideoCellNode.h"
 #import "YoutubeParser.h"
-#import "ImageCacheImplement.h"
 #import "GYoutubeHelper.h"
-#import "ImageViewEffect.h"
+#import "CacheImageConstant.h"
 
 
 CGFloat thumbnailHeight = 142;
@@ -141,7 +140,7 @@ CGFloat thumbnailHeight = 142;
           video.image = image;
           _imageNode.image = video.image;
       };
-      [ImageCacheImplement CacheWithImageView:_imageNode
+      [YTCacheImplement CacheWithImageView:_imageNode
                                           key:video.identifier
                                       withUrl:videoThumbnailsUrl
                               withPlaceholder:placeholder
@@ -171,7 +170,7 @@ CGFloat thumbnailHeight = 142;
 
 - (void)showChannelThumbnail:(NSString *)channelId {
    YoutubeResponseBlock completionBlock = ^(NSArray * array, NSObject * respObject) {
-       [ImageCacheImplement CacheWithImageView:_channelImageNode
+       [YTCacheImplement CacheWithImageView:_channelImageNode
                                            key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
                                        withUrl:respObject
                                withPlaceholder:nil
@@ -181,27 +180,13 @@ CGFloat thumbnailHeight = 142;
                                                                                    completion:completionBlock
                                                                                  errorHandler:nil];
    if (responseUrl) {
-      [ImageCacheImplement CacheWithImageView:_channelImageNode
+      [YTCacheImplement CacheWithImageView:_channelImageNode
                                           key:[YoutubeParser getThumbnailKeyWithChannelId:channelId]
                                       withUrl:responseUrl
                               withPlaceholder:nil
       ];
    }
 
-//   _channelImageNode.imageModificationBlock = ^UIImage *(UIImage * image) {
-//       UIImage * modifiedImage = nil;
-//       CGRect rect = (CGRect) { CGPointZero, image.size };
-//
-//       UIGraphicsBeginImageContextWithOptions(image.size, NO, [UIScreen mainScreen].scale);
-//
-//       [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:4.0] addClip];
-//       [image drawInRect:rect];
-//       modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
-//
-//       UIGraphicsEndImageContext();
-//
-//       return modifiedImage;
-//   };
 }
 
 
