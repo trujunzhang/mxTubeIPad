@@ -140,4 +140,12 @@
 }
 
 
++ (CGRect)frameForLeftMenuSubscriptionTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame {
+   CGFloat titlePaddingTop = 7;
+
+   CGFloat divX = leftNodeFrame.origin.x + leftNodeFrame.size.width + leftNodeFrame.origin.x;
+   CGFloat divY = containerBounds.size.height - thirdRowHeight + titlePaddingTop;
+   return CGRectMake(divX, divY, 180.0f, thirdRowHeight - titlePaddingTop);
+}
+
 @end

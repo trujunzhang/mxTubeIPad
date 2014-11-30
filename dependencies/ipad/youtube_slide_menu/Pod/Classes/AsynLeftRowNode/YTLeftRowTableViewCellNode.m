@@ -116,9 +116,9 @@ static const int THIRD_ROW_HEIGHT = 28;
    self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForLeftMenuSubscriptionThumbnail:self.bounds
                                                                                    thirdRowHeight:THIRD_ROW_HEIGHT];
 
-   self.channelTitleTextNode.frame = [FrameCalculator frameForChannelTitleText:self.bounds
-                                                                thirdRowHeight:THIRD_ROW_HEIGHT
-                                                                 leftNodeFrame:self.videoChannelThumbnailsNode.frame];
+   self.channelTitleTextNode.frame = [FrameCalculator frameForLeftMenuSubscriptionTitleText:self.bounds
+                                                                             thirdRowHeight:THIRD_ROW_HEIGHT
+                                                                              leftNodeFrame:self.videoChannelThumbnailsNode.frame];
 }
 
 

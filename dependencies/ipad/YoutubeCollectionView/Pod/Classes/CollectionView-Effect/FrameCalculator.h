@@ -26,4 +26,5 @@
 + (CGSize)sizeThatFits:(CGSize)size withImageSize:(CGSize)imageSize;
 + (CGSize)aspectSizeForWidth:(CGFloat)width originalSize:(CGSize)originalSize;
 + (CGRect)frameForLeftMenuSubscriptionThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
++ (CGRect)frameForLeftMenuSubscriptionTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame;
 @end
