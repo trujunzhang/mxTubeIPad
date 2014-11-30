@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
+
 #import "ASCacheNetworkImageNode.h"
 
 
@@ -41,7 +41,7 @@
 - (void)fetchCachedImageWithURL:(NSURL *)URL
                   callbackQueue:(dispatch_queue_t)callbackQueue
                      completion:(void (^)(CGImageRef imageFromCache))completion {
-   UIImage * cacheImage = [ImageCacheImplement getCacheImageWithURL:URL];
+   UIImage * cacheImage = [YTCacheImplement getCacheImageWithURL:URL];
    completion([cacheImage CGImage]);
 }
 
@@ -108,7 +108,7 @@
            }
        });
    };
-   [ImageCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
+   [YTCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
 
    return nil;
 }

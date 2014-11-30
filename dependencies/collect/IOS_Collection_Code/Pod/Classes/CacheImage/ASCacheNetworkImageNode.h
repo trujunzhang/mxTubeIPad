@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AsyncDisplayKit.h"
 
+#import "CacheImageConstant.h"
+
 
 @interface ASCacheNetworkImageNode : ASNetworkImageNode
 

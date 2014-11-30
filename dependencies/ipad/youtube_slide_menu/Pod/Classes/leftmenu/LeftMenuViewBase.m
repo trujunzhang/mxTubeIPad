@@ -6,13 +6,11 @@
 //  Copyright (c) 2013 iSofTom. All rights reserved.
 //
 
-#import <IOS_Collection_Code/ImageCacheImplement.h>
 #import <Business-Logic-Layer/YoutubeAuthInfo.h>
 #import <google-api-services-youtube/GYoutubeHelper.h>
 #import "LeftMenuViewBase.h"
 #import "UserInfoView.h"
 #import "LeftMenuItemTree.h"
-#import "ImageViewEffect.h"
 #import "LeftMenuTableHeaderView.h"
 #import "YoutubeAuthDataStore.h"
 
@@ -196,37 +194,6 @@ static const int TABLE_WIDTH = 258;
 
 #pragma mark -
 #pragma mark cell
-
-
-- (void)bind:(UITableViewCell *)cell atSection:(NSInteger)section atRow:(NSInteger)row {
-   LeftMenuItemTree * menuItemTree = self.tableSectionArray[section];
-   NSArray * line = menuItemTree.rowsArray[row];
-
-   cell.backgroundColor = [UIColor clearColor];
-
-   // 1
-   cell.textLabel.text = line[0];
-   cell.textLabel.textColor = [UIColor whiteColor];
-
-   // 2
-   if (menuItemTree.isRemoteImage) {
-      [ImageViewEffect setEffectImage:cell.imageView withCornerRadius:3.0f];
-      [ImageCacheImplement CacheWithImageView:cell.imageView
-                                          key:line[2]
-                                      withUrl:line[1]
-                              withPlaceholder:self.placeholderImage
-                                       resize:CGSizeMake(32, 32)
-      ];
-   } else {
-      cell.imageView.image = [UIImage imageNamed:line[1]];
-   }
-   cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
-   // 3
-   cell.selectedBackgroundView = [
-    [UIImageView alloc] initWithImage:[[UIImage imageNamed:@"mt_side_menu_selected_bg"]
-     stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
-}
 
 
 - (UIImage *)imageWithColor:(UIColor *)color {

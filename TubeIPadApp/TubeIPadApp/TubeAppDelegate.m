@@ -13,11 +13,10 @@
 #import "LeftMenuViewController.h"
 #import "SubscriptionsViewController.h"
 #import "GYoutubeAuthUser.h"
-#import "ImageCacheImplement.h"
 #import "YoutubeAuthInfo.h"
 #import "LeftRevealHelper.h"
 #import "GYoutubeHelper.h"
-#import "YoutubeConstants.h"
+#import "CacheImageConstant.h"
 
 
 @interface TubeAppDelegate ()<UIApplicationDelegate, UITabBarControllerDelegate, SWRevealViewControllerDelegate, GYoutubeHelperDelegate, LeftMenuViewBaseDelegate>
@@ -35,7 +34,7 @@
 @implementation TubeAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   [ImageCacheImplement removeAllObjects];
+   [YTCacheImplement removeAllObjects];
    [GYoutubeHelper getInstance].delegate = self;
 
    //1
