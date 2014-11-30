@@ -94,23 +94,27 @@ static const int THIRD_ROW_HEIGHT = 28;
 
 
 - (void)showSubscriptionThumbnail {
-   // 1
-   self.videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
-
-   // 2
    if (self.isRemoteImage) {
+      ASCacheNetworkImageNode * cacheNetworkImageNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
       [self.videoChannelThumbnailsNode startFetchImageWithString:self.lineIconUrl];
+
+      self.videoChannelThumbnailsNode = cacheNetworkImageNode;
    } else {
-      self.videoChannelThumbnailsNode.image = [UIImage imageNamed:_lineIconUrl];
+      ASImageNode * localImageNode = [[ASImageNode alloc] init];
+      NSString * iconUrl = self.lineIconUrl;
+      UIImage * image = [UIImage imageNamed:iconUrl];
+      self.videoChannelThumbnailsNode.image = image;
+
+      self.videoChannelThumbnailsNode = localImageNode;
    }
 
-//   [self addSubnode:self.videoChannelThumbnailsNode];
+   [self addSubnode:self.videoChannelThumbnailsNode];
 }
 
 
 - (void)layoutThirdForChannelInfo {
-   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnail:self.bounds
-                                                                      thirdRowHeight:THIRD_ROW_HEIGHT];
+   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForLeftMenuSubscriptionThumbnail:self.bounds
+                                                                                   thirdRowHeight:THIRD_ROW_HEIGHT];
 
    self.channelTitleTextNode.frame = [FrameCalculator frameForChannelTitleText:self.bounds
                                                                 thirdRowHeight:THIRD_ROW_HEIGHT

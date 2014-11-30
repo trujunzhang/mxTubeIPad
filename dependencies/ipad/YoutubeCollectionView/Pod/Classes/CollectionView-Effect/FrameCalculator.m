@@ -26,9 +26,8 @@
 }
 
 
-//+ (CGFloat)cardWidth {
-//   return 320.0;
-//}
+#pragma mark -
+#pragma mark UICollection Cell
 
 
 + (CGRect)frameForDescriptionText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame {
@@ -124,6 +123,20 @@
 + (CGSize)aspectSizeForWidth:(CGFloat)width originalSize:(CGSize)originalSize {
    CGFloat height = ceil((originalSize.height / originalSize.width) * width);
    return CGSizeMake(width, height);
+}
+
+
+#pragma mark -
+#pragma mark Left menu table cell
+
+
++ (CGRect)frameForLeftMenuSubscriptionThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight {
+   CGFloat thumbnailPaddingTop = 5;
+
+   CGFloat divX = 6;
+   CGFloat divY = containerBounds.size.height - thirdRowHeight + thumbnailPaddingTop;
+   CGFloat thumbnailHeight = thirdRowHeight - thumbnailPaddingTop * 2;
+   return CGRectMake(divX, divY, thumbnailHeight, thumbnailHeight);
 }
 
 

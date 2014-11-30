@@ -9,7 +9,6 @@
 
 @interface FrameCalculator : NSObject
 
-+ (CGFloat)cardWidth;
 + (CGRect)frameForDescriptionText:(CGRect)containerBounds featureImageFrame:(CGRect)featureImageFrame;
 + (CGRect)frameForDivider:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
 + (CGRect)frameForChannelThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
@@ -26,4 +25,5 @@
 + (CGRect)frameForContainer:(CGSize)featureImageSize;
 + (CGSize)sizeThatFits:(CGSize)size withImageSize:(CGSize)imageSize;
 + (CGSize)aspectSizeForWidth:(CGFloat)width originalSize:(CGSize)originalSize;
++ (CGRect)frameForLeftMenuSubscriptionThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
 @end
