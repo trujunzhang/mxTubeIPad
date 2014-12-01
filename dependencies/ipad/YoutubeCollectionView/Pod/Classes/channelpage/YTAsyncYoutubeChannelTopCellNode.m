@@ -40,8 +40,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
       self.nodeCellSize = cellSize;
 
       [self setupContainerNode];
-      [self layoutSubNodes];
-
       [self setupAllNodesEffect];
 
       [self setupAllBackup];
@@ -57,6 +55,25 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 //   self.channelBannerThumbnailNodse.layerBacked = true;
 //   self.channelThumbnailsNode.layerBacked = true;
 //   self.channelTitleTextNode.layerBacked = true;
+}
+
+
+// perform expensive sizing operations on a background thread
+//- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {// used
+////   return CGSizeMake(constrainedSize.width, self.nodeCellSize.height);
+//   return constrainedSize;
+//}
+
+
+// do as little work as possible in main-thread layout
+//856,135 (horizontal)
+//600,135 (vertical)
+- (void)layoutNodes:(CGSize)cellSize {
+   self.nodeCellSize = cellSize;
+   [self layoutSubNodes];
+
+   NSLog(@"Pretty printed size: %@", NSStringFromCGSize(cellSize));
+   NSString * debug = @"debug";
 }
 
 
@@ -88,7 +105,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 - (void)layoutSubNodes {
    //MARK: Node Layout Section
-//   self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
+   self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
 
    [self layoutFirstForChannelBanner];
    [self layoutThirdForChannelInfo];
@@ -105,11 +122,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    NSString * videoThumbnailsUrl = @"https://yt3.ggpht.com/-0lqcsLOqjOw/VDzgY9uZdvI/AAAAAAAAAHU/1QBKBB6DI8I/w1060-fcrop64=1,00005a57ffffa5a8-nd/tv_youtube_channel_big.png";
    [channelBannerThumbnailNodse startFetchImageWithString:videoThumbnailsUrl];
 
-   // configure the button
-   channelBannerThumbnailNodse.userInteractionEnabled = YES; // opt into touch handling
-   [channelBannerThumbnailNodse addTarget:self
-                                   action:@selector(channelThumbnailsTapped:)
-                         forControlEvents:ASControlNodeEventTouchUpInside];
+   channelBannerThumbnailNodse.contentMode = UIViewContentModeScaleAspectFill;
 
    self.channelBannerThumbnailNodse = channelBannerThumbnailNodse;
    [self addSubnode:self.channelBannerThumbnailNodse];
@@ -149,8 +162,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    self.channelBannerThumbnailNodse.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
    self.channelBannerThumbnailNodse.shadowOffset = CGSizeMake(1, 3);
    self.channelBannerThumbnailNodse.shadowRadius = 2.0;
-
-
 }
 
 

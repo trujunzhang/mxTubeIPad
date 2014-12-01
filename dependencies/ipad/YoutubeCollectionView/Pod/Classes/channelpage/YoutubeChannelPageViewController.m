@@ -98,6 +98,7 @@
                                                                               cellSize:parentView.frame.size];
        // self.view isn't a node, so we can only use it on the main thread
        dispatch_sync(dispatch_get_main_queue(), ^{
+           self.topBanner.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;// used
            [parentView addSubview:self.topBanner.view];
        });
    });
@@ -120,7 +121,7 @@
 - (void)viewDidLayoutSubviews {
    [super viewDidLayoutSubviews];
 
-
+   [self.topBanner layoutNodes:self.topBannerContainer.frame.size];
 }
 
 
