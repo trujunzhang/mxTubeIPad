@@ -156,7 +156,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 - (void)layoutFirstForChannelBanner {
    self.channelBannerThumbnailNode.frame = [FrameCalculator frameForPageChannelBannerThumbnails:self.nodeCellSize
-                                                                            secondRowFrameHeight:TOP_CHANNEL_SECOND_ROW_HEIGHT];
+                                                                           secondRowFrameHeight:TOP_CHANNEL_SECOND_ROW_HEIGHT];
 
    self.channelThumbnailsNode.frame = [FrameCalculator frameForPageChannelThumbnails:self.channelBannerThumbnailNode.frame.size];
 }
