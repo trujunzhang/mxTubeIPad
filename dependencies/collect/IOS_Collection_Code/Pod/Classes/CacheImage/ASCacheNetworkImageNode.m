@@ -78,7 +78,8 @@
            }
 
            if (completion) {
-              completion([downloadedImage CGImage], nil);
+              if (downloadedImage)
+                 completion([downloadedImage CGImage], nil);
            }
        });
    };
