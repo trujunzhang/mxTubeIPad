@@ -84,7 +84,6 @@
 
 // Channel for other request
 #define YTYouTubeChannel  MABYT3_Channel
-#define YTYouTubeMABChannel  MABYT3_Channel
 
 #define YTYouTubeSubscription  GTLYouTubeSubscription
 #define YTYouTubeMABThumbmail  MABYT3_Thumbnail

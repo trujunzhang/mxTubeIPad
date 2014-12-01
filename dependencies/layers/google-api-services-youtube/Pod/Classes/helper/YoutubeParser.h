@@ -29,7 +29,7 @@
 
 // Channel for other request
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel;
-+ (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel;
++ (NSString *)GetChannelSnippetThumbnail:(YTYouTubeChannel *)channel;
 
 // Subscription
 + (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription;

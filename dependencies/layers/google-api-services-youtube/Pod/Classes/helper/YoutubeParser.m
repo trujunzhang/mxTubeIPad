@@ -116,12 +116,11 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 
 
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel {
-//   return channel.brandingSettings.image.bannerMobileHdImageUrl;;
    return channel.brandingSettings.image.bannerMobileHdImageUrl;;
 }
 
 
-+ (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel {
++ (NSString *)GetChannelSnippetThumbnail:(YTYouTubeChannel *)channel {
    YTYouTubeMABThumbmail * thumbnail = channel.snippet.thumbnails[@"default"];
    return thumbnail.url;
 }

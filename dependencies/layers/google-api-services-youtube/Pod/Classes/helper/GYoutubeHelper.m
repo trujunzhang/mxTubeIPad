@@ -467,8 +467,8 @@ static GYoutubeHelper * instance = nil;
                        completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
                            if (responseInfo) {
                               NSMutableArray * array = responseInfo.array;
-                              YTYouTubeMABChannel * mabyt3Channel = array[0];
-                              NSString * thumbnailUrl = [YoutubeParser GetMABChannelSnippetThumbnail:mabyt3Channel];
+                              YTYouTubeChannel * mabyt3Channel = array[0];
+                              NSString * thumbnailUrl = [YoutubeParser GetChannelSnippetThumbnail:mabyt3Channel];
                               [YoutubeParser AppendThumbnailWithChannelId:channelId withThumbnailUrl:thumbnailUrl];
                               completion(nil, thumbnailUrl);
                            } else {
