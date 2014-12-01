@@ -18,6 +18,8 @@
 
 @interface YTAsyncYoutubeChannelTopCellNode () {
 }
+@property(nonatomic) CGSize nodeCellSize;
+
 // line01
 @property(nonatomic, strong) ASCacheNetworkImageNode * channelBannerThumbnailNodse;
 @property(nonatomic, strong) ASCacheNetworkImageNode * videoChannelThumbnailsNode;
@@ -29,10 +31,11 @@
 
 @implementation YTAsyncYoutubeChannelTopCellNode
 
-- (instancetype)initWithSubscription:(YTYouTubeSubscription *)subscription {
+- (instancetype)initWithSubscription:(GTLYouTubeSubscription *)subscription cellSize:(CGSize)cellSize {
    self = [super init];
    if (self) {
       self.subscription = subscription;
+      self.nodeCellSize = cellSize;
 
       [self setupContainerNode];
       [self layoutSubNodes];
@@ -89,7 +92,8 @@
 - (void)rowFirstForChannelBanner {
    // 1
    ASCacheNetworkImageNode * channelBannerThumbnailNodse = [[ASCacheNetworkImageNode alloc] initForImageCache];
-//   [channelBannerThumbnailNodse startFetchImageWithString:videoThumbnailsUrl];
+   NSString * videoThumbnailsUrl = @"https://yt3.ggpht.com/-0lqcsLOqjOw/VDzgY9uZdvI/AAAAAAAAAHU/1QBKBB6DI8I/w1060-fcrop64=1,00005a57ffffa5a8-nd/tv_youtube_channel_big.png";
+   [channelBannerThumbnailNodse startFetchImageWithString:videoThumbnailsUrl];
 
    // configure the button
    channelBannerThumbnailNodse.userInteractionEnabled = YES; // opt into touch handling
@@ -114,8 +118,8 @@
 
 
 - (void)layoutFirstForChannelBanner {
-//   self.channelBannerThumbnailNodse.frame = [FrameCalculator frameForChannelThumbnails:self.nodeCellSize
-//                                                                       nodeFrameHeight:142.0f];
+   self.channelBannerThumbnailNodse.frame = [FrameCalculator frameForPageChannelBannerThumbnails:self.nodeCellSize
+                                                                                 nodeFrameHeight:142.0f];
 
 //   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForDurationWithCloverSize:self.channelBannerThumbnailNodse.frame.size
 //                                                                         withDurationWidth:self.durationLabelWidth];

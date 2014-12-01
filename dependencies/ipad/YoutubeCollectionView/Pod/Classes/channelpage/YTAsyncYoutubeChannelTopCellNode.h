@@ -20,7 +20,5 @@
 @property(nonatomic, strong) YTYouTubeSubscription * subscription;
 @property(nonatomic, strong) YTYouTubeChannel * currentChannel;
 
-
-
-- (instancetype)initWithSubscription:(GTLYouTubeSubscription *)subscription;
+- (instancetype)initWithSubscription:(GTLYouTubeSubscription *)subscription cellSize:(CGSize)cellSize;
 @end

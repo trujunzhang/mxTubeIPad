@@ -27,4 +27,6 @@
 + (CGSize)aspectSizeForWidth:(CGFloat)width originalSize:(CGSize)originalSize;
 + (CGRect)frameForLeftMenuSubscriptionThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
 + (CGRect)frameForLeftMenuSubscriptionTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame;
+
++ (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize nodeFrameHeight:(CGFloat)nodeFrameHeight;
 @end

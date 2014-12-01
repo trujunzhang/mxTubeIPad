@@ -10,6 +10,7 @@
 #import "YoutubeChannelTopCell.h"
 #import "WHTopTabBarController.h"
 #import "YoutubeParser.h"
+#import "YTAsyncYoutubeChannelTopCellNode.h"
 
 
 @interface YoutubeChannelPageViewController ()<JBTopTabBarControllerDelegate, YoutubeCollectionNextPageDelegate>
@@ -19,7 +20,8 @@
 
 @property(nonatomic, strong) YTYouTubeSubscription * subscription;
 
-@property(nonatomic, strong) YoutubeChannelTopCell * topBanner;
+//@property(nonatomic, strong) YoutubeChannelTopCell * topBanner;
+@property(nonatomic, strong) YTAsyncYoutubeChannelTopCellNode * topBanner;
 @property(nonatomic, strong) WHTopTabBarController * videoTabBarController;
 
 @property(nonatomic, strong) NSMutableArray * defaultTableControllers;
@@ -85,16 +87,30 @@
 
 
 - (void)makeTopBanner:(UIView *)parentView {
-   self.topBanner = [[YoutubeChannelTopCell alloc] initWithSubscription:self.subscription];
+   self.topBanner = [[YTAsyncYoutubeChannelTopCellNode alloc] initWithSubscription:self.subscription
+                                                                          cellSize:parentView.frame.size];
    self.topBanner.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
    [parentView addSubview:self.topBanner];
 }
+//- (void)makeTopBanner:(UIView *)parentView {
+//   self.topBanner = [[YoutubeChannelTopCell alloc] initWithSubscription:self.subscription];
+//   self.topBanner.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//
+//   [parentView addSubview:self.topBanner];
+//}
 
 
 - (void)didReceiveMemoryWarning {
    [super didReceiveMemoryWarning];
    // Dispose of any resources that can be recreated.
+}
+
+
+- (void)viewDidLayoutSubviews {
+   [super viewDidLayoutSubviews];
+
+
 }
 
 

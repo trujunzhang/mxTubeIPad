@@ -148,4 +148,12 @@
    return CGRectMake(divX, divY, 180.0f, thirdRowHeight - titlePaddingTop);
 }
 
+
+#pragma mark -
+#pragma mark Page top banner Cell
++ (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize nodeFrameHeight:(CGFloat)nodeFrameHeight {
+   return CGRectMake(0, 0, cellSize.width, nodeFrameHeight);
+}
+
+
 @end
