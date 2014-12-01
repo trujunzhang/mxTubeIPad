@@ -48,6 +48,7 @@
 
    // Do any additional setup after loading the view from its nib.
    // 1
+   self.topBannerContainer.backgroundColor = [UIColor clearColor];
    [self makeTopBanner:self.topBannerContainer];
 
    // 2
