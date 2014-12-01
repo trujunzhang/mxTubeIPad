@@ -12,12 +12,15 @@
 #import "AsyncDisplayKit.h"
 #import "ASControlNode+Subclasses.h"
 #import "ASDisplayNode+Subclasses.h"
+@class ASCacheNetworkImageNode;
 
 
 @interface YTAsyncYoutubeChannelTopCellNode : ASDisplayNode
 
 @property(nonatomic, strong) YTYouTubeSubscription * subscription;
 @property(nonatomic, strong) YTYouTubeChannel * currentChannel;
+
+
 
 - (instancetype)initWithSubscription:(GTLYouTubeSubscription *)subscription;
 @end
