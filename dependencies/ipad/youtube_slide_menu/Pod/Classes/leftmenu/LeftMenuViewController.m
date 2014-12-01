@@ -157,6 +157,11 @@ nodeConstructionQueue:self.nodeConstructionQueue];
 
    //3
    [self setupTableViewExclusiveState];
+
+   // test
+   YTYouTubeSubscription * subscription = self.authUser.subscriptions[0];
+   [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription
+                                                             withTitle:subscription.snippet.title];
 }
 
 
