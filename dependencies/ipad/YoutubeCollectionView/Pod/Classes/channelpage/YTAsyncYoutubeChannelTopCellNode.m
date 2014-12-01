@@ -133,8 +133,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
                                                         completion:completion
                                                       errorHandler:error];
 
-//featureImageNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
-   channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFit;
+//   channelBannerThumbnailNode.contentMode = UIViewContentModeLeft;
 
    self.channelBannerThumbnailNode = channelBannerThumbnailNode;
    [self addSubnode:self.channelBannerThumbnailNode];
@@ -160,9 +159,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)effectFirstForChannelBanner {
-   // 2
-   self.channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
-
    // 2.1
    self.channelBannerThumbnailNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
 
