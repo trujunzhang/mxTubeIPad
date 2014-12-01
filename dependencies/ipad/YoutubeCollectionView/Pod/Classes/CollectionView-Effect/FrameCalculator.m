@@ -155,7 +155,8 @@
 
 + (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize secondRowFrameHeight:(CGFloat)nodeFrameHeight {
    CGFloat divH = cellSize.height - nodeFrameHeight;
-   return CGRectMake(0, 0, cellSize.width, divH);
+   CGRect rect = CGRectMake(0, 0, cellSize.width, divH);
+   return rect;
 }
 
 

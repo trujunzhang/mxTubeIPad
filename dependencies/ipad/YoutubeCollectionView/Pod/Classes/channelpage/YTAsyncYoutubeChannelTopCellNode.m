@@ -43,14 +43,14 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
       [self setupContainerNode];
       [self setupAllNodesEffect];
 
-      [self setupAllBackup];
+      [self setupAllBacked];
    }
 
    return self;
 }
 
 
-- (void)setupAllBackup {
+- (void)setupAllBacked {
 //   self.layerBacked = true;
 
 //   self.channelBannerThumbnailNode.layerBacked = true;
@@ -73,8 +73,8 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    self.nodeCellSize = cellSize;
    [self layoutSubNodes];
 
-   NSLog(@"Pretty printed size: %@", NSStringFromCGSize(cellSize));
-   NSString * debug = @"debug";
+//   NSLog(@"Pretty printed size: %@", NSStringFromCGSize(cellSize));
+//   NSString * debug = @"debug";
 }
 
 
@@ -119,7 +119,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 - (void)rowFirstForChannelBanner {
    ASCacheNetworkImageNode * channelBannerThumbnailNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
-
+   channelBannerThumbnailNode.image = [UIImage imageNamed:@"channel_default_banner.jpg"];
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
        NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
@@ -133,9 +133,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
                                                         completion:completion
                                                       errorHandler:error];
 
-   // 1
-
-//   NSString * videoThumbnailsUrl = @"https://yt3.ggpht.com/-0lqcsLOqjOw/VDzgY9uZdvI/AAAAAAAAAHU/1QBKBB6DI8I/w1060-fcrop64=1,00005a57ffffa5a8-nd/tv_youtube_channel_big.png";
    channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFill;
 
    self.channelBannerThumbnailNode = channelBannerThumbnailNode;
@@ -157,7 +154,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 - (void)layoutFirstForChannelBanner {
    self.channelBannerThumbnailNode.frame = [FrameCalculator frameForPageChannelBannerThumbnails:self.nodeCellSize
                                                                            secondRowFrameHeight:TOP_CHANNEL_SECOND_ROW_HEIGHT];
-
    self.channelThumbnailsNode.frame = [FrameCalculator frameForPageChannelThumbnails:self.channelBannerThumbnailNode.frame.size];
 }
 
