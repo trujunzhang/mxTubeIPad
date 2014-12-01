@@ -8,12 +8,12 @@
 
 #import "YTAsyncYoutubeChannelTopCellNode.h"
 
-#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "YoutubeParser.h"
 #import "FrameCalculator.h"
 #import "ASCacheNetworkImageNode.h"
 #import "HexColor.h"
 #import "UIColor+iOS8Colors.h"
+#import "Foundation.h"
 
 
 @interface YTAsyncYoutubeChannelTopCellNode () {
@@ -22,6 +22,8 @@
 @property(nonatomic, strong) ASCacheNetworkImageNode * channelBannerThumbnailNodse;
 @property(nonatomic, strong) ASCacheNetworkImageNode * videoChannelThumbnailsNode;
 
+// line02
+@property(nonatomic, strong) ASTextNode * channelTitleTextNode;
 @end
 
 
@@ -73,7 +75,7 @@
 
 - (void)layoutSubNodes {
    //MARK: Node Layout Section
-   self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
+//   self.frame = [FrameCalculator frameForContainer:self.nodeCellSize];
 
    [self layoutFirstForChannelBanner];
    [self layoutThirdForChannelInfo];
@@ -138,7 +140,7 @@
 
 
    // 3
-   self.durationTextNode.layerBacked = true;
+   self.videoChannelThumbnailsNode.layerBacked = true;
 }
 
 
@@ -147,11 +149,8 @@
 
 
 - (void)rowSecondForChannelInfo {
+   NSString * channelTitleValue = self.subscription.snippet.title;
    // 1
-   [self showChannelThumbnail:[YoutubeParser getChannelIdByVideo:self.cardInfo]];
-
-   NSString * channelTitleValue = self.cardInfo.snippet.channelTitle;
-   // 2
    ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
    channelTitleTextNode.attributedString = [NSAttributedString attributedStringForChannelTitleText:channelTitleValue];
 
@@ -162,19 +161,13 @@
 
 
 - (void)layoutThirdForChannelInfo {
-   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForChannelThumbnail:self.bounds
-                                                                      thirdRowHeight:THIRD_ROW_HEIGHT];
-
-   self.channelTitleTextNode.frame = [FrameCalculator frameForChannelTitleText:self.bounds
-                                                                thirdRowHeight:THIRD_ROW_HEIGHT
-                                                                 leftNodeFrame:self.videoChannelThumbnailsNode.frame];
+//   self.channelTitleTextNode.frame = [FrameCalculator frameForChannelTitleText:self.bounds
+//                                                                thirdRowHeight:THIRD_ROW_HEIGHT
+//                                                                 leftNodeFrame:self.videoChannelThumbnailsNode.frame];
 }
 
 
 - (void)effectThirdForChannelInfo {
-   // 4
-   self.videoChannelThumbnailsNode.layerBacked = true;
-
    // 3
    self.channelTitleTextNode.layerBacked = true;
    self.channelTitleTextNode.backgroundColor = [UIColor clearColor];
