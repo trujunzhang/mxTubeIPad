@@ -22,8 +22,10 @@
 + (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp;
 
 // Channel for author
-+ (NSString *)getChannelAuthSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel;
-+ (NSString *)getChannelAuthorTitle:(YTYouTubeAuthorChannel *)channel;
++ (NSString *)getAuthChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel;
++ (NSString *)getAuthChannelTitle:(YTYouTubeAuthorChannel *)channel;
++ (NSString *)getAuthChannelID:(YTYouTubeAuthorChannel *)channel;
+
 
 // Channel for other request
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel;

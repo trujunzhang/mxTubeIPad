@@ -131,13 +131,18 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 #pragma mark Channel for author
 
 
-+ (NSString *)getChannelAuthSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel {
++ (NSString *)getAuthChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel {
    return channel.snippet.thumbnails.high.url;
 }
 
 
-+ (NSString *)getChannelAuthorTitle:(YTYouTubeAuthorChannel *)channel {
++ (NSString *)getAuthChannelTitle:(YTYouTubeAuthorChannel *)channel {
    return channel.snippet.title;
+}
+
+
++ (NSString *)getAuthChannelID:(YTYouTubeAuthorChannel *)channel {
+   return channel.identifier;
 }
 
 
