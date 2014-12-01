@@ -133,7 +133,8 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
                                                         completion:completion
                                                       errorHandler:error];
 
-   channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFill;
+//featureImageNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
+   channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFit;
 
    self.channelBannerThumbnailNode = channelBannerThumbnailNode;
    [self addSubnode:self.channelBannerThumbnailNode];

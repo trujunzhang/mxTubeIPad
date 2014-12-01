@@ -14,8 +14,7 @@
 
 @interface ASCacheNetworkImageNode : ASNetworkImageNode
 
-
 - (instancetype)initForImageCache;
-
 - (void)startFetchImageWithString:(NSString *)urlString;
+
 @end
