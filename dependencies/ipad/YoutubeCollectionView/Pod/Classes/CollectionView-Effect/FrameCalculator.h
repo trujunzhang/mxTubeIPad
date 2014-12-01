@@ -28,5 +28,7 @@
 + (CGRect)frameForLeftMenuSubscriptionThumbnail:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight;
 + (CGRect)frameForLeftMenuSubscriptionTitleText:(CGRect)containerBounds thirdRowHeight:(CGFloat)thirdRowHeight leftNodeFrame:(CGRect)leftNodeFrame;
 
-+ (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize nodeFrameHeight:(CGFloat)nodeFrameHeight;
++ (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize secondRowFrameHeight:(CGFloat)nodeFrameHeight;
++ (CGRect)frameForPageChannelThumbnails:(CGSize)cellSize;
++ (CGRect)frameForPageChannelTitle:(CGSize)cellSize secondRowFrameHeight:(CGFloat)nodeFrameHeight;
 @end

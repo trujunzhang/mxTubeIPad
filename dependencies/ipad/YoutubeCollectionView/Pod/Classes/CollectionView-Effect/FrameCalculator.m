@@ -151,8 +151,22 @@
 
 #pragma mark -
 #pragma mark Page top banner Cell
-+ (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize nodeFrameHeight:(CGFloat)nodeFrameHeight {
-   return CGRectMake(0, 0, cellSize.width, nodeFrameHeight);
+
+
++ (CGRect)frameForPageChannelBannerThumbnails:(CGSize)cellSize secondRowFrameHeight:(CGFloat)nodeFrameHeight {
+   CGFloat divH = cellSize.height - nodeFrameHeight;
+   return CGRectMake(0, 0, cellSize.width, divH);
+}
+
+
++ (CGRect)frameForPageChannelThumbnails:(CGSize)cellSize {
+   return CGRectMake(17, 0, 70, 70);
+}
+
+
++ (CGRect)frameForPageChannelTitle:(CGSize)cellSize secondRowFrameHeight:(CGFloat)nodeFrameHeight {
+   CGFloat divY = cellSize.height - nodeFrameHeight;
+   return CGRectMake(4, divY + 4, 120, 15);
 }
 
 

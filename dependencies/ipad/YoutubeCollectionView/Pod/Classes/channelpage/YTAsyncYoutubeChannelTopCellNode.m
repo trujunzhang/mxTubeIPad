@@ -15,6 +15,8 @@
 #import "UIColor+iOS8Colors.h"
 #import "Foundation.h"
 
+static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
+
 
 @interface YTAsyncYoutubeChannelTopCellNode () {
 }
@@ -22,7 +24,7 @@
 
 // line01
 @property(nonatomic, strong) ASCacheNetworkImageNode * channelBannerThumbnailNodse;
-@property(nonatomic, strong) ASCacheNetworkImageNode * videoChannelThumbnailsNode;
+@property(nonatomic, strong) ASCacheNetworkImageNode * channelThumbnailsNode;
 
 // line02
 @property(nonatomic, strong) ASTextNode * channelTitleTextNode;
@@ -110,19 +112,18 @@
 
 
 - (void)showChannelThumbnail:(NSString *)channelThumbnailUrl {
-   self.videoChannelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
-   [self.videoChannelThumbnailsNode startFetchImageWithString:channelThumbnailUrl];
+   self.channelThumbnailsNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
+   [self.channelThumbnailsNode startFetchImageWithString:channelThumbnailUrl];
 
-   [self addSubnode:self.videoChannelThumbnailsNode];
+   [self addSubnode:self.channelThumbnailsNode];
 }
 
 
 - (void)layoutFirstForChannelBanner {
    self.channelBannerThumbnailNodse.frame = [FrameCalculator frameForPageChannelBannerThumbnails:self.nodeCellSize
-                                                                                 nodeFrameHeight:142.0f];
+                                                                            secondRowFrameHeight:TOP_CHANNEL_SECOND_ROW_HEIGHT];
 
-//   self.videoChannelThumbnailsNode.frame = [FrameCalculator frameForDurationWithCloverSize:self.channelBannerThumbnailNodse.frame.size
-//                                                                         withDurationWidth:self.durationLabelWidth];
+   self.channelThumbnailsNode.frame = [FrameCalculator frameForPageChannelThumbnails:self.channelBannerThumbnailNodse.frame.size];
 }
 
 
@@ -144,7 +145,7 @@
 
 
    // 3
-   self.videoChannelThumbnailsNode.layerBacked = true;
+   self.channelThumbnailsNode.layerBacked = true;
 }
 
 
@@ -165,9 +166,9 @@
 
 
 - (void)layoutThirdForChannelInfo {
-//   self.channelTitleTextNode.frame = [FrameCalculator frameForChannelTitleText:self.bounds
-//                                                                thirdRowHeight:THIRD_ROW_HEIGHT
-//                                                                 leftNodeFrame:self.videoChannelThumbnailsNode.frame];
+   self.channelTitleTextNode.frame = [FrameCalculator frameForPageChannelTitle:self.nodeCellSize
+                                                          secondRowFrameHeight:TOP_CHANNEL_SECOND_ROW_HEIGHT];
+
 }
 
 
