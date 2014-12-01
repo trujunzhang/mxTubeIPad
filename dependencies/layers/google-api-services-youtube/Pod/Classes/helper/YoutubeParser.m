@@ -66,8 +66,17 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
+#pragma mark -
+#pragma mark Subscription
+
+
 + (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription {
    return subscription.snippet.resourceId.JSON[@"channelId"];
+}
+
+
++ (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription {
+   return subscription.snippet.thumbnails.high.url;
 }
 
 
@@ -98,19 +107,13 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
+#pragma mark -
+#pragma mark Channel for other request
+
+
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel {
 //   return channel.brandingSettings.image.bannerMobileHdImageUrl;;
    return channel.brandingSettings.image.bannerMobileHdImageUrl;;
-}
-
-
-+ (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription {
-   return subscription.snippet.thumbnails.high.url;
-}
-
-
-+ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel {
-   return channel.snippet.thumbnails.high.url;
 }
 
 
@@ -120,8 +123,12 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)getThumbnailKeyWithChannelId:(NSString *)channelId {
-   return [NSString stringWithFormat:@"_cache_key_%@", channelId];
+#pragma mark -
+#pragma mark Channel for author
+
+
++ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel {
+   return channel.snippet.thumbnails.high.url;
 }
 
 

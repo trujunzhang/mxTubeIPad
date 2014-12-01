@@ -14,11 +14,19 @@
 + (NSString *)getVideoIdsByActivityList:searchResultList;
 + (NSString *)getVideoIdsBySearchResult:(NSMutableArray *)searchResultList;
 
++ (NSString *)checkAndAppendThumbnailWithChannelId:(NSString *)channelId;
++ (void)AppendThumbnailWithChannelId:(NSString *)channelId withThumbnailUrl:(NSString *)thumbnailUrl;
++ (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs;
++ (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs;
+
++ (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp;
+
 // Channel for author
 + (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel;
 
 // Channel for other request
 + (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel;
++ (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel;
 
 // Subscription
 + (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription;
@@ -29,13 +37,7 @@
 + (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video;
 + (NSString *)getChannelIdByVideo:(YTYouTubeVideoCache *)video;
 + (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video;
-
-+ (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel;
-+ (NSString *)getThumbnailKeyWithChannelId:(NSString *)channelId;
-+ (NSString *)checkAndAppendThumbnailWithChannelId:(NSString *)channelId;
-+ (void)AppendThumbnailWithChannelId:(NSString *)channelId withThumbnailUrl:(NSString *)thumbnailUrl;
-+ (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs;
-+ (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs;
-+ (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp;
 + (NSString *)getVideoDurationForVideoInfo:(YTYouTubeVideoCache *)video;
+
+
 @end
