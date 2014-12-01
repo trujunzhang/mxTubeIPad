@@ -24,7 +24,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 @property(nonatomic) CGSize nodeCellSize;
 
 // line01
-@property(nonatomic, strong) ASCacheNetworkImageNode * channelBannerThumbnailNodse;
+@property(nonatomic, strong) ASCacheNetworkImageNode * channelBannerThumbnailNode;
 @property(nonatomic, strong) ASCacheNetworkImageNode * channelThumbnailsNode;
 
 // line02
@@ -53,7 +53,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 - (void)setupAllBackup {
 //   self.layerBacked = true;
 
-//   self.channelBannerThumbnailNodse.layerBacked = true;
+//   self.channelBannerThumbnailNode.layerBacked = true;
 //   self.channelThumbnailsNode.layerBacked = true;
 //   self.channelTitleTextNode.layerBacked = true;
 }
@@ -118,12 +118,13 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)rowFirstForChannelBanner {
-   ASCacheNetworkImageNode * channelBannerThumbnailNodse = [[ASCacheNetworkImageNode alloc] initForImageCache];
+   ASCacheNetworkImageNode * channelBannerThumbnailNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
+
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
        NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
 
-       [channelBannerThumbnailNodse startFetchImageWithString:videoThumbnailsUrl];
+       [channelBannerThumbnailNode startFetchImageWithString:videoThumbnailsUrl];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
@@ -135,10 +136,10 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    // 1
 
 //   NSString * videoThumbnailsUrl = @"https://yt3.ggpht.com/-0lqcsLOqjOw/VDzgY9uZdvI/AAAAAAAAAHU/1QBKBB6DI8I/w1060-fcrop64=1,00005a57ffffa5a8-nd/tv_youtube_channel_big.png";
-   channelBannerThumbnailNodse.contentMode = UIViewContentModeScaleAspectFill;
+   channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFill;
 
-   self.channelBannerThumbnailNodse = channelBannerThumbnailNodse;
-   [self addSubnode:self.channelBannerThumbnailNodse];
+   self.channelBannerThumbnailNode = channelBannerThumbnailNode;
+   [self addSubnode:self.channelBannerThumbnailNode];
 
    // 2
    [self showChannelThumbnail:[YoutubeParser getSubscriptionSnippetThumbnailUrl:self.subscription]];
@@ -154,27 +155,27 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)layoutFirstForChannelBanner {
-   self.channelBannerThumbnailNodse.frame = [FrameCalculator frameForPageChannelBannerThumbnails:self.nodeCellSize
+   self.channelBannerThumbnailNode.frame = [FrameCalculator frameForPageChannelBannerThumbnails:self.nodeCellSize
                                                                             secondRowFrameHeight:TOP_CHANNEL_SECOND_ROW_HEIGHT];
 
-   self.channelThumbnailsNode.frame = [FrameCalculator frameForPageChannelThumbnails:self.channelBannerThumbnailNodse.frame.size];
+   self.channelThumbnailsNode.frame = [FrameCalculator frameForPageChannelThumbnails:self.channelBannerThumbnailNode.frame.size];
 }
 
 
 - (void)effectFirstForChannelBanner {
    // 2
-   self.channelBannerThumbnailNodse.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
+   self.channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
 
    // 2.1
-   self.channelBannerThumbnailNodse.backgroundColor = [UIColor iOS8silverGradientStartColor];
+   self.channelBannerThumbnailNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
 
    // 2.2
-   self.channelBannerThumbnailNodse.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-   self.channelBannerThumbnailNodse.borderWidth = 1;
+   self.channelBannerThumbnailNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
+   self.channelBannerThumbnailNode.borderWidth = 1;
 
-   self.channelBannerThumbnailNodse.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-   self.channelBannerThumbnailNodse.shadowOffset = CGSizeMake(1, 3);
-   self.channelBannerThumbnailNodse.shadowRadius = 2.0;
+   self.channelBannerThumbnailNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+   self.channelBannerThumbnailNode.shadowOffset = CGSizeMake(1, 3);
+   self.channelBannerThumbnailNode.shadowRadius = 2.0;
 }
 
 
