@@ -160,15 +160,15 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 - (void)effectFirstForChannelBanner {
    // 2.1
-   self.channelBannerThumbnailNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
+//   self.channelBannerThumbnailNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
 
    // 2.2
-   self.channelBannerThumbnailNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-   self.channelBannerThumbnailNode.borderWidth = 1;
-
-   self.channelBannerThumbnailNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-   self.channelBannerThumbnailNode.shadowOffset = CGSizeMake(1, 3);
-   self.channelBannerThumbnailNode.shadowRadius = 2.0;
+//   self.channelBannerThumbnailNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
+//   self.channelBannerThumbnailNode.borderWidth = 1;
+//
+//   self.channelBannerThumbnailNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
+//   self.channelBannerThumbnailNode.shadowOffset = CGSizeMake(1, 3);
+//   self.channelBannerThumbnailNode.shadowRadius = 2.0;
 }
 
 
