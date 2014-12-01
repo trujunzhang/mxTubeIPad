@@ -254,9 +254,9 @@ static GYoutubeHelper * instance = nil;
        YTYouTubeAuthorChannel * channel = array[0];
        // save user title
        YoutubeAuthInfo * info = [[[YoutubeAuthDataStore alloc] init]
-        saveAuthUserChannelWithTitle:channel.snippet.title
+        saveAuthUserChannelWithTitle:[YoutubeParser getChannelAuthorTitle:channel]
                            withEmail:self.youTubeService.authorizer.userEmail
-                    withThumbmailUrl:[YoutubeParser getChannelSnippetThumbnailUrl:channel]
+                    withThumbmailUrl:[YoutubeParser getChannelAuthSnippetThumbnailUrl:channel]
        ];
        self.youtubeAuthUser.channel = channel;
 
@@ -267,7 +267,7 @@ static GYoutubeHelper * instance = nil;
        [self getUserSubscriptions:self.delegate];
 
        // "id" -> "UC0wObT_HayGfWLdRAnFyPwA"
-       NSLog(@" user name = %@", self.youtubeAuthUser.channel.snippet.title);
+       NSLog(@" user name = %@", [YoutubeParser getChannelAuthorTitle:channel]);
    };
 
    ErrorResponseBlock error = ^(NSError * error) {
