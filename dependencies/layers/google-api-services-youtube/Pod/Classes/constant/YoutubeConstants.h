@@ -58,7 +58,7 @@
 #import "MABYT3_ResourceId.h"
 #import "MABYT3_PlayList.h"
 #import "MABYT3_PlayListItem.h"
-
+#import "MABYT3_ChannelBrandingSettings.h"
 
 // common
 #import <AsyncDisplayKit/AsyncDisplayKit.h>
@@ -79,11 +79,15 @@
 #define YTYouTubePlayList  MABYT3_PlayList
 #define YTYouTubePlaylistItem  GTLYouTubePlaylistItem
 
-#define YTYouTubeChannel  GTLYouTubeChannel
-#define YTYouTubeSubscription  GTLYouTubeSubscription
-#define YTYouTubeMABThumbmail  MABYT3_Thumbnail
+// Channel for author
+#define YTYouTubeAuthorChannel  GTLYouTubeChannel
+
+// Channel for other request
+#define YTYouTubeChannel  MABYT3_Channel
 #define YTYouTubeMABChannel  MABYT3_Channel
 
+#define YTYouTubeSubscription  GTLYouTubeSubscription
+#define YTYouTubeMABThumbmail  MABYT3_Thumbnail
 
 //
 #define YTServiceYouTube  GTLServiceYouTube

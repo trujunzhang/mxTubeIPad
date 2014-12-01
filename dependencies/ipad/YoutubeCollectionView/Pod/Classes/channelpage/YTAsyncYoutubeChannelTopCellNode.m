@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 djzhang. All rights reserved.
 //
 
+#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "YTAsyncYoutubeChannelTopCellNode.h"
 
 #import "YoutubeParser.h"
@@ -117,11 +118,23 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)rowFirstForChannelBanner {
-   // 1
    ASCacheNetworkImageNode * channelBannerThumbnailNodse = [[ASCacheNetworkImageNode alloc] initForImageCache];
-   NSString * videoThumbnailsUrl = @"https://yt3.ggpht.com/-0lqcsLOqjOw/VDzgY9uZdvI/AAAAAAAAAHU/1QBKBB6DI8I/w1060-fcrop64=1,00005a57ffffa5a8-nd/tv_youtube_channel_big.png";
-   [channelBannerThumbnailNodse startFetchImageWithString:videoThumbnailsUrl];
+   YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
+       self.currentChannel = array[0];
+       NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
 
+       [channelBannerThumbnailNodse startFetchImageWithString:videoThumbnailsUrl];
+   };
+   ErrorResponseBlock error = ^(NSError * error) {
+       NSString * debug = @"debug";
+   };
+   [[GYoutubeHelper getInstance] fetchChannelBrandingWithChannelId:[YoutubeParser getChannelIdBySubscription:self.subscription]
+                                                        completion:completion
+                                                      errorHandler:error];
+
+   // 1
+
+//   NSString * videoThumbnailsUrl = @"https://yt3.ggpht.com/-0lqcsLOqjOw/VDzgY9uZdvI/AAAAAAAAAHU/1QBKBB6DI8I/w1060-fcrop64=1,00005a57ffffa5a8-nd/tv_youtube_channel_big.png";
    channelBannerThumbnailNodse.contentMode = UIViewContentModeScaleAspectFill;
 
    self.channelBannerThumbnailNodse = channelBannerThumbnailNodse;

@@ -251,7 +251,7 @@ static GYoutubeHelper * instance = nil;
 - (void)getUserInfo {
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        // 1
-       GTLYouTubeChannel * channel = array[0];
+       YTYouTubeAuthorChannel * channel = array[0];
        // save user title
        YoutubeAuthInfo * info = [[[YoutubeAuthDataStore alloc] init]
         saveAuthUserChannelWithTitle:channel.snippet.title
@@ -262,16 +262,6 @@ static GYoutubeHelper * instance = nil;
 
        if (self.delegate)
           [self.delegate FetchYoutubeChannelCompletion:info];
-
-//       [self fetchChannelThumbnailsWithChannelId:channel.identifier
-//                                      completion:nil
-//                                    errorHandler:nil];
-
-//       [self fetchPlaylistItemsListWithPlaylists:self.youtubeAuthUser.channel.contentDetails.relatedPlaylists // Test
-//                                         tagType:kFavoritesTag
-//                                      completion:nil
-//                                    errorHandler:nil
-//       ];
 
        // 2
        [self getUserSubscriptions:self.delegate];
@@ -413,6 +403,27 @@ static GYoutubeHelper * instance = nil;
                                errorBlock(error);
                                _searchListTicket = nil;
                            }];
+}
+
+
+//GET https://www.googleapis.com/youtube/v3/channels?part=&id=UCl78QGX_hfK6zT8Mc-2w8GA&fields=items%2FbrandingSettings(image)&key={YOUR_API_KEY}
+- (void)fetchChannelBrandingWithChannelId:(NSString *)channelId completion:(YoutubeResponseBlock)completion errorHandler:(ErrorResponseBlock)errorBlock {
+   NSDictionary * parameters = @{
+    @"part" : @"brandingSettings",
+    @"id" : channelId,
+    @"fields" : @"items/brandingSettings(image)",
+   };
+   NSURLSessionDataTask * task =
+    [[MABYT3_APIRequest sharedInstance]
+     LISTChannelsThumbnailsForURL:parameters
+                       completion:^(YoutubeResponseInfo * responseInfo, NSError * error) {
+                           if (responseInfo) {
+                              NSMutableArray * array = responseInfo.array;
+                              completion(array, nil);
+                           } else {
+                              NSLog(@"ERROR: %@", error);
+                           }
+                       }];
 }
 
 

@@ -98,7 +98,8 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel {
++ (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel {
+//   return channel.brandingSettings.image.bannerMobileHdImageUrl;;
    return channel.brandingSettings.image.bannerMobileHdImageUrl;;
 }
 
@@ -108,7 +109,7 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel {
++ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel {
    return channel.snippet.thumbnails.high.url;
 }
 

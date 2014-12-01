@@ -14,7 +14,7 @@
 
 }
 
-@property(nonatomic, strong) YTYouTubeChannel * channel;
+@property(nonatomic, strong) YTYouTubeAuthorChannel * channel;
 
 @property(nonatomic, strong) NSArray * subscriptions;
 

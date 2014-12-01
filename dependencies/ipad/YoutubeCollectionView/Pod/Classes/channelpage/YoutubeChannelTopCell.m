@@ -47,7 +47,7 @@
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
 
-       NSString * url = [YoutubeParser getBannerImageUrl:self.currentChannel];
+       NSString * url = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
        [YTCacheImplement CacheWithImageView:self.youtubeCover
                                        withUrl:url
                                withPlaceholder:[UIImage imageNamed:@"channel_default_banner.jpg"]

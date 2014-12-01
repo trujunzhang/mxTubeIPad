@@ -9,24 +9,26 @@
 #import "YoutubeConstants.h"
 
 
-
-
 @interface YoutubeParser : NSObject
 
 + (NSString *)getVideoIdsByActivityList:searchResultList;
-
 + (NSString *)getVideoIdsBySearchResult:(NSMutableArray *)searchResultList;
 
-+ (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription;
+// Channel for author
++ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeAuthorChannel *)channel;
 
+// Channel for other request
++ (NSString *)getChannelBannerImageUrl:(YTYouTubeChannel *)channel;
+
+// Subscription
++ (NSString *)getChannelIdBySubscription:(YTYouTubeSubscription *)subscription;
++ (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;
+
+// Video cache
 + (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video;
 + (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video;
-
 + (NSString *)getChannelIdByVideo:(YTYouTubeVideoCache *)video;
 + (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video;
-+ (NSString *)getBannerImageUrl:(YTYouTubeChannel *)channel;
-+ (NSString *)getSubscriptionSnippetThumbnailUrl:(YTYouTubeSubscription *)subscription;
-+ (NSString *)getChannelSnippetThumbnailUrl:(YTYouTubeChannel *)channel;
 
 + (NSString *)GetMABChannelSnippetThumbnail:(YTYouTubeMABChannel *)channel;
 + (NSString *)getThumbnailKeyWithChannelId:(NSString *)channelId;
