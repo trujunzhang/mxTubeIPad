@@ -43,9 +43,20 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
       [self layoutSubNodes];
 
       [self setupAllNodesEffect];
+
+      [self setupAllBackup];
    }
 
    return self;
+}
+
+
+- (void)setupAllBackup {
+//   self.layerBacked = true;
+
+//   self.channelBannerThumbnailNodse.layerBacked = true;
+//   self.channelThumbnailsNode.layerBacked = true;
+//   self.channelTitleTextNode.layerBacked = true;
 }
 
 
@@ -60,9 +71,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)setupAllNodesEffect {
-
-   // 1
-   self.layerBacked = true;
 
    // 1.1
    self.backgroundColor = [UIColor whiteColor];
@@ -129,7 +137,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 - (void)effectFirstForChannelBanner {
    // 2
-   self.channelBannerThumbnailNodse.layerBacked = true;
    self.channelBannerThumbnailNodse.contentMode = UIViewContentModeScaleAspectFit;// .ScaleAspectFit
 
    // 2.1
@@ -144,8 +151,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    self.channelBannerThumbnailNodse.shadowRadius = 2.0;
 
 
-   // 3
-   self.channelThumbnailsNode.layerBacked = true;
 }
 
 
@@ -173,8 +178,8 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)effectThirdForChannelInfo {
+
    // 3
-   self.channelTitleTextNode.layerBacked = true;
    self.channelTitleTextNode.backgroundColor = [UIColor clearColor];
 }
 

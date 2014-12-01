@@ -87,12 +87,22 @@
 
 
 - (void)makeTopBanner:(UIView *)parentView {
-   self.topBanner = [[YTAsyncYoutubeChannelTopCellNode alloc] initWithSubscription:self.subscription
-                                                                          cellSize:parentView.frame.size];
-   self.topBanner.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-   [parentView addSubview:self.topBanner];
+   // Create a new private queue
+   dispatch_queue_t _backgroundQueue;
+   _backgroundQueue = dispatch_queue_create("com.youtube.page.topcell", NULL);
+
+   dispatch_async(_backgroundQueue, ^{
+
+       self.topBanner = [[YTAsyncYoutubeChannelTopCellNode alloc] initWithSubscription:self.subscription
+                                                                              cellSize:parentView.frame.size];
+       // self.view isn't a node, so we can only use it on the main thread
+       dispatch_sync(dispatch_get_main_queue(), ^{
+           [parentView addSubview:self.topBanner.view];
+       });
+   });
 }
+
 //- (void)makeTopBanner:(UIView *)parentView {
 //   self.topBanner = [[YoutubeChannelTopCell alloc] initWithSubscription:self.subscription];
 //   self.topBanner.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
