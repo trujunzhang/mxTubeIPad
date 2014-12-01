@@ -80,6 +80,15 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
+#pragma mark -
+#pragma mark  Video cache
+
+
++ (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video {
+   return video.snippet.thumbnails.medium.url;
+}
+
+
 + (NSString *)getWatchVideoId:(YTYouTubeVideoCache *)video {
    return video.identifier;
 }
@@ -92,11 +101,6 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 
 + (NSString *)getVideoSnippetTitle:(YTYouTubeVideoCache *)video {
    return video.snippet.title;
-}
-
-
-+ (NSString *)getVideoSnippetThumbnails:(YTYouTubeVideoCache *)video {
-   return video.snippet.thumbnails.medium.url;
 }
 
 
