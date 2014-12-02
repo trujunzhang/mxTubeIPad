@@ -42,28 +42,10 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
       [self setupContainerNode];
       [self setupAllNodesEffect];
-
-      [self setupAllBacked];
    }
 
    return self;
 }
-
-
-- (void)setupAllBacked {
-//   self.layerBacked = true;
-
-//   self.channelBannerThumbnailNode.layerBacked = true;
-//   self.channelThumbnailsNode.layerBacked = true;
-//   self.channelTitleTextNode.layerBacked = true;
-}
-
-
-// perform expensive sizing operations on a background thread
-//- (CGSize)calculateSizeThatFits:(CGSize)constrainedSize {// used
-////   return CGSizeMake(constrainedSize.width, self.nodeCellSize.height);
-//   return constrainedSize;
-//}
 
 
 // do as little work as possible in main-thread layout
@@ -123,7 +105,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
        NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
-       //https://yt3.ggpht.com/-xnLN6GWv-y8/UhrwkCE3qYI/AAAAAAAAAIA/A8kq3Qr9es0/w1280-fcrop64=1,32b75a57cd48a5a8-nd/channels4_banner.png
 //       NSLog(@"videoThumbnailsUrl = %@", videoThumbnailsUrl);
        [channelBannerThumbnailNode startFetchImageWithString:videoThumbnailsUrl];
    };
@@ -160,16 +141,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)effectFirstForChannelBanner {
-   // 2.1
-//   self.channelBannerThumbnailNode.backgroundColor = [UIColor iOS8silverGradientStartColor];
 
-   // 2.2
-//   self.channelBannerThumbnailNode.borderColor = [UIColor colorWithHexString:@"DDD"].CGColor;
-//   self.channelBannerThumbnailNode.borderWidth = 1;
-//
-//   self.channelBannerThumbnailNode.shadowColor = [UIColor colorWithHexString:@"B5B5B5"].CGColor;
-//   self.channelBannerThumbnailNode.shadowOffset = CGSizeMake(1, 3);
-//   self.channelBannerThumbnailNode.shadowRadius = 2.0;
 }
 
 

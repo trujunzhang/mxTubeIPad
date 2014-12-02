@@ -113,8 +113,9 @@
 #define hasShowLeftMenu YES
 
 
-#define debugLeftMenuTapSubscription NO
-//#define debugLeftMenuTapSubscription YES
+#define subscriptionIndex  4
+//#define debugLeftMenuTapSubscription NO
+#define debugLeftMenuTapSubscription YES
 
 
 
