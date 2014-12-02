@@ -90,6 +90,7 @@
 
 
 - (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
+//   NSLog(@"%s", sel_getName(_cmd));
    [YTCacheImplement cancelDowning:downloadIdentifier];
 }
 

@@ -160,7 +160,7 @@ nodeConstructionQueue:self.nodeConstructionQueue];
 
    // test
    if (debugLeftMenuTapSubscription) {
-      YTYouTubeSubscription * subscription = self.authUser.subscriptions[1];
+      YTYouTubeSubscription * subscription = self.authUser.subscriptions[4];
       [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription
                                                                 withTitle:subscription.snippet.title];
    }

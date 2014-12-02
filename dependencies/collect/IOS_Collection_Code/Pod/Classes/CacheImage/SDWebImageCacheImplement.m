@@ -29,7 +29,7 @@
 + (id)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
    SDWebImageManager * manager = [SDWebImageManager sharedManager];
    id<SDWebImageOperation> imageOperation = [manager downloadImageWithURL:url
-                                                                  options:0
+                                                                  options:SDWebImageLowPriority
                                                                  progress:nil
                                                                 completed:^(UIImage * image, NSError * error, SDImageCacheType cacheType, BOOL finished, NSURL * imageURL) {
                                                                     completionBlock(image);
