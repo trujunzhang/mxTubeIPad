@@ -106,7 +106,7 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 
 + (NSString *)getVideoDurationForVideoInfo:(YTYouTubeVideoCache *)video {
    NSString * durationString = [YoutubeParser parseISO8601Duration:video.contentDetails.duration];
-   return [NSString stringWithFormat:@"  %@ ", durationString];
+   return [NSString stringWithFormat:@" %@ ", durationString];
 }
 
 
