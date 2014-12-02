@@ -100,8 +100,9 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)rowFirstForChannelBanner {
-   ASCacheNetworkImageNode * channelBannerThumbnailNode = [[ASCacheNetworkImageNode alloc] initForImageCache];
-   channelBannerThumbnailNode.image = [UIImage imageNamed:@"channel_default_banner.jpg"];
+   ASCacheNetworkImageNode * channelBannerThumbnailNode =
+    [[ASCacheNetworkImageNode alloc] initWithPlaceHolder:[UIImage imageNamed:@"channel_default_banner.jpg"]];
+
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
        NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];

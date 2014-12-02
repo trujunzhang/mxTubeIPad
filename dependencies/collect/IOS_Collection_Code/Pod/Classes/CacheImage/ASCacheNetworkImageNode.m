@@ -19,10 +19,19 @@
 
 @implementation ASCacheNetworkImageNode
 
+- (instancetype)initWithPlaceHolder:(UIImage *)placeHolder {
+   self = [super initWithCache:self downloader:self];
+   if (self) {
+      self.defaultImage = placeHolder;
+   }
+
+   return self;
+}
+
+
 - (instancetype)initForImageCache {
    self = [super initWithCache:self downloader:self];
    if (self) {
-
    }
 
    return self;
