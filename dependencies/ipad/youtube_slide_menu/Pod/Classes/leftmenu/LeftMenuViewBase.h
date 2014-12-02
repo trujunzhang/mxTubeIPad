@@ -42,6 +42,7 @@
 @property(nonatomic, assign) id<LeftMenuViewBaseDelegate> delegate;
 
 
+- (void)defaultRefreshForSubscriptionList;
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user;
 - (void)refreshChannelInfo:(YoutubeAuthInfo *)info;
 - (void)setupTableViewExclusiveState;

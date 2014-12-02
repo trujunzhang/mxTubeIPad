@@ -303,6 +303,7 @@ static GYoutubeHelper * instance = nil;
 
    // 2
    self.youtubeAuthUser = nil;
+   self.isSignedIn = NO;
    [GTMOAuth2ViewControllerTouch removeAuthFromKeychainForName:kKeychainItemName];
    [GTMOAuth2ViewControllerTouch revokeTokenForGoogleAuthentication:self.youTubeService.authorizer];
 

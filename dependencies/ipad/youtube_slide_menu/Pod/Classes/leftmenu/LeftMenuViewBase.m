@@ -18,7 +18,7 @@
 static const int TABLE_WIDTH = 258;
 
 
-@interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate>
+@interface LeftMenuViewBase ()<UITableViewDataSource, UITableViewDelegate, UserInfoViewSigningOutDelegate, UIAlertViewDelegate>
 @property(nonatomic, strong) UITableView * baseTableView;
 @property(nonatomic, strong) ASImageNode * imageNode;
 
@@ -133,7 +133,7 @@ static const int TABLE_WIDTH = 258;
       UserInfoView * userInfoView = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoView"
                                                                    owner:nil
                                                                  options:nil] lastObject];
-
+      userInfoView.delegate = self;
       headerView = [userInfoView bind:user];
    } else {
       headerView = [[[NSBundle mainBundle] loadNibNamed:@"UserLoginView" owner:nil options:nil] lastObject];
@@ -195,6 +195,11 @@ static const int TABLE_WIDTH = 258;
 
 #pragma mark -
 #pragma mark Async refresh Table View
+
+
+- (void)defaultRefreshForSubscriptionList {
+   [self refreshChannelSubscriptionList:[[GYoutubeAuthUser alloc] init]];
+}
 
 
 - (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
@@ -285,6 +290,36 @@ static const int TABLE_WIDTH = 258;
    ];
 
    return array;
+}
+
+
+#pragma mark -
+#pragma mark UserInfoViewSigningOutDelegate
+
+
+- (void)signingOutTapped {
+   UIAlertView * myAlert = [[UIAlertView alloc]
+    initWithTitle:@"Title"
+          message:@"Message"
+         delegate:self
+cancelButtonTitle:@"Cancel"
+otherButtonTitles:@"Ok", nil];
+
+   [myAlert show];
+}
+
+
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+   if (buttonIndex == 0) {
+   }
+   else if (buttonIndex == 1) {
+      [[GYoutubeHelper getInstance] signingOut];
+      [self defaultRefreshForSubscriptionList];
+   }
 }
 
 

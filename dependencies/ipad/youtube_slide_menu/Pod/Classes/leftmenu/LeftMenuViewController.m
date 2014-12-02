@@ -48,10 +48,11 @@ static NSString * const leftmenuIdentifier = @"LeftMenuViewIdentifier";
    [self setCurrentTableView:self.tableView];
 
    // 2
-   [self refreshChannelSubscriptionList:[[GYoutubeAuthUser alloc] init]];
+   [self defaultRefreshForSubscriptionList];
 
    [super viewDidLoad];
 }
+
 
 
 #pragma mark -

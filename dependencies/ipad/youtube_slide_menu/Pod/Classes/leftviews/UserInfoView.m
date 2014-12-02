@@ -9,7 +9,6 @@
 
 #import "UserInfoView.h"
 #import <Business-Logic-Layer/YoutubeAuthInfo.h>
-#import <google-api-services-youtube/GYoutubeHelper.h>
 #import "CacheImageConstant.h"
 
 
@@ -39,6 +38,6 @@
 
 
 - (void)tapSignOut {
-   [[GYoutubeHelper getInstance] signingOut];
+   [self.delegate signingOutTapped];
 }
 @end

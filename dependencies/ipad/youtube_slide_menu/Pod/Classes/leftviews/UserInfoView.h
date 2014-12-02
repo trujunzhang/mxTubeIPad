@@ -10,6 +10,14 @@
 @class YoutubeAuthInfo;
 
 
+@protocol UserInfoViewSigningOutDelegate<NSObject>
+
+@required
+- (void)signingOutTapped;
+
+@end
+
+
 @interface UserInfoView : UIView
 
 @property(unsafe_unretained, nonatomic) IBOutlet UIImageView * userHeader;
@@ -20,5 +28,7 @@
 
 //"https://yt3.ggpht.com/-NvptLtFVHnM/AAAAAAAAAAI/AAAAAAAAAAA/glOMyY45o-0/s240-c-k-no/photo.jpg"
 - (UIView *)bind:(YoutubeAuthInfo *)user;
+
+@property(nonatomic, weak) id<UserInfoViewSigningOutDelegate> delegate;
 
 @end
