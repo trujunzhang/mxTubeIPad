@@ -105,9 +105,8 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 
 
 + (NSString *)getVideoDurationForVideoInfo:(YTYouTubeVideoCache *)video {
-   NSUInteger durationValue = video.contentDetails.duration;
-   NSString * durationString = [YoutubeParser timeFormatConvertToSecondsWithInteger:durationValue];
-   return [NSString stringWithFormat:@" %@ ", durationString];
+   NSString * durationString = [YoutubeParser parseISO8601Duration:video.contentDetails.duration];
+   return [NSString stringWithFormat:@"  %@ ", durationString];
 }
 
 
@@ -164,25 +163,6 @@ NSMutableDictionary * channelIdThumbnailDictionary;
 }
 
 
-+ (NSString *)timeFormatConvertToSecondsWithInteger:(NSUInteger)timeSecs {
-   return [YoutubeParser timeFormatConvertToSeconds:[NSString stringWithFormat:@"%d", timeSecs]];
-}
-
-
-+ (NSString *)timeFormatConvertToSeconds:(NSString *)timeSecs {
-   int totalSeconds = [timeSecs intValue];
-
-   int seconds = totalSeconds % 60;
-   int minutes = (totalSeconds / 60) % 60;
-   int hours = totalSeconds / 3600;
-   if (hours == 0) {
-      return [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-   }
-
-   return [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, seconds];
-}
-
-
 + (NSError *)getError:(NSData *)data httpresp:(NSHTTPURLResponse *)httpresp {
    NSError * error;
    NSError * e = nil;
@@ -205,6 +185,47 @@ NSMutableDictionary * channelIdThumbnailDictionary;
       }
    }
    return error;
+}
+
+
++ (NSString *)parseISO8601Duration:(NSString *)duration {
+//   NSString * duration = @"P1DT10H15M49S";
+
+   int i = 0, days = 0, hours = 0, minutes = 0, seconds = 0;
+
+   while (i < duration.length) {
+      NSString * str = [duration substringWithRange:NSMakeRange(i, duration.length - i)];
+
+      i++;
+
+      if ([str hasPrefix:@"P"] || [str hasPrefix:@"T"])
+         continue;
+
+      NSScanner * sc = [NSScanner scannerWithString:str];
+      int value = 0;
+
+      if ([sc scanInt:&value]) {
+         i += [sc scanLocation] - 1;
+
+         str = [duration substringWithRange:NSMakeRange(i, duration.length - i)];
+
+         i++;
+
+         if ([str hasPrefix:@"D"])
+            days = value;
+         else if ([str hasPrefix:@"H"])
+            hours = value;
+         else if ([str hasPrefix:@"M"])
+            minutes = value;
+         else if ([str hasPrefix:@"S"])
+            seconds = value;
+      }
+   }
+
+   if (hours == 0) {
+      return [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+   }
+   return [NSString stringWithFormat:@"%02d:%02d:%02d", hours, minutes, seconds];
 }
 
 

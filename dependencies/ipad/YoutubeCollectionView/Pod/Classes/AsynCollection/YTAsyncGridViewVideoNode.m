@@ -124,6 +124,7 @@ static const int THIRD_ROW_HEIGHT = 28;
 
    // 2
    NSString * durationString = [YoutubeParser getVideoDurationForVideoInfo:self.cardInfo];
+   NSLog(@"durationString = %@", durationString);
    self.durationLabelWidth = [FrameCalculator calculateWidthForDurationLabel:durationString];
 
    ASTextNode * durationTextNode = [[ASTextNode alloc] init];
@@ -164,7 +165,6 @@ static const int THIRD_ROW_HEIGHT = 28;
    // 3
    self.durationTextNode.layerBacked = true;
 }
-
 
 
 - (void)channelThumbnailsTapped:(id)buttonTapped {

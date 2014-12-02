@@ -42,17 +42,19 @@
       if ([dict objectForKey:@"duration"]) {
          //"PT35S"
          //"PT7M52S"
-         NSString * duration = [dict objectForKey:@"duration"];
-         NSString * dur = [[duration stringByReplacingOccurrencesOfString:@"PT"
-                                                               withString:@""] stringByReplacingOccurrencesOfString:@"S"
-                                                                                                         withString:@""];
-         NSUInteger localValue = [dur rangeOfString:@"M"].location;
-         if (localValue == NSNotFound) {
-            _duration = dur;
-         } else {
-            NSArray * arr = [dur componentsSeparatedByString:@"M"];
-            _duration = (60 * [arr[0] integerValue]) + [arr[1] integerValue];
-         }
+         //"PT1H35M38S"
+//         NSString * duration = [dict objectForKey:@"duration"];
+//         NSString * dur = [[duration stringByReplacingOccurrencesOfString:@"PT"
+//                                                               withString:@""] stringByReplacingOccurrencesOfString:@"S"
+//                                                                                                         withString:@""];
+//         NSUInteger localValue = [dur rangeOfString:@"M"].location;
+//         if (localValue == NSNotFound) {
+//            _duration = [dur integerValue];
+//         } else {
+//            NSArray * arr = [dur componentsSeparatedByString:@"M"];
+//            _duration = (60 * [arr[0] integerValue]) + [arr[1] integerValue];
+//         }
+         _duration = [dict objectForKey:@"duration"];
 
       }
       if ([dict objectForKey:@"dimension"]) {

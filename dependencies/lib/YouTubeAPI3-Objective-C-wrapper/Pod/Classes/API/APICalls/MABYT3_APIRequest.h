@@ -26,7 +26,7 @@
 typedef void (^MABYoutubeResponseBlock)(YoutubeResponseInfo * responseInfo, NSError * error);
 
 static NSString * kKeychainItemName = @"mxyoutube";
-static NSUInteger search_maxResults = 15;
+static NSUInteger search_maxResults = 4;
 
 
 
