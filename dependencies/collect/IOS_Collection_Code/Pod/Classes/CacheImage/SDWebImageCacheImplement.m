@@ -26,17 +26,21 @@
 }
 
 
-+ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
++ (id)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
    SDWebImageManager * manager = [SDWebImageManager sharedManager];
-   SDWebImageCompletionWithFinishedBlock cacheCompletedBlock = ^(UIImage * image, NSError * error, SDImageCacheType cacheType, BOOL finished, NSURL * imageURL) {
-       if (image) {
-          completionBlock(image);
-       }
-   };
-   [manager downloadImageWithURL:url
-                         options:0
-                        progress:nil
-                       completed:cacheCompletedBlock];
+   id<SDWebImageOperation> imageOperation = [manager downloadImageWithURL:url
+                                                                  options:0
+                                                                 progress:nil
+                                                                completed:^(UIImage * image, NSError * error, SDImageCacheType cacheType, BOOL finished, NSURL * imageURL) {
+                                                                    completionBlock(image);
+                                                                }];
+   return imageOperation;
+}
+
+
++ (void)cancelDowning:(id)operation {
+   id<SDWebImageOperation> imageOperation = operation;
+   [imageOperation cancel];
 }
 
 

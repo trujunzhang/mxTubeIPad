@@ -83,14 +83,14 @@
            }
        });
    };
-   [YTCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
+   id imageOperation = [YTCacheImplement CacheWithUrl:URL withCompletionBlock:downloadCompletion];
 
-   return nil;
+   return imageOperation;
 }
 
 
 - (void)cancelImageDownloadForIdentifier:(id)downloadIdentifier {
-
+   [YTCacheImplement cancelDowning:downloadIdentifier];
 }
 
 

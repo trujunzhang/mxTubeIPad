@@ -21,8 +21,14 @@
 }
 
 
-+ (void)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
++ (id)CacheWithUrl:(NSURL *)url withCompletionBlock:(void (^)(UIImage *))completionBlock {
    [[JMImageCache sharedCache] imageForURL:url completionBlock:completionBlock];
+
+   return nil;
+}
+
+
++ (void)cancelDowning:(id)operation {
 }
 
 
