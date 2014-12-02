@@ -431,9 +431,11 @@ static GYoutubeHelper * instance = nil;
    YTServiceYouTube * service = self.youTubeService;
 
 //   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,auditDetails,brandingSettings,contentDetails,invideoPromotion,statistics,status,topicDetails"];
-   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
+//   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet,contentDetails"];
 //   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"id,snippet"];
+   YTQueryYouTube * query = [YTQueryYouTube queryForChannelsListWithPart:@"snippet"];
    query.mine = YES;
+//   query.fields=@"snippet()";
 
    _searchListTicket = [service executeQuery:query
                            completionHandler:^(GTLServiceTicket * ticket,
