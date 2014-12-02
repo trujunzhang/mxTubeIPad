@@ -123,7 +123,8 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
        NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
-
+       //https://yt3.ggpht.com/-xnLN6GWv-y8/UhrwkCE3qYI/AAAAAAAAAIA/A8kq3Qr9es0/w1280-fcrop64=1,32b75a57cd48a5a8-nd/channels4_banner.png
+//       NSLog(@"videoThumbnailsUrl = %@", videoThumbnailsUrl);
        [channelBannerThumbnailNode startFetchImageWithString:videoThumbnailsUrl];
    };
    ErrorResponseBlock error = ^(NSError * error) {
@@ -133,7 +134,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
                                                         completion:completion
                                                       errorHandler:error];
 
-   channelBannerThumbnailNode.contentMode = UIViewContentModeScaleAspectFill;
+   channelBannerThumbnailNode.contentMode = UIViewContentModeScaleToFill;
 
    self.channelBannerThumbnailNode = channelBannerThumbnailNode;
    [self addSubnode:self.channelBannerThumbnailNode];
