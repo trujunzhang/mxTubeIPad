@@ -325,15 +325,17 @@ const NSInteger unionSize = 20;
       NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
       NSMutableArray * itemAttributes = [NSMutableArray arrayWithCapacity:itemCount];
 
+      CGSize itemSize = [self.delegate collectionView:self.collectionView
+                                               layout:self
+                               sizeForItemAtIndexPath:nil];
+
       // Item will be put into shortest column.
       for (idx = 0; idx < itemCount; idx++) {
          NSIndexPath * indexPath = [NSIndexPath indexPathForItem:idx inSection:section];
          NSUInteger columnIndex = [self nextColumnIndexForItem:idx inSection:section];
          CGFloat xOffset = sectionInset.left + (itemWidth + self.minimumColumnSpacing) * columnIndex;
          CGFloat yOffset = [self.columnHeights[section][columnIndex] floatValue];
-         CGSize itemSize = [self.delegate collectionView:self.collectionView
-                                                  layout:self
-                                  sizeForItemAtIndexPath:indexPath];
+
          CGFloat itemHeight = 0;
          if (itemSize.height > 0 && itemSize.width > 0) {
             itemHeight = floorf(itemSize.height * itemWidth / itemSize.width);
