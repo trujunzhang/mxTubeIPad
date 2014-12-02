@@ -15,9 +15,7 @@
 
 @interface LeftMenuViewController : LeftMenuViewBase
 
-- (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user;
-- (void)refreshChannelInfo:(YoutubeAuthInfo *)info;
-
 @property(nonatomic, strong) NSOperationQueue * nodeConstructionQueue;
+
 
 @end

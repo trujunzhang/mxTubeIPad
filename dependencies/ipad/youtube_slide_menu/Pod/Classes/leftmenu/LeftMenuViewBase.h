@@ -40,4 +40,10 @@
 - (NSArray *)signUserCategories;
 
 @property(nonatomic, assign) id<LeftMenuViewBaseDelegate> delegate;
+
+
+- (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user;
+- (void)refreshChannelInfo:(YoutubeAuthInfo *)info;
+- (void)setupTableViewExclusiveState;
+
 @end

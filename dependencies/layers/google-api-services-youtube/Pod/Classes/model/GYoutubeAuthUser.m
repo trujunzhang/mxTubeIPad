@@ -14,6 +14,16 @@
 
 @implementation GYoutubeAuthUser
 
+- (instancetype)init {
+   self = [super init];
+   if (self) {
+      self.channel = [[YTYouTubeAuthorChannel alloc] init];
+      self.subscriptions = [[NSArray alloc] init];
+   }
+
+   return self;
+}
+
 
 - (NSArray *)getTableRows {
    NSMutableArray * rows = [[NSMutableArray alloc] init];

@@ -249,8 +249,8 @@ static GYoutubeHelper * instance = nil;
 
 
 - (void)getUserInfo {
+   // 1
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
-       // 1
        YTYouTubeAuthorChannel * channel = array[0];
        // save user title
        YoutubeAuthInfo * info = [[[YoutubeAuthDataStore alloc] init]
@@ -259,9 +259,7 @@ static GYoutubeHelper * instance = nil;
                     withThumbmailUrl:[YoutubeParser getAuthChannelSnippetThumbnailUrl:channel]
        ];
        self.youtubeAuthUser.channel = channel;
-
-       if (self.delegate)
-          [self.delegate FetchYoutubeChannelCompletion:info];
+       [self.delegate FetchYoutubeChannelCompletion:info];
 
        // 2
        [self getUserSubscriptions:self.delegate];
@@ -269,31 +267,23 @@ static GYoutubeHelper * instance = nil;
        // "id" -> "UC0wObT_HayGfWLdRAnFyPwA"
        NSLog(@" user name = %@", [YoutubeParser getAuthChannelTitle:channel]);
    };
-
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-
    [self fetchAuthUserChannelWithCompletion:completion errorHandler:error];
+
+
 }
 
 
 - (void)getUserSubscriptions:(id<GYoutubeHelperDelegate>)delegate {
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.youtubeAuthUser.subscriptions = array;
-
-//       [self getActivityListWithChannelId:@"UCl78QGX_hfK6zT8Mc-2w8GA"];
-//       [self fetchChannelListWithIdentifier:@"UCl78QGX_hfK6zT8Mc-2w8GA" completion:nil errorHandler:nil];
-
-
-       if (delegate)
-          [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
-
+       [delegate FetchYoutubeSubscriptionListCompletion:self.youtubeAuthUser];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
    };
-
    [self fetchSubscriptionsListWithChannelId:[YoutubeParser getAuthChannelID:self.youtubeAuthUser.channel]
                            CompletionHandler:completion
                                 errorHandler:error];

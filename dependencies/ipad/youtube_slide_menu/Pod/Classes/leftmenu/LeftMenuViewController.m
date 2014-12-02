@@ -48,10 +48,7 @@ static NSString * const leftmenuIdentifier = @"LeftMenuViewIdentifier";
    [self setCurrentTableView:self.tableView];
 
    // 2
-   [self setupViewController:[[NSArray alloc] init]];
-   [self setupSlideTableViewWithAuthInfo:nil];
-
-   [self setupTableViewExclusiveState];
+   [self refreshChannelSubscriptionList:[[GYoutubeAuthUser alloc] init]];
 
    [super viewDidLoad];
 }
@@ -142,32 +139,5 @@ nodeConstructionQueue:self.nodeConstructionQueue];
 }
 
 
-#pragma mark -
-#pragma mark Async refresh Table View
 
-
-- (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
-   self.authUser = user;
-   // 1
-   [self setupViewController:[user getTableRows]];
-   [self setupSlideTableViewWithAuthInfo:nil];
-
-   // 2
-   [self.tableView reloadData];
-
-   //3
-   [self setupTableViewExclusiveState];
-
-   // test
-   if (debugLeftMenuTapSubscription) {
-      YTYouTubeSubscription * subscription = self.authUser.subscriptions[4];
-      [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription
-                                                                withTitle:subscription.snippet.title];
-   }
-}
-
-
-- (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
-   [self setupSlideTableViewWithAuthInfo:info];
-}
 @end

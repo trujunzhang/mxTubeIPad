@@ -13,6 +13,7 @@
 #import "LeftMenuItemTree.h"
 #import "LeftMenuTableHeaderView.h"
 #import "YoutubeAuthDataStore.h"
+#import "GYoutubeAuthUser.h"
 
 static const int TABLE_WIDTH = 258;
 
@@ -189,6 +190,39 @@ static const int TABLE_WIDTH = 258;
 - (void)cancelGdriveSignIn:(id)cancelGdriveSignIn {
    [self dismissViewControllerAnimated:YES completion:^(void) {
    }];
+}
+
+
+#pragma mark -
+#pragma mark Async refresh Table View
+
+
+- (void)refreshChannelSubscriptionList:(GYoutubeAuthUser *)user {
+   self.authUser = user;
+   // 1
+   [self setupViewController:[user getTableRows]];
+   [self setupSlideTableViewWithAuthInfo:nil];
+
+   // 2
+   [self.baseTableView reloadData];
+
+   //3
+   [self setupTableViewExclusiveState];
+
+   // test
+   if (debugLeftMenuTapSubscription) {
+      int index = 4;
+      if (self.authUser.subscriptions.count >= index) {
+         YTYouTubeSubscription * subscription = self.authUser.subscriptions[4];
+         [self.delegate endToggleLeftMenuEventForChannelPageWithSubscription:subscription
+                                                                   withTitle:subscription.snippet.title];
+      }
+   }
+}
+
+
+- (void)refreshChannelInfo:(YoutubeAuthInfo *)info {
+   [self setupSlideTableViewWithAuthInfo:info];
 }
 
 
