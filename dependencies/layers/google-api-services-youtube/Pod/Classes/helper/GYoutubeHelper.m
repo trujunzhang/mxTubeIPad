@@ -334,7 +334,7 @@ static GYoutubeHelper * instance = nil;
                                                             NSLog(@"ERROR: %@", error);
                                                          }
                                                      }
-                                                      authToken:authorizer.accessToken];
+                                                    accessToken:authorizer.accessToken];
 }
 
 

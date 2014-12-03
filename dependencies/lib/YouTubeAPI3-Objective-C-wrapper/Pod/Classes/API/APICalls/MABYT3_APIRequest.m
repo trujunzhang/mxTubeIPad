@@ -726,14 +726,11 @@
 }
 
 
-- (NSURLSessionDataTask *)LISTSubscriptionsForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion authToken:(NSString *)authToken {
-   NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
+- (NSURLSessionDataTask *)LISTSubscriptionsForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion accessToken:(NSString *)accessToken {
+   NSString * maxResultsString = [NSString stringWithFormat:@"%d", 2];
    NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
 
-//   NSString * authToken = [NSString stringWithFormat:@"Bearer %@",
-//                                                     [MAB_GoogleUserCredentials sharedInstance].token.accessToken];
-
-   [[MABYT3_APIRequest sharedInstance].requestSerializer setValue:authToken
+   [[MABYT3_APIRequest sharedInstance].requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", accessToken]
                                                forHTTPHeaderField:@"Authorization"];
 
    NSURLSessionDataTask * task = [self GET:@"/youtube/v3/subscriptions"
