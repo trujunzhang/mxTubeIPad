@@ -29,7 +29,6 @@ static NSString * kKeychainItemName = @"mxyoutube";
 static NSUInteger search_maxResults = 20;
 
 
-
 @interface MABYT3_AutoCompleteRequest : AFHTTPSessionManager
 @property(nonatomic, strong) NSURLSessionDataTask * lastTask;
 + (MABYT3_AutoCompleteRequest *)sharedInstance;
@@ -59,12 +58,6 @@ static NSUInteger search_maxResults = 20;
 - (NSURLSessionDataTask *)LISTPlayListForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
 - (NSURLSessionDataTask *)LISTActivitiesForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
 - (NSURLSessionDataTask *)searchForParameters:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion;
-- (void)fetchWithUrl:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
-- (void)LISTPlayListItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
-- (void)LISTPlayListsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
-- (void)LISTVideoCategoriesForURL:(NSString *)urlStr andHandler:(void (^)(NSMutableArray *, NSError *))handler;
-- (void)LISTSearchItemsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
-- (void)LISTSubscriptionsForURL:(NSString *)urlStr andHandler:(MABYoutubeResponseBlock)handler;
 
 
 - (void)LIKEVideo:(NSString *)videoId andHandler:(void (^)(NSError *, BOOL))handler;
