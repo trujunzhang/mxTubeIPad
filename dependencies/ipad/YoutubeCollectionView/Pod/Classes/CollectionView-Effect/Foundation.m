@@ -40,6 +40,8 @@
      NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
     };
 
+//   NSMutableAttributedString * str = [NSMutableAttributedString attributedStringWithHTML:text];
+
    return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
 }
 
@@ -135,7 +137,7 @@
 }
 
 
-+ (NSMutableParagraphStyle*)justifiedParagraphStyleForTitleText:(UIFont *)font {
++ (NSMutableParagraphStyle *)justifiedParagraphStyleForTitleText:(UIFont *)font {
    NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 //   style.paragraphSpacing = 0.5 * font.lineHeight;
    style.hyphenationFactor = 1.0;
@@ -195,7 +197,6 @@
 
    return shadow;
 }
-
 
 
 @end

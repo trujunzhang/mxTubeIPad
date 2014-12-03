@@ -54,9 +54,6 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 - (void)layoutNodes:(CGSize)cellSize {
    self.nodeCellSize = cellSize;
    [self layoutSubNodes];
-
-//   NSLog(@"Pretty printed size: %@", NSStringFromCGSize(cellSize));
-//   NSString * debug = @"debug";
 }
 
 
@@ -105,9 +102,7 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
    YoutubeResponseBlock completion = ^(NSArray * array, NSObject * respObject) {
        self.currentChannel = array[0];
-       NSString * videoThumbnailsUrl = [YoutubeParser getChannelBannerImageUrl:self.currentChannel];
-//       NSLog(@"videoThumbnailsUrl = %@", videoThumbnailsUrl);
-       [channelBannerThumbnailNode startFetchImageWithString:videoThumbnailsUrl];
+       [channelBannerThumbnailNode startFetchImageWithString:[YoutubeParser getChannelBannerImageUrl:self.currentChannel]];
    };
    ErrorResponseBlock error = ^(NSError * error) {
        NSString * debug = @"debug";
@@ -151,10 +146,10 @@ static const int TOP_CHANNEL_SECOND_ROW_HEIGHT = 42;
 
 
 - (void)rowSecondForChannelInfo {
-   NSString * channelTitleValue = self.subscription.snippet.title;
    // 1
    ASTextNode * channelTitleTextNode = [[ASTextNode alloc] init];
-   channelTitleTextNode.attributedString = [NSAttributedString attributedStringForChannelTitleText:channelTitleValue];
+   channelTitleTextNode.attributedString =
+    [NSAttributedString attributedStringForChannelTitleText:[YoutubeParser getSubscriptionSnippetTitle:self.subscription]];
 
    //MARK: Container Node Creation Section
    self.channelTitleTextNode = channelTitleTextNode;
