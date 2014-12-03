@@ -16,6 +16,8 @@ target 'TubeIPadApp', :exclusive => true do
   pod "KRLCollectionViewGridLayout", :path => "../dependencies/lib/KRLCollectionViewGridLayout"
   pod "AsyncDisplayKit", :path => "../dependencies/lib/AsyncDisplayKit"
   pod "SDWebImage", :path => "../dependencies/lib/SDWebImage"
+  pod "OHAttributedStringAdditions", :path => "../dependencies/lib/OHAttributedStringAdditions"
+  pod "MagicalRecord", :path => "../dependencies/lib/MagicalRecord"
 
 
   # ________________collect common library___________________

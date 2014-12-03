@@ -726,6 +726,60 @@
 }
 
 
+- (NSURLSessionDataTask *)LISTSubscriptionsForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion authToken:(NSString *)authToken {
+   NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
+   NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
+
+//   NSString * authToken = [NSString stringWithFormat:@"Bearer %@",
+//                                                     [MAB_GoogleUserCredentials sharedInstance].token.accessToken];
+
+   [[MABYT3_APIRequest sharedInstance].requestSerializer setValue:authToken
+                                               forHTTPHeaderField:@"Authorization"];
+
+   NSURLSessionDataTask * task = [self GET:@"/youtube/v3/subscriptions"
+                                parameters:dictionary
+                                   success:^(NSURLSessionDataTask * task, id responseObject) {
+                                       NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) task.response;
+
+                                       if (httpResponse.statusCode == 200) {
+                                          YoutubeResponseInfo * responseInfo = [self parseSubscriptionListWithData:responseObject];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(responseInfo, nil);
+                                          });
+                                       } else {
+                                          NSError * error = [YoutubeParser getError:responseObject
+                                                                           httpresp:httpResponse];
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              completion(nil, error);
+                                          });
+                                       }
+                                   } failure:^(NSURLSessionDataTask * task, NSError * error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(nil, error);
+        });
+    }];
+
+   return task;
+}
+
+//"NSErrorFailingURLKey" -> "https://www.googleapis.com/youtube/v3/subscriptions?channelId=UC0wObT_HayGfWLdRAnFyPwA&fields=items%2Fsnippet%28title%2CresourceId%2Cthumbnails%29%2CnextPageToken&key=AIzaSyBd9kf5LB41bYWnxI3pfoxHJ2njRvmAA90&maxResults=20&part=id%2Csnippet"
+//"NSErrorFailingURLKey" -> "https://www.googleapis.com/youtube/v3/subscriptions?channelId=UC0wObT_HayGfWLdRAnFyPwA&fields=items%2Fsnippet%28title%2CresourceId%2Cthumbnails%29&key=AIzaSyBd9kf5LB41bYWnxI3pfoxHJ2njRvmAA90&maxResults=20&part=id%2Csnippet"
+//"Error Domain=com.alamofire.error.serialization.response Code=-1011 "Request failed: unauthorized (401)" UserInfo=0x7bfb8900 {com.alamofire.serialization.response.error.response=<NSHTTPURLResponse: 0x7be93b10> { URL: https://www.googleapis.com/youtube/v3/subscriptions?channelId=UC0wObT_HayGfWLdRAnFyPwA&key=AIzaSyBd9kf5LB41bYWnxI3pfoxHJ2njRvmAA90&maxResults=20&part=id%2Csnippet } { status code: 401, headers {
+//"Cache-Control" = "private, max-age=0";
+//"Content-Encoding" = gzip;
+//"Content-Length" = 162;
+//"Content-Type" = "application/json; charset=UTF-8";
+//Date = "Wed, 03 Dec 2014 07:01:46 GMT";
+//Expires = "Wed, 03 Dec 2014 07:01:46 GMT";
+//Server = GSE;
+//Vary = "Origin, X-Origin";
+//"Www-Authenticate" = "Bearer realm=\"https://accounts.google.com/AuthSubRequest\", error=invalid_token";
+//"alternate-protocol" = "443:quic,p=0.02";
+//"x-content-type-options" = nosniff;
+//"x-frame-options" = SAMEORIGIN;
+//"x-xss-protection" = "1; mode=block";
+//} }, NSErrorFailingURLKey=https://www.googleapis.com/youtube/v3/subscriptions?channelId=UC0wObT_HayGfWLdRAnFyPwA&key=AIzaSyBd9kf5LB41bYWnxI3pfoxHJ2njRvmAA90&maxResults=20&part=id%2Csnippet, NSLocalizedDescription=Request failed: unauthorized (401), com.alamofire.serialization.response.error.data=<7b0a2022 6572726f 72223a20 7b0a2020 22657272 6f727322 3a205b0a 2020207b 0a202020 2022646f 6d61696e 223a2022 676c6f62 616c222c 0a202020 20227265 61736f6e 223a2022 61757468 4572726f 72222c0a 20202020 226d6573 73616765 223a2022 496e7661 6c696420 43726564 656e7469 616c7322 2c0a2020 2020226c 6f636174 696f6e54 79706522 3a202268 65616465 72222c0a 20202020 226c6f63 6174696f 6e223a20 22417574 686f7269 7a617469 6f6e220a 2020207d 0a20205d 2c0a2020 22636f64 65223a20 3430312c 0a202022 6d657373 61676522 3a202249 6e76616c 69642043 72656465 6e746961 6c73220a 207d0a7d 0a>}"
+
 - (NSURLSessionDataTask *)LISTChannelsThumbnailsForURL:(NSMutableDictionary *)parameters completion:(MABYoutubeResponseBlock)completion {
    NSString * maxResultsString = [NSString stringWithFormat:@"%d", search_maxResults];
    NSMutableDictionary * dictionary = [self commonDictionary:parameters maxResultsString:maxResultsString];
@@ -1123,9 +1177,9 @@
 
 - (void)appendAuthInfo:(NSMutableURLRequest *)request {
    if ([MAB_GoogleUserCredentials sharedInstance].signedin) {
-//      [request setValue:[NSString stringWithFormat:@"Bearer %@",
-//                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
-//     forHTTPHeaderField:@"Authorization"];
+      [request setValue:[NSString stringWithFormat:@"Bearer %@",
+                                                   [MAB_GoogleUserCredentials sharedInstance].token.accessToken]
+     forHTTPHeaderField:@"Authorization"];
    }
 }
 
@@ -1930,6 +1984,26 @@
       if (items.count > 0) {
          for (int i = 0; i < items.count; i++) {
             MABYT3_SearchItem * itm = [[MABYT3_SearchItem alloc] initFromDictionary:items[i]];
+            [arr addObject:itm];
+         }
+      }
+   }
+
+   return [YoutubeResponseInfo infoWithArray:arr pageToken:[self parsePageToken:dict]];
+}
+
+
+- (YoutubeResponseInfo *)parseSubscriptionListWithData:(NSData *)data {
+   NSMutableArray * arr = [[NSMutableArray alloc] init];
+   NSError * e = nil;
+   NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&e];
+   if ([dict objectForKey:@"items"]) {
+      NSArray * items = [dict objectForKey:@"items"];
+      if (items.count > 0) {
+         for (int i = 0; i < items.count; i++) {
+            MABYT3_Subscription * itm = [[MABYT3_Subscription alloc] initFromDictionary:items[i]];
             [arr addObject:itm];
          }
       }

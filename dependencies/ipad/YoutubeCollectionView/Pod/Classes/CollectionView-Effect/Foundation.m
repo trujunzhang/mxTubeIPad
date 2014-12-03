@@ -8,6 +8,7 @@
 
 #import "Foundation.h"
 #import "ASTextNodeCoreTextAdditions.h"
+#import "NSAttributedString+OHAdditions.h"
 
 
 @implementation NSAttributedString (custom)
@@ -40,9 +41,10 @@
      NSParagraphStyleAttributeName : [NSParagraphStyle justifiedParagraphStyleForChannelTitle]
     };
 
-//   NSMutableAttributedString * str = [NSMutableAttributedString attributedStringWithHTML:text];
+   NSMutableAttributedString * mutableAttributedString = [NSMutableAttributedString attributedStringWithHTML:text];
 
-   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+//   return [[NSAttributedString alloc] initWithString:text attributes:titleAttributes];
+   return mutableAttributedString;
 }
 
 

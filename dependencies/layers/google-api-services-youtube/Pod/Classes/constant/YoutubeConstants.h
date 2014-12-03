@@ -114,8 +114,8 @@
 
 
 #define subscriptionIndex  4
-#define debugLeftMenuTapSubscription NO
-//#define debugLeftMenuTapSubscription YES
+//#define debugLeftMenuTapSubscription NO
+#define debugLeftMenuTapSubscription YES
 
 
 
