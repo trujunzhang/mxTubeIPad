@@ -11,6 +11,7 @@
 #import "YTAsyncGridViewVideoCollectionViewCell.h"
 #import "FrameCalculator.h"
 #import "YTAsyncGridViewVideoNode.h"
+#import "ASDisplayNode+Subclasses.h"
 
 
 @implementation YTAsyncGridViewVideoCollectionViewCell
@@ -57,7 +58,8 @@
    if (operation)
       [operation cancel];
 
-   [_containerNode recursiveSetPreventOrCancelDisplay:YES];
+   [_containerNode setDisplaySuspended:YES];
+
    [_contentLayer removeFromSuperlayer];
    _contentLayer = nil;
    _containerNode = nil;
@@ -107,7 +109,7 @@
               if (strongSelf.nodeConstructionOperation != strongNodeConstructionOperation)
                  return;
 
-              if (containerNode.preventOrCancelDisplay)
+              if (containerNode.displaySuspended)
                  return;
 
               //MARK: Node Layer and Wrap Up Section

@@ -1,0 +1,8 @@
+language: objective-c
+
+before_install:
+  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+
+script:
+  - xcodebuild -workspace Example/AttributedStringDemo.xcworkspace -scheme AttributedStringDemo -sdk iphonesimulator -configuration Release test | xcpretty -c ; exit ${PIPESTATUS[0]}
+

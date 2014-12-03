@@ -20,7 +20,9 @@
 @implementation ASCacheNetworkImageNode
 
 - (instancetype)initWithPlaceHolder:(UIImage *)placeHolder {
-   self = [super initWithCache:self downloader:self];
+//   self = [super initWithCache:self downloader:self];
+//   self = [super initWithCache:self downloader:[[ASBasicImageDownloader alloc] init]];
+   self = [self initForImageCache];
    if (self) {
       self.defaultImage = placeHolder;
    }
@@ -31,6 +33,7 @@
 
 - (instancetype)initForImageCache {
    self = [super initWithCache:self downloader:self];
+//   self = [super initWithCache:self downloader:[[ASBasicImageDownloader alloc] init]];
    if (self) {
    }
 

@@ -81,6 +81,7 @@ static const int THIRD_ROW_HEIGHT = 28;
    self.backgroundColor = [UIColor whiteColor];
 
    // 1.2
+//   self.layer.shadowPath =[UIBezierPath bezierPathWithRect:self.root.view.bounds].CGPath;
    self.shadowColor = [UIColor colorWithHexString:@"B5B5B5" alpha:0.8].CGColor;
    self.shadowOffset = CGSizeMake(1, 3);
    self.shadowOpacity = 1.0;
@@ -124,7 +125,7 @@ static const int THIRD_ROW_HEIGHT = 28;
 
    // 2
    NSString * durationString = [YoutubeParser getVideoDurationForVideoInfo:self.cardInfo];
-   NSLog(@"durationString = %@", durationString);
+//   NSLog(@"durationString = %@", durationString);
    self.durationLabelWidth = [FrameCalculator calculateWidthForDurationLabel:durationString];
 
    ASTextNode * durationTextNode = [[ASTextNode alloc] init];
