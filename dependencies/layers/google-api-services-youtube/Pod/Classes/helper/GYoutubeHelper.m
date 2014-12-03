@@ -320,7 +320,7 @@ static GYoutubeHelper * instance = nil;
    NSDictionary * parameters = @{
     @"part" : @"id,snippet",
     @"channelId" : channelId,
-//    @"fields" : @"items/snippet(title,resourceId,thumbnails),nextPageToken",
+    @"fields" : @"items/snippet(title,resourceId,thumbnails),nextPageToken",
 //    @"fields" : @"items/snippet(title,resourceId,thumbnails)",
    };
 
